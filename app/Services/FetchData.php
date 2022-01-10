@@ -3,9 +3,6 @@
 
 namespace App\Services;
 
-
-use Firebase\JWT\JWT;
-
 class FetchData
 {
 
