@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
 
         // FetchData From Open Data Euskadi
-        $schedule->call(new FetchData)->everySixHours();
+        $schedule->call(new FetchData)->everyMinute();
     }
 
     /**
