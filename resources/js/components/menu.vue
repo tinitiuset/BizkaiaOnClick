@@ -1,5 +1,5 @@
 <template>
-    <nav class="container-fluid bg-dark">
+    <nav class="container-fluid bg-dark sticky-top">
         <div class="row align-items-center">
           <div class="col-2">
             <img src="/img/menuHamburguesa.png" class="img-fluid text-center">

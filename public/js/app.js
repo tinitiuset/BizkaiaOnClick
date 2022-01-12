@@ -5323,6 +5323,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     console.log("footer cargado");
@@ -29012,23 +29019,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("footer", { staticClass: "bg-dark text-center text-lg-start" }, [
-      _c("div", { staticClass: "text-center p-3 text-light" }, [
-        _vm._v("\n    © 2022 Todos los derechos reservados. "),
-        _c(
-          "a",
-          {
-            staticClass: "text-dark",
-            attrs: { href: "https://mdbootstrap.com/" },
-          },
-          [_vm._v("BizkaiaOnClick.com")]
-        ),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "text-center p-3 text-light" }, [
-        _vm._v("\n    Politica de privacidad | Términos de uso | Legalidad | "),
-        _c("a", { attrs: { href: "https://mdbootstrap.com/" } }, [
-          _vm._v("Volver arriba"),
+    return _c("footer", { staticClass: "footer mt-auto bg-dark" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row pt-2 text-center text-white" }, [
+          _c("div", { staticClass: "col" }, [
+            _vm._v("\n            © 2022 Todos los derechos reservados. "),
+            _c(
+              "a",
+              {
+                staticClass: "text-white text-decoration-none",
+                attrs: { href: "https://mdbootstrap.com/" },
+              },
+              [_vm._v("BizkaiaOnClick.com")]
+            ),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row pb-2 text-center text-light" }, [
+          _c("div", { staticClass: "col" }, [
+            _vm._v(
+              "\n            Politica de privacidad | Términos de uso | Legalidad | "
+            ),
+            _c(
+              "a",
+              {
+                staticClass: "text-white text-decoration-none",
+                attrs: { href: "https://mdbootstrap.com/" },
+              },
+              [_vm._v("Volver arriba")]
+            ),
+          ]),
         ]),
       ]),
     ])
@@ -29063,7 +29083,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("nav", { staticClass: "container-fluid bg-dark" }, [
+    return _c("nav", { staticClass: "container-fluid bg-dark sticky-top" }, [
       _c("div", { staticClass: "row align-items-center" }, [
         _c("div", { staticClass: "col-2" }, [
           _c("img", {

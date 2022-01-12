@@ -1,14 +1,21 @@
 <template>
 
-    <footer class="bg-dark text-center text-lg-start">
-        <!-- Copyright -->
-        <div class="text-center p-3 text-light">
-            © 2022 Todos los derechos reservados. <a class="text-dark" href="https://mdbootstrap.com/">BizkaiaOnClick.com</a>
+    <footer class="footer mt-auto bg-dark">
+        <div class="container">
+          <!-- Copyright -->
+          <div class="row pt-2 text-center text-white">
+              <div class="col">
+                © 2022 Todos los derechos reservados. <a class="text-white text-decoration-none" href="https://mdbootstrap.com/">BizkaiaOnClick.com</a>
+              </div>
+          </div>
+          <div class="row pb-2 text-center text-light">
+              <div class="col">
+                Politica de privacidad | Términos de uso | Legalidad | <a class="text-white text-decoration-none" href="https://mdbootstrap.com/">Volver arriba</a>
+              </div>
+          </div>
+          <!-- Copyright -->
         </div>
-        <div class="text-center p-3 text-light">
-            Politica de privacidad | Términos de uso | Legalidad | <a href="https://mdbootstrap.com/">Volver arriba</a>
-        </div>
-        <!-- Copyright -->
+
     </footer>
 
 </template>
