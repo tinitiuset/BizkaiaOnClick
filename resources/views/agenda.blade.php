@@ -13,6 +13,7 @@
     <div id="app">
         {{-- <img src="../img/menuHamburguesa.png"> --}}
         <menujs></menujs>
+        <piedepagina></piedepagina>
     </div>
 
     <script src="{{ asset('js/app.js') }}"></script>

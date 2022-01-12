@@ -7,6 +7,7 @@
 require('./bootstrap');
 
 import menu from './components/menu.vue';
+import footer from './components/footer.vue';
 import axios from './functions/axios';
 
 console.log("hola");
@@ -37,6 +38,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
     components: {
-        "menujs":menu
+        "menujs":menu,
+        "piedepagina":footer
     }
 });

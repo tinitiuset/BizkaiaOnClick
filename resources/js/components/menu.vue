@@ -19,7 +19,7 @@
 export default {
 
   mounted() {
-    console.log("This is about component");
+    console.log("menu cargado");
   }
 
     
