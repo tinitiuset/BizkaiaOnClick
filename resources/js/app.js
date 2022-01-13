@@ -12,7 +12,7 @@ import axios from './functions/axios';
 
 console.log("hola");
 
-console.log(axios("https://api.euskadi.eus/culture/events/v1.0/events?_elements=20&_page=1").then((response) => console.log(response.data)));
+// console.log(axios("https://api.euskadi.eus/culture/events/v1.0/events?_elements=20&_page=1").then((response) => console.log(response.data)));
 
 window.Vue = require('vue').default;
 

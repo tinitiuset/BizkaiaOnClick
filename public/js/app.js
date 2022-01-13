@@ -5323,6 +5323,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     console.log("footer cargado");
@@ -5342,6 +5349,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5387,10 +5430,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-console.log("hola");
-console.log((0,_functions_axios__WEBPACK_IMPORTED_MODULE_2__["default"])("https://api.euskadi.eus/culture/events/v1.0/events?_elements=20&_page=1").then(function (response) {
-  return console.log(response.data);
-}));
+console.log("hola"); // console.log(axios("https://api.euskadi.eus/culture/events/v1.0/events?_elements=20&_page=1").then((response) => console.log(response.data)));
+
 window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]);
 /**
  * The following block of code may be used to automatically register your
@@ -29012,25 +29053,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("footer", { staticClass: "bg-dark text-center text-lg-start" }, [
-      _c("div", { staticClass: "text-center p-3 text-light" }, [
-        _vm._v("\n        © 2022 Todos los derechos reservados. "),
-        _c(
-          "a",
-          {
-            staticClass: "text-dark",
-            attrs: { href: "https://mdbootstrap.com/" },
-          },
-          [_vm._v("BizkaiaOnClick.com")]
-        ),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "text-center p-3 text-light" }, [
-        _vm._v(
-          "\n        Politica de privacidad | Términos de uso | Legalidad | "
-        ),
-        _c("a", { attrs: { href: "https://mdbootstrap.com/" } }, [
-          _vm._v("Volver arriba"),
+    return _c("footer", { staticClass: "footer mt-auto bg-dark" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row pt-2 text-center text-white" }, [
+          _c("div", { staticClass: "col" }, [
+            _vm._v("\n            © 2022 Todos los derechos reservados. "),
+            _c(
+              "a",
+              {
+                staticClass: "text-white text-decoration-none",
+                attrs: { href: "https://mdbootstrap.com/" },
+              },
+              [_vm._v("BizkaiaOnClick.com")]
+            ),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row pb-2 text-center text-light" }, [
+          _c("div", { staticClass: "col" }, [
+            _vm._v(
+              "\n            Politica de privacidad | Términos de uso | Legalidad | "
+            ),
+            _c(
+              "a",
+              {
+                staticClass: "text-white text-decoration-none",
+                attrs: { href: "https://mdbootstrap.com/" },
+              },
+              [_vm._v("Volver arriba")]
+            ),
+          ]),
         ]),
       ]),
     ])
@@ -29065,27 +29117,78 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("nav", { staticClass: "container-fluid bg-dark" }, [
-      _c("div", { staticClass: "row align-items-center" }, [
-        _c("div", { staticClass: "col-2" }, [
+    return _c(
+      "nav",
+      { staticClass: "navbar navbar-expand-lg bg-dark navbar-dark fixed-top" },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "navbar-toggler",
+            attrs: {
+              type: "button",
+              "data-toggle": "collapse",
+              "data-target": "#mimenu",
+            },
+          },
+          [_c("span", { staticClass: "navbar-toggler-icon" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "collapse navbar-collapse", attrs: { id: "mimenu" } },
+          [
+            _c("ul", { staticClass: "navbar-nav" }, [
+              _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  { staticClass: " nav-link active", attrs: { href: "#" } },
+                  [_vm._v("Temario")]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item" }, [
+                _c("a", { staticClass: " nav-link", attrs: { href: "#" } }, [
+                  _vm._v("Objetivos"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item" }, [
+                _c("a", { staticClass: " nav-link", attrs: { href: "#" } }, [
+                  _vm._v("Requisito"),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item" }, [
+                _c("a", { staticClass: " nav-link", attrs: { href: "#" } }, [
+                  _vm._v("Precio"),
+                ]),
+              ]),
+            ]),
+          ]
+        ),
+        _vm._v(" "),
+        _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
           _c("img", {
-            staticClass: "img-fluid text-center",
-            attrs: { src: "/img/menuHamburguesa.png" },
+            staticClass: "rounded-circle",
+            attrs: { id: "logo", src: "img/gato.jpg", alt: "gato" },
           }),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-8 text-white" }, [
-          _vm._v("\n        aeaea\n      "),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-2" }, [
-          _c("img", {
-            staticClass: "img-fluid text-center",
-            attrs: { src: "/img/usuario.png" },
+        _c("form", { staticClass: "form-inline", attrs: { action: "#" } }, [
+          _c("input", {
+            staticClass: "form-control mr-sm-2",
+            attrs: { type: "text", placeholder: "buscar" },
           }),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btn btn-success", attrs: { type: "submit" } },
+            [_vm._v("Buscar")]
+          ),
         ]),
-      ]),
-    ])
+      ]
+    )
   },
 ]
 render._withStripped = true
