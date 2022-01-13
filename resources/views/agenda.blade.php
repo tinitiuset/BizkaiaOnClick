@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     
     {{-- <link href="{{ asset('css/menu.css') }}" rel="stylesheet"> --}}
     <title>Agenda</title>
@@ -18,9 +20,9 @@
         </div>
         <piedepagina></piedepagina>
     </div>
+
     <script src="{{ mix('js/app.js') }}"></script>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
+
 
 </body>
 </html>

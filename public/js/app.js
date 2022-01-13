@@ -5401,6 +5401,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     console.log("menu cargado");
@@ -5451,7 +5453,11 @@ Vue.component('example-component', (__webpack_require__(/*! ./components/Example
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  components: {
+    "menujs": _components_menu_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    "piedepagina": _components_footer_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }
 });
 
 /***/ }),
@@ -29115,73 +29121,161 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "nav",
-      { staticClass: "navbar navbar-expand-lg bg-dark navbar-dark fixed-top" },
+      { staticClass: "navbar navbar-expand-lg navbar-light bg-dark" },
       [
-        _c(
-          "button",
-          {
-            staticClass: "navbar-toggler",
-            attrs: {
-              type: "button",
-              "data-toggle": "collapse",
-              "data-target": "#mimenu",
-            },
-          },
-          [_c("span", { staticClass: "navbar-toggler-icon" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "collapse navbar-collapse", attrs: { id: "mimenu" } },
-          [
-            _c("ul", { staticClass: "navbar-nav" }, [
-              _c("li", { staticClass: "nav-item" }, [
-                _c(
-                  "a",
-                  { staticClass: " nav-link active", attrs: { href: "#" } },
-                  [_vm._v("Temario")]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: " nav-link", attrs: { href: "#" } }, [
-                  _vm._v("Objetivos"),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: " nav-link", attrs: { href: "#" } }, [
-                  _vm._v("Requisito"),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "nav-item" }, [
-                _c("a", { staticClass: " nav-link", attrs: { href: "#" } }, [
-                  _vm._v("Precio"),
-                ]),
-              ]),
-            ]),
-          ]
-        ),
-        _vm._v(" "),
-        _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
-          _c("img", {
-            staticClass: "rounded-circle",
-            attrs: { id: "logo", src: "img/gato.jpg", alt: "gato" },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("form", { staticClass: "form-inline", attrs: { action: "#" } }, [
-          _c("input", {
-            staticClass: "form-control mr-sm-2",
-            attrs: { type: "text", placeholder: "buscar" },
-          }),
-          _vm._v(" "),
+        _c("div", { staticClass: "container-fluid justify-content-center" }, [
           _c(
             "button",
-            { staticClass: "btn btn-success", attrs: { type: "submit" } },
-            [_vm._v("Buscar")]
+            {
+              staticClass: "navbar-toggler",
+              attrs: {
+                type: "button",
+                "data-bs-toggle": "collapse",
+                "data-bs-target": "#navbarSupportedContent",
+                "aria-controls": "navbarSupportedContent",
+                "aria-expanded": "false",
+                "aria-label": "Toggle navigation",
+              },
+            },
+            [_c("span", { staticClass: "navbar-toggler-icon" })]
           ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "collapse navbar-collapse",
+              attrs: { id: "navbarSupportedContent" },
+            },
+            [
+              _c("ul", { staticClass: "navbar-nav me-auto mb-2 mb-lg-0" }, [
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link active",
+                      attrs: { "aria-current": "page", href: "#" },
+                    },
+                    [_vm._v("Home")]
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                    _vm._v("Link"),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item dropdown" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link dropdown-toggle",
+                      attrs: {
+                        href: "#",
+                        id: "navbarDropdown",
+                        role: "button",
+                        "data-bs-toggle": "dropdown",
+                        "aria-expanded": "false",
+                      },
+                    },
+                    [_vm._v("\n            Dropdown\n          ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "ul",
+                    {
+                      staticClass: "dropdown-menu",
+                      attrs: { "aria-labelledby": "navbarDropdown" },
+                    },
+                    [
+                      _c("li", [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { href: "#" },
+                          },
+                          [_vm._v("Action")]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { href: "#" },
+                          },
+                          [_vm._v("Another action")]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("li", [_c("hr", { staticClass: "dropdown-divider" })]),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { href: "#" },
+                          },
+                          [_vm._v("Something else here")]
+                        ),
+                      ]),
+                    ]
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link disabled",
+                      attrs: {
+                        href: "#",
+                        tabindex: "-1",
+                        "aria-disabled": "true",
+                      },
+                    },
+                    [_vm._v("Disabled")]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("form", { staticClass: "d-flex" }, [
+                _c("input", {
+                  staticClass: "form-control me-2",
+                  attrs: {
+                    type: "search",
+                    placeholder: "Search",
+                    "aria-label": "Search",
+                  },
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-success",
+                    attrs: { type: "submit" },
+                  },
+                  [_vm._v("Search")]
+                ),
+              ]),
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "navbar-brand p-0 m-0", attrs: { href: "#" } },
+            [_vm._v("Navbar")]
+          ),
+          _vm._v(" "),
+          _c("a", { attrs: { href: "#" } }, [
+            _c("img", {
+              staticClass: "img-fluid d-block h-50 w-50",
+              attrs: { src: "/img/usuario.png", alt: "" },
+            }),
+          ]),
         ]),
       ]
     )

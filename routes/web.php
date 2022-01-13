@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +22,10 @@ Route::get('/agenda', function () {
     return view('agenda');
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resources([
+    'categorias' => CategoriaController::class
+    // 'posts' => PostController::class,
+]);
 
 Auth::routes();
 
