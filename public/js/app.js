@@ -29014,7 +29014,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("footer", { staticClass: "bg-dark text-center text-lg-start" }, [
       _c("div", { staticClass: "text-center p-3 text-light" }, [
-        _vm._v("\n    © 2022 Todos los derechos reservados. "),
+        _vm._v("\n        © 2022 Todos los derechos reservados. "),
         _c(
           "a",
           {
@@ -29026,7 +29026,9 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "text-center p-3 text-light" }, [
-        _vm._v("\n    Politica de privacidad | Términos de uso | Legalidad | "),
+        _vm._v(
+          "\n        Politica de privacidad | Términos de uso | Legalidad | "
+        ),
         _c("a", { attrs: { href: "https://mdbootstrap.com/" } }, [
           _vm._v("Volver arriba"),
         ]),
