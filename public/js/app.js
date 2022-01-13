@@ -5451,11 +5451,7 @@ Vue.component('example-component', (__webpack_require__(/*! ./components/Example
  */
 
 var app = new Vue({
-  el: '#app',
-  components: {
-    "menujs": _components_menu_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    "piedepagina": _components_footer_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
-  }
+  el: '#app'
 });
 
 /***/ }),
