@@ -24,29 +24,20 @@
 				<ul class="navbar-nav">
 					<li class="nav-item">
 					<!--Link activo (pestaña actual)-->
-					<a class=" nav-link active" href="#">Temario</a>
+					<a class=" nav-link active" href="#">Inicio</a>
 					</li>
 					<li class="nav-item">
-					<a class=" nav-link" href="#">Objetivos</a>
+					<a class=" nav-link" href="#">Agenda</a>
 					</li>
 					<li class="nav-item">
-					<a class=" nav-link" href="#">Requisito</a>
-					</li>
-					<li class="nav-item">
-						<!--Link deshabilitado-->
-					<a class=" nav-link" href="#">Precio</a>
+					<a class=" nav-link" href="#">Envia tus eventos</a>
 					</li>
 				</ul>
 				</div>
         <!--Logo, para poner una imagen-->
 				<a class="navbar-brand" href="#">
-					<img class="rounded-circle" id="logo" src="img/gato.jpg" alt="gato">
+					<img class="rounded-circle" id="logo" src="img/gato.jpg" alt="LogoBizkaiaOnClick">
 				</a>
-				<!--Formulario de busqueda-->
-				<form class="form-inline" action="#">
-					<input class="form-control mr-sm-2" type="text" placeholder="buscar">
-						<button class="btn btn-success" type="submit">Buscar</button>
-				</form>
 			</nav>
 </template>
 
