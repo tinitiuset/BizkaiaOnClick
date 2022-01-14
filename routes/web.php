@@ -26,10 +26,20 @@ Route::get('/agenda', function () {
     return view('agenda');
 });
 
-Route::resources([
+/*Route::get('/categoria', function () {
+    return view('categoria');
+});
+Route::get('/createCategoria',[CategoriaController::class,'create']);*/
+
+//de esta manera se pueden acceder a todas las url
+Route::resource('categoria',CategoriaController::class);
+
+
+/*Route::resources([
     'categorias' => CategoriaController::class
     // 'posts' => PostController::class,
-]);
+]);*/
+
 Route::resource('eventos',EventoController::class);
 
 Auth::routes();
