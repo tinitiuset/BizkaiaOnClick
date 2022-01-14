@@ -1,12 +1,14 @@
 Formulario de creación de categoria
 
-<form action="" method="post" enctype="multipart/form-data">
-    <label for="Nombre"> Nombre </label>
-    <input type="text" name="Nombre">
+<form action="{{ url('/categoria') }}" method="post" enctype="multipart/form-data">
+    @csrf
+
+    <label for="nombre"> Nombre </label>
+    <input type="text" name="nombre">
     <br>
-    <label for="Descripcion"> Descripción </label>
-    <input type="text" name="Descripción">
+    <label for="descripcion"> Descripción </label>
+    <input type="text" name="descripcion">
     <br>
-    <input type="submit" value="Enviar">
+    <input type="submit" value="Guardar datos">
     <br>
 </form>

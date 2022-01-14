@@ -38,7 +38,13 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //$datosCategoria = request()->all();
+        $datosCategoria = request()->except('_token');
+        Categoria::insert($datosCategoria);
+        
+        return response()->json($datosCategoria);
+
     }
 
     /**
