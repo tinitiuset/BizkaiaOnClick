@@ -14,13 +14,14 @@ class Evento extends Model
     protected $fillable = [
         "titulo",
         "descripcion",
-        "fecha",
+        "fechaInicio",
+        "fechaFin",
+        "hora",
         "precio",
         "direccion",
         "estado",
         "sala",
         "recinto",
-        "provincia",
         "localidad"
     ];
     protected $primaryKey = "titulo";

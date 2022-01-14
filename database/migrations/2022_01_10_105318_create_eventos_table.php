@@ -16,15 +16,16 @@ class CreateEventosTable extends Migration
         Schema::create('eventos', function (Blueprint $table) {
 
             $table->string("titulo")->primary();
-            $table->string("descripcion");
-            $table->date("fecha")->useCurrent();
-            $table->float("precio")->unsigned();
-            $table->string("direccion");
+            $table->string("descripcion")->nullable();
+            $table->date("fechaInicio")->nullable();
+            $table->date("fechaFin")->nullable();
+            $table->time("hora")->nullable();
+            $table->float("precio")->nullable()->unsigned();
+            $table->string("direccion")->nullable();
             $table->enum("estado",["pendiente","aprobado"])->default("pendiente");
-            $table->integer("sala",false,true)->nullable()->unsigned();
+            $table->string("sala")->nullable();
             $table->string("recinto")->nullable();
-            $table->string("provincia");
-            $table->string("localidad");
+            $table->string("localidad")->nullable();
 
         });
     }
@@ -38,5 +39,5 @@ class CreateEventosTable extends Migration
     {
         Schema::dropIfExists('eventos');
     }
-    
+
 }

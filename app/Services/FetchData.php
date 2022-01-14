@@ -3,6 +3,8 @@
 
 namespace App\Services;
 
+use App\Http\Controllers\EventoController;
+
 class FetchData
 {
 
@@ -17,7 +19,25 @@ class FetchData
         // GET last Event
         $url = "https://api.euskadi.eus/culture/events/v1.0/events?_elements=1&_page=1";
         // Dump Data to prove it's working
-        var_dump(self::getServiceData($url));
+        $controller = new EventoController();
+        $controller->create(self::filterData(self::getServiceData($url)));
+    }
+
+    function filterData(array $data): array
+    {
+        return [
+            'titulo' => $data['nameEs'],
+            'description'=> $data['descriptionEs'],
+            'fechaInicio' => $data['startDate'],
+            'fechaFin' => $data['endDate'],
+            'hora' => $data['openingHoursEs'],
+            'precio' => null,
+            'direccion' => $data['direccion'],
+            'estado' => $data['estado'],
+            'sala' => $data['placeEs'],
+            'recinto' => $data['recinto'],
+            'localidad' => $data['localidad'],
+        ];
     }
 
     function getServiceData($url): array
