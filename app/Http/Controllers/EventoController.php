@@ -6,6 +6,8 @@ use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Foto;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 
 class EventoController extends Controller
@@ -13,7 +15,7 @@ class EventoController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -25,11 +27,10 @@ class EventoController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
-
         return view('eventos/crear');
 
     }
@@ -37,44 +38,77 @@ class EventoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Redirector
      */
     public function store(Request $request)
     {
-        
-        $evento = new Evento;
-
-        $evento->titulo =  $request->titulo;
-        $evento->descripcion =  $request->descripcion;
-        $evento->fechaInicio =  $request->fechaInicio;
-        $evento->fechaFin =  $request->fechaFin;
-        $evento->hora =  $request->hora;
-        $evento->precio =  $request->precio;
-        $evento->direccion =  $request->direccion;
-        $evento->estado =  "pendiente";
-        $evento->sala =  $request->sala;
-        $evento->recinto =  $request->recinto;
-        $evento->localidad =  $request->localidad;
-
-        $evento->save();
-
+        Evento::create([
+            'titulo' => $request->get('titulo'),
+            'descripcion' => $request->get('descripcion'),
+            'fechaInicio' => $request->get('fechaInicio'),
+            'fechaFin' => $request->get('fechaFin'),
+            'hora' => $request->get('hora'),
+            'precio' => $request->get('precio'),
+            'direccion' => $request->get('direccion'),
+            'estado' => $request->get('estado'),
+            'sala' => $request->get('sala'),
+            'recinto' => $request->get('recinto'),
+            'localidad' => $request->get('localidad'),
+        ]);
+        return redirect('/eventos');
     }
-
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
-        
-        $evento=DB::table("eventos")->select()->where("titulo","=",$id)->get();
-        $fotos=DB::table("fotos")->select()->where("evento","=",$id)->get();
-
-        return view ('eventos/detalle', array('evento'=>$evento), array('fotos'=>$fotos));
-
+        $eventos = Evento::all();
+        $fotos = Foto::all();
+        return view ('eventos.detalle', array('evento'=>$eventos[$id]), array('foto'=>$fotos[$id]));
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param  int  $id
+     * @return Response
+     */
+    public function update(Request $request, $id)
+    {
+        $evento = Evento::findOrFail($id);
+        $evento->update($request->all());
+
+        return $evento;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+
+    public function delete(Request $request, $id)
+    {
+        $article = Evento::findOrFail($id);
+        $article->delete();
+
+        return response()->noContent();
+    }
 }
