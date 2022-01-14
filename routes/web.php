@@ -27,11 +27,11 @@ Route::get('/agenda', function () {
     return view('agenda');
 });
 
-Route::get('/categoria', function () {
-    return view('categoria');
+/*Route::get('/categoria', function () {
+    return view('categoria.index');
 });
 
-Route::get('/createCategoria',[CategoriaController::class,'create']);
+Route::get('categoria/create',[CategoriaController::class,'create']);*/
 
 Route::resource('categoria',CategoriaController::class);
 
