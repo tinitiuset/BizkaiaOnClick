@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventoController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,12 +27,12 @@ Route::get('/agenda', function () {
     return view('agenda');
 });
 
-/*Route::get('/categoria', function () {
+Route::get('/categoria', function () {
     return view('categoria');
 });
-Route::get('/createCategoria',[CategoriaController::class,'create']);*/
 
-//de esta manera se pueden acceder a todas las url
+Route::get('/createCategoria',[CategoriaController::class,'create']);
+
 Route::resource('categoria',CategoriaController::class);
 
 
