@@ -15,7 +15,8 @@ class CategoriaController extends Controller
     public function index()
     {
         //
-        return view('categoria.index');
+        $datos['categorias']=Categoria::paginate(5);
+        return view('categoria.index',$datos);
     }
 
     /**
@@ -42,7 +43,7 @@ class CategoriaController extends Controller
         //$datosCategoria = request()->all();
         $datosCategoria = request()->except('_token');
         Categoria::insert($datosCategoria);
-        
+
         return response()->json($datosCategoria);
 
     }
@@ -88,8 +89,10 @@ class CategoriaController extends Controller
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categoria $categoria)
+    public function destroy($nombre)
     {
         //
+        Categoria::destroy($nombre);
+        return redirect('categoria');
     }
 }
