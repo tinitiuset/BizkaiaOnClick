@@ -12,7 +12,6 @@
           </div>
         </div>
     </nav> -->
-<<<<<<< HEAD
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
   <div class="container-fluid justify-content-center">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,35 +50,6 @@
     <a class="" href="#"><img src="/img/usuario.png" alt="" class="img-fluid d-block h-50 w-50"></a>
   </div>
 </nav>
-=======
-      <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
-				
-				<!--Boton-->
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#mimenu">
-				<span class="navbar-toggler-icon"></span>
-				</button>
-				<!--Lista de los link de navegacion-->
-				<div class="collapse navbar-collapse" id="mimenu">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-					<!--Link activo (pestaña actual)-->
-					<a class=" nav-link active" href="#">Inicio</a>
-					</li>
-					<li class="nav-item">
-					<a class=" nav-link" href="#">Agenda</a>
-					</li>
-					<li class="nav-item">
-					<a class=" nav-link" href="#">Envia tus eventos</a>
-					</li>
-				</ul>
-				</div>
-        <!--Logo, para poner una imagen-->
-				<a class="navbar-brand" href="#">
-					<img class="rounded-circle" id="logo" src="img/gato.jpg" alt="LogoBizkaiaOnClick">
-				</a>
-			</nav>
->>>>>>> 17a8198a01eefc2cdf156feb4c4c51f64226f880
 </template>
 
 <script>

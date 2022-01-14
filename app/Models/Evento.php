@@ -27,4 +27,11 @@ class Evento extends Model
     protected $primaryKey = "titulo";
     protected $keyType = "string";
     public $timestamps = false;
+
+    public function fotos(){
+
+        return $this->hasMany(Foto::class,"evento","titulo");
+
+    }
+
 }

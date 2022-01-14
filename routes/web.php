@@ -1,12 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
-use App\Http\Controllers\CategoriaController;
-=======
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventoController;
->>>>>>> 17a8198a01eefc2cdf156feb4c4c51f64226f880
+use App\Http\Controllers\EventoAdminController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,22 +23,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/agenda', function () {
-    return view('agenda');
+Route::group(['prefix' => 'agenda'], function() {
+
+    Route::get('/',[EventoController::class,"index"])->name("agenda.listado");
+    Route::get("/{id}", [EventoController::class,"show"])->name("agenda.detalle");
+    // Route::get("/create", [EventoController::class,"create"])->name("agenda.crear");
+    Route::post("/", [EventoController::class,"store"])->name("agenda.store");
+
 });
 
-<<<<<<< HEAD
-Route::resources([
-    'categorias' => CategoriaController::class
-    // 'posts' => PostController::class,
-]);
-=======
-Route::resource('eventos',EventoController::class);
+Route::group(['prefix' => 'admin'], function() {
+    Route::resources([
+        "eventos" => EventoAdminController::class
+    ]);
+});
+
+// Route::resource('eventos',EventoController::class);
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
->>>>>>> 17a8198a01eefc2cdf156feb4c4c51f64226f880
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 

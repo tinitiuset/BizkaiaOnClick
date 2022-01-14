@@ -1,6 +1,8 @@
 @extends ('layouts.app')
 
-@section ('title') {{$evento['titulo']}}@endsection
+<div>aaa</div>
+
+{{-- @section ('title') {{$evento['titulo']}}@endsection
 
 @section ('content')
     <div class="row">
@@ -21,4 +23,4 @@
             <a href="./"  type="button" class="btn btn-light border border-dark"> Volver</a>
         </div>
     </div>
-@endsection
+@endsection --}}

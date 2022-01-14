@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Foto;
+use Illuminate\Support\Facades\DB;
 
 class EventoController extends Controller
 {
@@ -17,7 +19,7 @@ class EventoController extends Controller
     {
         $eventos = Evento::all();
         $fotos = Foto::all();
-        return view ('eventos.index',array('eventos' => $eventos),array('fotos'=> $fotos));
+        return view('eventos/index',array('eventos' => $eventos),array('fotos'=> $fotos));
     }
 
     /**
@@ -27,7 +29,9 @@ class EventoController extends Controller
      */
     public function create()
     {
-        return view('eventos.crearEvento');
+
+        return view('eventos/crear');
+
     }
 
     /**
@@ -38,7 +42,23 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $evento = new Evento;
+
+        $evento->titulo =  $request->titulo;
+        $evento->descripcion =  $request->descripcion;
+        $evento->fechaInicio =  $request->fechaInicio;
+        $evento->fechaFin =  $request->fechaFin;
+        $evento->hora =  $request->hora;
+        $evento->precio =  $request->precio;
+        $evento->direccion =  $request->direccion;
+        $evento->estado =  "pendiente";
+        $evento->sala =  $request->sala;
+        $evento->recinto =  $request->recinto;
+        $evento->localidad =  $request->localidad;
+
+        $evento->save();
+
     }
 
     /**
@@ -49,42 +69,12 @@ class EventoController extends Controller
      */
     public function show($id)
     {
-        $eventos = Evento::all();
-        $fotos = Foto::all();
-        return view ('eventos.detalle', array('evento'=>$eventos[$id]), array('foto'=>$fotos[$id]));
+        
+        $evento=DB::table("eventos")->select()->where("titulo","=",$id)->get();
+        $fotos=DB::table("fotos")->select()->where("evento","=",$id)->get();
+
+        return view ('eventos/detalle', array('evento'=>$evento), array('fotos'=>$fotos));
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

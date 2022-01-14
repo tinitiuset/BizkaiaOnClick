@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
+use App\Models\Evento;
 use Illuminate\Http\Request;
 
-class CategoriaController extends Controller
+class EventoAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        return view("");
+        //
     }
 
     /**
@@ -24,7 +24,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        return view("");
+        //
     }
 
     /**
@@ -41,10 +41,10 @@ class CategoriaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function show(Categoria $categoria)
+    public function show(Evento $evento)
     {
         //
     }
@@ -52,10 +52,10 @@ class CategoriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categoria $categoria)
+    public function edit(Evento $evento)
     {
         //
     }
@@ -64,10 +64,10 @@ class CategoriaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(Request $request, Evento $evento)
     {
         //
     }
@@ -75,10 +75,10 @@ class CategoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categoria $categoria)
+    public function destroy(Evento $evento)
     {
         //
     }
