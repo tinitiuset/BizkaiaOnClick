@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\EventoAdminController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\FotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,10 +43,17 @@ Route::group(['prefix' => 'admin'], function() {
 Route::resource('categoria',CategoriaController::class);
 
 // Route::resource('eventos',EventoController::class);
+Route::resources([
+    'categorias' => CategoriaController::class
+    // 'posts' => PostController::class,
+]);
+Route::resource('eventos',EventoController::class);
+
+Route::resource('fotos',FotoController::class);
 
 Auth::routes();
 
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 

@@ -29,10 +29,8 @@ class EventoController extends Controller
      *
      * @return Response
      */
-    public function create()
-    {
-        return view('eventos/crear');
-
+    public function create(){
+        return view('eventos.crearEvento');
     }
 
     /**
