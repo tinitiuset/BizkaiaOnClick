@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
-use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Foto;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class EventoController extends Controller
@@ -15,8 +14,8 @@ class EventoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
+
         $eventos = Evento::all();
         $fotos = Foto::all();
         return view('eventos/index',array('eventos' => $eventos),array('fotos'=> $fotos));
@@ -29,9 +28,7 @@ class EventoController extends Controller
      */
     public function create()
     {
-
         return view('eventos/crear');
-
     }
 
     /**
@@ -42,7 +39,6 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-        
         $evento = new Evento;
 
         $evento->titulo =  $request->titulo;
@@ -58,23 +54,55 @@ class EventoController extends Controller
         $evento->localidad =  $request->localidad;
 
         $evento->save();
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Evento $evento)
     {
-        
-        $evento=DB::table("eventos")->select()->where("titulo","=",$id)->get();
-        $fotos=DB::table("fotos")->select()->where("evento","=",$id)->get();
+
+        $evento=DB::table("eventos")->select()->where("titulo","=",$evento)->get();
+        $fotos=DB::table("fotos")->select()->where("evento","=",$evento)->get();
 
         return view ('eventos/detalle', array('evento'=>$evento), array('fotos'=>$fotos));
 
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Evento  $evento
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Evento $evento)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Evento  $evento
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Evento $evento)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Evento  $evento
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Evento $evento)
+    {
+        //
+    }
 }
