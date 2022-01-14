@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventoController;
@@ -37,6 +38,8 @@ Route::group(['prefix' => 'admin'], function() {
         "eventos" => EventoAdminController::class
     ]);
 });
+
+Route::resource('categoria',CategoriaController::class);
 
 // Route::resource('eventos',EventoController::class);
 
