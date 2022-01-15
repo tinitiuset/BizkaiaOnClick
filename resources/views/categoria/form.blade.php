@@ -1,11 +1,11 @@
     <h1> {{ $modo }} categoría </h1>
 
-    @if (count($errors)>0)
+    @if (count($errors)>0)<!-- Comprobamos si hay algún error -->
 
         <div class="alert alert-danger" role="alert">
             <ul>
-                @foreach ($errors->all() as $error)
-                <li> {{ $error }} </li>
+                @foreach ($errors->all() as $error) <!-- Con un foreach recorremos todos los errores-->
+                <li> {{ $error }} </li> <!-- Y los metemos en una lista -->
                 @endforeach
             </ul>
         </div>
