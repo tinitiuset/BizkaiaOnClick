@@ -25,20 +25,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'agenda'], function() {
+// Route::group(['prefix' => 'agenda'], function() {
 
-    Route::get('/',[EventoController::class,"index"])->name("agenda.listado");
-    Route::get("/{id}", [EventoController::class,"show"])->name("agenda.detalle");
-    // Route::get("/create", [EventoController::class,"create"])->name("agenda.crear");
-    Route::post("/", [EventoController::class,"store"])->name("agenda.store");
+//     // Route::get('/',[EventoController::class,"index"])->name("agenda.listado");
+//     // Route::get("/create", [EventoController::class,"create"])->name("agenda.create");
+//     // Route::get("/{id}", [EventoController::class,"show"])->name("agenda.detalle");
+//     // Route::post("/", [EventoController::class,"store"])->name("agenda.store");
 
-});
+    
 
-Route::group(['prefix' => 'admin'], function() {
-    Route::resources([
-        "eventos" => EventoAdminController::class
-    ]);
-});
+// });
+
+Route::resource("agenda",EventoController::class);
+
+
+
+// Route::group(['prefix' => 'admin'], function() {
+//     Route::resources([
+//         "eventos" => EventoAdminController::class
+//     ]);
+// });
 
 Route::resource('categoria',CategoriaController::class);
 

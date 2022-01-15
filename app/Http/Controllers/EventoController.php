@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
-use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Foto;
 use Illuminate\Http\Response;
@@ -17,8 +15,8 @@ class EventoController extends Controller
      *
      * @return Response
      */
-    public function index()
-    {
+    public function index() {
+
         $eventos = Evento::all();
         $fotos = Foto::all();
         return view('eventos/index',array('eventos' => $eventos),array('fotos'=> $fotos));
@@ -29,8 +27,9 @@ class EventoController extends Controller
      *
      * @return Response
      */
-    public function create(){
-        return view('eventos.crearEvento');
+    public function create()
+    {
+        return view('eventos/crear');
     }
 
     /**
@@ -59,26 +58,14 @@ class EventoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  \App\Models\Evento  $evento
+     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Evento $evento)
     {
-        $eventos = Evento::all();
-        $fotos = Foto::all();
-        return view ('eventos.detalle', array('evento'=>$eventos[$id]), array('foto'=>$fotos[$id]));
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        $evento=DB::table("eventos")->select()->where("titulo","=",$evento)->get();
+        $fotos=DB::table("fotos")->select()->where("evento","=",$evento)->get();
 
     /**
      * Update the specified resource in storage.
@@ -96,17 +83,36 @@ class EventoController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Evento  $evento
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Evento $evento)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Evento  $evento
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Evento $evento)
+    {
+        //
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  \App\Models\Evento  $evento
+     * @return \Illuminate\Http\Response
      */
-
-    public function delete(Request $request, $id)
+    public function destroy(Evento $evento)
     {
-        $article = Evento::findOrFail($id);
-        $article->delete();
-
-        return response()->noContent();
+        //
     }
 }
