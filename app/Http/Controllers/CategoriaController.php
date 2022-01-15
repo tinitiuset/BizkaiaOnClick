@@ -15,7 +15,7 @@ class CategoriaController extends Controller
     public function index()
     {
         //
-        $datos['categorias']=Categoria::paginate(15);
+        $datos['categorias']=Categoria::paginate(10);
         return view('categoria.index',$datos);
     }
 
@@ -39,6 +39,17 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
+        //validaciones para el formulario
+        $campos=[
+            'nombre'=>'required|string|max:50',
+            'descripcion'=>'required|string|max:400'
+        ];
+        $mensaje=[
+            'required'=>'El campo :attribute es requerido'
+
+        ];
+
+        $this->validate($request,$campos,$mensaje);
 
         //$datosCategoria = request()->all();
         $datosCategoria = request()->except('_token');
@@ -83,13 +94,28 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, $nombre)
     {
+
+        //validaciones para el formulario
+        $campos=[
+            'nombre'=>'required|string|max:50',
+            'descripcion'=>'required|string|max:400'
+        ];
+        $mensaje=[
+            'required'=>'El campo :attribute es requerido'
+
+        ];
+
+        $this->validate($request,$campos,$mensaje);
+
         //recepcionamos todos los datos excepto el token y el método
         $datosCategoria = request()->except(['_token','_method']);
         //Busca el registro en categoria dnd nombre=nombre y hace el update
         Categoria::where('nombre','=',$nombre)->update($datosCategoria);
 
         $categoria=Categoria::findOrFail($nombre);//vuelvo a buscar la info
-        return view('categoria.edit', compact('categoria') );//retorno con los datos act.
+        //return view('categoria.edit', compact('categoria') );//retorno con los datos act.
+
+        return redirect('categoria')->with('mensaje','Categoría modificada');
     }
 
     /**

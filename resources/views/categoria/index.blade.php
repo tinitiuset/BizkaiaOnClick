@@ -1,9 +1,17 @@
+@extends('layouts.app')
+@section('content')
+<div class="container">
 
-@if (Session::has('mensaje'))
-{{ Session::get('mensaje') }}
-@endif
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @if (Session::has('mensaje'))
+            {{ Session::get('mensaje') }}
+        @endif
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 
-<a href="{{ url('categoria/create')}}"> Registrar nueva categoria </a>
+<a href="{{ url('categoria/create')}}" class="btn btn-success"> Registrar nueva categoria </a>
+<br>
+<br>
 <table class="table table-light">
     <thead class="thead-light">
         <tr>
@@ -18,14 +26,14 @@
             <td>{{ $categoria->nombre }}</td>
             <td>{{ $categoria->descripcion }}</td>
             <td>
-                <a href="{{ url('/categoria/'.$categoria->nombre.'/edit')}}">
+                <a href="{{ url('/categoria/'.$categoria->nombre.'/edit')}}" class="btn btn-primary" >
                     Editar
                 </a>
                 |
-                <form action="{{ url('/categoria/'.$categoria->nombre) }}" method="post">
+                <form action="{{ url('/categoria/'.$categoria->nombre) }}" class="d-inline" method="post">
                 @csrf
                 {{ method_field('DELETE') }}
-                <input type="submit" onclick="return confirm('¿Quieres borrar?')"
+                <input class="btn btn-danger" type="submit" onclick="return confirm('¿Quieres borrar?')"
                  value="Borrar">
 
                 </form>
@@ -35,3 +43,5 @@
         @endforeach
     </tbody>
 </table>
+</div>
+@endsection
