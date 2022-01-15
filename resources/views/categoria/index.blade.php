@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-
+    <!-- Si existe mensaje crea un div alert con botón de cierre -->
+    @if (Session::has('mensaje'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @if (Session::has('mensaje'))
-            {{ Session::get('mensaje') }}
-        @endif
+        {{ Session::get('mensaje') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+    @endif  
 
 <a href="{{ url('categoria/create')}}" class="btn btn-success"> Registrar nueva categoria </a>
 <br>
@@ -27,15 +27,13 @@
             <td>{{ $categoria->descripcion }}</td>
             <td>
                 <a href="{{ url('/categoria/'.$categoria->nombre.'/edit')}}" class="btn btn-primary" >
-                    Editar
+                    <i class="far fa-edit"></i>
                 </a>
-                |
                 <form action="{{ url('/categoria/'.$categoria->nombre) }}" class="d-inline" method="post">
                 @csrf
                 {{ method_field('DELETE') }}
-                <input class="btn btn-danger" type="submit" onclick="return confirm('¿Quieres borrar?')"
-                 value="Borrar">
-
+                <button class="btn btn-danger" type="submit" onclick="return confirm('¿Quieres borrar?')"
+                 value="Borrar"><i class="far fa-trash-alt"></i></button>
                 </form>
 
             </td>
@@ -43,5 +41,6 @@
         @endforeach
     </tbody>
 </table>
+{!!$categorias->links()!!}
 </div>
 @endsection
