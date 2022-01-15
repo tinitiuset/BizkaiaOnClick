@@ -43,10 +43,10 @@ Route::group(['prefix' => 'admin'], function() {
 Route::resource('categoria',CategoriaController::class);
 
 // Route::resource('eventos',EventoController::class);
-Route::resources([
+/*Route::resources([
     'categorias' => CategoriaController::class
     // 'posts' => PostController::class,
-]);
+]);*/
 Route::resource('eventos',EventoController::class);
 
 Route::resource('fotos',FotoController::class);

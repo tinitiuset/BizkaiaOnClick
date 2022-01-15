@@ -65,9 +65,11 @@ class CategoriaController extends Controller
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categoria $categoria)
+    public function edit($nombre)
     {
-        //
+        //método para buscar un registro
+        $categoria=Categoria::findOrFail($nombre);
+        return view('categoria.edit', compact('categoria') );
        
     }
 
@@ -91,7 +93,7 @@ class CategoriaController extends Controller
      */
     public function destroy($nombre)
     {
-        //
+        //método destroy para borrar
         Categoria::destroy($nombre);
         return redirect('categoria');
     }

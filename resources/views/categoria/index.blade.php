@@ -1,4 +1,3 @@
-
 <table class="table table-light">
     <thead class="thead-light">
         <tr>
@@ -12,7 +11,11 @@
         <tr>
             <td>{{ $categoria->nombre }}</td>
             <td>{{ $categoria->descripcion }}</td>
-            <td>Editar | 
+            <td>
+                <a href="{{ url('/categoria/'.$categoria->nombre.'/edit')}}">
+                    Editar
+                </a>
+                |
                 <form action="{{ url('/categoria/'.$categoria->nombre) }}" method="post">
                 @csrf
                 {{ method_field('DELETE') }}

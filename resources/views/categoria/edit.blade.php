@@ -1,1 +1,5 @@
-Formulario de edición de categoria
+<form action="{{ url('/categoria') }}" method="post">
+
+    @include('categoria.form');
+</form>
+
