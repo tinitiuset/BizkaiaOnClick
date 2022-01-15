@@ -15,7 +15,7 @@ class CategoriaController extends Controller
     public function index()
     {
         //
-        $datos['categorias']=Categoria::paginate(5);
+        $datos['categorias']=Categoria::paginate(15);
         return view('categoria.index',$datos);
     }
 
@@ -44,7 +44,8 @@ class CategoriaController extends Controller
         $datosCategoria = request()->except('_token');
         Categoria::insert($datosCategoria);
 
-        return response()->json($datosCategoria);
+        //return response()->json($datosCategoria);
+        return redirect('categoria')->with('mensaje','Categoría agregada con éxito');
 
     }
 
@@ -80,9 +81,15 @@ class CategoriaController extends Controller
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(Request $request, $nombre)
     {
-        //
+        //recepcionamos todos los datos excepto el token y el método
+        $datosCategoria = request()->except(['_token','_method']);
+        //Busca el registro en categoria dnd nombre=nombre y hace el update
+        Categoria::where('nombre','=',$nombre)->update($datosCategoria);
+
+        $categoria=Categoria::findOrFail($nombre);//vuelvo a buscar la info
+        return view('categoria.edit', compact('categoria') );//retorno con los datos act.
     }
 
     /**
@@ -95,6 +102,6 @@ class CategoriaController extends Controller
     {
         //método destroy para borrar
         Categoria::destroy($nombre);
-        return redirect('categoria');
+        return redirect('categoria')->with('mensaje', 'Categoría borrada');
     }
 }

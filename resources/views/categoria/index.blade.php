@@ -1,3 +1,9 @@
+
+@if (Session::has('mensaje'))
+{{ Session::get('mensaje') }}
+@endif
+
+<a href="{{ url('categoria/create')}}"> Registrar nueva categoria </a>
 <table class="table table-light">
     <thead class="thead-light">
         <tr>
