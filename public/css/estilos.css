@@ -1,0 +1,20 @@
+.navbar-color{
+    background-color: black;
+
+}
+#navbar-button{
+    color:#FF08D7;
+    border: none;
+}
+.navbar-link {
+    line-height: 1; 
+    display: block;
+    padding: 0.5rem 1rem;
+    color: white;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    
+}
+.navbar-link:hover{
+    color:#FF08D7;
+}
