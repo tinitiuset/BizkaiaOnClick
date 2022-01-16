@@ -4,7 +4,6 @@ use App\Http\Controllers\CategoriaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventoController;
-use App\Http\Controllers\EventoAdminController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\FotoController;
 
@@ -53,17 +52,17 @@ Route::resource('categoria',CategoriaController::class);
     'categorias' => CategoriaController::class
     // 'posts' => PostController::class,
 ]);*/
-Route::resource('eventos',EventoController::class);
+// Route::resource('eventos',EventoController::class);
 
-Route::resource('fotos',FotoController::class);
+// Route::resource('fotos',FotoController::class);
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+// Auth::routes();
 
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

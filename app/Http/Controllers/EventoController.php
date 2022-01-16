@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Evento;
 use App\Models\Foto;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
@@ -40,6 +41,9 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
+
+        // return "hola";
+
         Evento::create([
             'titulo' => $request->get('titulo'),
             'descripcion' => $request->get('descripcion'),
@@ -53,7 +57,8 @@ class EventoController extends Controller
             'recinto' => $request->get('recinto'),
             'localidad' => $request->get('localidad'),
         ]);
-        return redirect('/eventos');
+
+        return view('/eventos/index');
     }
     /**
      * Display the specified resource.
@@ -61,11 +66,16 @@ class EventoController extends Controller
      * @param  \App\Models\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function show(Evento $evento)
+    public function show(String $titulo)
     {
 
-        $evento=DB::table("eventos")->select()->where("titulo","=",$evento)->get();
-        $fotos=DB::table("fotos")->select()->where("evento","=",$evento)->get();
+        $evento=Evento::findOrFail($titulo);
+        $fotos=Foto::where("evento",$titulo);
+
+        return view("eventos/detalle",["evento"=>$evento,"fotos"=>$fotos]);
+
+    
+    }
 
     /**
      * Update the specified resource in storage.
@@ -76,6 +86,7 @@ class EventoController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $evento = Evento::findOrFail($id);
         $evento->update($request->all());
 
@@ -88,21 +99,13 @@ class EventoController extends Controller
      * @param  \App\Models\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Evento $evento)
+    public function edit(String $evento)
     {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Evento  $evento
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Evento $evento)
-    {
-        //
+        $evento = Evento::findOrFail($evento);
+
+        return view("administracion/eventos/editar",array("evento"=>$evento));
+
     }
 
     /**
@@ -111,8 +114,12 @@ class EventoController extends Controller
      * @param  \App\Models\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Evento $evento)
+    public function destroy(String $evento)
     {
-        //
+        
+        Evento::destroy($evento);
+
+        return view("administracion/eventos/index");
+
     }
 }

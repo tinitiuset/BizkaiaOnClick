@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Foto;
 use App\Models\Evento;
+use Illuminate\Contracts\Validation\Validator;
 
 class FotoController extends Controller {
     /**

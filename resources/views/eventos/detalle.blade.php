@@ -2,12 +2,12 @@
 
 <div>aaa</div>
 
-{{-- @section ('title') {{$evento['titulo']}}@endsection
+@section ('title') {{$evento['titulo']}}@endsection
 
 @section ('content')
     <div class="row">
         <div class="col-sn-4">
-            <img src="../img/{{$foto['ruta']}}" alt="{{$evento['titulo']}}" style="width:350px;">
+            {{-- <img src="../img/{{$fotos['ruta']}}" alt="{{$evento['titulo']}}" style="width:350px;"> --}}
         </div>
 
         <div class="cool-sm-8">
@@ -23,4 +23,4 @@
             <a href="./"  type="button" class="btn btn-light border border-dark"> Volver</a>
         </div>
     </div>
-@endsection --}}
+@endsection
