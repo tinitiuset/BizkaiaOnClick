@@ -8,8 +8,9 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 
-import menu from './components/menu.vue';
-import footer from './components/footer.vue';
+// import menu from './components/menu.vue';
+// import footer from './components/footer.vue';
+import paginador from './components/paginador.vue';
 
 /**
  * The following block of code may be used to automatically register your
@@ -34,8 +35,9 @@ const app = new Vue({
     el: '#app',
     components: {
 
-        "menujs":menu,
-        "piedepagina":footer
+        // "menujs":menu,
+        // "piedepagina":footer,
+        "paginador":paginador
 
     }
 });

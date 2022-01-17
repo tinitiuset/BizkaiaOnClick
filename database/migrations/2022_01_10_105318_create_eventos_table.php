@@ -28,8 +28,8 @@ class CreateEventosTable extends Migration
             $table->string("localidad")->nullable();
             $table->string("usuarioAprueba")->nullable();
             $table->string("usuarioCreador")->nullable();
-            $table->foreign('usuarioAprueba')->references('usuario')->on('usuarios');
-            $table->foreign('usuarioCreador')->references('usuario')->on('usuarios');
+            $table->foreign('usuarioAprueba')->references('usuario')->on('users');
+            $table->foreign('usuarioCreador')->references('usuario')->on('users');
 
         });
     }
