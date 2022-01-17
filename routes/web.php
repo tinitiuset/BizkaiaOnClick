@@ -21,7 +21,7 @@ use App\Http\Controllers\FotoController;
 //Route::get('/', [InicioController::class, 'index'])->name('inicio');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 // Route::group(['prefix' => 'agenda'], function() {

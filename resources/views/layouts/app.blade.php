@@ -7,7 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
+    <title>@yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -21,7 +22,7 @@
     <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
 </head>
 <body class="h-100">
-    <div id="app" class="h-100">
+    <div id="app" class="h-100 d-flex flex-column">
         <nav class="navbar navbar-color navbar-expand-md fa-lg">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">

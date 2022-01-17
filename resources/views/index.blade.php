@@ -1,9 +1,15 @@
 @extends ('layouts.app')
 
+@section ('title') Eventos 
+@endsection 
 
-{{-- @section ('title') Eventos @endsection --}}
+@section('content')
+    
+    
 
-@section ('content')
+@endsection
+
+{{-- @section ('content')
     <div class="row">
         @foreach($eventos as $key => $evento)
         <div class="col-xs-6 col-md-3 text-center">
@@ -21,4 +27,4 @@
         </div>
         @endforeach
     </div>
-@endsection
+@endsection --}}
