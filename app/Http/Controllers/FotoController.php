@@ -40,29 +40,29 @@ class FotoController extends Controller {
         $foto->ruta = $request->input('evento');
         $foto->evento = $request->input('evento');
         $foto->save();
-        return redirect()->back()->with('estado','Foto agregada correctamente');
+        return redirect('fotos')->with('estado','Foto agregada correctamente');
      }
 
-     public function storeOLD(Request $request) {
-        $reglas = [
-            'identificador' => 'required|string|min:3|max:255',
-            'ruta' => 'required|string|min:3|max:255',
-            'evento' => 'required|string|min:3|max:255'
-        ];
+    //  public function storeOLD(Request $request) {
+    //     $reglas = [
+    //         'identificador' => 'required|string|min:3|max:255',
+    //         'ruta' => 'required|string|min:3|max:255',
+    //         'evento' => 'required|string|min:3|max:255'
+    //     ];
 
-        $validator = Validator::make($request->all(),$reglas);
-        if ($validator->fails()) {
-            //return
-        } else {
-            $data = $request->input();
-            $foto = new Foto;
-            $foto->identificador = $data['identificador'];
-            $foto->ruta = $data['identificador'];
-            $foto->evento = $data['identificador'];
-            $foto->save();
-            return view (index());
-        }
-    }
+    //     $validator = Validator::make($request->all(),$reglas);
+    //     if ($validator->fails()) {
+    //         //return
+    //     } else {
+    //         $data = $request->input();
+    //         $foto = new Foto;
+    //         $foto->identificador = $data['identificador'];
+    //         $foto->ruta = $data['identificador'];
+    //         $foto->evento = $data['identificador'];
+    //         $foto->save();
+    //         return view (index());
+    //     }
+    // }
 
     /**
      * Display the specified resource.
@@ -71,8 +71,8 @@ class FotoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        $fotos = Foto::all();
-        return view ('fotos.detalle',array('foto'=>$fotos[$id]));
+        $foto = Foto::find($id);
+        return view ('fotos.detalle',array('foto'=>$foto));
     }
 
     /**
@@ -81,8 +81,11 @@ class FotoController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id) {
-        //
+        $foto = Foto::find($id);
+        $eventos = Evento::all();
+        return view('fotos.editar',array('foto'=>$foto),array('eventos'=>$eventos));
     }
 
     /**
@@ -92,26 +95,34 @@ class FotoController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        $reglas = [
-            'ruta' => 'required|string|min:3|max:255',
-            'evento' => 'required|string|min:3|max:255'
-        ];
 
-        $validator = Validator::make($request->all(),$reglas);
-        if ($validator->fails()) {
-            //return
-        } else {
-            $data = $request->input();
-            $fotoVieja = Foto::find($id);
-            $fotoNueva = new Foto;
-            $fotoNueva->identificador = $fotoVieja['identificador'];
-            $fotoNueva->ruta = $data['identificador'];
-            $fotoNueva->evento = $data['identificador'];
-            $fotoVieja->update($fotoNueva);
-            return view(index());
-        }
-    }
+     public function update(Request $request, $id) {
+        $foto = Foto::find($id);
+        $foto->ruta = $request->input('evento');
+        $foto->evento = $request->input('evento');
+        $foto->update();
+        return redirect('fotos')->with('estado','Se ha modificado correctamente');
+     }
+    // public function updateOLD(Request $request, $id) {
+    //     $reglas = [
+    //         'ruta' => 'required|string|min:3|max:255',
+    //         'evento' => 'required|string|min:3|max:255'
+    //     ];
+
+    //     $validator = Validator::make($request->all(),$reglas);
+    //     if ($validator->fails()) {
+    //         //return
+    //     } else {
+    //         $data = $request->input();
+    //         $fotoVieja = Foto::find($id);
+    //         $fotoNueva = new Foto;
+    //         $fotoNueva->identificador = $fotoVieja['identificador'];
+    //         $fotoNueva->ruta = $data['identificador'];
+    //         $fotoNueva->evento = $data['identificador'];
+    //         $fotoVieja->update($fotoNueva);
+    //         return view(index());
+    //     }
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -121,8 +132,7 @@ class FotoController extends Controller {
      */
     public function destroy($id) {
         $foto = Foto::find($id);
-        // $foto = Foto::all();
-        $foto->destroy();
-        return index();
+        $foto->delete();
+        return redirect()->back()->with('estado','Se ha eliminado la foto correctamente');
     }
 }
