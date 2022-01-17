@@ -24,6 +24,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/test', function() {
+    return view('test');
+});
+
 // Route::group(['prefix' => 'agenda'], function() {
 
 //     // Route::get('/',[EventoController::class,"index"])->name("agenda.listado");
