@@ -21,7 +21,7 @@
             <th>{{$foto->identificador}}</th>
             <th>{{$foto->ruta}}</th>
             <th>{{$foto->evento}}</th>
-            <th><img src="../img/{{ $foto->ruta }}" alt="{{$foto->evento}}"></th>
+            <th><img src="../img/eventos/{{ $foto->ruta }}" alt="{{$foto->evento}}"></th>
         </tr>
     </tbody>
 </table>

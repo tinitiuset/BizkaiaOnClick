@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Foto;
 use App\Models\Evento;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Support\Facades\File;
 
 class FotoController extends Controller {
     /**
@@ -36,9 +37,22 @@ class FotoController extends Controller {
      */
     
      public function store(Request $request) {
+       $reglas = [
+           'foto' => 'required:mimes:jpeg,png'
+       ];
+
+       $fichero = $request->file('foto');
+       $ficheroNombre = $request->input('evento') . "." . $fichero->extension();
+
         $foto = new Foto;
-        $foto->ruta = $request->input('evento');
+        
+        $foto->ruta = $ficheroNombre;
+        
         $foto->evento = $request->input('evento');
+
+        $fichero->storeAs('evento',$ficheroNombre);
+    
+
         $foto->save();
         return redirect('fotos')->with('estado','Foto agregada correctamente');
      }
