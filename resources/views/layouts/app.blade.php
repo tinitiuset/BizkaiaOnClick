@@ -21,8 +21,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
 </head>
-<body class="h-100">
-    <div id="app" class="h-100 d-flex flex-column">
+<body>
+    <div id="app">
         <nav class="navbar navbar-color navbar-expand-md fa-lg">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -60,7 +60,7 @@
 
                             @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
+                                <a class="navbar-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                             </li>
                         @endif
                         @else
