@@ -24,9 +24,28 @@
 
 export default {
 
-  mounted() {
-    console.log("footer cargado");
-  }
+    data: {
+            textos: ["Disfruta","Vive","Complacete"],
+            // texto: this.textos[contador],
+            texto: "hola",
+            contador:0,
+    },
+    methods: {
+        cambiarTexto() {
+
+            if (this.contador == textos.length-1) {
+    
+                this.contador = 0;
+    
+            }
+    
+            return this.textos[contador];            
+    
+        }
+    },
+    mounted() {
+        setInterval(cambiarTexto, 3000);
+    },
 
     
 }
