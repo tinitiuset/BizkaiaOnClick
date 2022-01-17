@@ -17,7 +17,6 @@ class EventoController extends Controller
      * @return Response
      */
     public function index() {
-
         $eventos = Evento::all();
         $fotos = Foto::distinct()->get(["evento"]);
         return view('eventos/index',array('eventos' => $eventos),array('fotos'=> $fotos));
