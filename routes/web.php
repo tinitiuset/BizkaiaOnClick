@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\CategoriaController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventoController;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +22,10 @@ use App\Http\Controllers\FotoController;
 
 Route::get('/', function () {
     return view('index');
+});
+
+Route::get('/test', function() {
+    return view('test');
 });
 
 // Route::group(['prefix' => 'agenda'], function() {
