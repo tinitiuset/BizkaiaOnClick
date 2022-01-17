@@ -6,11 +6,10 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue').default;
+// window.Vue = require('vue').default;
 
-// import menu from './components/menu.vue';
-// import footer from './components/footer.vue';
-import paginador from './components/paginador.vue';
+var indexVideo = require('./components/indexVideo.vue');
+import { createApp } from 'vue';
 
 /**
  * The following block of code may be used to automatically register your
@@ -31,13 +30,18 @@ import paginador from './components/paginador.vue';
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
+console.log("hola");
+
+const app = createApp({
+    el: "#index",
+    // data: {
+    //     hola:"hola"
+    // },
     components: {
 
-        // "menujs":menu,
-        // "piedepagina":footer,
-        "paginador":paginador
+        "indexVideojs": indexVideo
 
     }
 });
+// app.component("indexVideojs",indexVideo);
+// app.mount("#index");

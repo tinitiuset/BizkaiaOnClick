@@ -1,38 +1,16 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-100"> 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
+    @include('layouts.header')
     <title>@yield('title')</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
 </head>
 <body class="h-100">
-    <div id="app" class="h-100 d-flex flex-column">
-        <nav class="navbar navbar-color navbar-expand-md fa-lg">
+    <div id="@yield('vueInstance')" class="h-100 d-flex flex-column">
+        {{-- <nav class="navbar navbar-color navbar-expand-md fa-lg">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="./img/LogoColor_e.png">
-                   <!--{{ config('app.name', 'Laravel') }}-->
-                </a>
                 <button class="navbar-toggler" id="navbar-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <i class="fas fa-bars fa-3x"></i>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
@@ -84,10 +62,41 @@
                         @endguest
                     </ul>
                 </div>
+
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="./img/LogoColor_e.png">
+                   <!--{{ config('app.name', 'Laravel') }}-->
+                </a>
+
+            </div>
+        </nav> --}}
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <a class="navbar-brand p-0 m-0" href="#">Navbar</a>
+              <a class="" href="#"><img src="/img/usuario.png" alt="" class="img-fluid d-block h-50 w-50"></a>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item text-center">
+                    <a class="nav-link active text-white text-center" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white text-center" href="#">Link</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled text-white text-center" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                  </li>
+                </ul>
+              </div>
+              
+          
             </div>
         </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
         <footer class="footer mt-auto navbar-color">
