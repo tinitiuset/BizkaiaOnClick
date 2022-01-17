@@ -56,11 +56,11 @@ Route::resource('categoria',CategoriaController::class);
 
 Route::resource('fotos',FotoController::class);
 
-// Auth::routes();
+Auth::routes();//no descomentar es para el login
 
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// Auth::routes();
+//Auth::routes();
 
 
 // Auth::routes();
