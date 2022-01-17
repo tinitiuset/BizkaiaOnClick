@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/';
 
     /**
      * The controller namespace for the application.
@@ -46,6 +46,12 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
+
+            //añadimos los archivos que queremos que reconozcA LARAVEL como rutas
+            Route::middleware('web', 'auth')
+            ->prefix('admin')//añadimos el prefijo para no tener que escribirlo todo el rato
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin.php'));
         });
     }
 
