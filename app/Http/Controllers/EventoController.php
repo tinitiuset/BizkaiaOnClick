@@ -36,29 +36,6 @@ class EventoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return Redirector
-     */
-    public function store(Request $request)
-    {
-        Evento::create([
-            'titulo' => $request->get('titulo'),
-            'descripcion' => $request->get('descripcion'),
-            'fechaInicio' => $request->get('fechaInicio'),
-            'fechaFin' => $request->get('fechaFin'),
-            'hora' => $request->get('hora'),
-            'precio' => $request->get('precio'),
-            'direccion' => $request->get('direccion'),
-            'estado' => $request->get('estado'),
-            'sala' => $request->get('sala'),
-            'recinto' => $request->get('recinto'),
-            'localidad' => $request->get('localidad'),
-        ]);
-        return redirect('/eventos');
-    }
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -82,6 +59,33 @@ class EventoController extends Controller
         //
     }
 
+
+    // API SECTION
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @return Redirector
+     */
+    public function store(Request $request)
+    {
+        Evento::create([
+            'titulo' => $request->get('titulo'),
+            'descripcion' => $request->get('descripcion'),
+            'fechaInicio' => $request->get('fechaInicio'),
+            'fechaFin' => $request->get('fechaFin'),
+            'hora' => $request->get('hora'),
+            'precio' => $request->get('precio'),
+            'direccion' => $request->get('direccion'),
+            'estado' => $request->get('estado'),
+            'sala' => $request->get('sala'),
+            'recinto' => $request->get('recinto'),
+            'localidad' => $request->get('localidad'),
+        ]);
+        return redirect('/eventos');
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -103,7 +107,6 @@ class EventoController extends Controller
      * @param  int  $id
      * @return Response
      */
-
     public function delete(Request $request, $id)
     {
         $article = Evento::findOrFail($id);

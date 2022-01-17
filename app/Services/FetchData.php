@@ -18,25 +18,33 @@ class FetchData
          */
 
         // GET last Event
+        try {
         $url = "https://api.euskadi.eus/culture/events/v1.0/events?_elements=1&_page=1";
         // Dump Data to prove it's working
         self::saveData(self::getServiceData($url));
+        }catch (\Exception $e) {
+            echo $e;
+        }
+
     }
 
     function saveData(array $data)
     {
+        var_dump($data);
         $evento = Evento::create([
             'titulo' => $data['nameEs'],
             'description'=> $data['descriptionEs'],
-            'fechaInicio' => $data['startDate'],
-            'fechaFin' => $data['endDate'],
+            /*'fechaInicio' => $data['startDate'],*/
+            'fechaInicio' => null,
+            /*'fechaFin' => $data['endDate'],*/
+            'fechaFin' => null,
             'hora' => $data['openingHoursEs'],
             'precio' => null,
-            'direccion' => $data['direccion'],
-            'estado' => $data['estado'],
-            'sala' => $data['placeEs'],
-            'recinto' => $data['recinto'],
-            'localidad' => $data['localidad'],
+            'direccion' => null,
+            'estado' => true,
+            'sala' => null,
+            'recinto' => $data['establishmentEs'],
+            'localidad' => $data['municipalityEs'],
         ]);
     }
 
@@ -49,7 +57,6 @@ class FetchData
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         $resp[] = json_decode(utf8_encode(curl_exec($curl)), true);
         curl_close($curl);
-
-        return $resp;
+        return $resp[0]["items"][0];
     }
 }

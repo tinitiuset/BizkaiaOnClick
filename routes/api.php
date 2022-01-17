@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,8 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('eventos', 'ArticleController@index');
-Route::get('eventos/{id}', 'ArticleController@show');
-Route::post('eventos', 'ArticleController@store');
-Route::put('eventos/{id}', 'ArticleController@update');
-Route::delete('eventos/{id}', 'ArticleController@delete');
+/*--------------------EVENTO--------------------*/
+// POST NEW EVENT
+Route::post('/eventos', [EventoController::class,"store"]);
+// EDIT EXISTING EVENT
+Route::put('/eventos/{id}', [EventoController::class,"update"]);
+// DELETE EXISTING EVENT
+Route::delete('/eventos/{id}', [EventoController::class,"delete"]);
