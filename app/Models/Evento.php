@@ -22,13 +22,27 @@ class Evento extends Model
         "estado",
         "sala",
         "recinto",
-        "localidad"
+        "localidad",
+        "usuarioAprueba",
+        "usuarioCreador"
     ];
     protected $primaryKey = "titulo";
     protected $keyType = "string";
     public $timestamps = false;
 
     public function fotos(){
+
+        return $this->hasMany(Foto::class,"evento","titulo");
+
+    }
+
+    public function usuarioAprobador(){
+
+        return $this->hasMany(Foto::class,"evento","titulo");
+
+    }
+
+    public function usuarioCreador(){
 
         return $this->hasMany(Foto::class,"evento","titulo");
 

@@ -47,4 +47,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function usuarioAprobador(){
+
+        return $this->hasOneThrough(Evento::class,"usuarioAprueba","usuario");
+
+    }
+
+    public function usuarioCreador(){
+
+        return $this->hasOneThrough(Evento::class,"usuarioCreador","usuario");
+
+    }
+
 }
