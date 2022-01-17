@@ -54,7 +54,7 @@ Route::resource('categoria',CategoriaController::class);
 ]);*/
 // Route::resource('eventos',EventoController::class);
 
-// Route::resource('fotos',FotoController::class);
+Route::resource('fotos',FotoController::class);
 
 // Auth::routes();
 
