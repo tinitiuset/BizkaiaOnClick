@@ -1,7 +1,7 @@
 <!-- Extendemos la plantilla de adminlte  -->
 @extends('adminlte::page')
 
-@section('title', 'BizkaiaOnClick')
+@section('title', 'Dashboard')
 
 @section('content_header')
     <h1>Tablero</h1>
