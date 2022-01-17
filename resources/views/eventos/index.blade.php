@@ -26,6 +26,7 @@
                     <img src="" alt="" class="">
                     <h3 class="text-bold">{{$evento->titulo}}</h2>
                     <p>{{$evento->descripcion}}</p>
+                    
                 </div>
 
             @endforeach
