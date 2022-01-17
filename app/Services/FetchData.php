@@ -30,21 +30,23 @@ class FetchData
 
     function saveData(array $data)
     {
-        var_dump($data);
+        // TODO Arreglar campos vacios
+        // TODO Arreglar formatos de fechas
         $evento = Evento::create([
             'titulo' => $data['nameEs'],
-            'description'=> $data['descriptionEs'],
-            /*'fechaInicio' => $data['startDate'],*/
+            'description'=> strip_tags($data['descriptionEs']),
+            /*'fechaInicio' => $data['startDate'] ?? '',*/
             'fechaInicio' => null,
-            /*'fechaFin' => $data['endDate'],*/
+            /*'fechaFin' => $data['endDate'] ?? '',*/
             'fechaFin' => null,
-            'hora' => $data['openingHoursEs'],
+            'hora' => $data['openingHoursEs'] ?? '',
+            /*'precio' => $data['priceEs'] ?? '',*/
             'precio' => null,
-            'direccion' => null,
+            'direccion' => $data['direccion'] ?? '',
             'estado' => true,
             'sala' => null,
-            'recinto' => $data['establishmentEs'],
-            'localidad' => $data['municipalityEs'],
+            'recinto' => $data['establishmentEs'] ?? '',
+            'localidad' => $data['municipalityEs'] ?? '',
         ]);
     }
 

@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Foto;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\DB;
 
 class EventoController extends Controller
 {
@@ -38,10 +37,10 @@ class EventoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $eventos = Evento::all();
         $fotos = Foto::all();
@@ -51,10 +50,10 @@ class EventoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
-    public function edit($id)
+    public function edit(int $id): Response
     {
         //
     }
@@ -63,55 +62,54 @@ class EventoController extends Controller
     // API SECTION
 
     /**
+     * Get all resources in storage.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function get(Request $request): JsonResponse
+    {
+        $eventos = Evento::all();
+        return response()->json($eventos);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Redirector
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
-        Evento::create([
-            'titulo' => $request->get('titulo'),
-            'descripcion' => $request->get('descripcion'),
-            'fechaInicio' => $request->get('fechaInicio'),
-            'fechaFin' => $request->get('fechaFin'),
-            'hora' => $request->get('hora'),
-            'precio' => $request->get('precio'),
-            'direccion' => $request->get('direccion'),
-            'estado' => $request->get('estado'),
-            'sala' => $request->get('sala'),
-            'recinto' => $request->get('recinto'),
-            'localidad' => $request->get('localidad'),
-        ]);
-        return redirect('/eventos');
+        $evento = Evento::create($request->all());
+        return response()->json($evento);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
-     * @return Response
+     * @param int $id
+     * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): JsonResponse
     {
         $evento = Evento::findOrFail($id);
         $evento->update($request->all());
-
-        return $evento;
+        return response()->json($evento);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return Response
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
      */
-    public function delete(Request $request, $id)
+    public function delete(Request $request, int $id): JsonResponse
     {
-        $article = Evento::findOrFail($id);
-        $article->delete();
+        Evento::destroy($id);
 
-        return response()->noContent();
+        return response()->json("ok");
     }
 }

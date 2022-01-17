@@ -4,6 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import Vue from "vue";
+
 require('./bootstrap');
 
 window.Vue = require('vue').default;
@@ -30,12 +32,18 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import store from './store/index'
+
+Vue.component('eventos', require('./components/Eventos.vue').default)
+Vue.component('createEvento', require('./components/CreateEvento.vue').default)
+
 const app = new Vue({
     el: '#app',
+    store,
     components: {
 
         "menujs":menu,
-        "piedepagina":footer
+        "piedepagina":footer,
 
     }
 });
