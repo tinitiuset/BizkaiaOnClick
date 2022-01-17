@@ -7,7 +7,11 @@
 
 @section ('content')
     <div class="card-body" style="padding:30px">
-        <form action="POST" enctype="multipart/form-data" accept="image/jpeg, image/png" action={{route('fotos.store')}}>
+        @if(session('estado'))
+            <div class="alert alert-success">{{session('estado')}}</div>
+        @endif
+        <form method="POST" enctype="multipart/form-data" accept="image/jpeg, image/png" action={{url('fotos')}}>
+            @csrf
             <div class="form-group">
                 <label for="foto">Foto:</label>
                 <input type="file" name="foto" id="foto" onchange="cargarImg()">

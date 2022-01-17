@@ -36,14 +36,11 @@ class FotoController extends Controller {
      */
     
      public function store(Request $request) {
-        $data = $request->validate([
-            'foto' => 'required',
-            'evento' => 'required'
-        ]);
-        $project = Foto::create($data);
-        return response()->json([
-            'success' => 'Funciona'
-        ]);
+        $foto = new Foto;
+        $foto->ruta = $request->input('evento');
+        $foto->evento = $request->input('evento');
+        $foto->save();
+        return redirect()->back()->with('estado','Foto agregada correctamente');
      }
 
      public function storeOLD(Request $request) {
