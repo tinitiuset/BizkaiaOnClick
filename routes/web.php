@@ -60,9 +60,4 @@ Auth::routes();//no descomentar es para el login
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-//Auth::routes();
-
-
-// Auth::routes();
-
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
