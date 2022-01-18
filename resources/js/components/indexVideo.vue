@@ -1,50 +1,66 @@
-<template>
-        <div class="position-fixed embed-responsive embed-responsive-4by3 h-100 w-100">
-            <video autoplay muted loop id="myVideo" class="position-fixed end-0 bottom-0">
+<!--<template>
+        <a class="d-block h-100 w-100" href="">
+            <video autoplay muted loop id="myVideo" class="position-fixed start-0 top-0 h-100">
               <source src="/video/index.mp4" type="video/mp4">
               Your browser does not support HTML5 video.
+              <a href=""></a>
             </video>
             <div class="position-fixed top-50 text-center w-100" style="z-index: 2;">
-                <h1 class="text-white" id="textoCambiante">{{texto}}</h1>
-                <a href="" class="text-white p-2 bg-success text-decoration-none">Comenzar</a>
+                <h1 class="text-white fs-1" id="textoCambiante">{{texto}}</h1>
+                <a href="http://google.com" class="text-dark border border-3  fw-bold border-dark p-2 bg-light text-decoration-none rounded">Comenzar</a>
             </div>
-        </div>
+        </a>
+</template>-->
+
+<template>
+  <div href="" class="d-block" id="contenedorVideo">
+    <video autoplay muted loop preload id="myVideo" class="">
+      <source src="/video/index.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+      <a href=""></a>
+    </video>
+    <div class="contenido d-flex align-items-center">
+      <div class="container text-center">
+        <a href='/agenda' class="text-white text-decoration-none" id="textoCambiante">{{texto}}</a>
+      </div>
+      
+    </div>
+  </div>
+
 </template>
+
+
 
 <script>
 export default {
     data() {
       return {
-            textos: ["Disfruta","Vive","Complacete"],
-            // texto: this.textos[this.contador],
-            texto: "",
+            textos: ["Disfruta","Vive","Diviertete"],
+            texto: "Bienvenido",
             contador:0,
       }
     }, created() {
-      
+
           setInterval(() => {
 
-            console.log("texto antes:"+this.texto);
-
-            $("#textoCambiante").animate({opacity:"0"},2500);
-
-            this.texto = this.textos[this.contador];
-
-            if (this.contador == this.textos.length-1) {
+            if (this.contador == this.textos.length) {
     
               this.contador = 0;
     
-            } else {
+            }
+
+            $("#textoCambiante").animate({opacity:"0"},500, () => {
+              
+              this.texto = this.textos[this.contador];
+
+              $("#textoCambiante").animate({opacity:"1"},500);
 
               this.contador++;
 
-            }
+          });
 
-            console.log("texto ahora:"+this.texto);
 
-            $("#textoCambiante").animate({opacity:"1"},2500);
-
-        }, 3000);
+        }, 2500);
 
     }
 
