@@ -82,7 +82,7 @@
                         <div class="row mb-3 justify-content-center">
                             <div class="col-md-10">
                                 <input id="password" placeholder="Contraseña" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
-
+                                <div class="small text-muted mt-2">Mínimo 8 carácteres</div>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -98,7 +98,7 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="d-grid gap-2 col-6 mx-auto">
+                            <div class="d-grid gap-2 col-10 mx-auto">
                                 <button type="submit" class="btn bg-magenta white btn-lg btn-login">
                                     {{ __('Registrarse') }}
                                 </button>

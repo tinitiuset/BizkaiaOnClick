@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container body-degradado" width="100%">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+        <div class="col-lg-4 col-md-6 col-xs-8">
+            <div class="card margin-110">
+                <div class="card-header white text-center text-uppercase">{{ __('Renovar Contraseña') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -17,10 +17,10 @@
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('E-Mail Address') }}</label>
+                        <div class="row mb-0">
+                            <label for="email" class="col-form-label white">{{ __('E-Mail Address') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col lg-10 col-md-12">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
@@ -32,9 +32,9 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
+                            <div class="d-grid gap-2 col-10 mx-auto">
+                                <button type="submit" class="btn bg-magenta white btn-lg btn-login mt-4">
+                                    {{ __('Reenviar') }}
                                 </button>
                             </div>
                         </div>

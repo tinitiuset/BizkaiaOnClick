@@ -3,18 +3,21 @@
 @section('content')
 <div class="container body-degradado">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-lg-4 col-md-6 col-xs-8">
             <div class="card">
-                <div class="card-header">{{ __('Iniciar Sesión') }}</div>
+                <div class="card-header card-registro text-center">
+                    <a class="card-link white text-uppercase text-decoration-none link-personalizado " href="{{ url('register')}}">Crear cuenta</a>
+                    <a class="card-link white text-uppercase text-decoration-none link-personalizado " href="{{ url('login')}}">Inciciar sesión</a>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Dirección E-Mail') }}</label>
+                        <div class="row mb-0">
+                            <label for="email" class="col-form-label white">{{ __('Correo electrónico') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col lg-10 col-md-12">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
@@ -25,10 +28,10 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Contraseña') }}</label>
+                        <div class="row mb-0">
+                            <label for="password" class=" col-form-label white">{{ __('Contraseña') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col lg-10 col-md-12">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
@@ -44,7 +47,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
+                                    <label class="form-check-label white" for="remember">
                                         {{ __('Recordarme') }}
                                     </label>
                                 </div>
@@ -58,7 +61,7 @@
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    <a class="btn btn-link white magenta-hover" href="{{ route('password.request') }}">
                                         {{ __('¿Has olvidado la contraseña?') }}
                                     </a>
                                 @endif
