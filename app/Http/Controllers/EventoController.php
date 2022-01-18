@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
+use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Foto;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\DB;
 
 class EventoController extends Controller
 {
@@ -33,7 +32,6 @@ class EventoController extends Controller
 
 
         return view('eventos/index',array('eventos' => $eventos),array('fotos'=> $fotos));
-        // return view('eventos/index',array('eventos' => $eventos));
     }
 
     /**
@@ -44,95 +42,85 @@ class EventoController extends Controller
     public function create()
     {
         return view('eventos/crear');
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     * @return Response
+     */
+    public function show(int $id)
+    {
+        $eventos = Evento::all();
+        $fotos = Foto::all();
+        return view ('eventos.detalle', array('evento'=>$eventos[$id]), array('foto'=>$fotos[$id]));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return Response
+     */
+    public function edit(int $id): Response
+    {
+        //
+    }
+
+
+    // API SECTION
+
+    /**
+     * Get all resources in storage.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function get(Request $request): JsonResponse
+    {
+        $eventos = Evento::all();
+        return response()->json($eventos);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Redirector
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
-
-        // return "hola";
-
-        Evento::create([
-            'titulo' => $request->get('titulo'),
-            'descripcion' => $request->get('descripcion'),
-            'fechaInicio' => $request->get('fechaInicio'),
-            'fechaFin' => $request->get('fechaFin'),
-            'hora' => $request->get('hora'),
-            'precio' => $request->get('precio'),
-            'direccion' => $request->get('direccion'),
-            'estado' => $request->get('estado'),
-            'sala' => $request->get('sala'),
-            'recinto' => $request->get('recinto'),
-            'localidad' => $request->get('localidad'),
-        ]);
-
-        return view('/eventos/index');
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Evento  $evento
-     * @return \Illuminate\Http\Response
-     */
-    public function show(String $titulo)
-    {
-
-        $evento=Evento::findOrFail($titulo);
-        $fotos=Foto::where("evento",$titulo);
-
-        return view("eventos/detalle",["evento"=>$evento,"fotos"=>$fotos]);
-
-    
+        $evento = Evento::create($request->all());
+        return response()->json($evento);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
-     * @return Response
+     * @param int $id
+     * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): JsonResponse
     {
-
         $evento = Evento::findOrFail($id);
         $evento->update($request->all());
-
-        return $evento;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Evento  $evento
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(String $evento)
-    {
-
-        $evento = Evento::findOrFail($evento);
-
-        return view("administracion/eventos/editar",array("evento"=>$evento));
-
+        return response()->json($evento);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Evento  $evento
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
      */
-    public function destroy(String $evento)
+    public function delete(Request $request, int $id): JsonResponse
     {
-        
-        Evento::destroy($evento);
+        Evento::destroy($id);
 
-        return view("administracion/eventos/index");
-
+        return response()->json("ok");
     }
 }

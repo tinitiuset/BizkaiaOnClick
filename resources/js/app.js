@@ -4,12 +4,17 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import Vue from "vue";
+
 require('./bootstrap');
 
-// window.Vue = require('vue').default;
+window.Vue = require('vue').default;
 
 var indexVideo = require('./components/indexVideo.vue');
 import { createApp } from 'vue';
+
+import menu from './components/menu.vue';
+import footer from './components/footer.vue';
 
 /**
  * The following block of code may be used to automatically register your
@@ -22,7 +27,7 @@ import { createApp } from 'vue';
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -30,18 +35,19 @@ import { createApp } from 'vue';
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-console.log("hola");
+import store from './store/index'
 
-const app = createApp({
-    el: "#index",
-    // data: {
-    //     hola:"hola"
-    // },
+Vue.component('eventos', require('./components/Eventos.vue').default)
+Vue.component('createEvento', require('./components/CreateEvento.vue').default)
+
+const app = new Vue({
+    el: '#app',
+    store,
     components: {
 
+        "menujs":menu,
+        "piedepagina":footer,
         "indexVideojs": indexVideo
 
     }
 });
-// app.component("indexVideojs",indexVideo);
-// app.mount("#index");
