@@ -4,12 +4,17 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+ import Vue from 'vue';
+ window.Vue = Vue;
+ require('./bootstrap'); 
 
 // window.Vue = require('vue').default;
 
-var indexVideo = require('./components/indexVideo.vue');
-import { createApp } from 'vue';
+
+var hola= "eaea";
+
+import indexVideo from './components/indexVideo.vue';
+// import {createApp} from 'vue';
 
 /**
  * The following block of code may be used to automatically register your
@@ -32,14 +37,15 @@ import { createApp } from 'vue';
 
 console.log("hola");
 
-const app = createApp({
+
+const app = new Vue({
     el: "#index",
-    // data: {
-    //     hola:"hola"
-    // },
+    // // data: {
+    // //     hola:"hola"
+    // // },
     components: {
 
-        "indexVideojs": indexVideo
+        "indexvideojs": indexVideo
 
     }
 });
