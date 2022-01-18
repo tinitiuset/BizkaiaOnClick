@@ -77,7 +77,7 @@
                 <i class="fas fa-bars fa-2x"></i>
               </button>
               <a class="navbar-brand" href="{{ url('/') }}">
-                <img class="logo-movil" src="./img/LogoColor_e.png">
+                <img class="logo-movil" src="{{URL::asset('/img/LogoColor_e.png')}}">
                <!--{{ config('app.name', 'Laravel') }}-->
               </a>
               <a class="" href="#"><img src="/img/usuario.png" alt="" class="img-fluid d-block h-50 w-50"></a>
