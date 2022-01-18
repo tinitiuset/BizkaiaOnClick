@@ -1,14 +1,15 @@
 
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en" class="w-100 h-100">
 <head>
 
     @include('layouts.header')
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 
     <title>BizkaiaOnClick</title>
 </head>
-<body class="h-100">
-    <div id="index" class="h-100">
+<body class="w-100 h-100">
+    <div id="index" class="w-100 h-100">
         {{-- <indexVideo video="{{asset("video/index.mp4")}}"></indexVideo> --}}
         <indexvideo></indexvideo>
     </div>
