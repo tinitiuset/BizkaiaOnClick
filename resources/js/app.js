@@ -35,27 +35,28 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import store from './store/index'
+import store from './store/index';
 
-Vue.component('eventos', require('./components/Eventos.vue').default)
-Vue.component('createEvento', require('./components/CreateEvento.vue').default)
+Vue.component('eventos', require('./components/Eventos.vue').default);
+Vue.component('createEvento', require('./components/CreateEvento.vue').default);
+// Vue.component('indexvideo', require('./components/indexVideo.vue').default);
 
-const app = new Vue({
-    el: '#app',
-    store,
-    components: {
+// const app = new Vue({
+//     el: '#app',
+//     store,
+//     components: {
 
-        "menujs":menu,
-        "piedepagina":footer,
+//         "menujs":menu,
+//         "piedepagina":footer,
 
-    }
-});
+//     }
+// });
 
-const app = new Vue({
+const index = new Vue({
     el: '#index',
     components: {
 
-        "indexVideo":indexVideo
+        "indexvideo":indexVideo
 
     }
 });

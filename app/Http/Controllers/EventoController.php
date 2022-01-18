@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Foto;
