@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container body-degradado">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -52,8 +52,8 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="d-grid gap-2 col-10 mx-auto">
+                                <button type="submit" class="btn bg-magenta white btn-lg btn-login">
                                     {{ __('Iniciar sesión') }}
                                 </button>
 

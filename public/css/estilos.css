@@ -33,6 +33,7 @@
 
 .navbar-color{
     background-color: black;
+    border: none;
 
 }
 #navbar-button{
@@ -50,6 +51,9 @@
 }
 .navbar-link:hover{
     color:#FF08D7;
+}
+.logo-movil {
+    width: 150px;
 }
 /*------------  ESTILOS DE LOGIN  ----------------------*/
 .card{
