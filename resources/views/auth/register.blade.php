@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container body-degradado">
     <div class="row justify-content-center">
         <div class="col-lg-4 col-md-6 col-xs-8">
             <div class="card">
-                <div class="card-header card-registro">
-                    <a class="card-link white text-uppercase text-decoration-none link-personalizado " href="">Crear cuenta</a>
-                    <a class="card-link white text-uppercase link-personalizado " href="">Inciciar sesión</a>
+                <div class="card-header card-registro text-center">
+                    <a class="card-link white text-uppercase text-decoration-none link-personalizado " href="{{ url('register')}}">Crear cuenta</a>
+                    <a class="card-link white text-uppercase text-decoration-none link-personalizado " href="{{ url('login')}}">Inciciar sesión</a>
                 </div>
 
 
@@ -31,7 +31,7 @@
                         <!--NOMBRE USUARIO-->
                         <div class="row mb-3 justify-content-center">
                             <div class="col-md-10">
-                                <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" autocomplete="nombre">
+                                <input id="nombre" placeholder="Nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" autocomplete="nombre">
 
                                 @error('nombre')
                                     <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
                         <!--APELLIDOS USUARIO-->
                         <div class="row mb-3 justify-content-center">
                             <div class="col-md-10">
-                                <input id="apellidos" type="text" class="form-control @error('apellidos') is-invalid @enderror" name="apellidos" value="{{ old('apellidos') }}" autocomplete="apellidos">
+                                <input id="apellidos" placeholder="Apellidos" type="text" class="form-control @error('apellidos') is-invalid @enderror" name="apellidos" value="{{ old('apellidos') }}" autocomplete="apellidos">
 
                                 @error('apellidos')
                                 <span class="invalid-feedback" role="alert">
@@ -56,7 +56,7 @@
                         <!--E-MAIL USUARIO-->
                         <div class="row mb-3 justify-content-center">
                             <div class="col-md-10">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
+                                <input id="email" placeholder="Email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -69,7 +69,7 @@
                         <!--TELEFONO USUARIO-->
                         <div class="row mb-3 justify-content-center">
                             <div class="col-md-10">
-                                <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" autocomplete="telefono">
+                                <input id="telefono" placeholder="Teléfono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" autocomplete="telefono">
 
                                 @error('telefono')
                                 <span class="invalid-feedback" role="alert">
@@ -81,7 +81,7 @@
 
                         <div class="row mb-3 justify-content-center">
                             <div class="col-md-10">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
+                                <input id="password" placeholder="Contraseña" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -93,13 +93,13 @@
 
                         <div class="row mb-3 justify-content-center">
                             <div class="col-md-10">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
+                                <input id="password-confirm" placeholder="Confirmar contraseña" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
                             </div>
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button type="submit" class="btn bg-magenta white btn-lg btn-login">
                                     {{ __('Registrarse') }}
                                 </button>
                             </div>
