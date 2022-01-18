@@ -10,6 +10,9 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}" defer></script>
 
+<!-- Fontawsome -->
+<script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" data-auto-a11y="true"></script>
+
 <!-- Fonts -->
 <link rel="dns-prefetch" href="//fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">

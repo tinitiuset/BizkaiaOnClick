@@ -51,6 +51,9 @@
 .navbar-link:hover{
     color:#FF08D7;
 }
+.logo-movil {
+    width: 150px;
+}
 /*------------  ESTILOS DE LOGIN  ----------------------*/
 .card{
     margin:50px 20px 50px 20px;
