@@ -6,29 +6,33 @@
 {{-- @section ('title') {{Foto $foto['identificador']}}@endsection --}}
 
 @section ('content')
-<h3>Valores antiguos:</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Identificador</th>
-            <th>Ruta</th>
-            <th>Evento</th>
-            <th>Foto</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th>{{$foto->identificador}}</th>
-            <th>{{$foto->ruta}}</th>
-            <th>{{$foto->evento}}</th>
-            <th><img src="../img/eventos/{{ $foto->ruta }}" alt="{{$foto->evento}}"></th>
-        </tr>
-    </tbody>
-</table>
     <div class="card-body" style="padding:30px">
-        @if(session('estado'))
-            <div class="alert alert-success">{{session('estado')}}</div>
+        @if (count($errors)>0)
+            <div class="alert alert-danger">
+            @foreach ($errors->all() as $error) 
+                {{ $error }} <br>
+            @endforeach
+            </div>
         @endif
+        <h3>Valores antiguos:</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Identificador</th>
+                    <th>Ruta</th>
+                    <th>Evento</th>
+                    <th>Foto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>{{$foto->identificador}}</th>
+                    <th>{{$foto->ruta}}</th>
+                    <th>{{$foto->evento}}</th>
+                    <th><img src="../img/eventos/{{ $foto->ruta }}" alt="{{$foto->evento}}"></th>
+                </tr>
+            </tbody>
+        </table>
         <form method="POST" enctype="multipart/form-data" accept="image/jpeg, image/png" action={{url('fotos/'.$foto->identificador)}}>
             @csrf
             @method('PUT')

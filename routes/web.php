@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\EventoAdminController;
+use App\Http\Controllers\FotoController;
 use Illuminate\Support\Facades\Auth;
 
 /*
