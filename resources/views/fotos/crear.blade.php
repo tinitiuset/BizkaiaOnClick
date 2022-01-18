@@ -5,10 +5,14 @@
 
 {{-- @section ('title') {{Foto $foto['identificador']}}@endsection --}}
 
-@section ('content')
+    @section ('content')
     <div class="card-body" style="padding:30px">
-        @if(session('estado'))
-            <div class="alert alert-success">{{session('estado')}}</div>
+        @if (count($errors)>0)
+        <div class="alert alert-danger">
+            @foreach ($errors->all() as $error) 
+                {{ $error }} <br>
+            @endforeach
+        </div>
         @endif
         <form method="POST" enctype="multipart/form-data" accept="image/jpeg, image/png" action={{url('fotos')}}>
             @csrf
@@ -20,7 +24,7 @@
             <div class="form-group">
                 <label for="">Evento:</label>
                 <select name="evento" id="">
-                    @foreach ($eventos as $key => $evento)
+                    @foreach ($eventos as $evento)
                         <option>{{$evento['titulo']}}</option>    
                     @endforeach
                 </select>

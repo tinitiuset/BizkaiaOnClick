@@ -37,12 +37,22 @@ class FotoController extends Controller {
      */
     
      public function store(Request $request) {
-       $reglas = [
-           'foto' => 'required:mimes:jpeg,png'
-       ];
+       
+        $reglas = [
+           'foto' => 'required|mimes:jpeg,png',
+           'evento' => 'required'
+        ];
 
-       $fichero = $request->file('foto');
-       $ficheroNombre = $request->input('evento') . "." . $fichero->extension();
+        $mensaje=[
+           'required' => 'El campo :attribute es requerido',
+            'mimes'=>'Solo se pueden subir archivos PNG o JPG'
+        ];
+        
+        $this->validate($request,$reglas,$mensaje);
+
+        $fichero = $request->file('foto');
+    
+        $ficheroNombre = $request->input('evento') . "." . $fichero->extension();
 
         $foto = new Foto;
         
@@ -50,9 +60,8 @@ class FotoController extends Controller {
         
         $foto->evento = $request->input('evento');
 
-        $fichero->storeAs('evento',$ficheroNombre);
-    
-
+        $fichero->storeAs('tmpFotosEvento',$ficheroNombre);
+        
         $foto->save();
         return redirect('fotos')->with('estado','Foto agregada correctamente');
      }
@@ -110,13 +119,34 @@ class FotoController extends Controller {
      * @return \Illuminate\Http\Response
      */
 
-     public function update(Request $request, $id) {
+    public function update(Request $request, $id) {
+        $reglas = [
+            'foto' => 'mimes:jpeg,png',
+            'evento' => 'required'
+        ];
+
+        $mensaje=[
+            'required' => 'El campo :attribute es requerido',
+            'mimes'=>'Solo se pueden subir archivos PNG o JPG'
+        ];
+
+        $this->validate($request,$reglas,$mensaje);
+
         $foto = Foto::find($id);
+
         $foto->ruta = $request->input('evento');
         $foto->evento = $request->input('evento');
+
+        if ($request->file()) {
+            $fichero = $request->file('foto');
+            $ficheroNombre = $request->input('evento') . "." . $fichero->extension();
+            $foto->ruta = $ficheroNombre;
+            $fichero->storeAs('tmpFotosEvento',$ficheroNombre);
+        } 
+
         $foto->update();
         return redirect('fotos')->with('estado','Se ha modificado correctamente');
-     }
+    }
     // public function updateOLD(Request $request, $id) {
     //     $reglas = [
     //         'ruta' => 'required|string|min:3|max:255',

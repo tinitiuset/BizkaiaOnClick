@@ -10,7 +10,7 @@
 <body class="h-100">
     <div id="index" class="h-100">
         {{-- <indexVideo video="{{asset("video/index.mp4")}}"></indexVideo> --}}
-    <indexVideojs></indexVideojs/>
+        <indexvideo></indexvideo>
     </div>
     
     
