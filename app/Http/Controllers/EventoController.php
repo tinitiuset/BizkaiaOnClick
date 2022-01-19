@@ -22,7 +22,7 @@ class EventoController extends Controller
         config()->set('database.connections.mysql.strict', false);
         DB::reconnect(); //important as the existing connection if any would be in strict mode
 
-        $eventos = Evento::paginate(5);
+        $eventos = Evento::paginate(15);
         // $fotos = Foto::all();
         $fotos = Foto::orderBy('identificador', 'asc')
         ->groupBy('evento')

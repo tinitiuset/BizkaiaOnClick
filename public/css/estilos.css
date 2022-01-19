@@ -28,6 +28,18 @@
     background: linear-gradient(to bottom, #FF08D7, #b062fe, #3385ff);
 }
 
+/* .texto-degradado {
+    color: white;
+} */
+
+.texto-degradado:hover {
+    background: linear-gradient(to bottom, #FF08D7, #b062fe, #3385ff);
+    -webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+    /* color: seagreen; */
+}
+
+
 .magenta-hover:hover {
     color:#FF08D7;   
 }

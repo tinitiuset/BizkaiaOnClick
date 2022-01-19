@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     
-    <div class="d-flex flex-column h-100">
+    <div class="d-flex flex-column h-100 py-4">
         {{-- <img src="../img/menuHamburguesa.png"> --}}
         <div class="container-fluid">
             <div>
