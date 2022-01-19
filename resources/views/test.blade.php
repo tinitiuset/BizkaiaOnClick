@@ -74,7 +74,6 @@
 {{--<div class="flex-center position-ref full-height">--}}
 
 <div id="app">
-
     <div class="container">
         <div class="row">
             <div class="col-md-5">
@@ -83,12 +82,9 @@
             </div>
             <div class="col-md-7">
                 <Eventos></Eventos>
-
             </div>
         </div>
     </div>
-
-    <evento></evento>
 </div>
 
 {{--</div>--}}

@@ -1,5 +1,6 @@
 const state = {
-    eventos: []
+    eventos: [],
+    evento: []
 }
 
 export default state
