@@ -7,6 +7,7 @@ use App\Models\Foto;
 use App\Models\Evento;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class FotoController extends Controller {
     /**
@@ -60,7 +61,7 @@ class FotoController extends Controller {
         
         $foto->evento = $request->input('evento');
 
-        $fichero->storeAs('tmpFotosEvento',$ficheroNombre);
+        $fichero->storeAs('imgEventos',$ficheroNombre);
         
         $foto->save();
         return redirect('fotos')->with('estado','Foto agregada correctamente');
@@ -134,16 +135,20 @@ class FotoController extends Controller {
 
         $foto = Foto::find($id);
 
-        $foto->ruta = $request->input('evento');
-        $foto->evento = $request->input('evento');
-
+        
         if ($request->file()) {
+            Storage::delete('imgEventos/'.$foto->ruta);
             $fichero = $request->file('foto');
             $ficheroNombre = $request->input('evento') . "." . $fichero->extension();
             $foto->ruta = $ficheroNombre;
-            $fichero->storeAs('tmpFotosEvento',$ficheroNombre);
-        } 
-
+            $fichero->storeAs('imgEventos',$ficheroNombre);
+        } else {
+            //to do
+            //Cambiar nombre fichero
+            $foto->ruta = $request->input('evento');
+            $foto->evento = $request->input('evento');
+        }
+        
         $foto->update();
         return redirect('fotos')->with('estado','Se ha modificado correctamente');
     }
@@ -176,6 +181,7 @@ class FotoController extends Controller {
      */
     public function destroy($id) {
         $foto = Foto::find($id);
+        Storage::delete('imgEventos/'.$foto->ruta);
         $foto->delete();
         return redirect()->back()->with('estado','Se ha eliminado la foto correctamente');
     }
