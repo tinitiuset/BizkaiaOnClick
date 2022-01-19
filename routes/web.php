@@ -6,6 +6,7 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\EventoAdminController;
 use App\Http\Controllers\FotoController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -32,6 +33,8 @@ Route::get('/test', function() {
 Route::resource("agenda",EventoController::class);
 Route::resource('categoria',CategoriaController::class);
 Route::resource('fotos',FotoController::class);
+
+Route::apiresource('user',UserController::class);
 
 // Route::resource('eventos',EventoController::class);
 

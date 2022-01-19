@@ -38,6 +38,7 @@ Vue.component('eventos', require('./components/Eventos.vue').default);
 Vue.component('createEvento', require('./components/CreateEvento.vue').default);
 Vue.component('evento', require('./components/Evento.vue').default);
 // Vue.component('indexvideo', require('./components/indexVideo.vue').default);
+Vue.component('usuario', require('./components/Usuario.vue').default);
 
 const app = new Vue({
     el: '#app',
