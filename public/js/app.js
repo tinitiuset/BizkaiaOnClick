@@ -5617,13 +5617,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   methods: {
     abrirMenu: function abrirMenu() {
       if ($("#logo").css("display") != "none") {
         $("#logo").hide();
+        $("#menuHamburguesa").hide();
+        $("#cerrarMenu").removeClass("d-none"); // $("#cerrarMenu").show();
+
+        $("#contenedorMenu").addClass("justify-content-center");
       } else {
         $("#logo").show();
+        $("#menuHamburguesa").show();
+        $("#cerrarMenu").addClass("d-none"); // $("#cerrarMenu").hide();
+
+        $("#contenedorMenu").removeClass("justify-content-center");
       }
     }
   },
@@ -40241,29 +40265,60 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("nav", { staticClass: "navbar navbar-expand-lg navbar-color" }, [
-    _c("div", { staticClass: "container-fluid" }, [
-      _c(
-        "button",
-        {
-          staticClass: "navbar-toggler",
-          attrs: {
-            id: "navbar-button",
-            type: "button",
-            "data-bs-toggle": "collapse",
-            "data-bs-target": "#navbarSupportedContent",
-            "aria-controls": "navbarSupportedContent",
-            "aria-expanded": "false",
-            "aria-label": "Toggle navigation",
+    _c(
+      "div",
+      { staticClass: "container-fluid", attrs: { id: "contenedorMenu" } },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "navbar-toggler",
+            attrs: {
+              id: "navbar-button",
+              type: "button",
+              "data-bs-toggle": "collapse",
+              "data-bs-target": "#navbarSupportedContent",
+              "aria-controls": "navbarSupportedContent",
+              "aria-expanded": "false",
+              "aria-label": "Toggle navigation",
+            },
+            on: { click: _vm.abrirMenu },
           },
-          on: { click: _vm.abrirMenu },
-        },
-        [_c("i", { staticClass: "fas fa-bars fa-2x" })]
-      ),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
-    ]),
+          [
+            _c("i", {
+              staticClass: "fas fa-bars fa-2x",
+              attrs: { id: "menuHamburguesa" },
+            }),
+            _vm._v(" "),
+            _c(
+              "svg",
+              {
+                staticClass: "bi bi-x d-none",
+                attrs: {
+                  xmlns: "http://www.w3.org/2000/svg",
+                  width: "48",
+                  height: "48",
+                  fill: "currentColor",
+                  id: "cerrarMenu",
+                  viewBox: "0 0 16 16",
+                },
+              },
+              [
+                _c("path", {
+                  attrs: {
+                    d: "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z",
+                  },
+                }),
+              ]
+            ),
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
+      ]
+    ),
   ])
 }
 var staticRenderFns = [
@@ -40277,7 +40332,7 @@ var staticRenderFns = [
       [
         _c("img", {
           staticClass: "logo-movil",
-          attrs: { src: "/img/LogoColor_e.png'" },
+          attrs: { src: "/img/logoColor.png" },
         }),
       ]
     )
@@ -40293,38 +40348,66 @@ var staticRenderFns = [
         attrs: { id: "navbarSupportedContent" },
       },
       [
-        _c("ul", { staticClass: "navbar-nav me-auto mb-2 mb-lg-0" }, [
-          _c("li", { staticClass: "nav-item text-center fs-1" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link active text-white text-center",
-                attrs: { "aria-current": "page", href: "/" },
-              },
-              [_vm._v("Inicio")]
-            ),
+        _c("div", [
+          _c("ul", { staticClass: "navbar-nav me-auto mb-2 mb-lg-0" }, [
+            _c("li", { staticClass: "nav-item text-center fs-1" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link active text-white text-center",
+                  attrs: { "aria-current": "page", href: "/" },
+                },
+                [_vm._v("Inicio")]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link text-white text-center fs-1",
+                  attrs: { href: "#" },
+                },
+                [_vm._v("Agenda")]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link text-white text-center fs-1",
+                  attrs: { href: "#" },
+                },
+                [_vm._v("Envía tus eventos")]
+              ),
+            ]),
           ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link text-white text-center fs-1",
-                attrs: { href: "#" },
-              },
-              [_vm._v("Agenda")]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link text-white text-center fs-1",
-                attrs: { href: "#" },
-              },
-              [_vm._v("Envía tus eventos")]
-            ),
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("ul", { staticClass: "navbar-nav me-auto mb-2 mb-lg-0" }, [
+            _c("li", { staticClass: "nav-item text-center fs-1" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link active text-white text-center",
+                  attrs: { "aria-current": "page", href: "/" },
+                },
+                [_vm._v("Iniciar Sesion")]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link text-white text-center fs-1",
+                  attrs: { href: "#" },
+                },
+                [_vm._v("Registrar")]
+              ),
+            ]),
           ]),
         ]),
       ]
