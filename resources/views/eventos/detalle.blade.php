@@ -1,26 +1,90 @@
-@extends ('layouts.app')
+<!doctype html>
+<html lang="{{ app()->getLocale() }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<div>aaa</div>
+    <title>Laravel Vue.js app</title>
 
-@section ('title') {{$evento['titulo']}}@endsection
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-@section ('content')
-    <div class="row">
-        <div class="col-sn-4">
-            {{-- <img src="../img/{{$fotos['ruta']}}" alt="{{$evento['titulo']}}" style="width:350px;"> --}}
-        </div>
+    <link rel="stylesheet" href="{{mix('css/app.css')}}">
 
-        <div class="cool-sm-8">
-            <h1>{{$evento['titulo']}}</h1>
-            <h4>{{$evento['descripcion']}} </h4>
-            <p>Fecha: {{$evento['fecha']}}</p>
-            <p>Precio: {{$evento['precio']}}</p>
-            <p>Dirección: {{$evento['direccion']}} </p>
-            <p>Sala: {{$evento['sala']}}</p>
-            <p>Recinto: {{$evento['recinto']}} </p>
-            <p>Provincia: {{$evento['provincia']}} </p>
-            <p>Localidad: {{$evento['localidad']}} </p>
-            <a href="./"  type="button" class="btn btn-light border border-dark"> Volver</a>
-        </div>
+    <!-- Styles -->
+    <style>
+        html, body {
+            padding: 45px;
+            background-color: #fff;
+            color: #636b6f;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 200;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .full-height {
+            height: 100vh;
+        }
+
+        .flex-center {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .position-ref {
+            position: relative;
+        }
+
+        .top-right {
+            position: absolute;
+            right: 10px;
+            top: 18px;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .title {
+            font-size: 84px;
+        }
+
+        .links > a {
+            color: #636b6f;
+            padding: 0 25px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .m-b-md {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+
+    <div class="container">
+        <evento id="{{$id}}"></evento>
     </div>
-@endsection
+</div>
+
+<script async src="{{mix('js/app.js')}}"></script>
+</body>
+</html>
+<script>
+    import Evento from "../../js/components/Evento";
+    export default {
+        components: {Evento}
+    }
+</script>

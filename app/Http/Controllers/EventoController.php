@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Evento;
@@ -51,13 +54,11 @@ class EventoController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return Response
+     * @return View
      */
-    public function show(int $id)
+    public function show(int $id): View
     {
-        $eventos = Evento::all();
-        $fotos = Foto::all();
-        return view ('eventos.detalle', array('evento'=>$eventos[$id]), array('foto'=>$fotos[$id]));
+        return view ('eventos.detalle', array('id' => $id));
     }
 
     /**
@@ -75,15 +76,28 @@ class EventoController extends Controller
     // API SECTION
 
     /**
-     * Get all resources in storage.
+     * Get a resource in storage.
      *
      * @param Request $request
      * @return JsonResponse
      */
-    public function get(Request $request): JsonResponse
+    public function getAll(Request $request): JsonResponse
     {
         $eventos = Evento::all();
         return response()->json($eventos);
+    }
+
+    /**
+     * Get all resources in storage.
+     *
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function get(Request $request, int $id): JsonResponse
+    {
+        $evento = Evento::findOrFail($id);
+        return response()->json($evento);
     }
 
     /**

@@ -88,7 +88,7 @@
         </div>
     </div>
 
-
+    <evento></evento>
 </div>
 
 {{--</div>--}}

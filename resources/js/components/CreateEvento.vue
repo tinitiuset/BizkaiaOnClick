@@ -80,6 +80,7 @@ export default {
     },
     computed: {
         isValid() {
+            //TODO Hacer correspondientes validaciones
             // Validaciones JS
             return this.evento.titulo !== '' && this.evento.descripcion !== ''
         }

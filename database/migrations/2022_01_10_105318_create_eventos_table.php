@@ -15,7 +15,8 @@ class CreateEventosTable extends Migration
     {
         Schema::create('eventos', function (Blueprint $table) {
 
-            $table->string("titulo")->primary();
+            $table->integer("id")->autoIncrement();
+            $table->string("titulo")->unique();
             $table->string("descripcion")->nullable();
             $table->date("fechaInicio")->nullable();
             $table->date("fechaFin")->nullable();
@@ -30,6 +31,7 @@ class CreateEventosTable extends Migration
             $table->string("usuarioCreador")->nullable();
             $table->foreign('usuarioAprueba')->references('usuario')->on('users');
             $table->foreign('usuarioCreador')->references('usuario')->on('users');
+            $table->timestamps();
 
         });
     }

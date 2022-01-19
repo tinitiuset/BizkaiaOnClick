@@ -12,6 +12,7 @@ class Evento extends Model
 
     protected $table = "eventos";
     protected $fillable = [
+        "id",
         "titulo",
         "descripcion",
         "fechaInicio",
@@ -26,19 +27,18 @@ class Evento extends Model
         "usuarioAprueba",
         "usuarioCreador"
     ];
-    protected $primaryKey = "titulo";
+    protected $primaryKey = "id";
     protected $keyType = "string";
-    public $timestamps = false;
 
     public function fotos(){
 
-        return $this->hasMany(Foto::class,"evento","titulo");
+        return $this->hasMany(Foto::class,"evento","id");
 
     }
 
     public function usuarioAprobador(){
 
-        return $this->hasMany(Foto::class,"evento","titulo");
+        return $this->hasMany(Foto::class,"evento","id");
 
     }
 

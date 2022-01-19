@@ -4,6 +4,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
+                <th scope="col">ID</th>
                 <th scope="col">Titulo</th>
                 <th scope="col">Descripcion</th>
                 <th scope="col">Acciones</th>
@@ -11,6 +12,7 @@
             </thead>
             <tbody>
             <tr v-for="evento in eventos">
+                <td>{{evento.id}}</td>
                 <td>{{evento.titulo}}</td>
                 <td>{{evento.descripcion}}</td>
                 <td>

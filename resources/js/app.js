@@ -5,16 +5,15 @@
  */
 
 import Vue from "vue";
+import indexVideo from './components/indexVideo.vue';
+// import {createApp} from 'vue';
+import menu from './components/menu.vue';
+import footer from './components/footer.vue';
+import store from './store';
 
 require('./bootstrap');
 
 window.Vue = require('vue').default;
-
-import indexVideo from './components/indexVideo.vue';
-// import {createApp} from 'vue';
-
-import menu from './components/menu.vue';
-import footer from './components/footer.vue';
 
 /**
  * The following block of code may be used to automatically register your
@@ -35,22 +34,21 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import store from './store/index';
-
 Vue.component('eventos', require('./components/Eventos.vue').default);
 Vue.component('createEvento', require('./components/CreateEvento.vue').default);
+Vue.component('evento', require('./components/Evento.vue').default);
 // Vue.component('indexvideo', require('./components/indexVideo.vue').default);
 
-// const app = new Vue({
-//     el: '#app',
-//     store,
-//     components: {
+const app = new Vue({
+    el: '#app',
+    store,
+    components: {
 
-//         "menujs":menu,
-//         "piedepagina":footer,
+        "menujs": menu,
+        "piedepagina": footer,
 
-//     }
-// });
+    }
+});
 
 // const index = new Vue({
 //     el: '#index',
@@ -61,6 +59,7 @@ Vue.component('createEvento', require('./components/CreateEvento.vue').default);
 //     }
 // });
 
+/*
 const agenda = new Vue({
     el: '#app',
     components: {
@@ -70,3 +69,4 @@ const agenda = new Vue({
 
     }
 });
+*/

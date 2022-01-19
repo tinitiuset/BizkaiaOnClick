@@ -20,8 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 /*--------------------EVENTO--------------------*/
+// GET EVENT
+Route::get('eventos/{id}', [EventoController::class,"get"]);
 // GET EVENTS
-Route::get('eventos', [EventoController::class,"get"]);
+Route::get('eventos', [EventoController::class,"getAll"]);
 // POST NEW EVENT
 Route::post('eventos', [EventoController::class,"store"]);
 // EDIT EXISTING EVENT
