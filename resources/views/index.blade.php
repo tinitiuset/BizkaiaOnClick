@@ -9,7 +9,7 @@
     <title>BizkaiaOnClick</title>
 </head>
 <body class="w-100 h-100">
-    <div id="index" class="w-100 h-100">
+    <div id="app" class="w-100 h-100">
         {{-- <indexVideo video="{{asset("video/index.mp4")}}"></indexVideo> --}}
         <indexvideo></indexvideo>
     </div>
