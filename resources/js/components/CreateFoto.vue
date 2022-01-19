@@ -9,7 +9,9 @@
             <label for="evento">Evento:</label>
 
             <select name="evento" id="evento">
-                <option value=""></option>
+                <option value="">
+                    
+                </option>
             </select>
         </div>
 
