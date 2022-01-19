@@ -5,7 +5,7 @@
     <title>@yield('title')</title>
 </head>
 <body class="h-100">
-    <div id="@yield('vueInstance')" class="h-100 d-flex flex-column">
+    <div id="app" class="h-100 d-flex flex-column">
         {{-- <nav class="navbar navbar-color navbar-expand-md fa-lg">
             <div class="container">
                 <button class="navbar-toggler" id="navbar-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -71,33 +71,35 @@
             </div>
         </nav> --}}
 
-        <nav class="navbar navbar-expand-lg navbar-color">
+        {{-- <nav class="navbar navbar-expand-lg navbar-color">
             <div class="container-fluid">
-              <button class="navbar-toggler" id="navbar-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+              <button class="navbar-toggler" id="navbar-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}" :click="abrirMenu">
                 <i class="fas fa-bars fa-2x"></i>
               </button>
-              <a class="navbar-brand" href="{{ url('/') }}">
+              <a class="navbar-brand" id="logo" href="{{ url('/') }}">
                 <img class="logo-movil" src="{{URL::asset('/img/LogoColor_e.png')}}">
                <!--{{ config('app.name', 'Laravel') }}-->
               </a>
-              <a class="" href="#"><img src="/img/usuario.png" alt="" class="img-fluid d-block h-50 w-50"></a>
+              <a class="" id="iconoUsuario" href="#"><img src="/img/usuario.png" alt="" class="img-fluid d-block h-50 w-50"></a>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item text-center">
+                  <li class="nav-item text-center fs-1">
                     <a class="nav-link active text-white text-center" aria-current="page" href="{{ url('/') }}">Inicio</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-white text-center" href="#">Agenda</a>
+                    <a class="nav-link text-white text-center fs-1" href="#">Agenda</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-white text-center" href="#">Envía tus eventos</a>
+                    <a class="nav-link text-white text-center fs-1" href="#">Envía tus eventos</a>
                   </li>
                 </ul>
               </div>
               
           
             </div>
-        </nav>
+        </nav> --}}
+
+        <menuusuario></menuusuario>
 
         <main>
             @yield('content')

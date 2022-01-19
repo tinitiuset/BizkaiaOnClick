@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Foto;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class EventoController extends Controller
 {

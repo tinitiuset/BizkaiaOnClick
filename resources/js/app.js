@@ -52,11 +52,21 @@ Vue.component('createEvento', require('./components/CreateEvento.vue').default);
 //     }
 // });
 
-const index = new Vue({
-    el: '#index',
+// const index = new Vue({
+//     el: '#index',
+//     components: {
+
+//         "indexvideo":indexVideo
+
+//     }
+// });
+
+const agenda = new Vue({
+    el: '#app',
     components: {
 
-        "indexvideo":indexVideo
+        "indexvideo":indexVideo,
+        "menuusuario":menu
 
     }
 });
