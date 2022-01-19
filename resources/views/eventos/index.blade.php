@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     
-    <div id="app" class="d-flex flex-column h-100">
+    <div class="d-flex flex-column h-100">
         {{-- <img src="../img/menuHamburguesa.png"> --}}
         <div class="container-fluid">
             <div>
