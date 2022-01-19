@@ -3,7 +3,7 @@
 @section('content')
 <div class="container body-degradado">
     <div class="row justify-content-center">
-        <div class="col-lg-4 col-md-6 col-xs-8">
+        <div class="col-lg-5 col-md-6 col-xs-8">
             <div class="card">
                 <div class="card-header card-registro text-center">
                     <a class="card-link white text-uppercase text-decoration-none link-personalizado " href="{{ url('register')}}">Crear cuenta</a>
