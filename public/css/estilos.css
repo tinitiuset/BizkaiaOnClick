@@ -23,6 +23,8 @@
 }
 
 .body-degradado {
+    margin: 0;
+    box-sizing: border-box;
     background: linear-gradient(to bottom, #FF08D7, #b062fe, #3385ff);
 }
 

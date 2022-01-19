@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
+@section('otrasClasesBody','body-degradado')
+
 @section('content')
-<div class="container body-degradado" width="100%">
+<div class="container" width="100%">
     <div class="row justify-content-center">
-        <div class="col-lg-4 col-md-6 col-xs-8">
+        <div class="col-lg-5 col-md-6 col-xs-8">
             <div class="card margin-110">
                 <div class="card-header white text-center text-uppercase">{{ __('Renovar Contraseña') }}</div>
 

@@ -4,7 +4,8 @@
     @include('layouts.header')
     <title>@yield('title')</title>
 </head>
-<body class="h-100">
+<!-- yield se usa para añadir elementos, en este caso una clase -->
+<body class="h-100 @yield('otrasClasesBody')">
     <div id="app" class="h-100 d-flex flex-column">
         {{-- <nav class="navbar navbar-color navbar-expand-md fa-lg">
             <div class="container">

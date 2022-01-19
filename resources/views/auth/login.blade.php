@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
+@section('otrasClasesBody','body-degradado')
+
 @section('content')
-<div class="container body-degradado">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-5 col-md-6 col-xs-8">
             <div class="card">
