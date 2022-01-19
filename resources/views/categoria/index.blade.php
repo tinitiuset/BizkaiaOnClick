@@ -8,8 +8,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif  
-
+<br>
 <a href="{{ url('categoria/create')}}" class="btn btn-success"> Registrar nueva categoria </a>
+<a href="{{ url('admin')}}" class="btn btn-primary"> Volver </a>
 <br>
 <br>
 <table class="table table-light">
@@ -41,6 +42,7 @@
         @endforeach
     </tbody>
 </table>
-{!!$categorias->links()!!}
+{!!$categorias->links()!!} 
+
 </div>
 @endsection
