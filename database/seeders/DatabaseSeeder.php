@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\User::factory(10)->create();//llama al factory para crear usuarios random
+        //\App\Models\User::factory(10)->create();//llama al factory para crear usuarios random
         $this->call(EventoSeeder::class);
     }
 }

@@ -12,14 +12,28 @@ class UserFactory extends Factory
      *
      * @return array
      */
+    public function autoIncrement()
+    {
+        for ($i = 0; $i < 1000; $i++) {
+            yield $i;
+        }
+    }
+
     public function definition()
     {
+        //$autoIncrement = autoIncrement(); 
+
         return [
+            //'id' => $this->$autoIncrement->current(),
+            'usuario' => $this->faker->name(),
             'nombre' => $this->faker->name(),
+            'apellidos' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'fechaNac' => $this->faker->date(),
+            'tipo' => "usuario",
+            'telefono' => $this->faker->randomNumber(9,true),
+            'estado' => "pendiente",
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi' // password
         ];
     }
 
@@ -36,4 +50,5 @@ class UserFactory extends Factory
             ];
         });
     }
+
 }
