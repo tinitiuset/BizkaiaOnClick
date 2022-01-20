@@ -57,14 +57,12 @@ Vue.component('usuario', require('./components/Usuario.vue').default);
 
 
 
-// const createFoto = new Vue({
-//     el: '#createFoto',
-//     components: {
-//         "createFoto": createFoto
-//     }
-// });
-
-
+/*const createFoto = new Vue({
+    el: '#createFoto',
+    components: {
+        "createFoto": createFoto
+    }
+});*/
 
 // const index = new Vue({
 //     el: '#index',
@@ -78,11 +76,12 @@ Vue.component('usuario', require('./components/Usuario.vue').default);
 
 const agenda = new Vue({
     el: '#app',
+    store,
     components: {
 
         "indexvideo":indexVideo,
         "menuusuario":menu
-
+        
     }
 });
 
