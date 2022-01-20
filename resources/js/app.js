@@ -11,6 +11,8 @@ import menu from './components/menu.vue';
 import footer from './components/footer.vue';
 import store from './store';
 
+import createFoto from './components/CreateFoto.vue';
+
 require('./bootstrap');
 
 window.Vue = require('vue').default;
@@ -40,14 +42,25 @@ Vue.component('evento', require('./components/Evento.vue').default);
 // Vue.component('indexvideo', require('./components/indexVideo.vue').default);
 Vue.component('usuario', require('./components/Usuario.vue').default);
 
-/*const app = new Vue({
-    el: '#app',
-    store,
+// Vue.component('createFoto', require('./components/CreateFoto.vue').default);
+
+// const app = new Vue({
+//     el: '#app',
+//     store,
+//     components: {
+
+//      "menujs": menu,
+//      "piedepagina": footer,
+
+//      }
+//  });
+
+
+
+/*const createFoto = new Vue({
+    el: '#createFoto',
     components: {
-
-        "menujs": menu,
-        "piedepagina": footer,
-
+        "createFoto": createFoto
     }
 });*/
 
@@ -63,6 +76,7 @@ Vue.component('usuario', require('./components/Usuario.vue').default);
 
 const agenda = new Vue({
     el: '#app',
+    store,
     components: {
 
         "indexvideo":indexVideo,
