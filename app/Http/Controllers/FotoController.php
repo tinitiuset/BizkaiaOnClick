@@ -143,7 +143,7 @@ class FotoController extends Controller {
             $foto->ruta = $ficheroNombre;
             $fichero->storeAs('imgEventos',$ficheroNombre);
         } else {
-            //to do
+            //TODO
             //Cambiar nombre fichero
             $foto->ruta = $request->input('evento');
             $foto->evento = $request->input('evento');
