@@ -21,7 +21,7 @@
     </video>
     <div class="contenido d-flex align-items-center">
       <div class="container text-center">
-        <a href='/agenda' class="text-white text-decoration-none" id="textoCambiante">{{texto}}</a>
+        <a href='/agenda' class="text-white text-decoration-none texto-degradado" id="textoCambiante">{{texto}}</a>
       </div>
       
     </div>

@@ -5801,6 +5801,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     usuario: String,
@@ -5813,7 +5816,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     cerrarSesion: function cerrarSesion() {
-      preventDefault();
       document.getElementById('logout-form').submit();
     },
     abrirMenu: function abrirMenu() {
@@ -5823,12 +5825,16 @@ __webpack_require__.r(__webpack_exports__);
         $("#cerrarMenu").removeClass("d-none"); // $("#cerrarMenu").show();
 
         $("#contenedorMenu").addClass("justify-content-center");
+        $(".textoOpcion").addClass("d-none");
+        $(".iconoMenu").removeClass("d-none");
       } else {
         $("#logo").show();
         $("#menuHamburguesa").show();
         $("#cerrarMenu").addClass("d-none"); // $("#cerrarMenu").hide();
 
         $("#contenedorMenu").removeClass("justify-content-center");
+        $(".textoOpcion").removeClass("d-none");
+        $(".iconoMenu").addClass("d-none");
       }
     }
   },
@@ -41403,7 +41409,7 @@ var render = function () {
           _c(
             "a",
             {
-              staticClass: "text-white text-decoration-none",
+              staticClass: "text-white text-decoration-none texto-degradado",
               attrs: { href: "/agenda", id: "textoCambiante" },
             },
             [_vm._v(_vm._s(_vm.texto))]
@@ -41504,12 +41510,12 @@ var render = function () {
                 _vm.usuario == null
                   ? _c(
                       "ul",
-                      { staticClass: "navbar-nav me-auto mb-2 mb-lg-0 fs-2" },
+                      { staticClass: "navbar-nav me-auto mb-2 mb-lg-0 fs-3" },
                       [_vm._m(2), _vm._v(" "), _vm._m(3)]
                     )
                   : _c(
                       "ul",
-                      { staticClass: "navbar-nav me-auto mb-2 mb-lg-0 fs-2" },
+                      { staticClass: "navbar-nav me-auto mb-2 mb-lg-0 fs-3" },
                       [
                         _vm.tipo != null
                           ? _c("li", { staticClass: "nav-item" }, [
@@ -41518,13 +41524,16 @@ var render = function () {
                                 {
                                   staticClass:
                                     "nav-link text-white text-center",
-                                  attrs: { href: "/register" },
+                                  attrs: {
+                                    title: "Panel de administracion",
+                                    href: "/register",
+                                  },
                                 },
                                 [
                                   _c(
                                     "svg",
                                     {
-                                      staticClass: "bi bi-journal",
+                                      staticClass: "bi bi-journal iconoMenu",
                                       attrs: {
                                         xmlns: "http://www.w3.org/2000/svg",
                                         width: "32",
@@ -41547,6 +41556,10 @@ var render = function () {
                                       }),
                                     ]
                                   ),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "textoOpcion" }, [
+                                    _vm._v("Administracion"),
+                                  ]),
                                 ]
                               ),
                             ])
@@ -41558,13 +41571,16 @@ var render = function () {
                             {
                               staticClass:
                                 "nav-link text-white texto-degradado text-center",
-                              attrs: { href: "/register" },
+                              attrs: {
+                                title: "Editar perfil",
+                                href: "/register",
+                              },
                             },
                             [
                               _c(
                                 "svg",
                                 {
-                                  staticClass: "bi bi-person-circle",
+                                  staticClass: "bi bi-person-circle iconoMenu",
                                   attrs: {
                                     xmlns: "http://www.w3.org/2000/svg",
                                     width: "32",
@@ -41588,6 +41604,10 @@ var render = function () {
                                   }),
                                 ]
                               ),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "textoOpcion" }, [
+                                _vm._v("Editar perfil"),
+                              ]),
                             ]
                           ),
                         ]),
@@ -41598,9 +41618,14 @@ var render = function () {
                             {
                               staticClass:
                                 "nav-link active text-white texto-degradado text-center texto-degradado",
-                              attrs: { "aria-current": "page", href: "" },
+                              attrs: {
+                                title: "Cerrar sesion",
+                                "aria-current": "page",
+                                href: "",
+                              },
                               on: {
                                 click: function ($event) {
+                                  $event.preventDefault()
                                   return _vm.cerrarSesion()
                                 },
                               },
@@ -41617,18 +41642,17 @@ var render = function () {
                                   },
                                 },
                                 [
-                                  _vm._v(
-                                    " \n              " +
-                                      _vm._s(_vm.csrf) +
-                                      "\n              "
-                                  ),
+                                  _c("input", {
+                                    attrs: { type: "hidden", name: "_token" },
+                                    domProps: { value: _vm.csrf },
+                                  }),
                                 ]
                               ),
                               _vm._v(" "),
                               _c(
                                 "svg",
                                 {
-                                  staticClass: "bi bi-door-open",
+                                  staticClass: "bi bi-door-open iconoMenu",
                                   attrs: {
                                     xmlns: "http://www.w3.org/2000/svg",
                                     width: "32",
@@ -41651,6 +41675,10 @@ var render = function () {
                                   }),
                                 ]
                               ),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "textoOpcion" }, [
+                                _vm._v("Cerrar sesion"),
+                              ]),
                             ]
                           ),
                         ]),
@@ -41685,7 +41713,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c("ul", { staticClass: "navbar-nav me-auto mb-2 mb-lg-0 fs-2" }, [
+      _c("ul", { staticClass: "navbar-nav me-auto mb-2 mb-lg-0 fs-3" }, [
         _c("li", { staticClass: "nav-item text-center" }, [
           _c(
             "a",
