@@ -36,7 +36,11 @@
              </div>
         </form>
     </div>
+    <div id="createFoto">
+        <createFoto></createFoto>
+    </div>
 
+    
 
     <script src="{{asset('js/post.js')}}"></script>
     <script>
