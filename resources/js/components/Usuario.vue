@@ -39,27 +39,17 @@ export default {
         }
     },
     methods: {
-      getUser(){
-          let me = this;
-          let url = '/user/'
-          axios.get(url).then(function(response){
+        async listar() {
+            const res=await axios.get('user');
+            this.usuarios=res.data;
+        }
+    },
 
-              me.arrayTasks = response.data;
-          })
-
-          .catch(function(error){
-
-              console.log(error);
-          });
-        },
-
-      mounted(){
-          this.getUser();
-      }
+    created() {
+        this.listar ();
+    },
     
-    }
 }
-
 </script>
 
 <style>
