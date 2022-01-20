@@ -100,17 +100,7 @@
             </div>
         </nav> --}}
 
-        @auth
-      
-        <menuusuario usuario="{{ auth()->user() }}"></menuusuario>
-
-        @else
-
         <menuusuario></menuusuario>
-
-        @endauth
-
-
 
         <main>
             @yield('content')

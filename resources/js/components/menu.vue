@@ -27,40 +27,12 @@
           </ul>
         </div>
         <div>
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-2" v-if="usuario == null">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-2">
             <li class="nav-item text-center">
               <a class="nav-link active text-white texto-degradado text-center texto-degradado" aria-current="page" href="/login">Iniciar Sesion</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-white texto-degradado text-center" href="/register">Registrar</a>
-            </li>
-          </ul>
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-2" v-else>
-
-            <li class="nav-item" v-if="tipo != null">
-              <a class="nav-link text-white text-center" href="/register"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-journal" viewBox="0 0 16 16">
-                <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
-                <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
-              </svg></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white texto-degradado text-center" href="/register"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-              </svg></a>
-            </li>
-            <li class="nav-item text-center">
-              <a class="nav-link active text-white texto-degradado text-center texto-degradado" aria-current="page" @click="cerrarSesion()" href="">
-              
-              <form action="/logout" method="post" id="logout-form" class="d-none"> 
-                {{csrf}}
-                <!-- <input type="hidden" name="_token" value="ggmY2I1Gjt0wDFRU1ds0cP9H4g5dJaFg7X6wXgXU"> -->
-              </form>
-              
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-door-open" viewBox="0 0 16 16">
-                <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
-                <path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z"/>
-              </svg></a>
             </li>
           </ul>
         </div>
@@ -75,29 +47,9 @@
 
 export default {
 
-  props: {
-
-    usuario: String,
-    tipo: String,
-
-  },
-  data() {
-
-    return {
-
-      csrf: document.head.querySelector('meta[name="csrf-token"]') ? document.head.querySelector('meta[name="csrf-token"]').content : ''
-
-    }
-
-  },
   methods: {
 
-      cerrarSesion() {
-
-        preventDefault(); 
-        document.getElementById('logout-form').submit();
-
-      }, abrirMenu() { 
+      abrirMenu() { 
 
         if ($("#logo").css("display") != "none") {
                     
