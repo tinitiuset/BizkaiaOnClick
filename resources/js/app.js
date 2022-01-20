@@ -4,6 +4,14 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import App from './App.vue';
+import VueAxios from 'vue-axios';
+import VueRouter from 'vue-router';
+import axios from 'axios';
+import {
+    routes
+} from '.routes';
+
 import Vue from "vue";
 import indexVideo from './components/indexVideo.vue';
 // import {createApp} from 'vue';
@@ -72,10 +80,18 @@ Vue.component('usuario', require('./components/Usuario.vue').default);
 
 //     }
 // });
+Vue.use(VueRouter);
+Vue.use(VueAxios, axios);
 
+const router = new VueRouter({
+    mode: 'history',
+    routes: routes
+});
 
 const agenda = new Vue({
     el: '#app',
+    router: router,
+    render: h => h(App),
     store,
     components: {
 

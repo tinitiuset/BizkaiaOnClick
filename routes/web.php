@@ -30,13 +30,15 @@ Route::get('/test', function() {
     return view('test');
 });
 
-Route::get('/user', function() {
+/*Route::get('/user', function() {
     return view('user');
-});
+});*/
 
 Route::resource("agenda",EventoController::class);
 Route::resource('categoria',CategoriaController::class);
 Route::resource('fotos',FotoController::class);
+
+Route::resource('user', UserController::class);
 
 
 

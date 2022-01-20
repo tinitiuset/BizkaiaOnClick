@@ -10,7 +10,8 @@ class UserController extends Controller
     
     public function index() {
         $user = User::all()->toArray();
-        return array_reverse($user);
+        $datos=array_reverse($user);
+        return view('user.index',$datos);
     }
     public function store(Request $request) {
         $user = new User([
