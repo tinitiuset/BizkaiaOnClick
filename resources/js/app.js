@@ -40,7 +40,7 @@ Vue.component('evento', require('./components/Evento.vue').default);
 // Vue.component('indexvideo', require('./components/indexVideo.vue').default);
 Vue.component('usuario', require('./components/Usuario.vue').default);
 
-const app = new Vue({
+/*const app = new Vue({
     el: '#app',
     store,
     components: {
@@ -49,7 +49,7 @@ const app = new Vue({
         "piedepagina": footer,
 
     }
-});
+});*/
 
 // const index = new Vue({
 //     el: '#index',
@@ -60,14 +60,14 @@ const app = new Vue({
 //     }
 // });
 
-/*
+
 const agenda = new Vue({
     el: '#app',
     components: {
 
         "indexvideo":indexVideo,
         "menuusuario":menu
-
+        
     }
 });
-*/
+
