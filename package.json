@@ -28,8 +28,6 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
         "bootstrap-icons": "^1.7.2",
-        "jquery": "^3.6.0",
-        "vue-axios": "^3.4.0",
-        "vue-router": "^3.5.3"
+        "jquery": "^3.6.0"
     }
 }

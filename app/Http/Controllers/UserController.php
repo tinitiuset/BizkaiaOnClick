@@ -7,40 +7,44 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    
-    public function index() {
-        $user = User::all()->toArray();
-        $datos=array_reverse($user);
-        return view('user.index',$datos);
+    //
+    public function index()
+    {
+        return view('user.index');
     }
-    public function store(Request $request) {
-        $user = new User([
-            'usuario' => $request->input('usuario'),
-            'nombre' => $request->input('nombre'),
-            'apellidos' => $request->input('apellidos'),
-            'email' => $request->input('email'),
-            'fechaNac' => $request->input('fechaNac'),
-            'tipo' => $request->input('tipo'),
-            'telefono' => $request->input('telefono'),
-            'estado' => $request->input('estado'),
-            'password' => $request->input('password')  
-            ]);
 
-        $user->save();
-        return response()->json('Usuario Creado!');
+      /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
+    {
+       
     }
-    public function show($id) {
-        $user = User::find($id);
-        return response()->json($user);
+
+      /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $user = new User;
+        $user->create($request->all());
     }
-    public function update($id, Request $request) {
-        $user = User::find($id);
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, User $user)
+    {
         $user->update($request->all());
-        return response()->json('Usuario Creado!');
-    }
-    public function destroy($id) {
-        $user = User::find($id);
-        $user->delete();
-        return response()->json('Usuario Creado!');
     }
 }
