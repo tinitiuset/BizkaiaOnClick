@@ -101,25 +101,25 @@ export default {
 
       }, abrirMenu() { 
 
+        console.log("hola");
+
         if ($("#logo").css("display") != "none") {
                     
           $("#logo").hide();
           $("#menuHamburguesa").hide();
           $("#cerrarMenu").removeClass("d-none");
-          // $("#cerrarMenu").show();
           $("#contenedorMenu").addClass("justify-content-center");
-          $(".textoOpcion").addClass("d-none");
-          $(".iconoMenu").removeClass("d-none");
+          $(".textoOpcion").removeClass("d-none");
+          $(".iconoMenu").addClass("d-none");
 
         } else {
 
           $("#logo").show();
           $("#menuHamburguesa").show();
           $("#cerrarMenu").addClass("d-none");
-          // $("#cerrarMenu").hide();
           $("#contenedorMenu").removeClass("justify-content-center");
-          $(".textoOpcion").removeClass("d-none");
-          $(".iconoMenu").addClass("d-none");
+          $(".textoOpcion").addClass("d-none");
+          $(".iconoMenu").removeClass("d-none");
 
         }
 
@@ -128,6 +128,8 @@ export default {
   },
   mounted() {
     console.log("menu cargado");
+    $(".textoOpcion").addClass("d-none");
+
   }
 
     

@@ -30,6 +30,8 @@ Route::get('/test', function() {
     return view('test');
 });
 
+// Route::prefix("agenda")
+
 /*Route::get('/user', function() {
     return view('user');
 });*/

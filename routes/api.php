@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers\CategoriaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,5 +29,5 @@ Route::get('eventos', [EventoController::class,"getAll"]);
 Route::post('eventos', [EventoController::class,"store"]);
 // EDIT EXISTING EVENT
 Route::put('eventos/{id}', [EventoController::class,"update"]);
-// DELETE EXISTING EVENT
-Route::delete('eventos/{id}', [EventoController::class,"delete"]);
+// GET CATEGORIAS
+Route::get('categorias', [CategoriaController::class,"getAll"]);

@@ -88,6 +88,19 @@ class EventoController extends Controller
     }
 
     /**
+     * Get a resource in storage.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getAllEventsCategoriesAndFirstPhoto(Request $request): JsonResponse
+    {
+        $eventos = Evento::all();
+        $categorias = Categoria::all();
+        return response()->json(array($eventos,$categorias));
+    }
+
+    /**
      * Get all resources in storage.
      *
      * @param Request $request

@@ -17,7 +17,7 @@ class CreateFotosTable extends Migration
             $table->id('identificador');
             $table->string('ruta');
             $table->string('evento');
-            $table->foreign('evento')->references('titulo')->on('eventos');
+            $table->foreign('evento')->references('id')->on('eventos');
         });
     }
 

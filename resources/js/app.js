@@ -4,19 +4,20 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import App from './App.vue';
-import VueAxios from 'vue-axios';
-import VueRouter from 'vue-router';
+// import App from './App.vue';
+// import VueAxios from 'vue-axios';
+// import VueRouter from 'vue-router';
 import axios from 'axios';
-import {
-    routes
-} from '.routes';
+// import {
+//     routes
+// } from '.routes';
 
 import Vue from "vue";
 import indexVideo from './components/indexVideo.vue';
 // import {createApp} from 'vue';
 import menu from './components/menu.vue';
 import footer from './components/footer.vue';
+import agenda from './components/agenda.vue';
 import store from './store';
 
 import createFoto from './components/CreateFoto.vue';
@@ -82,23 +83,24 @@ Vue.component('usuario', require('./components/Usuario.vue').default);
 
 //     }
 // });
-Vue.use(VueRouter);
-Vue.use(VueAxios, axios);
+// Vue.use(VueRouter);
+// Vue.use(VueAxios, axios);
 
-const router = new VueRouter({
-    mode: 'history',
-    routes: routes
-});
+// const router = new VueRouter({
+//     mode: 'history',
+//     routes: routes
+// });
 
-const agenda = new Vue({
+const app = new Vue({
     el: '#app',
-    router: router,
-    render: h => h(App),
+    // router: router,
+    // render: h => h(App),
     store,
     components: {
 
         "indexvideo":indexVideo,
-        "menuusuario":menu
+        "menuusuario":menu,
+        "agenda":agenda
 
     }
 });

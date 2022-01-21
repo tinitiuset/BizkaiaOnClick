@@ -86,6 +86,20 @@ class CategoriaController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Categoria  $categoria
+     * @return \Illuminate\Http\Response
+     */
+    public function getAll(Categoria $categoria)
+    {
+        
+        $categorias = Categoria::all();
+        return response()->json($categorias);
+
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
