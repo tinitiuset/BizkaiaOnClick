@@ -30,6 +30,10 @@ Route::get('/test', function() {
     return view('test');
 });
 
+Route::get('/enviaEvento', function() {
+    return view('enviaEvento');
+});
+
 /*Route::get('/user', function() {
     return view('user');
 });*/
