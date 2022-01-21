@@ -17,4 +17,13 @@ class Categoria extends Model
     protected $primaryKey = "nombre";
     protected $keyType = "string";
     public $timestamps = false;
+
+    /**
+     * Obtengo los eventos relacionados a esta categoria
+     */
+    public function eventos()
+    {
+        return $this->hasMany(Evento::class,"categoria","nombre");
+    }
+
 }

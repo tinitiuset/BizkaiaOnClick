@@ -5671,6 +5671,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Agenda",
+  data: {
+    eventosFiltrados: eventos
+  },
+  methods: {
+    filtrarEventos: function filtrarEventos() {
+      eventosFiltrados = [];
+      eventos.forEach(function (evento) {// if (evento.categoria == ) {
+        // }
+      });
+    }
+  },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['eventos', 'categorias'])),
   mounted: function mounted() {
     this.$store.dispatch('fetchEventos');
@@ -5962,12 +5973,8 @@ __webpack_require__.r(__webpack_exports__);
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-// import App from './App.vue';
 // import VueAxios from 'vue-axios';
 // import VueRouter from 'vue-router';
- // import {
-//     routes
-// } from '.routes';
 
 
  // import {createApp} from 'vue';

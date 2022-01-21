@@ -38,14 +38,21 @@ class Evento extends Model
 
     public function usuarioAprobador(){
 
-        return $this->hasMany(Foto::class,"evento","id");
+        return $this->belongsTo(User::class,"usuario","usuarioAprobador");
 
     }
 
     public function usuarioCreador(){
 
-        return $this->hasMany(Foto::class,"evento","titulo");
+        return $this->belongsTo(User::class,"usuario","usuarioCreador");
 
+    }
+
+
+    public function categoria()
+    {
+
+        return $this->belongsTo(Categoria::class,"nombre","categoria");
     }
 
 }

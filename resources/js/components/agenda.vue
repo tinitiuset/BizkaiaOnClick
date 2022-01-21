@@ -44,6 +44,29 @@
 import {mapGetters} from 'vuex';
 export default {
     name: "Agenda",
+    data: {
+
+        eventosFiltrados: eventos
+
+    },
+    methods: {
+
+        filtrarEventos() {
+
+            eventosFiltrados = [];
+
+            eventos.forEach(evento => {
+                
+                // if (evento.categoria == ) {
+                    
+                // }
+
+            });
+            
+
+        }
+
+    },
     computed: {
         ...mapGetters([
             'eventos',
