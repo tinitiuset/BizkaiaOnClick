@@ -1,55 +1,79 @@
 <template>
     <form action="" @submit="createEvento(evento)">
-        <h4 class="text-center font-weight-bold">Formulario de creacion de Evento</h4>
-        <div class="form-group pt-1">
-            Titulo: <input type="text" placeholder="" v-model="evento.titulo" class="form-control">
+        <div class="cardPersonalizada">
+            <h2 class="text-center font-weight-bold h2Personalizado">Envia tus eventos</h2>
+            <!--TITULO EVENTO-->
+            <div class="row mb-3 justify-content-center">
+                <label for="titulo" class="col-form-label white">Título:</label>
+                <div class="col">
+                    <input type="text" placeholder="" v-model="evento.titulo" class="form-control col-10 ">
+                </div>
+            </div>
 
-        </div>
-        <div class="form-group pt-1">
-            Descripcion: <textarea v-model="evento.descripcion" placeholder="" class="form-control">
+            <!--DESCRIPCION EVENTO-->
+            <div class="row mb-3 justify-content-center">
+                <label for="descripción" class="col-form-label white">Descripción:</label>
+                
+                <div class="col">
+                    <textarea v-model="evento.descripcion" placeholder="" class="form-control"></textarea>
+                </div>
+            </div>
+            <!--FECHA INICIO/FIN EVENTO-->
+            <div class="row mb-3 justify-content-center">
+                <label for="fechaIni" class="col-form-label white">Fecha Inicio:</label>
 
-                </textarea>
-        </div>
-        <div class="row pt-1">
-            <div class="col-6 form-group">
-                Inicio: <input type="date" placeholder="Inicio del Evento" v-model="evento.fechaInicio" class="form-control">
+                <div class="col">
+                    <input type="date" placeholder="Inicio del Evento" v-model="evento.fechaInicio" class="form-control">
+                </div>
+
+                <label for="fechaFin" class="col-form-label white">Fecha Fin:</label>
+
+                <div class="col">
+                    <input type="date" placeholder="Fin del Evento" v-model="evento.fechaFin" class="form-control">
+
+                </div>
+            </div>
+            <!--HORA Y PRECIO EVENTO-->
+            <div class="row mb-3">
+                <div class="col-6 form-group white">
+                    Hora: <input type="number" placeholder="" v-model="evento.hora" class="form-control">
+
+                </div>
+                <div class="col-6 form-group white">
+                    Precio: <input type="number" placeholder="" v-model="evento.precio" class="form-control">
+
+                </div>
+            </div>
+            <!--DIRECCION EVENTO-->
+            <div class="row mb-3">
+                <label for="direccion" class="col-form-label white">Dirección:</label>
+
+                <div class="col">
+                    <input type="text" placeholder="" v-model="evento.direccion" class="form-control">
+                </div>
+            </div>
+            <!--SALA EVENTO-->
+            <div class="form-group pt-1 white">
+                Sala: <input type="text" placeholder="" v-model="evento.sala" class="form-control">
 
             </div>
-            <div class="col-6 form-group">
-                Fin: <input type="date" placeholder="Fin del Evento" v-model="evento.fechaFin" class="form-control">
+            <!--RECINTO EVENTO-->
+            <div class="form-group pt-1 white">
+                Recinto: <input type="text" placeholder="" v-model="evento.recinto" class="form-control">
 
             </div>
-        </div>
-        <div class="row pt-1">
-            <div class="col-6 form-group">
-                Hora: <input type="number" placeholder="" v-model="evento.hora" class="form-control">
+            <!--LOCALIDAD EVENTO-->
+            <div class="form-group pt-1 white">
+                Localidad:<input type="text" placeholder="" v-model="evento.localidad" class="form-control">
 
             </div>
-            <div class="col-6 form-group">
-                Precio: <input type="number" placeholder="" v-model="evento.precio" class="form-control">
-
+            <!--BOTON ENVIAR EVENTO-->
+            <div class="row mb-0">
+                <div class="d-grid gap-2 col-10 mx-auto">
+                    <button :disabled="!isValid" class="btn btn-primary mt-2 btn-lg btnPersonalizado" @click.prevent="createEvento(evento)">Crear Evento
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="form-group pt-1">
-            Direccion: <input type="text" placeholder="" v-model="evento.direccion" class="form-control">
-
-        </div>
-        <div class="form-group pt-1">
-            Sala: <input type="text" placeholder="" v-model="evento.sala" class="form-control">
-
-        </div>
-        <div class="form-group pt-1">
-            Recinto: <input type="text" placeholder="" v-model="evento.recinto" class="form-control">
-
-        </div>
-        <div class="form-group pt-1">
-            Localidad:<input type="text" placeholder="" v-model="evento.localidad" class="form-control">
-
-        </div>
-
-        <div class="form-group pt-1">
-            <button :disabled="!isValid" class="btn btn-block btn-primary" @click.prevent="createEvento(evento)">Crear Evento
-            </button>
         </div>
     </form>
 </template>
@@ -57,6 +81,11 @@
 <script>
 export default {
     name: "CreateEvento",
+    props: {
+
+        card: String
+
+    },
     data() {
         return {
             evento: {

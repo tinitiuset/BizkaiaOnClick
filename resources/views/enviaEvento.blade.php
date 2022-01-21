@@ -1,21 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.app')   
+@section('estilosPersonalizados')  
+@endsection
 @section('content')
-
 <div class="container">
-    
-    <div class="row">
-        <div class="col-md-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6 col-xs-8">
             <create-evento></create-evento>
-
         </div>
     </div>
 
-
-{{-- <script>
-    import CreateEvento from "../js/components/CreateEvento";
-    export default {
-        components: {CreateEvento}
-    }
-</script> --}}
 @endsection
 

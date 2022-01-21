@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-100"> 
 <head>
     @include('layouts.header')
+    @yield('estilosPersonalizados')
     <title>@yield('title')</title>
 </head>
 <!-- yield se usa para añadir elementos, en este caso una clase -->
