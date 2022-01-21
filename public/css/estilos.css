@@ -32,11 +32,15 @@
     color: white;
 } */
 
-.texto-degradado:hover {
+.texto-degradado:hover, 
+.h2Personalizado {
     background: linear-gradient(to bottom, #FF08D7, #b062fe, #3385ff);
     -webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
     /* color: seagreen; */
+}
+.h2Personalizado {
+    padding-top: 20px;
 }
 
 svg:hover {
@@ -52,9 +56,6 @@ svg:hover {
 .magenta-hover:hover {
     color:#FF08D7;   
 }
-
-
-
 
 .navbar-color{
     background-color: black;
@@ -81,10 +82,13 @@ svg:hover {
     width: 150px;
 }
 /*------------  ESTILOS DE LOGIN  ----------------------*/
-.card{
+.card,
+.cardPersonalizada {
     margin:50px 20px 50px 20px;
     background-color: black;
     border-radius: 20px;
+    flex: 1 1 auto;
+    padding: 1rem 1rem;
 }
 .link-personalizado:hover {
     color:#FF08D7;
@@ -95,4 +99,14 @@ svg:hover {
 .margin-110 {
     margin: 110px 20px 110px 20px;
 }
+
+/*----------  ESTILOS FORM EVENTOS ------------*/
+.btnPersonalizado,
+.btnPersonalizado:hover {
+    border-radius: 50px; 
+    margin: 20px;
+    background-color: #FF08D7; 
+    border: none;
+}
+
 

@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         //\App\Models\User::factory(10)->create();//llama al factory para crear usuarios random
         $this->call(EventoSeeder::class);
+        $this->call(CategoriaSeeder::class);
     }
 }
