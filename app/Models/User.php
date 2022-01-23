@@ -50,13 +50,13 @@ class User extends Authenticatable
 
     public function usuarioAprobador(){
 
-        return $this->hasOneThrough(Evento::class,"usuarioAprueba","usuario");
+        return $this->hasMany(Evento::class,"usuarioAprueba","usuario");
 
     }
 
     public function usuarioCreador(){
 
-        return $this->hasOneThrough(Evento::class,"usuarioCreador","usuario");
+        return $this->hasMany(Evento::class,"usuarioCreador","usuario");
 
     }
 

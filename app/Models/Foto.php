@@ -13,4 +13,11 @@ class Foto extends Model {
 
     //Sujeto a cambio
     public $timestamps = false;
+
+    public function evento() {
+
+        return $this->belongsTo(Evento::class,"id","evento");
+
+    }
+
 }
