@@ -5318,8 +5318,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CreateEvento",
+  props: {
+    card: String
+  },
   data: function data() {
     return {
       evento: {
@@ -40494,279 +40521,322 @@ var render = function () {
       },
     },
     [
-      _c("h4", { staticClass: "text-center font-weight-bold" }, [
-        _vm._v("Formulario de creacion de Evento"),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group pt-1" }, [
-        _vm._v("\n        Titulo: "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.evento.titulo,
-              expression: "evento.titulo",
-            },
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "" },
-          domProps: { value: _vm.evento.titulo },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.evento, "titulo", $event.target.value)
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group pt-1" }, [
-        _vm._v("\n        Descripcion: "),
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.evento.descripcion,
-              expression: "evento.descripcion",
-            },
-          ],
-          staticClass: "form-control",
-          attrs: { placeholder: "" },
-          domProps: { value: _vm.evento.descripcion },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.evento, "descripcion", $event.target.value)
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row pt-1" }, [
-        _c("div", { staticClass: "col-6 form-group" }, [
-          _vm._v("\n            Inicio: "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.evento.fechaInicio,
-                expression: "evento.fechaInicio",
-              },
-            ],
-            staticClass: "form-control",
-            attrs: { type: "date", placeholder: "Inicio del Evento" },
-            domProps: { value: _vm.evento.fechaInicio },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.evento, "fechaInicio", $event.target.value)
-              },
-            },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-6 form-group" }, [
-          _vm._v("\n            Fin: "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.evento.fechaFin,
-                expression: "evento.fechaFin",
-              },
-            ],
-            staticClass: "form-control",
-            attrs: { type: "date", placeholder: "Fin del Evento" },
-            domProps: { value: _vm.evento.fechaFin },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.evento, "fechaFin", $event.target.value)
-              },
-            },
-          }),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row pt-1" }, [
-        _c("div", { staticClass: "col-6 form-group" }, [
-          _vm._v("\n            Hora: "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.evento.hora,
-                expression: "evento.hora",
-              },
-            ],
-            staticClass: "form-control",
-            attrs: { type: "number", placeholder: "" },
-            domProps: { value: _vm.evento.hora },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.evento, "hora", $event.target.value)
-              },
-            },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-6 form-group" }, [
-          _vm._v("\n            Precio: "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.evento.precio,
-                expression: "evento.precio",
-              },
-            ],
-            staticClass: "form-control",
-            attrs: { type: "number", placeholder: "" },
-            domProps: { value: _vm.evento.precio },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.evento, "precio", $event.target.value)
-              },
-            },
-          }),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group pt-1" }, [
-        _vm._v("\n        Direccion: "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.evento.direccion,
-              expression: "evento.direccion",
-            },
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "" },
-          domProps: { value: _vm.evento.direccion },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.evento, "direccion", $event.target.value)
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group pt-1" }, [
-        _vm._v("\n        Sala: "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.evento.sala,
-              expression: "evento.sala",
-            },
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "" },
-          domProps: { value: _vm.evento.sala },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.evento, "sala", $event.target.value)
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group pt-1" }, [
-        _vm._v("\n        Recinto: "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.evento.recinto,
-              expression: "evento.recinto",
-            },
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "" },
-          domProps: { value: _vm.evento.recinto },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.evento, "recinto", $event.target.value)
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group pt-1" }, [
-        _vm._v("\n        Localidad:"),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.evento.localidad,
-              expression: "evento.localidad",
-            },
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "" },
-          domProps: { value: _vm.evento.localidad },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.evento, "localidad", $event.target.value)
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group pt-1" }, [
+      _c("div", { staticClass: "cardPersonalizada" }, [
         _c(
-          "button",
-          {
-            staticClass: "btn btn-block btn-primary",
-            attrs: { disabled: !_vm.isValid },
+          "h2",
+          { staticClass: "text-center font-weight-bold h2Personalizado" },
+          [_vm._v("Envia tus eventos")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "row mb-3 justify-content-center" }, [
+          _c(
+            "label",
+            { staticClass: "col-form-label white", attrs: { for: "titulo" } },
+            [_vm._v("Título:")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.evento.titulo,
+                  expression: "evento.titulo",
+                },
+              ],
+              staticClass: "form-control col-10 ",
+              attrs: { type: "text", placeholder: "" },
+              domProps: { value: _vm.evento.titulo },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.evento, "titulo", $event.target.value)
+                },
+              },
+            }),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row mb-3 justify-content-center" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-form-label white",
+              attrs: { for: "descripción" },
+            },
+            [_vm._v("Descripción:")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.evento.descripcion,
+                  expression: "evento.descripcion",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: { placeholder: "" },
+              domProps: { value: _vm.evento.descripcion },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.evento, "descripcion", $event.target.value)
+                },
+              },
+            }),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row mb-3 justify-content-center" }, [
+          _c(
+            "label",
+            { staticClass: "col-form-label white", attrs: { for: "fechaIni" } },
+            [_vm._v("Fecha Inicio:")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.evento.fechaInicio,
+                  expression: "evento.fechaInicio",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: { type: "date", placeholder: "Inicio del Evento" },
+              domProps: { value: _vm.evento.fechaInicio },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.evento, "fechaInicio", $event.target.value)
+                },
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "col-form-label white", attrs: { for: "fechaFin" } },
+            [_vm._v("Fecha Fin:")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.evento.fechaFin,
+                  expression: "evento.fechaFin",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: { type: "date", placeholder: "Fin del Evento" },
+              domProps: { value: _vm.evento.fechaFin },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.evento, "fechaFin", $event.target.value)
+                },
+              },
+            }),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row mb-3" }, [
+          _c("div", { staticClass: "col-6 form-group white" }, [
+            _vm._v("\n                Hora: "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.evento.hora,
+                  expression: "evento.hora",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", placeholder: "" },
+              domProps: { value: _vm.evento.hora },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.evento, "hora", $event.target.value)
+                },
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6 form-group white" }, [
+            _vm._v("\n                Precio: "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.evento.precio,
+                  expression: "evento.precio",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", placeholder: "" },
+              domProps: { value: _vm.evento.precio },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.evento, "precio", $event.target.value)
+                },
+              },
+            }),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row mb-3" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-form-label white",
+              attrs: { for: "direccion" },
+            },
+            [_vm._v("Dirección:")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.evento.direccion,
+                  expression: "evento.direccion",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "" },
+              domProps: { value: _vm.evento.direccion },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.evento, "direccion", $event.target.value)
+                },
+              },
+            }),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group pt-1 white" }, [
+          _vm._v("\n            Sala: "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.evento.sala,
+                expression: "evento.sala",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "" },
+            domProps: { value: _vm.evento.sala },
             on: {
-              click: function ($event) {
-                $event.preventDefault()
-                return _vm.createEvento(_vm.evento)
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.evento, "sala", $event.target.value)
               },
             },
-          },
-          [_vm._v("Crear Evento\n        ")]
-        ),
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group pt-1 white" }, [
+          _vm._v("\n            Recinto: "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.evento.recinto,
+                expression: "evento.recinto",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "" },
+            domProps: { value: _vm.evento.recinto },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.evento, "recinto", $event.target.value)
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group pt-1 white" }, [
+          _vm._v("\n            Localidad:"),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.evento.localidad,
+                expression: "evento.localidad",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "" },
+            domProps: { value: _vm.evento.localidad },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.evento, "localidad", $event.target.value)
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row mb-0" }, [
+          _c("div", { staticClass: "d-grid gap-2 col-10 mx-auto" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary mt-2 btn-lg btnPersonalizado",
+                attrs: { disabled: !_vm.isValid },
+                on: {
+                  click: function ($event) {
+                    $event.preventDefault()
+                    return _vm.createEvento(_vm.evento)
+                  },
+                },
+              },
+              [_vm._v("Crear Evento\n                ")]
+            ),
+          ]),
+        ]),
       ]),
     ]
   )
