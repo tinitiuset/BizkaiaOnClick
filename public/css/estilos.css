@@ -109,4 +109,9 @@ svg:hover {
     border: none;
 }
 
+/*----------- ESTILOS EDITAR PERFIL -----------*/
+.card-perfil {
+    background-color:#E5E5E5 ;
+}
+
 
