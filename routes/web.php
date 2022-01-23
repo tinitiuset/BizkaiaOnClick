@@ -34,9 +34,8 @@ Route::get('/enviaevento', function() {
     return view('enviaevento');
 });
 
-/*Route::get('/user', function() {
-    return view('user');
-});*/
+Route::get('/user/create', [App\Http\Controller\UserController::class, 'create']);
+
 
 Route::resource("agenda",EventoController::class);
 Route::resource('categoria',CategoriaController::class);

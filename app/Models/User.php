@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    protected $table = "usuarios"; 
     protected $fillable = [
         'usuario',
         'nombre',
@@ -50,13 +52,13 @@ class User extends Authenticatable
 
     public function usuarioAprobador(){
 
-        return $this->hasMany(Evento::class,"usuarioAprueba","usuario");
+        return $this->hasOneThrough(Evento::class,"usuarioAprueba","usuario");
 
     }
 
     public function usuarioCreador(){
 
-        return $this->hasMany(Evento::class,"usuarioCreador","usuario");
+        return $this->hasOneThrough(Evento::class,"usuarioCreador","usuario");
 
     }
 
