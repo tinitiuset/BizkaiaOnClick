@@ -22,21 +22,10 @@ class EventoController extends Controller
      */
     public function index() {
 
-        config()->set('database.connections.mysql.strict', false);
-        DB::reconnect(); //important as the existing connection if any would be in strict mode
 
         $eventos = Evento::paginate(15);
-        // $fotos = Foto::all();
-        $fotos = Foto::orderBy('identificador', 'asc')
-        ->groupBy('evento')
-        ->get(["identificador","ruta","evento"]);
 
-        //now changing back the strict ON
-        config()->set('database.connections.mysql.strict', true);
-        DB::reconnect();
-
-
-        return view('eventos/index',array('eventos' => $eventos),array('fotos'=> $fotos));
+        return view('eventos/index',array('eventos' => $eventos));
     }
 
     /**
@@ -83,7 +72,7 @@ class EventoController extends Controller
      */
     public function getAll(Request $request): JsonResponse
     {
-        $eventos = Evento::all();
+        $eventos = Evento::with("fotos")->get();
         return response()->json($eventos);
     }
 
