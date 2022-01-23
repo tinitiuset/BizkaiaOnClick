@@ -17,7 +17,6 @@ class CreateCategoriasTable extends Migration
             $table->string('nombre',60);
             $table->primary('nombre');
             $table->text('descripcion');
-
             $table->timestamps();
         });
     }

@@ -2,19 +2,24 @@
 
 namespace Database\Factories;
 
+use App\Models\Categoria;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 class EventoFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
+
     public function definition()
     {
+
+        static $number = 0;
+        $categorias = Categoria::pluck('nombre')->toArray();
+        $usuariosCreadores = User::pluck('id')->toArray();
+        $usuariosAprobadores = User::all()->where("tipo","=","administrador")->pluck('id')->toArray();
+
         return [
+            'id' => ++$number,
             'titulo' => $this->faker->name(),
             'descripcion' => $this->faker->text(),
             'fechaInicio' => $this->faker->date(),
@@ -25,7 +30,10 @@ class EventoFactory extends Factory
             'estado' => "pendiente",
             'sala' => $this->faker->randomNumber(2,true),
             'recinto' => "palacioeuskalduna",
-            "localidad" => "galdakao"
+            "localidad" => "galdakao",
+            "usuarioCreador" => $this->faker->randomElement($usuariosCreadores),
+            "usuarioAprobador" => $this->faker->randomElement($usuariosAprobadores),
+            "categoria" => $this->faker->randomElement($categorias)
         ];
     }
 
@@ -34,12 +42,12 @@ class EventoFactory extends Factory
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    public function unverified()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'email_verified_at' => null,
-            ];
-        });
-    }
+    // public function unverified()
+    // {
+    //     return $this->state(function (array $attributes) {
+    //         return [
+    //             'email_verified_at' => null,
+    //         ];
+    //     });
+    // }
 }

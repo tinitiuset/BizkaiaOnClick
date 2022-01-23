@@ -24,11 +24,11 @@ class Evento extends Model
         "sala",
         "recinto",
         "localidad",
-        "usuarioAprueba",
-        "usuarioCreador"
+        "usuarioAprobador",
+        "usuarioCreador",
+        "categoria"
     ];
     protected $primaryKey = "id";
-    protected $keyType = "string";
 
     public function fotos(){
 
@@ -38,13 +38,13 @@ class Evento extends Model
 
     public function usuarioAprobador(){
 
-        return $this->belongsTo(User::class,"usuario","usuarioAprobador");
+        return $this->belongsTo(User::class,"id","usuarioAprobador");
 
     }
 
     public function usuarioCreador(){
 
-        return $this->belongsTo(User::class,"usuario","usuarioCreador");
+        return $this->belongsTo(User::class,"id","usuarioCreador");
 
     }
 

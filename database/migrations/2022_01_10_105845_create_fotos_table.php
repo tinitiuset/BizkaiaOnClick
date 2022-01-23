@@ -14,10 +14,11 @@ class CreateFotosTable extends Migration
     public function up()
     {
         Schema::create('fotos', function (Blueprint $table) {
-            $table->id('identificador');
+            $table->integer("id")->autoIncrement();
             $table->string('ruta');
-            $table->string('evento');
+            $table->integer('evento');
             $table->foreign('evento')->references('id')->on('eventos');
+            $table->timestamps();
         });
     }
 

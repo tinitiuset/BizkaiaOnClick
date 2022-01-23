@@ -27,11 +27,11 @@ class CreateEventosTable extends Migration
             $table->string("sala")->nullable();
             $table->string("recinto")->nullable();
             $table->string("localidad")->nullable();
-            $table->string("usuarioAprueba")->nullable();
-            $table->string("usuarioCreador")->nullable();
+            $table->integer("usuarioAprobador")->nullable();
+            $table->integer("usuarioCreador")->nullable();
             $table->string("categoria");
-            $table->foreign('usuarioAprueba')->references('usuario')->on('users');
-            $table->foreign('usuarioCreador')->references('usuario')->on('users');
+            $table->foreign('usuarioAprobador')->references('id')->on('users');
+            $table->foreign('usuarioCreador')->references('id')->on('users');
             $table->foreign('categoria')->references('nombre')->on('categorias');
             $table->timestamps();
 
