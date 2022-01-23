@@ -22,7 +22,7 @@
               <a class="nav-link text-white texto-degradado text-center" href="/agenda">Agenda</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white texto-degradado text-center" href="#">Envía tus eventos</a>
+              <a class="nav-link text-white texto-degradado text-center" href="/enviaevento">Envía tus eventos</a>
             </li>
           </ul>
         </div>

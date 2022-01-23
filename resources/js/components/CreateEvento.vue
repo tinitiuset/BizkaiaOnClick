@@ -53,19 +53,28 @@
                 </div>
             </div>
             <!--SALA EVENTO-->
-            <div class="form-group pt-1 white">
-                Sala: <input type="text" placeholder="" v-model="evento.sala" class="form-control">
+             <div class="row mb-3">
+                <label for="sala" class="col-form-label white">Sala:</label>
 
+                <div class="col">
+                    <input type="text" placeholder="" v-model="evento.sala" class="form-control">
+                </div>
             </div>
             <!--RECINTO EVENTO-->
-            <div class="form-group pt-1 white">
-                Recinto: <input type="text" placeholder="" v-model="evento.recinto" class="form-control">
+            <div class="row mb-3">
+                <label for="recinto" class="col-form-label white">Recinto:</label>
 
+                <div class="col">
+                    <input type="text" placeholder="" v-model="evento.recinto" class="form-control">
+                </div>
             </div>
             <!--LOCALIDAD EVENTO-->
-            <div class="form-group pt-1 white">
-                Localidad:<input type="text" placeholder="" v-model="evento.localidad" class="form-control">
+            <div class="row mb-3">
+                <label for="localidad" class="col-form-label white">Localidad:</label>
 
+                <div class="col">
+                    <input type="text" placeholder="" v-model="evento.localidad" class="form-control">
+                </div>
             </div>
             <!--BOTON ENVIAR EVENTO-->
             <div class="row mb-0">

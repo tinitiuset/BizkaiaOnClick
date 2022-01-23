@@ -40,7 +40,7 @@
     
 </template>
 
-<script>
+<!--<script>
 import {mapGetters} from 'vuex';
 export default {
     name: "Agenda",
@@ -80,4 +80,4 @@ export default {
     }
 
 }
-</script>
+</script>-->
