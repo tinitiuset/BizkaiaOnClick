@@ -9,7 +9,7 @@ class Foto extends Model {
     use HasFactory;
     protected $table = 'fotos';
     protected $primaryKey = 'id';
-    protected $fillable = ['id','ruta','evento'];
+    protected $fillable = ['ruta','evento'];
 
     //Sujeto a cambio
     public $timestamps = false;
