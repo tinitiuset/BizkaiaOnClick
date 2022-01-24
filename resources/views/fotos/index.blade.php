@@ -1,7 +1,6 @@
-@extends ('layouts.app')
+@extends ('adminlte::page')
 
-
-{{-- @section ('title') Eventos @endsection --}}
+@section('title','Fotos')
 
 @section ('content')
 <div class="card-body" style="padding:30px">

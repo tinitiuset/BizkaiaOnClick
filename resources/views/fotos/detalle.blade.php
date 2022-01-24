@@ -1,6 +1,6 @@
-@extends ('layouts.app')
+@extends ('adminlte::page')
 
-{{-- @section ('title') {{Foto $foto['identificador']}}@endsection --}}
+@section('title','Fotos')
 
 @section ('content')
     <div class="row">
