@@ -6112,8 +6112,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
   components: {
     "indexvideo": _components_indexVideo_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     "menuusuario": _components_Menu_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    "agenda": _components_agenda_vue__WEBPACK_IMPORTED_MODULE_3__["default"] // "createfoto":createFoto
-
+    "agenda": _components_agenda_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    "createfoto": createFoto
   }
 });
 
@@ -41764,7 +41764,7 @@ var render = function () {
                   "a",
                   {
                     staticClass: "text-decoration-none text-dark",
-                    attrs: { href: "" },
+                    attrs: { href: "/detalleevento" },
                   },
                   [_vm._v(_vm._s(evento.titulo))]
                 ),

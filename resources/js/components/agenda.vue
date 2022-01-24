@@ -29,7 +29,7 @@
 
             <div class="row">
                 <!-- <img :src="" alt=""> -->
-                <h3><a href="" class="text-decoration-none text-dark">{{ evento.titulo }}</a></h3>
+                <h3><a href="/detalleevento" class="text-decoration-none text-dark">{{ evento.titulo }}</a></h3>
                 <h3>{{ evento.categoria }}</h3>
                 <p>{{ evento.descripcion }}</p>
             </div>
