@@ -12,7 +12,7 @@ import store from './store';
 // Componentes
 import indexVideo from './components/indexVideo.vue';
 import menu from './components/Menu.vue';
-import agenda from './components/agenda.vue';
+import agenda from './components/Agenda.vue';
 import createFoto from './components/CreateFoto.vue';
 
 require('./bootstrap');

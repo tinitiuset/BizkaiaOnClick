@@ -11,7 +11,7 @@
             @endforeach
         </div>
         @endif
-        <form method="POST" enctype="multipart/form-data" accept="image/jpeg, image/png" action={{url('fotos')}}>
+        <form method="POST" enctype="multipart/form-data" accept="image/jpeg, image/png" action={{url('admin/fotos')}}>
             @csrf
             <div class="form-group">
                 <label for="foto">Foto:</label>
@@ -22,7 +22,7 @@
                 <label for="">Evento:</label>
                 <select name="evento" id="">
                     @foreach ($eventos as $evento)
-                        <option>{{$evento['titulo']}}</option>    
+                        <option value="{{$evento['id']}}">{{$evento['titulo']}}</option>    
                     @endforeach
                 </select>
             </div>

@@ -51,21 +51,41 @@ class FotoController extends Controller {
         
         $this->validate($request,$reglas,$mensaje);
 
-        $fichero = $request->file('foto');
+        if ($archivoOrigen = $request->file('foto')) {
+            
+            $ultimaFoto = intval(Foto::orderBy('id','desc')->get("id")->first()["id"]);
+            $ultimaFoto += 1;
 
-        $foto = new Foto;
+            $foto = new Foto;
+            $archivoDestino = $ultimaFoto.".".$archivoOrigen->extension();
+            $foto->ruta = $archivoDestino;
+            $foto->evento = request()->input('evento');
+            $foto->created_at=date("Y-m-d H:i:s");
+            $foto->updated_at=date("Y-m-d H:i:s");
+            $foto->save();
+            $archivoOrigen->move("img/eventos",$archivoDestino);
 
-        $ficheroNombre = $request->input('evento') . "." . $fichero->extension();
-        // $ficheroNombre = $foto->id . "." . $fichero->extension();
-        
-        $foto->ruta = $ficheroNombre;
-        
-        $foto->evento = $request->input('evento');
+            return redirect()->route("fotos.index")->with('estado','Foto agregada correctamente' . $foto->id);
 
-        $fichero->storeAs('public',$ficheroNombre);
+        }
+
         
-        $foto->save();
-        return redirect('fotos')->with('estado','Foto agregada correctamente' . $foto->id);
+
+        // $fichero = $request->file('foto');
+
+        // $foto = new Foto;
+
+        // $ficheroNombre = $request->input('evento') . "." . $fichero->extension();
+        // // $ficheroNombre = $foto->id . "." . $fichero->extension();
+        
+        // $foto->ruta = $ficheroNombre;
+        
+        // $foto->evento = $request->input('evento');
+
+        // $fichero->storeAs('public',$ficheroNombre);
+        
+        // $foto->save();
+        // return redirect('fotos')->with('estado','Foto agregada correctamente' . $foto->id);
      }
 
     //  public function storeOLD(Request $request) {
@@ -151,7 +171,7 @@ class FotoController extends Controller {
         }
         
         $foto->update();
-        return redirect('fotos')->with('estado','Se ha modificado correctamente');
+        // return redirect('fotos')->with('estado','Se ha modificado correctamente');
     }
     // public function updateOLD(Request $request, $id) {
     //     $reglas = [

@@ -33,7 +33,7 @@ Route::get('/test', function() {
 Route::get('/enviaevento', function() {
     return view('enviaevento');
 });
-Route::get('/detalleevento', function() {
+Route::get('/detalleevento/{evento}', function() {
     return view('detalleevento');
 });
 
@@ -41,7 +41,7 @@ Route::get('/agenda',[EventoController::class,"index"]);
 
 Route::get('/user/create', [UserController::class, 'create']);
 
-Route::resource('/fotos', FotoController::class);
+// Route::resource('/fotos', FotoController::class);
 
 // Route::resource('eventos',EventoController::class);
 

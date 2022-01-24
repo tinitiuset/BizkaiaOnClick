@@ -282,12 +282,12 @@ return [
                         [
                             'text' => 'Categorias',
                             'icon'   => 'far fa-list-alt',
-                            'url'  => 'categoria',
+                            'url'  => 'admin/categoria',
                         ],
                         [
                             'text'    => 'Fotos',
                             'icon'   => 'far fa-image',
-                            'url'     => 'fotos',    
+                            'url'     => 'admin/fotos',    
                         ],
                         [
                             'text'    => 'Agenda',
