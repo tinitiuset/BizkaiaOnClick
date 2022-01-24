@@ -36,13 +36,10 @@
              </div>
         </form>
     </div>
-    <div id="createFoto">
-        <createFoto></createFoto>
+    <div>
+        <createfoto></createfoto>
     </div>
 
-    
-
-    <script src="{{asset('js/post.js')}}"></script>
     <script>
         var cargarImg = function () {
             var imagen = document.getElementById('fotoCambio');

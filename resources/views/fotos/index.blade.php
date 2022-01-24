@@ -24,7 +24,7 @@
                     <td>{{ $foto['identificador'] }}</td>
                     <td>{{ $foto['ruta'] }}</td>
                     <td>{{ $foto['evento'] }}</td>
-                    <td><img src="../img/eventos/{{ $foto['ruta'] }}" alt="{{$foto['evento']}}"></td>
+                    <td><img src="../storage/{{ $foto['ruta'] }}" alt="{{$foto['evento']}}" style="height:50px"></td>
                     <td> <a href="{{ url('fotos/'.$foto->identificador.'/edit') }}" class="btn btn-sm btn-primary"><i class="far fa-edit"></i></a>
                    
                         <form action={{url('fotos/'.$foto->identificador)}} method="POST" class="d-inline">

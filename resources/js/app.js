@@ -5,18 +5,14 @@
  */
 
 
-// import VueAxios from 'vue-axios';
-// import VueRouter from 'vue-router';
-import axios from 'axios';
+// Dependencias
 import Vue from "vue";
-import indexVideo from './components/indexVideo.vue';
-// import {createApp} from 'vue';
-import menu from './components/menu.vue';
-import footer from './components/footer.vue';
-import agenda from './components/agenda.vue';
 import store from './store';
 
-import createFoto from './components/CreateFoto.vue';
+// Componentes
+import indexVideo from './components/indexVideo.vue';
+import menu from './components/menu.vue';
+import agenda from './components/agenda.vue';
 
 require('./bootstrap');
 
@@ -30,8 +26,8 @@ window.Vue = require('vue').default;
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
@@ -41,63 +37,15 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('eventos', require('./components/Eventos.vue').default);
-Vue.component('createEvento', require('./components/CreateEvento.vue').default);
-Vue.component('evento', require('./components/Evento.vue').default);
-// Vue.component('indexvideo', require('./components/indexVideo.vue').default);
-Vue.component('usuario', require('./components/Usuario.vue').default);
-
-// Vue.component('createFoto', require('./components/CreateFoto.vue').default);
-
-// const app = new Vue({
-//     el: '#app',
-//     store,
-//     components: {
-
-//      "menujs": menu,
-//      "piedepagina": footer,
-
-//      }
-//  });
-
-
-
-// const createFoto = new Vue({
-//     el: '#createFoto',
-//     components: {
-//         "createFoto": createFoto
-//     }
-// });
-
-
-
-// const index = new Vue({
-//     el: '#index',
-//     components: {
-
-//         "indexvideo":indexVideo
-
-//     }
-// });
-// Vue.use(VueRouter);
-// Vue.use(VueAxios, axios);
-
-// const router = new VueRouter({
-//     mode: 'history',
-//     routes: routes
-// });
-
+// Vue APP
 const app = new Vue({
     el: '#app',
-    // router: router,
-    // render: h => h(App),
     store,
     components: {
-
-        "indexvideo":indexVideo,
-        "menuusuario":menu,
-        "agenda":agenda
-
+        "indexvideo": indexVideo,
+        "menuusuario": menu,
+        "agenda": agenda,
+        "createfoto":createFoto
     }
 });
 
