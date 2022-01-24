@@ -20,7 +20,7 @@ class EsAdmin
 
         if (auth()->user()->tipo != "administrador") {
 
-            return view("index");
+            return redirect()->route("index");
 
         }
 
