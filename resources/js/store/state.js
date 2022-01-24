@@ -1,6 +1,7 @@
 const state = {
     eventos: [],
     evento: [],
+
     usuarios: [],
     usuario: []
 }
