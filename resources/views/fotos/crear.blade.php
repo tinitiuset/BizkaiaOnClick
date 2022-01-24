@@ -1,11 +1,8 @@
+@extends ('adminlte::page')
 
+@section('title','Fotos')
 
-
-@extends ('layouts.app')
-
-{{-- @section ('title') {{Foto $foto['identificador']}}@endsection --}}
-
-    @section ('content')
+@section ('content')
     <div class="card-body" style="padding:30px">
         @if (count($errors)>0)
         <div class="alert alert-danger">
