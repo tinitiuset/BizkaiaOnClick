@@ -41,6 +41,7 @@ Route::get('/agenda',[EventoController::class,"index"]);
 
 Route::get('/user/create', [UserController::class, 'create']);
 
+Route::resource('/fotos', FotoController::class);
 
 // Route::resource('eventos',EventoController::class);
 

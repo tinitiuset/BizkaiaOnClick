@@ -52,10 +52,11 @@ class FotoController extends Controller {
         $this->validate($request,$reglas,$mensaje);
 
         $fichero = $request->file('foto');
-    
-        $ficheroNombre = $request->input('evento') . "." . $fichero->extension();
 
         $foto = new Foto;
+
+        $ficheroNombre = $request->input('evento') . "." . $fichero->extension();
+        // $ficheroNombre = $foto->id . "." . $fichero->extension();
         
         $foto->ruta = $ficheroNombre;
         
@@ -64,7 +65,7 @@ class FotoController extends Controller {
         $fichero->storeAs('public',$ficheroNombre);
         
         $foto->save();
-        return redirect('fotos')->with('estado','Foto agregada correctamente');
+        return redirect('fotos')->with('estado','Foto agregada correctamente' . $foto->id);
      }
 
     //  public function storeOLD(Request $request) {
