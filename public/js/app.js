@@ -5707,27 +5707,80 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Agenda",
   data: function data() {
     return {
-      filtro: "Todos"
+      filtroCategoria: "Todos",
+      filtro: "",
+      diasSemana: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['eventos', 'categorias'])), {}, {
     eventosFiltrados: function eventosFiltrados() {
       var _this = this;
 
-      console.log(this.filtro);
+      if (this.filtro != "") {
+        this.filtrado = [];
 
-      if (this.filtro == "Todos") {
+        if (this.filtroCategoria == "Todos") {
+          this.eventos.forEach(function (evento) {
+            if (evento.titulo.toLowerCase().includes(_this.filtro.toLowerCase()) || evento.descripcion.toLowerCase().includes(_this.filtro.toLowerCase())) {
+              _this.filtrado.push(evento);
+            }
+          });
+        } else {
+          this.eventos.forEach(function (evento) {
+            if (_this.filtroCategoria == evento.categoria) {
+              if (evento.titulo.toLowerCase().includes(_this.filtro.toLowerCase()) || evento.descripcion.toLowerCase().includes(_this.filtro.toLowerCase())) {
+                _this.filtrado.push(evento);
+              }
+            }
+          });
+        }
+
+        return this.filtrado;
+      }
+
+      if (this.filtroCategoria == "Todos") {
         return this.eventos;
       }
 
       this.filtrado = [];
       this.eventos.forEach(function (evento) {
-        if (_this.filtro == evento.categoria) {
+        if (_this.filtroCategoria == evento.categoria) {
           _this.filtrado.push(evento);
         }
       });
@@ -41246,14 +41299,12 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "py-4" },
     [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("h2", [_vm._v("Categorias")]),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
+      _c("div", { staticClass: "container-fluid my-4" }, [
+        _c("div", [
+          _c("h3", [_vm._v("Busca tus eventos:")]),
+          _vm._v(" "),
+          _c("input", {
             directives: [
               {
                 name: "model",
@@ -41262,59 +41313,172 @@ var render = function () {
                 expression: "filtro",
               },
             ],
-            attrs: { name: "", id: "" },
+            attrs: { type: "text", name: "", id: "" },
+            domProps: { value: _vm.filtro },
             on: {
-              change: function ($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function (o) {
-                    return o.selected
-                  })
-                  .map(function (o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.filtro = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.filtro = $event.target.value
               },
             },
-          },
-          [
-            _c("option", { attrs: { value: "Todos" } }, [_vm._v("Todos")]),
-            _vm._v(" "),
-            _vm._l(_vm.categorias, function (categoria) {
-              return _c(
-                "option",
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("h2", [_vm._v("Categorias")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
                 {
-                  key: categoria.nombre,
-                  domProps: { value: categoria.nombre },
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.filtroCategoria,
+                  expression: "filtroCategoria",
                 },
-                [_vm._v(_vm._s(categoria.nombre))]
-              )
-            }),
-          ],
-          2
-        ),
+              ],
+              attrs: { name: "", id: "" },
+              on: {
+                change: function ($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function (o) {
+                      return o.selected
+                    })
+                    .map(function (o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.filtroCategoria = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+              },
+            },
+            [
+              _c("option", { attrs: { value: "Todos" } }, [_vm._v("Todos")]),
+              _vm._v(" "),
+              _vm._l(_vm.categorias, function (categoria) {
+                return _c(
+                  "option",
+                  {
+                    key: categoria.nombre,
+                    domProps: { value: categoria.nombre },
+                  },
+                  [_vm._v(_vm._s(categoria.nombre))]
+                )
+              }),
+            ],
+            2
+          ),
+        ]),
       ]),
       _vm._v(" "),
       _vm._l(_vm.eventosFiltrados, function (evento) {
-        return _c("div", { key: evento.id }, [
-          _c("div", { staticClass: "container-fluid my-1" }, [
+        return _c(
+          "div",
+          { key: evento.id, staticClass: "container-fluid my-4" },
+          [
             _vm._m(0, true),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
-              _c("img", { attrs: { src: "", alt: "" } }),
-              _vm._v(" "),
-              _c("h3", [_vm._v(_vm._s(evento.titulo))]),
+              _c("h3", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "text-decoration-none text-dark",
+                    attrs: { href: "" },
+                  },
+                  [_vm._v(_vm._s(evento.titulo))]
+                ),
+              ]),
               _vm._v(" "),
               _c("h3", [_vm._v(_vm._s(evento.categoria))]),
               _vm._v(" "),
               _c("p", [_vm._v(_vm._s(evento.descripcion))]),
             ]),
             _vm._v(" "),
-            _vm._m(1, true),
-          ]),
-        ])
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "bg-dark" }),
+              _vm._v(" "),
+              _c("div", [
+                _c("p", [
+                  _c("i", { staticClass: "fas fa-map-marker-alt" }),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(evento.localidad))]),
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "bi bi-clock",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        width: "16",
+                        height: "16",
+                        fill: "currentColor",
+                        viewBox: "0 0 16 16",
+                      },
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d: "M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z",
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d: "M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z",
+                        },
+                      }),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("span", [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(evento.fechaInicio.replaceAll("-", "/")) +
+                        " - " +
+                        _vm._s(evento.fechaFin.replaceAll("-", "/")) +
+                        "\n                        "
+                    ),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "bi bi-currency-euro",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        width: "16",
+                        height: "16",
+                        fill: "currentColor",
+                        viewBox: "0 0 16 16",
+                      },
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d: "M4 9.42h1.063C5.4 12.323 7.317 14 10.34 14c.622 0 1.167-.068 1.659-.185v-1.3c-.484.119-1.045.17-1.659.17-2.1 0-3.455-1.198-3.775-3.264h4.017v-.928H6.497v-.936c0-.11 0-.219.008-.329h4.078v-.927H6.618c.388-1.898 1.719-2.985 3.723-2.985.614 0 1.175.05 1.659.177V2.194A6.617 6.617 0 0 0 10.341 2c-2.928 0-4.82 1.569-5.244 4.3H4v.928h1.01v1.265H4v.928z",
+                        },
+                      }),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  evento.precio == 0
+                    ? _c("span", [_vm._v("Gratis")])
+                    : _c("span", [_vm._v(_vm._s(evento.precio) + "€")]),
+                ]),
+              ]),
+            ]),
+          ]
+        )
       }),
     ],
     2
@@ -41327,14 +41491,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row text-center" }, [
       _c("img", { attrs: { src: "", alt: "" } }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "bg-dark" }),
     ])
   },
 ]
@@ -41562,7 +41718,7 @@ var render = function () {
                       "ul",
                       { staticClass: "navbar-nav me-auto mb-2 mb-lg-0 fs-3" },
                       [
-                        _vm.tipo != null
+                        _vm.tipo == "administrador"
                           ? _c("li", { staticClass: "nav-item" }, [
                               _c(
                                 "a",
@@ -41571,7 +41727,7 @@ var render = function () {
                                     "nav-link text-white text-center",
                                   attrs: {
                                     title: "Panel de administracion",
-                                    href: "/register",
+                                    href: "/admin/index",
                                   },
                                 },
                                 [

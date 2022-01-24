@@ -33,16 +33,13 @@ Route::get('/test', function() {
 Route::get('/enviaevento', function() {
     return view('enviaevento');
 });
+Route::get('/detalleevento', function() {
+    return view('detalleevento');
+});
 
-Route::get('/user/create', [App\Http\Controller\UserController::class, 'create']);
+Route::get('/agenda',[EventoController::class,"index"]);
 
-
-Route::resource("agenda",EventoController::class);
-Route::resource('categoria',CategoriaController::class);
-Route::resource('fotos',FotoController::class);
-
-Route::resource('user', UserController::class);
-
+Route::get('/user/create', [UserController::class, 'create']);
 
 
 // Route::resource('eventos',EventoController::class);

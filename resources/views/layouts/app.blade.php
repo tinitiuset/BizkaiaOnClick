@@ -103,7 +103,7 @@
 
         @auth
       
-        <menuusuario usuario="{{ auth()->user() }}"></menuusuario>
+        <menuusuario usuario="{{ auth()->user() }}" tipo="{{auth()->user()->tipo}}"></menuusuario>
 
         @else
 
