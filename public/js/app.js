@@ -5399,6 +5399,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -5415,8 +5422,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "CreateFoto",
+  name: "createFoto",
   data: function data() {
     return {
       foto: {
@@ -5429,11 +5439,14 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch('createFoto', foto);
     }
   },
-  computed: {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['eventos'])), {}, {
+    beforeMount: function beforeMount() {
+      this.$store.dispatch('fetchEventos');
+    },
     isValid: function isValid() {
       return this.foto.foto !== '';
     }
-  }
+  })
 });
 
 /***/ }),
@@ -6155,7 +6168,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
   components: {
     "indexvideo": _components_indexVideo_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     "menuusuario": _components_menu_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    "agenda": _components_agenda_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    "agenda": _components_agenda_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    "createfoto": createFoto
   }
 });
 
@@ -41049,7 +41063,7 @@ var render = function () {
       attrs: { action: "" },
       on: {
         submit: function ($event) {
-          return _vm.createFoto(_vm.foto)
+          return _vm.crear(_vm.createFoto)
         },
       },
     },
@@ -41060,7 +41074,20 @@ var render = function () {
       _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group pt-1" }),
+      _c("div", { staticClass: "form-group pt-1" }, [
+        _c(
+          "select",
+          { attrs: { name: "evento", id: "evento" } },
+          _vm._l(_vm.eventos, function (evento) {
+            return _c(
+              "option",
+              { key: evento.titulo, domProps: { value: evento.titulo } },
+              [_vm._v(_vm._s(evento.titulo))]
+            )
+          }),
+          0
+        ),
+      ]),
       _vm._v(" "),
       _c(
         "button",
