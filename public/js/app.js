@@ -5342,6 +5342,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CreateEvento",
   props: {
@@ -5695,22 +5704,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Agenda",
-  data: {
-    eventosFiltrados: eventos
+  data: function data() {
+    return {
+      filtro: "Todos"
+    };
   },
-  methods: {
-    filtrarEventos: function filtrarEventos() {
-      eventosFiltrados = [];
-      eventos.forEach(function (evento) {// if (evento.categoria == ) {
-        // }
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['eventos', 'categorias'])), {}, {
+    eventosFiltrados: function eventosFiltrados() {
+      var _this = this;
+
+      console.log(this.filtro);
+
+      if (this.filtro == "Todos") {
+        return this.eventos;
+      }
+
+      this.filtrado = [];
+      this.eventos.forEach(function (evento) {
+        if (_this.filtro == evento.categoria) {
+          _this.filtrado.push(evento);
+        }
       });
+      return this.filtrado;
     }
-  },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['eventos', 'categorias'])),
-  mounted: function mounted() {
+  }),
+  beforeMount: function beforeMount() {
     this.$store.dispatch('fetchEventos');
     this.$store.dispatch('fetchCategorias');
   }
@@ -40744,79 +40768,103 @@ var render = function () {
           ]),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group pt-1 white" }, [
-          _vm._v("\n            Sala: "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.evento.sala,
-                expression: "evento.sala",
+        _c("div", { staticClass: "row mb-3" }, [
+          _c(
+            "label",
+            { staticClass: "col-form-label white", attrs: { for: "sala" } },
+            [_vm._v("Sala:")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.evento.sala,
+                  expression: "evento.sala",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "" },
+              domProps: { value: _vm.evento.sala },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.evento, "sala", $event.target.value)
+                },
               },
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", placeholder: "" },
-            domProps: { value: _vm.evento.sala },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.evento, "sala", $event.target.value)
-              },
-            },
-          }),
+            }),
+          ]),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group pt-1 white" }, [
-          _vm._v("\n            Recinto: "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.evento.recinto,
-                expression: "evento.recinto",
+        _c("div", { staticClass: "row mb-3" }, [
+          _c(
+            "label",
+            { staticClass: "col-form-label white", attrs: { for: "recinto" } },
+            [_vm._v("Recinto:")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.evento.recinto,
+                  expression: "evento.recinto",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "" },
+              domProps: { value: _vm.evento.recinto },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.evento, "recinto", $event.target.value)
+                },
               },
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", placeholder: "" },
-            domProps: { value: _vm.evento.recinto },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.evento, "recinto", $event.target.value)
-              },
-            },
-          }),
+            }),
+          ]),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group pt-1 white" }, [
-          _vm._v("\n            Localidad:"),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.evento.localidad,
-                expression: "evento.localidad",
-              },
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", placeholder: "" },
-            domProps: { value: _vm.evento.localidad },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.evento, "localidad", $event.target.value)
-              },
+        _c("div", { staticClass: "row mb-3" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-form-label white",
+              attrs: { for: "localidad" },
             },
-          }),
+            [_vm._v("Localidad:")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.evento.localidad,
+                  expression: "evento.localidad",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "" },
+              domProps: { value: _vm.evento.localidad },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.evento, "localidad", $event.target.value)
+                },
+              },
+            }),
+          ]),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row mb-0" }, [
@@ -41205,9 +41253,34 @@ var render = function () {
         _vm._v(" "),
         _c(
           "select",
-          { attrs: { name: "", id: "" } },
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.filtro,
+                expression: "filtro",
+              },
+            ],
+            attrs: { name: "", id: "" },
+            on: {
+              change: function ($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function (o) {
+                    return o.selected
+                  })
+                  .map(function (o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.filtro = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+            },
+          },
           [
-            _c("option", { attrs: { value: "todos" } }, [_vm._v("Todos")]),
+            _c("option", { attrs: { value: "Todos" } }, [_vm._v("Todos")]),
             _vm._v(" "),
             _vm._l(_vm.categorias, function (categoria) {
               return _c(
@@ -41224,7 +41297,7 @@ var render = function () {
         ),
       ]),
       _vm._v(" "),
-      _vm._l(_vm.eventos, function (evento) {
+      _vm._l(_vm.eventosFiltrados, function (evento) {
         return _c("div", { key: evento.id }, [
           _c("div", { staticClass: "container-fluid my-1" }, [
             _vm._m(0, true),
@@ -41233,6 +41306,8 @@ var render = function () {
               _c("img", { attrs: { src: "", alt: "" } }),
               _vm._v(" "),
               _c("h3", [_vm._v(_vm._s(evento.titulo))]),
+              _vm._v(" "),
+              _c("h3", [_vm._v(_vm._s(evento.categoria))]),
               _vm._v(" "),
               _c("p", [_vm._v(_vm._s(evento.descripcion))]),
             ]),
@@ -41712,7 +41787,7 @@ var staticRenderFns = [
             "a",
             {
               staticClass: "nav-link text-white texto-degradado text-center",
-              attrs: { href: "#" },
+              attrs: { href: "/enviaevento" },
             },
             [_vm._v("Envía tus eventos")]
           ),
