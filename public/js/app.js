@@ -5894,8 +5894,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Agenda",
@@ -5905,6 +5903,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       filtro: "",
       diasSemana: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
     };
+  },
+  methods: {
+    agrandarTitulo: function agrandarTitulo(event) {
+      $("#" + event.target.id).animate({
+        "font-size": "+=10"
+      }, 1000);
+    },
+    reducirTitulo: function reducirTitulo(event) {
+      $("#" + event.target.id).animate({
+        "font-size": "-=10"
+      }, 1000);
+    }
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['eventos', 'categorias'])), {}, {
     eventosFiltrados: function eventosFiltrados() {
@@ -6064,11 +6074,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 /* harmony import */ var _components_indexVideo_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/indexVideo.vue */ "./resources/js/components/indexVideo.vue");
 /* harmony import */ var _components_Menu_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Menu.vue */ "./resources/js/components/Menu.vue");
 /* harmony import */ var _components_agenda_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/agenda.vue */ "./resources/js/components/agenda.vue");
+/* harmony import */ var _components_CreateFoto_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/CreateFoto.vue */ "./resources/js/components/CreateFoto.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -6077,6 +6088,7 @@ __webpack_require__.r(__webpack_exports__);
 // Dependencias
 
  // Componentes
+
 
 
 
@@ -6096,9 +6108,9 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 var files = __webpack_require__("./resources/js sync recursive \\.vue$/");
 
 files.keys().map(function (key) {
-  return vue__WEBPACK_IMPORTED_MODULE_4__["default"].component(key.split('/').pop().split('.')[0], files(key)["default"]);
+  return vue__WEBPACK_IMPORTED_MODULE_5__["default"].component(key.split('/').pop().split('.')[0], files(key)["default"]);
 });
-vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('example-component', (__webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_5__["default"].component('example-component', (__webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -6106,14 +6118,14 @@ vue__WEBPACK_IMPORTED_MODULE_4__["default"].component('example-component', (__we
  */
 // Vue APP
 
-var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
+var app = new vue__WEBPACK_IMPORTED_MODULE_5__["default"]({
   el: '#app',
   store: _store__WEBPACK_IMPORTED_MODULE_0__["default"],
   components: {
     "indexvideo": _components_indexVideo_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     "menuusuario": _components_Menu_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     "agenda": _components_agenda_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    "createfoto": createFoto
+    "createfoto": _components_CreateFoto_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 });
 
@@ -41675,9 +41687,11 @@ var render = function () {
   return _c(
     "div",
     [
-      _c("div", { staticClass: "container-fluid my-4" }, [
-        _c("div", [
-          _c("h3", [_vm._v("Busca tus eventos:")]),
+      _c("div", { staticClass: "container-fluid my-4 g-0" }, [
+        _c("div", { staticClass: "row text-sm-center mx-md-5" }, [
+          _c("h3", { staticClass: "text-sm-center" }, [
+            _vm._v("Busca tus eventos:"),
+          ]),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -41688,7 +41702,8 @@ var render = function () {
                 expression: "filtro",
               },
             ],
-            attrs: { type: "text", name: "", id: "" },
+            staticClass: "form-control form-control-dark w-50 mx-sm-auto",
+            attrs: { type: "text", name: "", "aria-label": "Search", id: "" },
             domProps: { value: _vm.filtro },
             on: {
               input: function ($event) {
@@ -41701,8 +41716,8 @@ var render = function () {
           }),
         ]),
         _vm._v(" "),
-        _c("div", [
-          _c("h2", [_vm._v("Categorias")]),
+        _c("div", { staticClass: "row text-sm-center mx-md-5" }, [
+          _c("h3", [_vm._v("Categorias:")]),
           _vm._v(" "),
           _c(
             "select",
@@ -41715,6 +41730,7 @@ var render = function () {
                   expression: "filtroCategoria",
                 },
               ],
+              staticClass: "text-center w-auto",
               attrs: { name: "", id: "" },
               on: {
                 change: function ($event) {
@@ -41759,18 +41775,27 @@ var render = function () {
             _vm._m(0, true),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
-              _c("h3", [
+              _c("h4", [
                 _c(
                   "a",
                   {
-                    staticClass: "text-decoration-none text-dark",
-                    attrs: { href: "/detalleevento" },
+                    staticClass:
+                      "text-decoration-none text-dark texto-degradado",
+                    attrs: { href: "/detalleevento", id: evento.id },
+                    on: {
+                      mouseover: function ($event) {
+                        return _vm.agrandarTitulo($event)
+                      },
+                      mouseout: function ($event) {
+                        return _vm.reducirTitulo($event)
+                      },
+                    },
                   },
                   [_vm._v(_vm._s(evento.titulo))]
                 ),
               ]),
               _vm._v(" "),
-              _c("h3", [_vm._v(_vm._s(evento.categoria))]),
+              _c("h4", [_vm._v(_vm._s(evento.categoria))]),
               _vm._v(" "),
               _c("p", [_vm._v(_vm._s(evento.descripcion))]),
             ]),

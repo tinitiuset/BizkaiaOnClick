@@ -4,15 +4,15 @@
 
         <!-- {{eventos}} -->
 
-        <div class="container-fluid my-4">
+        <div class="container-fluid my-4 g-0">
 
-            <div>
-                <h3>Busca tus eventos:</h3>
-                <input type="text" name="" id="" v-model="filtro">
+            <div class="row text-sm-center mx-md-5">
+                <h3 class="text-sm-center">Busca tus eventos:</h3>
+                <input type="text" name="" aria-label="Search" class="form-control form-control-dark w-50 mx-sm-auto" id="" v-model="filtro">
             </div>
-            <div>
-                <h2>Categorias</h2>
-                <select name="" id="" v-model="filtroCategoria">
+            <div class="row text-sm-center mx-md-5">
+                <h3>Categorias:</h3>
+                <select class="text-center w-auto" name="" id="" v-model="filtroCategoria">
                     <option value="Todos">Todos</option>
                     <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
                 </select>
@@ -29,8 +29,8 @@
 
             <div class="row">
                 <!-- <img :src="" alt=""> -->
-                <h3><a href="/detalleevento" class="text-decoration-none text-dark">{{ evento.titulo }}</a></h3>
-                <h3>{{ evento.categoria }}</h3>
+                <h4><a href="/detalleevento" class="text-decoration-none text-dark texto-degradado" :id="evento.id" @mouseover="agrandarTitulo($event)" @mouseout="reducirTitulo($event)">{{ evento.titulo }}</a></h4>
+                <h4>{{ evento.categoria }}</h4>
                 <p>{{ evento.descripcion }}</p>
             </div>
 
@@ -68,8 +68,6 @@
 
         </div>
 
-
-
     </div>
     
 </template>
@@ -87,6 +85,22 @@ export default {
             diasSemana: ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
 
         };
+
+    }, methods: {
+
+        agrandarTitulo (event) {
+
+            $("#"+event.target.id).animate({
+                "font-size" : "+=10"
+            },1000);
+
+        }, reducirTitulo (event) {
+
+            $("#"+event.target.id).animate({
+                "font-size" : "-=10"
+            },1000);
+
+        }
 
     },
     computed: {

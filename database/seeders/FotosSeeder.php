@@ -14,7 +14,11 @@ class FotosSeeder extends Seeder
     public function run()
     {
         
+        for ($i=1; $i < 61; $i++) { 
+            
+            
 
+        }
 
     }
 }
