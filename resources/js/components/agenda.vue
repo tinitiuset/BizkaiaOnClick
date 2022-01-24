@@ -6,11 +6,11 @@
 
         <div class="container-fluid my-4 g-0">
 
-            <div class="row mx-auto">
+            <div class="row mx-auto my-2">
                 <h3 class="text-center">Busca tus eventos:</h3>
                 <div class="text-center">
                 <input type="text" name="" placeholder="Buscar evento..." aria-label="Search" class="form-control d-inline form-control-dark w-50 mx-auto" id="" v-model="filtro" />
-                <button id="search-button" type="button" class="btn btn-primary">
+                <button id="search-button" type="button" class="btn btn-primary" title="Actualizar">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
                     <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
                     <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
@@ -19,10 +19,10 @@
                 </div>
 
             </div>
-            <div class="row text-center mx-auto">
+            <div class="row text-center mx-auto my-2">
                 <h3>Categorias:</h3>
-                <select class="text-center w-auto mx-auto" name="" id="" v-model="filtroCategoria">
-                    <option value="Todos" class="text-center">Todos</option>
+                <select class="p-0 w-auto mx-auto" name="" id="" v-model="filtroCategoria">
+                    <option value="Todos">Todos</option>
                     <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
                 </select>
             </div>
@@ -30,16 +30,23 @@
 
         <div class="container-fluid my-4">
 
-            <div v-for="evento in eventosFiltrados" :key="evento.id" class="card col">
+            <div class="row g-3">
+
+                <div v-for="evento in eventosFiltrados" :key="evento.id" class="py-4 col-sm-6 col-md-4 col-lg-3">
+
+                    <div class="card h-100">
+
+                        <img class="card-img-top h-50" :src="'/img/eventos/'+evento.fotos[0].ruta" alt="Card image cap">
+                        <div class="card-body bg-dark border border-1 border-dark">
+                            <h5 class="card-title"><a :href="'/detalleevento/'+evento.id" class="text-decoration-none text-white texto-degradado">{{evento.titulo}}</a></h5>
+                            <p class="card-text text-white">{{evento.descripcion}}.</p>
+                        </div>
+                        <a :href="'/detalleevento/'+evento.id" class="btn btn-primary botonSinRedondeo w-100">Ver</a>
+
+                    </div>
 
                 <!-- {{evento.fotos[0].id}} -->
 
-                <img class="card-img-top" :src="'/img/eventos/'+evento.fotos[0].ruta" alt="Card image cap">
-                <div class="card-body bg-white border border-1">
-                    <h5 class="card-title"><a :href="'/detalleevento/'+evento.id" class="text-decoration-none text-dark texto-degradado">{{evento.titulo}}</a></h5>
-                    <p class="card-text">{{evento.descripcion}}.</p>
-                    <a :href="'/detalleevento/'+evento.id" class="btn btn-primary">Ver</a>
-                </div>
 
                 <!-- {{evento}} -->
 
@@ -79,6 +86,8 @@
 
                     </div>
                 </div> -->
+
+            </div>
 
             </div>
 

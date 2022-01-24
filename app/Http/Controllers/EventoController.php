@@ -98,7 +98,7 @@ class EventoController extends Controller
      */
     public function get(Request $request, int $id): JsonResponse
     {
-        $evento = Evento::findOrFail($id);
+        $evento = Evento::with("fotos")->findOrFail($id);
         return response()->json($evento);
     }
 

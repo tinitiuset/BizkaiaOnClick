@@ -32,8 +32,8 @@ Route::get('/test', function() {
 
 Route::get('/enviaevento', function() {
     return view('enviaevento');
-});
-Route::get('/detalleevento/{evento}', function() {
+})->middleware("auth");
+Route::get('/detalleevento/{id}', function() {
     return view('detalleevento');
 });
 

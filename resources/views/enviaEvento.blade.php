@@ -1,6 +1,8 @@
 @extends('layouts.app')   
 @section('estilosPersonalizados')  
+
 @endsection
+@section('otrasClasesMain','body-degradado')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

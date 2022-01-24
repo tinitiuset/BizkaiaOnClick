@@ -26,6 +26,7 @@
     margin: 0;
     box-sizing: border-box;
     background: linear-gradient(to bottom, #FF08D7, #b062fe, #3385ff);
+    background-size: cover;
 }
 
 /* .texto-degradado {
@@ -81,6 +82,13 @@ svg:hover {
 .logo-movil {
     width: 150px;
 }
+
+.botonSinRedondeo {
+
+    border-radius: 0;
+
+}
+
 /*------------  ESTILOS DE LOGIN  ----------------------*/
 /* .card, */
 .cardPersonalizada {

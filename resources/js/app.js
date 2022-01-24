@@ -14,6 +14,7 @@ import indexVideo from './components/indexVideo.vue';
 import menu from './components/Menu.vue';
 import agenda from './components/Agenda.vue';
 import createFoto from './components/CreateFoto.vue';
+import detalleEvento from './components/DetalleEvento.vue';
 
 require('./bootstrap');
 
@@ -46,6 +47,7 @@ const app = new Vue({
         "indexvideo": indexVideo,
         "menuusuario": menu,
         "agenda": agenda,
+        "detalleevento": detalleEvento,
         "createfoto":createFoto
     }
 });

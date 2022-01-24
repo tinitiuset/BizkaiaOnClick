@@ -113,7 +113,7 @@
 
 
 
-        <main>
+        <main class="@yield('otrasClasesMain')">
             @yield('content')
         </main>
         <footer class="footer mt-auto navbar-color">
