@@ -44,7 +44,8 @@ const app = new Vue({
     components: {
         "indexvideo": indexVideo,
         "menuusuario": menu,
-        "agenda": agenda
+        "agenda": agenda,
+        "createfoto":createFoto
     }
 });
 

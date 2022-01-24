@@ -61,7 +61,7 @@ class FotoController extends Controller {
         
         $foto->evento = $request->input('evento');
 
-        $fichero->storeAs('imgEventos',$ficheroNombre);
+        $fichero->storeAs('public',$ficheroNombre);
         
         $foto->save();
         return redirect('fotos')->with('estado','Foto agregada correctamente');
@@ -141,7 +141,7 @@ class FotoController extends Controller {
             $fichero = $request->file('foto');
             $ficheroNombre = $request->input('evento') . "." . $fichero->extension();
             $foto->ruta = $ficheroNombre;
-            $fichero->storeAs('imgEventos',$ficheroNombre);
+            $fichero->storeAs('public',$ficheroNombre);
         } else {
             //TODO
             //Cambiar nombre fichero
@@ -181,7 +181,7 @@ class FotoController extends Controller {
      */
     public function destroy($id) {
         $foto = Foto::find($id);
-        Storage::delete('imgEventos/'.$foto->ruta);
+        Storage::delete('public/'.$foto->ruta);
         $foto->delete();
         return redirect()->back()->with('estado','Se ha eliminado la foto correctamente');
     }

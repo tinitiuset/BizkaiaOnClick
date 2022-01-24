@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\FotoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,3 +32,12 @@ Route::post('eventos', [EventoController::class,"store"]);
 Route::put('eventos/{id}', [EventoController::class,"update"]);
 // GET CATEGORIAS
 Route::get('categorias', [CategoriaController::class,"getAll"]);
+
+
+/*--------------------FOTO--------------------*/
+// GET FOTO
+Route::get('fotos/{id}', [FotoController::class,'get']);
+// GET FOTOS
+Route::get('fotos' , [FotoController::class, 'getAll']);
+// POST NEW FOTO
+Route::post('fotos',[FotoController::class, 'store']);

@@ -29,7 +29,7 @@
                     <th>{{$foto->identificador}}</th>
                     <th>{{$foto->ruta}}</th>
                     <th>{{$foto->evento}}</th>
-                    <th><img src="../img/eventos/{{ $foto->ruta }}" alt="{{$foto->evento}}"></th>
+                    <th><img src=" ../../storage/{{ $foto->ruta }}" alt="{{$foto->evento}}" style="height:50px"></th>
                 </tr>
             </tbody>
         </table>
