@@ -27,6 +27,11 @@
                 </select>
             </div>
             <div class="form-group text-center">
+                <a href={{url('admin/fotos')}}> 
+                    <button type="button" class="btn btn-light" style="padding:8px 100px;margin-top:25px;">
+                        Volver
+                    </button>
+                </a>
                 <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
                    Agregar foto
                 </button>

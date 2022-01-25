@@ -53,8 +53,15 @@ class FotoController extends Controller {
 
         if ($archivoOrigen = $request->file('foto')) {
             
-            $ultimaFoto = intval(Foto::orderBy('id','desc')->get("id")->first()["id"]);
-            $ultimaFoto += 1;
+            if (Foto::select("*")->exists()) {
+                $ultimaFoto = intval(Foto::orderBy('id','desc')->get("id")->first()["id"]); 
+                $ultimaFoto += 1;
+            } else {
+                $ultimaFoto = 1;
+            }
+          
+            
+
 
             $foto = new Foto;
             $archivoDestino = $ultimaFoto.".".$archivoOrigen->extension();
@@ -87,27 +94,6 @@ class FotoController extends Controller {
         // $foto->save();
         // return redirect('fotos')->with('estado','Foto agregada correctamente' . $foto->id);
      }
-
-    //  public function storeOLD(Request $request) {
-    //     $reglas = [
-    //         'identificador' => 'required|string|min:3|max:255',
-    //         'ruta' => 'required|string|min:3|max:255',
-    //         'evento' => 'required|string|min:3|max:255'
-    //     ];
-
-    //     $validator = Validator::make($request->all(),$reglas);
-    //     if ($validator->fails()) {
-    //         //return
-    //     } else {
-    //         $data = $request->input();
-    //         $foto = new Foto;
-    //         $foto->identificador = $data['identificador'];
-    //         $foto->ruta = $data['identificador'];
-    //         $foto->evento = $data['identificador'];
-    //         $foto->save();
-    //         return view (index());
-    //     }
-    // }
 
     /**
      * Display the specified resource.
@@ -155,44 +141,21 @@ class FotoController extends Controller {
         $this->validate($request,$reglas,$mensaje);
 
         $foto = Foto::find($id);
-
         
-        if ($request->file()) {
-            Storage::delete('imgEventos/'.$foto->ruta);
-            $fichero = $request->file('foto');
-            $ficheroNombre = $request->input('evento') . "." . $fichero->extension();
+        if ($archivoOrigen = $request->file('foto')) {
+            File::delete(public_path("img/eventos/$foto->ruta"));
+            $ficheroNombre = $foto->id . "." . $archivoOrigen->extension();
             $foto->ruta = $ficheroNombre;
-            $fichero->storeAs('public',$ficheroNombre);
-        } else {
-            //TODO
-            //Cambiar nombre fichero
-            $foto->ruta = $request->input('evento');
-            $foto->evento = $request->input('evento');
+            $archivoOrigen->move("img/eventos",$ficheroNombre);
         }
-        
-        $foto->update();
-        // return redirect('fotos')->with('estado','Se ha modificado correctamente');
-    }
-    // public function updateOLD(Request $request, $id) {
-    //     $reglas = [
-    //         'ruta' => 'required|string|min:3|max:255',
-    //         'evento' => 'required|string|min:3|max:255'
-    //     ];
 
-    //     $validator = Validator::make($request->all(),$reglas);
-    //     if ($validator->fails()) {
-    //         //return
-    //     } else {
-    //         $data = $request->input();
-    //         $fotoVieja = Foto::find($id);
-    //         $fotoNueva = new Foto;
-    //         $fotoNueva->identificador = $fotoVieja['identificador'];
-    //         $fotoNueva->ruta = $data['identificador'];
-    //         $fotoNueva->evento = $data['identificador'];
-    //         $fotoVieja->update($fotoNueva);
-    //         return view(index());
-    //     }
-    // }
+        $foto->evento = request()->input('evento');
+
+        $foto->updated_at=date("Y-m-d H:i:s");
+        $foto->update();
+        return redirect()->route('fotos.index')->with('estado','Se ha modificado correctamente');
+    }
+  
 
     /**
      * Remove the specified resource from storage.
@@ -202,7 +165,7 @@ class FotoController extends Controller {
      */
     public function destroy($id) {
         $foto = Foto::find($id);
-        Storage::delete('public/'.$foto->ruta);
+        File::delete(public_path("img/eventos/$foto->ruta"));
         $foto->delete();
         return redirect()->back()->with('estado','Se ha eliminado la foto correctamente');
     }

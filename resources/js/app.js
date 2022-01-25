@@ -10,7 +10,7 @@ import Vue from "vue";
 import store from './store';
 
 // Componentes
-import indexVideo from './components/indexVideo.vue';
+import indexVideo from './components/IndexVideo.vue';
 import menu from './components/Menu.vue';
 import agenda from './components/Agenda.vue';
 import createFoto from './components/CreateFoto.vue';
