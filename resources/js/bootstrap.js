@@ -1,7 +1,11 @@
 window._ = require('lodash');
+import Popper from 'popper.js/dist/umd/popper.js';
 
 try {
-    require('bootstrap');
+    window.bootstrap = require('bootstrap');
+    window.$ = require('jquery');
+    window.Popper = require('@popperjs/core');
+
 } catch (e) {}
 
 /**
@@ -17,7 +21,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /**
  * Require jQuery
  */
-window.$ = require('jquery');
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

@@ -89,6 +89,24 @@ svg:hover {
 
 }
 
+/* .carousel-inner > .carousel-item >img{
+    min-height : 300px;
+    max-height : 300px;
+    width : 100%;
+  } */
+
+  .imgResponsiveCarousel img {
+    width: auto;
+    height: 225px;
+    max-height: 225px;
+  }
+
+  .carousel-control:hover {
+
+    background-color: rgba(0, 0, 0, 1);
+
+  }
+
 /*------------  ESTILOS DE LOGIN  ----------------------*/
 /* .card, */
 .cardPersonalizada {

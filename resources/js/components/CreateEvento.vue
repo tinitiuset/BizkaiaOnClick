@@ -114,13 +114,29 @@ export default {
     methods: {
         createEvento(evento) {
             this.$store.dispatch('createEvento', evento)
+        },
+        tituloValido(texto) {
+
+            const pattern = /[a-zA-Z0-9^]+/;
+            return pattern.test(texto);
+
         }
     },
     computed: {
         isValid() {
             //TODO Hacer correspondientes validaciones
             // Validaciones JS
-            return this.evento.titulo !== '' && this.evento.descripcion !== ''
+
+            if (!this.tituloValido(this.evento.titulo)) {
+
+                console.log("error")
+                
+                return false;
+
+            }
+
+            return true;
+
         }
     }
 }
