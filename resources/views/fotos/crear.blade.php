@@ -20,11 +20,17 @@
             <img src="" alt="" id="fotoCambio" style="height:220px">
             <div class="form-group">
                 <label for="">Evento:</label>
-                <select name="evento" id="">
+                {{-- <select name="evento" id=""> --}}
                     @foreach ($eventos as $evento)
-                        <option value="{{$evento['id']}}">{{$evento['titulo']}}</option>    
+                        <input type="radio" name="evento" class="btn-check" value="{{$evento['id']}}" id="evento{{$evento['id']}}">
+                        <label class="btn btn-outline-success" for="evento{{$evento['id']}}">
+                          {{$evento['titulo']}}
+                        </label>
+                     
+                        {{-- <option value="{{$evento['id']}}">{{$evento['titulo']}}</option>     --}}
                     @endforeach
-                </select>
+                    
+                {{-- </select> --}}
             </div>
             <div class="form-group text-center">
                 <a href={{url('admin/fotos')}}> 
