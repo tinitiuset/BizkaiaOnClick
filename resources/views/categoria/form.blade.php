@@ -24,8 +24,8 @@
     </div>
     <br>
     <!-- Agregamos la variable $modo para diferenciar entre crear y editar-->
-    <input class="btn btn-success" type="submit" value="{{ $modo }} datos">
+    <input class="btn btn-success" type="submit" value="{{ $modo }} categoria">
 
-    <a class="btn btn-primary" href="{{ url('categoria')}}"> Volver </a>
+    <a class="btn btn-primary" href="{{ url('/admin/categoria')}}"> Volver </a>
 
     <br>                                    

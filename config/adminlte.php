@@ -267,39 +267,65 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         ['header' => 'GESTION DEL SITIO WEB'],
-        [
-            'text'    => 'Configuraciones',
-            'icon'    => 'fas fa-cogs',
-            'submenu' => [
-                [
-                    'text' => 'Usuarios',
-                    'icon'  => 'fas fa-user-cog',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'Eventos',
-                    'icon'   => 'far fa-bookmark',
-                    'submenu' => [
-                        [
-                            'text' => 'Categorias',
-                            'icon'   => 'far fa-list-alt',
-                            'url'  => 'admin/categoria',
-                        ],
-                        [
-                            'text'    => 'Fotos',
-                            'icon'   => 'far fa-image',
-                            'url'     => 'admin/fotos',    
-                        ],
-                        [
-                            'text'    => 'Agenda',
-                            'icon'   => 'fas fa-calendar-alt',
-                            'url'     => 'agenda',    
-                        ],
+        // [
+        //     'text'    => 'Configuraciones',
+        //     'icon'    => 'fas fa-cogs',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Usuarios',
+        //             'icon'  => 'fas fa-user-cog',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text'    => 'Eventos',
+        //             'icon'   => 'far fa-bookmark',
+        //             'submenu' => [
+        //                 [
+        //                     'text' => 'Categorias',
+        //                     'icon'   => 'far fa-list-alt',
+        //                     'url'  => 'admin/categoria',
+        //                 ],
+        //                 [
+        //                     'text'    => 'Fotos',
+        //                     'icon'   => 'far fa-image',
+        //                     'url'     => 'admin/fotos',    
+        //                 ],
+        //                 [
+        //                     'text'    => 'Agenda',
+        //                     'icon'   => 'fas fa-calendar-alt',
+        //                     'url'     => 'agenda',    
+        //                 ],
+        //             ],
+        //         ],
+        //     ],
+        // ],
+            [
+                'text' => 'Usuarios',
+                'icon'  => 'fas fa-user-cog',
+                'url'  => 'admin/user',
+            ],
+            [
+                'text'    => 'Eventos',
+                'icon'   => 'far fa-bookmark',
+                'submenu' => [
+                    [
+                        'text' => 'Categorias',
+                        'icon'   => 'far fa-list-alt',
+                        'url'  => 'admin/categoria',
+                    ],
+                    [
+                        'text'    => 'Fotos',
+                        'icon'   => 'far fa-image',
+                        'url'     => 'admin/fotos',    
+                    ],
+                    [
+                        'text'    => 'Agenda',
+                        'icon'   => 'fas fa-calendar-alt',
+                        'url'     => 'agenda',    
                     ],
                 ],
             ],
         ],
-    ],
 
     /*
     |--------------------------------------------------------------------------

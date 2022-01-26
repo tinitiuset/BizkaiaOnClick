@@ -34,7 +34,7 @@ class UserFactory extends Factory
             'fechaNac' => $this->faker->date(),
             'tipo' => $this->faker->randomElement(["usuario","administrador"]),
             'telefono' => $this->faker->randomNumber(9,true),
-            'estado' => $this->faker->randomNumber(1,true),
+            'estado' => $this->faker->randomElement(["activo","inactivo"]),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi' // password
         ];
     }

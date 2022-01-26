@@ -1,4 +1,6 @@
-@extends('layouts.app')
+@extends ('adminlte::page')
+
+@section('title','Usuarios')
 
 @section('content')
 <div class="container">
@@ -10,8 +12,8 @@
     </div>
     @endif  
 <br>
-<a href="{{ url('user/create')}}" class="btn btn-success"> Registrar un nuevo usuario </a>
-<a href="{{ url('admin')}}" class="btn btn-primary"> Volver </a>
+<a href="{{ url('admin/user/create')}}" class="btn btn-success"> Registrar un nuevo usuario </a>
+{{-- <a href="{{ url('admin')}}" class="btn btn-primary"> Volver </a> --}}
 <br>
 <br>
 <table class="table table-light">
@@ -29,7 +31,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($usuarios as $usuario )
+        @foreach ($usuarios as $usuario)
         <tr>
             <td>{{ $usuario->usuario }}</td>
             <td>{{ $usuario->nombre }}</td>
@@ -40,10 +42,10 @@
             <td>{{ $usuario->telefono }}</td>
             <td>{{ $usuario->estado }}</td>
             <td>
-                <a href="{{ url('/user/'.$usuario->nombre.'/edit')}}" class="btn btn-primary" >
+                <a href="{{ url('admin/user/'.$usuario->id.'/edit')}}" class="btn btn-primary" >
                     <i class="far fa-edit"></i>
                 </a>
-                <form action="{{ url('/user/'.$usuario->nombre) }}" class="d-inline" method="post">
+                <form action="{{ url('admin/user/'.$usuario->id) }}" class="d-inline" method="post">
                 @csrf
                 {{ method_field('DELETE') }}
                 <button class="btn btn-danger" type="submit" onclick="return confirm('¿Quieres borrar?')"

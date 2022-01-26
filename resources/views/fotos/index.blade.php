@@ -4,6 +4,7 @@
 
 @section ('content')
 <div class="card-body" style="padding:30px">
+    <a class="btn btn-primary" href={{route('fotos.create')}}>Agregar foto</a>
     @if(session('estado'))
         <div class="alert alert-success">{{session('estado')}}</div>
     @endif
@@ -37,6 +38,7 @@
                 @endforeach
         </tbody>
     </table>
-    <a class="btn btn-primary" href={{route('fotos.create')}}>Agregar foto</a>
+    
+{!!$fotos->links()!!} 
 </div>
 @endsection

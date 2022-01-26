@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Evento;
 use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
@@ -56,7 +57,7 @@ class CategoriaController extends Controller
         Categoria::insert($datosCategoria);
 
         //return response()->json($datosCategoria);
-        return redirect('categoria')->with('mensaje','Categoría agregada con éxito');
+        return redirect()->route("categoria.index")->with('mensaje','Categoría agregada con éxito');
 
     }
 
@@ -129,7 +130,7 @@ class CategoriaController extends Controller
         $categoria=Categoria::findOrFail($nombre);//vuelvo a buscar la info
         //return view('categoria.edit', compact('categoria') );//retorno con los datos act.
 
-        return redirect('categoria')->with('mensaje','Categoría modificada');
+        return redirect()->route("categoria.index")->with('mensaje','Categoría modificada');
     }
 
     /**
@@ -140,8 +141,16 @@ class CategoriaController extends Controller
      */
     public function destroy($nombre)
     {
+
+
+        if (count(Evento::where("categoria",$nombre)->get()) > 0) {
+            
+            return redirect()->route("categoria.index")->with('mensajeError', 'No se puede eliminar la categoria si esta tiene eventos asociados');
+
+        }
+
         //método destroy para borrar
         Categoria::destroy($nombre);
-        return redirect('categoria')->with('mensaje', 'Categoría borrada');
+        return redirect()->route("categoria.index")->with('mensaje', 'Categoría borrada');
     }
 }

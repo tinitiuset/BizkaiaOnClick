@@ -16,7 +16,7 @@ class FotoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $fotos = Foto::all();
+        $fotos = Foto::paginate(10);
         return view ('fotos.index',array('fotos' => $fotos));
     }
 
