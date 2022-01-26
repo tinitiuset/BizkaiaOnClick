@@ -1,10 +1,10 @@
 window._ = require('lodash');
-import Popper from 'popper.js/dist/umd/popper.js';
+// import Popper from 'popper.js/dist/umd/popper.js';
 
 try {
     window.bootstrap = require('bootstrap');
     window.$ = require('jquery');
-    window.Popper = require('@popperjs/core');
+    // window.Popper = require('@popperjs/core');
 
 } catch (e) {}
 

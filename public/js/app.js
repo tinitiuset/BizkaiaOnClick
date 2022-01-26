@@ -6249,17 +6249,13 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_6__["default"]({
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
   \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-
+window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"); // import Popper from 'popper.js/dist/umd/popper.js';
 
 try {
   window.bootstrap = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
-  window.$ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-  window.Popper = __webpack_require__(/*! @popperjs/core */ "./node_modules/@popperjs/core/lib/index.js");
+  window.$ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"); // window.Popper = require('@popperjs/core');
 } catch (e) {}
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
