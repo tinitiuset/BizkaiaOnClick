@@ -44,9 +44,6 @@
              </div>
         </form>
     </div>
-    <div>
-        <createfoto></createfoto>
-    </div>
 
     <script>
         var cargarImg = function () {

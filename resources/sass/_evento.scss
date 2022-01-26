@@ -1,0 +1,5 @@
+// Estilos para la vista de detalle de Evento
+
+.evento-container {
+    @include make-container(20%);
+}
