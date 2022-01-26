@@ -34,7 +34,7 @@ Route::get('/enviaevento', function() {
     return view('enviaevento');
 })->middleware("auth");
 Route::get('/detalleevento/{id}', function() {
-    return view('detalleevento');
+    return view('eventos.detalle');
 });
 
 Route::get('/agenda',[EventoController::class,"index"]);

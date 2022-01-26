@@ -1,7 +1,29 @@
-// Body
-$body-bg: #f8fafc;
+// scss-docs-start theme-color-variables
+$primary:       #FF08D7;
+$secondary:     #b062fe;
+$tertiary:      #3385ff;
+$success:       $green;
+$info:          $cyan;
+$warning:       $yellow;
+$danger:        $red;
+$light:         $gray-100;
+$dark:          $gray-900;
+// scss-docs-end theme-color-variables
 
-// Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+// scss-docs-start theme-colors-map
+$theme-colors: (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "tertiary":   $tertiary,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger,
+    "light":      $light,
+    "dark":       $dark
+);
+// scss-docs-end theme-colors-map
+
+// scss-docs-start theme-colors-rgb
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
+// scss-docs-end theme-colors-rgb

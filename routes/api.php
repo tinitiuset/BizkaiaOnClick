@@ -30,8 +30,11 @@ Route::get('eventos', [EventoController::class,"getAll"]);
 Route::post('eventos', [EventoController::class,"store"]);
 // EDIT EXISTING EVENT
 Route::put('eventos/{id}', [EventoController::class,"update"]);
+
+/*--------------------CATEGORIAS--------------------*/
 // GET CATEGORIAS
 Route::get('categorias', [CategoriaController::class,"getAll"]);
+
 
 
 /*--------------------FOTO--------------------*/
