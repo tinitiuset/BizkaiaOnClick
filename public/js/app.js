@@ -5702,6 +5702,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "DetalleEvento",
@@ -5716,8 +5719,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['evento'])),
   mounted: function mounted() {
     this.$store.dispatch("fetchEvento", this.eventopasado);
-    var bootstrap_enabled = typeof $().modal == 'function';
-    console.log(bootstrap_enabled); // $('#carouselExampleControls').carousel();
   }
 });
 
@@ -41428,19 +41429,22 @@ var render = function () {
   return _c("div", { staticClass: "container-fluid my-lg-2" }, [
     _c(
       "div",
-      { staticClass: "row align-items-center flex-column-reverse flex-lg-row" },
+      {
+        staticClass:
+          "row align-items-start flex-column-reverse flex-md-row justify-content-xl-center mx-xl-5",
+      },
       [
         _c(
           "div",
           {
             staticClass:
-              "cardPersonalizada col-md-5 col-lg-7 mx-md-2 my-0 my-md-2 mx-0 rounded-0 text-white",
+              "cardPersonalizada col-md-5 col-xl-7 mx-0 mx-md-2 my-0 my-md-2 rounded-0 rounded-lg-2 text-white",
           },
           [
             _c(
               "h2",
               {
-                staticClass: "text-md-center font-weight-bold h2Personalizado",
+                staticClass: "text-lg-center font-weight-bold h2Personalizado",
               },
               [_vm._v(_vm._s(_vm.evento.titulo))]
             ),
@@ -41450,7 +41454,92 @@ var render = function () {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row mb-3 justify-content-center" }, [
-              _c("p", [_vm._v(_vm._s(_vm.evento.descripcion))]),
+              _c(
+                "div",
+                { staticClass: "col-5 g-2 rounded-1 p-2 bordeDegradado" },
+                [
+                  _c(
+                    "span",
+                    { staticClass: "d-block", attrs: { title: "Localidad" } },
+                    [
+                      _c("i", { staticClass: "fas fa-map-marker-alt" }),
+                      _vm._v(" " + _vm._s(_vm.evento.localidad)),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "d-block",
+                      attrs: { title: "Inicio del evento" },
+                    },
+                    [
+                      _c("i", { staticClass: "far fa-calendar-check" }),
+                      _vm._v(" " + _vm._s(_vm.evento.fechaInicio)),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "d-block",
+                      attrs: { title: "Fin del evento" },
+                    },
+                    [
+                      _c("i", { staticClass: "far fa-calendar-times" }),
+                      _vm._v(" " + _vm._s(_vm.evento.fechaFin)),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "d-block",
+                      attrs: { title: "Hora del evento" },
+                    },
+                    [
+                      _c("i", { staticClass: "far fa-clock" }),
+                      _vm._v(" " + _vm._s(_vm.evento.hora)),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    { staticClass: "d-block", attrs: { title: "Precio" } },
+                    [
+                      _c("i", { staticClass: "fas fa-euro-sign" }),
+                      _vm._v(" " + _vm._s(_vm.evento.precio)),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.evento.sala != null
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "d-block",
+                          attrs: { title: "Sala del recinto" },
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-door-open" }),
+                          _vm._v(" " + _vm._s(_vm.evento.sala)),
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "d-block",
+                      attrs: { title: "Direccion fisica" },
+                    },
+                    [_vm._v(_vm._s(_vm.evento.direccion))]
+                  ),
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-6 g-0 ms-3" }, [
+                _c("p", [_vm._v(_vm._s(_vm.evento.descripcion))]),
+              ]),
             ]),
           ]
         ),
@@ -41458,7 +41547,8 @@ var render = function () {
         _c(
           "div",
           {
-            staticClass: "carousel slide mx-auto mx-md-2 col-md-6 col-lg-4 g-0",
+            staticClass:
+              "carousel slide col-md-6 col-lg-5 col-xl-4 mx-auto m-md-4 g-0",
             attrs: {
               id: "carouselExampleControls",
               "data-bs-ride": "carousel",
@@ -41786,7 +41876,7 @@ var render = function () {
           _c("source", {
             attrs: { src: "/video/index.mp4", type: "video/mp4" },
           }),
-          _vm._v("\n    Your browser does not support HTML5 video.\n    "),
+          _vm._v("\n    Tu navegador no soporta video en HTML5\n    "),
           _c("a", { attrs: { href: "" } }),
         ]
       ),

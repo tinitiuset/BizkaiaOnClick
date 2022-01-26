@@ -16,7 +16,7 @@
   <div href="" class="d-block" id="contenedorVideo">
     <video autoplay muted loop preload id="myVideo" class="">
       <source src="/video/index.mp4" type="video/mp4">
-      Your browser does not support HTML5 video.
+      Tu navegador no soporta video en HTML5
       <a href=""></a>
     </video>
     <div class="contenido d-flex align-items-center">

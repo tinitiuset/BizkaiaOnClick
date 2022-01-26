@@ -1,8 +1,8 @@
 <template>
     <div class="container-fluid my-lg-2">
-        <div class="row align-items-center flex-column-reverse flex-lg-row">
-            <div class="cardPersonalizada col-md-5 col-lg-7 mx-md-2 my-0 my-md-2 mx-0 rounded-0 text-white">
-                <h2 class="text-md-center font-weight-bold h2Personalizado">{{evento.titulo}}</h2>
+        <div class="row align-items-start flex-column-reverse flex-md-row justify-content-xl-center mx-xl-5">
+            <div class="cardPersonalizada col-md-5 col-xl-7 mx-0 mx-md-2 my-0 my-md-2 rounded-0 rounded-lg-2 text-white">
+                <h2 class="text-lg-center font-weight-bold h2Personalizado">{{evento.titulo}}</h2>
                 <!--TITULO EVENTO-->
                 <div class="row mb-3 justify-content-center">
                     <h3>{{evento.categoria}}</h3>
@@ -10,27 +10,30 @@
 
                 <!--DESCRIPCION EVENTO-->
                 <div class="row mb-3 justify-content-center">
-                    <p>{{evento.descripcion}}</p>
+                    <div class="col-5 g-2 rounded-1 p-2 bordeDegradado">
+                        
+                        <span class="d-block" title="Localidad"><i class="fas fa-map-marker-alt"></i> {{evento.localidad}}</span>
+                        <span class="d-block" title="Inicio del evento"><i class="far fa-calendar-check"></i> {{evento.fechaInicio}}</span>
+                        <span class="d-block" title="Fin del evento"><i class="far fa-calendar-times"></i> {{evento.fechaFin}}</span>
+                        <span class="d-block" title="Hora del evento"><i class="far fa-clock"></i> {{evento.hora}}</span>
+                        <span class="d-block" title="Precio"><i class="fas fa-euro-sign"></i> {{evento.precio}}</span>
+                        <span class="d-block" title="Sala del recinto" v-if="evento.sala != null"><i class="fas fa-door-open"></i> {{evento.sala}}</span>
+                        <span class="d-block" title="Direccion fisica">{{evento.direccion}}</span>
+
+                    </div>
+                    <div class="col-6 g-0 ms-3">
+                        <p>{{evento.descripcion}}</p>
+                    </div>
+
                 </div>
             </div>
-            <div id="carouselExampleControls" class="carousel slide mx-auto mx-md-2 col-md-6 col-lg-4 g-0" data-bs-ride="carousel" style="">
+            <div id="carouselExampleControls" class="carousel slide col-md-6 col-lg-5 col-xl-4 mx-auto m-md-4 g-0" data-bs-ride="carousel" style="">
                 <div class="carousel-inner">
                     <div :class="{ 'active': index === 0, 'carousel-item' : true, 'imgResponsiveCarousel' : true }" v-for="(foto, index) in evento.fotos" :key="foto.id">
 
                         <img :src="'/img/eventos/'+foto.ruta" class="d-block w-100" alt="...">
 
-                        <!-- {{index++}} -->
-
                     </div>
-                    <!-- <div class="carousel-item active">
-                    <img src="/img/eventos/1.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item ">
-                    <img src="/img/eventos/2.jpg" class="d-block w-100" alt="...">
-                    </div> -->
-                    <!-- <div class="carousel-item">
-                    <img src="..." class="d-block w-100" alt="...">
-                    </div> -->
                 </div>
                 <button class="carousel-control carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -68,10 +71,9 @@ export default {
 
     }, 
     mounted() {
+
         this.$store.dispatch("fetchEvento",this.eventopasado);
-        var bootstrap_enabled = (typeof $().modal == 'function');
-        console.log(bootstrap_enabled);
-        // $('#carouselExampleControls').carousel();
+
     },
     
 }

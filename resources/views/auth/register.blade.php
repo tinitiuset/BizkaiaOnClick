@@ -6,10 +6,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-5 col-md-6 col-xs-8">
-            <div class="card">
+            <div class="card cardPersonalizada">
                 <div class="card-header card-registro text-center">
                     <a class="card-link white text-uppercase text-decoration-none link-personalizado " href="{{ url('register')}}">Crear cuenta</a>
-                    <a class="card-link white text-uppercase text-decoration-none link-personalizado " href="{{ url('login')}}">Inciciar sesión</a>
+                    <a class="card-link white text-uppercase text-decoration-none link-personalizado " href="{{ url('login')}}">Iniciar sesión</a>
                 </div>
 
 
