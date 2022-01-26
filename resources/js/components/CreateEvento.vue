@@ -6,17 +6,24 @@
             <div class="row mb-3 justify-content-center">
                 <label for="titulo" class="col-form-label white">Título:</label>
                 <div class="col">
-                    <input type="text" placeholder="" v-model="evento.titulo" class="form-control col-10 ">
+                    <input id="titulo" type="text" placeholder="" v-model="evento.titulo" class="form-control col-10 ">
                 </div>
             </div>
 
             <!--DESCRIPCION EVENTO-->
             <div class="row mb-3 justify-content-center">
-                <label for="descripción" class="col-form-label white">Descripción:</label>
+                <label for="descripcion" class="col-form-label white">Descripción:</label>
                 
                 <div class="col">
-                    <textarea v-model="evento.descripcion" placeholder="" class="form-control"></textarea>
+                    <textarea id="descripcion" v-model="evento.descripcion" placeholder="" class="form-control"></textarea>
                 </div>
+            </div>
+            <!-- CATEGORIA EVENTO -->
+            <div class="row mb-3 justify-content-center">
+                <label for="categoria" class="col-form-label white">Categoría:</label>
+                <select v-model="evento.categoria"  id="categoria">
+                    <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
+                </select>
             </div>
             <!--FECHA INICIO/FIN EVENTO-->
             <div class="row mb-3 justify-content-center">
@@ -36,11 +43,11 @@
             <!--HORA Y PRECIO EVENTO-->
             <div class="row mb-3">
                 <div class="col-6 form-group white">
-                    Hora: <input type="number" placeholder="" v-model="evento.hora" class="form-control">
+                    Hora: <input type="time" placeholder="" v-model="evento.hora" class="form-control">
 
                 </div>
                 <div class="col-6 form-group white">
-                    Precio: <input type="number" placeholder="" v-model="evento.precio" class="form-control">
+                    Precio: <input type="number" placeholder="" min=0 v-model="evento.precio" class="form-control">
 
                 </div>
             </div>
@@ -88,6 +95,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 export default {
     name: "CreateEvento",
     props: {
@@ -112,7 +120,7 @@ export default {
         }
     },
     methods: {
-        createEvento(evento) {
+         createEvento(evento) {
             this.$store.dispatch('createEvento', evento)
         },
         tituloValido(texto) {
@@ -123,7 +131,9 @@ export default {
         }
     },
     computed: {
+        ...mapGetters(['categorias']),
         isValid() {
+            let b = false;
             //TODO Hacer correspondientes validaciones
             // Validaciones JS
 
@@ -137,7 +147,35 @@ export default {
 
             return true;
 
+            errores = [
+                "Completa el campo título.",
+                "Completa el campo descripción.",
+                "Escoge una categoría"
+            ];
+
+            if (this.evento.titulo !== '') {
+                errores.splice(0,1);
+            } else {
+                errores[0] = "Completa el campo título.";
+            }
+            if (this.evento.descripcion !== '') {
+                errores.splice(1,1);
+            }  else {
+                    errores[1] = "Completa el campo descripción";
+            }
+            if (this.evento.categoria !== '') {
+                errores.splice(1,1);
+            } else {
+                errores[2] = "Escoge una categoría";
+            }
+            if (this.evento.titulo !== '' && this.evento.descripcion !== '' && this.evento.categoria !== '') {
+               b = true;
+            }
+            return b;
         }
+    },
+    beforeMount() {
+        this.$store.dispatch('fetchCategorias');
     }
 }
 </script>
