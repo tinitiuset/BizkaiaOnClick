@@ -5542,6 +5542,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CreateEvento",
@@ -5585,6 +5587,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       // Validaciones JS
 
       if (this.estaVacio(this.evento.titulo) || !this.tituloValido(this.evento.titulo)) {
+        $("#titulo").fadeIn();
+        $("#titulo").fadeOut();
+        $("#titulo").fadeIn();
+        $("#titulo").fadeOut();
+        $("#titulo").fadeIn();
         $("#titulo").css("border", "2px solid red");
         b = false;
       }
@@ -40975,55 +40982,57 @@ var render = function () {
             [_vm._v("Categoría:")]
           ),
           _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.evento.categoria,
-                  expression: "evento.categoria",
-                },
-              ],
-              staticClass: "form-control",
-              attrs: { id: "categoria" },
-              on: {
-                change: function ($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function (o) {
-                      return o.selected
-                    })
-                    .map(function (o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.evento,
-                    "categoria",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
+          _c("div", { staticClass: "col" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.evento.categoria,
+                    expression: "evento.categoria",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: { id: "categoria" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.evento,
+                      "categoria",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
                 },
               },
-            },
-            [
-              _c("option", { attrs: { selected: "", disabled: "" } }, [
-                _vm._v("Escoge una categoría"),
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.categorias, function (categoria) {
-                return _c(
-                  "option",
-                  {
-                    key: categoria.nombre,
-                    domProps: { value: categoria.nombre },
-                  },
-                  [_vm._v(_vm._s(categoria.nombre))]
-                )
-              }),
-            ],
-            2
-          ),
+              [
+                _c("option", { attrs: { selected: "", disabled: "" } }, [
+                  _vm._v("Escoge una categoría"),
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.categorias, function (categoria) {
+                  return _c(
+                    "option",
+                    {
+                      key: categoria.nombre,
+                      domProps: { value: categoria.nombre },
+                    },
+                    [_vm._v(_vm._s(categoria.nombre))]
+                  )
+                }),
+              ],
+              2
+            ),
+          ]),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row mb-3 justify-content-center" }, [
