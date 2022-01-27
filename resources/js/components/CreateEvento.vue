@@ -20,11 +20,13 @@
             </div>
             <!-- CATEGORIA EVENTO -->
             <div class="row mb-3 justify-content-center">
-                <label for="categoria" class="col-form-label white" >Categoría:</label>
-                <select v-model="evento.categoria" class="form-control"  id="categoria">
-                    <option selected disabled>Escoge una categoría</option>
-                    <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
-                </select>
+                <label for="categoria" class="col-form-label white">Categoría:</label>
+                <div class="col">
+                    <select v-model="evento.categoria" class="form-control" id="categoria">
+                        <option selected disabled>Escoge una categoría</option>
+                        <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
+                    </select>
+                </div>
             </div>
             <!--FECHA INICIO/FIN EVENTO-->
             <div class="row mb-3 justify-content-center">
@@ -141,7 +143,13 @@ export default {
             //TODO Hacer correspondientes validaciones
             // Validaciones JS
             if (this.estaVacio(this.evento.titulo) || !this.tituloValido(this.evento.titulo) ) {
-                $("#titulo").css("border","2px solid red");
+               $("#titulo").fadeIn();
+               $("#titulo").fadeOut();
+                 $("#titulo").fadeIn();
+               $("#titulo").fadeOut();
+                 $("#titulo").fadeIn();
+               
+               $("#titulo").css("border","2px solid red");
                 b = false;
             } 
 
