@@ -261,11 +261,6 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
         ],
-        [
-            'text' => 'Cambio de contraseña',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
         ['header' => 'GESTION DEL SITIO WEB'],
         // [
         //     'text'    => 'Configuraciones',
@@ -321,7 +316,7 @@ return [
                     [
                         'text'    => 'Agenda',
                         'icon'   => 'fas fa-calendar-alt',
-                        'url'     => 'agenda',    
+                        'url'     => 'admin/eventoCrud',    
                     ],
                 ],
             ],

@@ -37,7 +37,10 @@ Route::get('/detalleevento/{id}', function() {
     return view('detalleEvento');
 });
 
-Route::get('/agenda',[EventoController::class,"index"]);
+// Route::get('/agenda',[EventoController::class,"index"]);
+Route::get('/agenda', function() {
+    return view('agenda');
+});
 
 Route::get('/user/create', [UserController::class, 'create']);
 

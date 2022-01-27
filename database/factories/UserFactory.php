@@ -32,7 +32,7 @@ class UserFactory extends Factory
             'apellidos' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'fechaNac' => $this->faker->date(),
-            'tipo' => $this->faker->randomElement(["usuario","administrador"]),
+            'tipo' => "usuario",
             'telefono' => $this->faker->randomNumber(9,true),
             'estado' => $this->faker->randomElement(["activo","inactivo"]),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi' // password

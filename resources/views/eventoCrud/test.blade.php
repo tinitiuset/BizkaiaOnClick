@@ -26,6 +26,21 @@
             height: 100vh;
             margin: 0;
         }
+        .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:disabled, .btn-primary.disabled {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }  
+        .btn-primary:hover {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff; 
 
         .full-height {
             height: 100vh;
