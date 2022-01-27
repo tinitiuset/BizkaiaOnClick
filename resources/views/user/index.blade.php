@@ -12,7 +12,7 @@
     </div>
     @endif  
 <br>
-<a href="{{ url('admin/user/create')}}" class="btn btn-success"> Registrar un nuevo usuario </a>
+<a href="{{ url('admin/user/create')}}" class="btn btn-success"> Registrar nuevo usuario </a>
 {{-- <a href="{{ url('admin')}}" class="btn btn-primary"> Volver </a> --}}
 <br>
 <br>
@@ -42,15 +42,34 @@
             <td>{{ $usuario->telefono }}</td>
             <td>{{ $usuario->estado }}</td>
             <td>
-                <a href="{{ url('admin/user/'.$usuario->id.'/edit')}}" class="btn btn-primary" >
+                <a href="{{ url('admin/user/'.$usuario->id.'/edit')}}" class="btn btn-primary" title="Editar usuario">
                     <i class="far fa-edit"></i>
                 </a>
-                <form action="{{ url('admin/user/'.$usuario->id) }}" class="d-inline" method="post">
-                @csrf
-                {{ method_field('DELETE') }}
-                <button class="btn btn-danger" type="submit" onclick="return confirm('¿Quieres borrar?')"
-                 value="Borrar"><i class="far fa-trash-alt"></i></button>
-                </form>
+                @if ($usuario->estado == "activo")
+
+                    <form action="{{ url('admin/user/'.$usuario->id) }}" class="d-inline" method="post">
+                    @csrf
+                    {{ method_field('DELETE') }}
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('¿Quieres deshabilitar a este usuario?')"
+                     value="Borrar" title="Deshabilitar usuario"><i class="far fa-trash-alt"></i></button>
+                    </form>
+                
+                @else
+
+                    {{-- <form action="{{ url('admin/user/'.$usuario->id) }}" class="d-inline" method="post">
+                    @csrf
+                    {{ method_field('DELETE') }}
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('¿Quieres borrar?')"
+                     value="Borrar" title="Desactivar usuario"><i class="fas fa-check"></i></button>
+                    </form> --}}
+
+                    <a href="{{ url('admin/user/'.$usuario->id.'/reactivar')}}" class="btn btn-success" title="Habilitar usuario" onclick="return confirm('¿Quieres habilitar a este usuario?')">
+                        <i class="fas fa-check"></i>
+                    </a>
+
+                @endif
+
+
 
             </td>
         </tr>

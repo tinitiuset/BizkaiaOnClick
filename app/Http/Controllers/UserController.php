@@ -43,7 +43,7 @@ class UserController extends Controller
             'nombre'=>['required','string','min:2','max:30','regex:/^[a-zA-Z ]+$/'],
             'apellidos'=>['required','string','min:2','max:70','regex:/^[a-zA-Z ]+$/'],
             'email'=>['required','string','max:50','regex:/^([a-zA-Z0-9.])+(@{1})+([a-zA-Z0-9]{2,30})+(\.[a-zA-Z0-9]{2,3}){1}$/',Rule::unique('users', 'email')],
-            'fechaNac'=>['required','string','regex:/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'],
+            'fechaNac'=>['string','regex:/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'],
             'tipo' => ['required','in:usuario,administrador'],
             'telefono'=>['required','string','max:9','min:9','regex:/^(6|7|9)+([0-9]{8})/',Rule::unique('users', 'telefono')],
             'password'=>['required','string','confirmed','max:100',Password::min(8)->mixedCase()->numbers()],
@@ -135,7 +135,7 @@ class UserController extends Controller
             'nombre'=>['required','string','min:2','max:30','regex:/^[a-zA-Z ]+$/'],
             'apellidos'=>['required','string','min:2','max:70','regex:/^[a-zA-Z ]+$/'],
             // 'email'=>['required','string','max:50','regex:/^([a-zA-Z0-9.])+(@{1})+([a-zA-Z0-9]{2,30})+(\.[a-zA-Z0-9]{2,3}){1}$/',Rule::unique('users', 'email')],
-            'fechaNac'=>['required','string','regex:/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'],
+            'fechaNac'=>['string','regex:/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'],
             'tipo' => ['required','in:usuario,administrador'],
             // 'telefono'=>['required','string','max:9','min:9','regex:/^(6|7|9)+([0-9]{8})/',Rule::unique('users', 'telefono')],
             'password'=>['string','confirmed','max:100',Password::min(8)->mixedCase()->numbers()],
@@ -168,6 +168,12 @@ class UserController extends Controller
         } elseif (request()->get("telefono") != User::where("id",request()->get("id"))->get("telefono")[0]->telefono) {
             // return "hola3";
             $campos['telefono'] = ['required','string','max:9','min:9','regex:/^(6|7|9)+([0-9]{8})/',Rule::unique('users', 'telefono')];
+        } 
+
+        if (request()->get("fechaNac") == null) {
+
+            unset($campos['fechaNac']);
+
         }
 
         $datosUsuario = request()->except(['_token','_method']);
@@ -176,6 +182,11 @@ class UserController extends Controller
             
             $datosUsuario = request()->except(['_token','password_confirmation','_method','password']);
             unset($campos['password']);
+
+        } else {
+
+            $datosUsuario = request()->except(['_token','password_confirmation','_method']);
+            $datosUsuario['password'] = Hash::make($datosUsuario['password']);
 
         }
 
@@ -194,15 +205,29 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\User  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function destroy($nombre)
+    public function destroy($id)
     {
         //método destroy para borrar
         // User::destroy($nombre);
-        User::where("usuario",$nombre)->update(["estado" => "inactivo"]);
+        User::where("id",$id)->update(["estado" => "inactivo"]);
         return redirect()->route('user.index')->with('mensaje', 'Usuario deshabilitado');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\User  $usuario
+     * @return \Illuminate\Http\Response
+     */
+    public function reactivar($id)
+    {
+        //método destroy para borrar
+        // User::destroy($nombre);
+        User::where("id",$id)->update(["estado" => "activo"]);
+        return redirect()->route('user.index')->with('mensaje', 'Usuario habilitado');
     }
 
     

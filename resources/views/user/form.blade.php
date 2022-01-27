@@ -42,8 +42,29 @@
 <div class="form-group">
     <label for="tipo"> Tipo: </label>
     <select name="tipo" id="">
-        <option value="usuario" selected>Usuario</option>
-        <option value="administrador">Administrador</option>
+            
+        @if ($modo == "Editar")
+            
+            @if ($usuario->tipo == "administrador")
+
+                <option value="usuario">Usuario</option>    
+                <option value="administrador" selected>Administrador</option>
+                
+            @else
+
+                <option value="usuario" selected>Usuario</option>
+                <option value="administrador">Administrador</option>
+
+            @endif
+
+        @else
+            <option value="usuario" selected>Usuario</option>
+            <option value="administrador">Administrador</option>
+            
+        @endif
+
+        
+        
     </select>
 </div>
 <div class="form-group">
@@ -52,13 +73,13 @@
      value="{{ isset($usuario->telefono)?$usuario->telefono:old('telefono') }}">  
 </div>
 <div class="form-group">
-    <label for="nombre"> Contraseña: </label>
+    <label for="nombre"> Contraseña: @if ($modo == "Editar") (Si dejas este campo vacio se preservara la anterior contraseña del usuario) @endif</label>
     <input type="password" class="form-control" name="password">
      {{-- value="{{ isset($usuario->password)?$usuario->password:old('password') }}">   --}}
      
 </div>
 <div class="form-group">
-    <label for="nombre"> Confirmar Contraseña: </label>
+    <label for="nombre"> Confirmar Contraseña: @if ($modo == "Editar") (Si dejas este campo vacio se preservara la anterior contraseña del usuario) @endif</label>
     <input type="password" class="form-control" name="password_confirmation">
      {{-- value="{{ isset($usuario->password)?$usuario->password:old('password_confirmation') }}">   --}}
 </div>
@@ -66,6 +87,6 @@
 <!-- Agregamos la variable $modo para diferenciar entre crear y editar-->
 <input class="btn btn-success" type="submit" value="{{ $modo }} usuario">
 
-<a class="btn btn-primary" href="{{ url('admin/user')}}"> Volver </a>
+<a class="btn btn-primary" href="{{ url('admin/user')}}" onclick="return confirm('Seguro que quieres regresar? Se perderan todos los cambios realizados')"> Volver </a>
 
 <br>                                    
