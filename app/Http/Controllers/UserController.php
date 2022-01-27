@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Rule;
 
@@ -69,16 +70,17 @@ class UserController extends Controller
 
         $datosUsuario = request()->except(['_token','password_confirmation']);
 
+        $datosUsuario['password'] = Hash::make($datosUsuario['password']);
+
+        // return $datosUsuario;
+
         // if ($datosUsuario->password === $datosUsuario->confirmarPassword) {
 
         //     return redirect()->route('user.index')->with('mensajeError','Usuario creado con éxito');
             
         // }
 
-        // $json = json_decode($json , true);
-        // unset($json["key"]);
 
-        // unset($datosUsuario->password_confirmation);
 
         // return $datosUsuario;
 
@@ -136,8 +138,7 @@ class UserController extends Controller
             'fechaNac'=>['required','string','regex:/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'],
             'tipo' => ['required','in:usuario,administrador'],
             // 'telefono'=>['required','string','max:9','min:9','regex:/^(6|7|9)+([0-9]{8})/',Rule::unique('users', 'telefono')],
-            'password'=>['required','string','confirmed','max:100',Password::min(8)->mixedCase()->numbers()],
-            // 'confirmarPassword'=>['required','string','max:100',Password::min(8)->mixedCase()],
+            'password'=>['string','confirmed','max:100',Password::min(8)->mixedCase()->numbers()],
             
         ];
         $mensaje=[
@@ -169,9 +170,18 @@ class UserController extends Controller
             $campos['telefono'] = ['required','string','max:9','min:9','regex:/^(6|7|9)+([0-9]{8})/',Rule::unique('users', 'telefono')];
         }
 
+        $datosUsuario = request()->except(['_token','_method']);
+
+        if (($datosUsuario['password'] == null) && ($datosUsuario['password_confirmation'] == null)) {
+            
+            $datosUsuario = request()->except(['_token','password_confirmation','_method','password']);
+            unset($campos['password']);
+
+        }
+
         $this->validate($request,$campos,$mensaje);
 
-        $datosUsuario = request()->except(['_token','password_confirmation','_method']);
+        
         //Busca el registro en user dnd nombre=nombre y hace el update
         User::where('id','=',$id)->update($datosUsuario);
 

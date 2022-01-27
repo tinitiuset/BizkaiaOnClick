@@ -53,14 +53,14 @@
 </div>
 <div class="form-group">
     <label for="nombre"> Contraseña: </label>
-    <input type="password" class="form-control" name="password"
-     value="{{ isset($usuario->password)?$usuario->password:old('password') }}">  
+    <input type="password" class="form-control" name="password">
+     {{-- value="{{ isset($usuario->password)?$usuario->password:old('password') }}">   --}}
      
 </div>
 <div class="form-group">
     <label for="nombre"> Confirmar Contraseña: </label>
-    <input type="password" class="form-control" name="password_confirmation"
-     value="{{ isset($usuario->password)?$usuario->password:old('password_confirmation') }}">  
+    <input type="password" class="form-control" name="password_confirmation">
+     {{-- value="{{ isset($usuario->password)?$usuario->password:old('password_confirmation') }}">   --}}
 </div>
 <br>
 <!-- Agregamos la variable $modo para diferenciar entre crear y editar-->
