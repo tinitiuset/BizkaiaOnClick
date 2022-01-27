@@ -21,9 +21,12 @@
             <!-- CATEGORIA EVENTO -->
             <div class="row mb-3 justify-content-center">
                 <label for="categoria" class="col-form-label white">Categoría:</label>
-                <select v-model="evento.categoria"  id="categoria">
-                    <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
-                </select>
+                <div class="col">
+                    <select v-model="evento.categoria" class="form-control" id="categoria">
+                        <option selected disabled>Escoge una categoría</option>
+                        <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
+                    </select>
+                </div>
             </div>
             <!--FECHA INICIO/FIN EVENTO-->
             <div class="row mb-3 justify-content-center">
@@ -99,7 +102,6 @@ import {mapGetters} from 'vuex';
 export default {
     name: "CreateEvento",
     props: {
-
         card: String
 
     },
@@ -124,53 +126,44 @@ export default {
             this.$store.dispatch('createEvento', evento)
         },
         tituloValido(texto) {
-
             const pattern = /[a-zA-Z0-9^]+/;
-            return pattern.test(texto);
-
+                return pattern.test(texto);
+        },
+        estaVacio(texto) {
+            return texto == '';
         }
     },
     computed: {
         ...mapGetters(['categorias']),
         isValid() {
-            let b = false;
+            let b = true;
+            $("#titulo").css("border","none");
+            $("#descripcion").css("border","none");
+            $("#categoria").css("border","none");
             //TODO Hacer correspondientes validaciones
             // Validaciones JS
+            if (this.estaVacio(this.evento.titulo) || !this.tituloValido(this.evento.titulo) ) {
+               $("#titulo").fadeIn();
+               $("#titulo").fadeOut();
+                 $("#titulo").fadeIn();
+               $("#titulo").fadeOut();
+                 $("#titulo").fadeIn();
+               
+               $("#titulo").css("border","2px solid red");
+                b = false;
+            } 
 
-            if (!this.tituloValido(this.evento.titulo)) {
-
-                console.log("error")
-                
-                return false;
-
+            if (this.estaVacio(this.evento.descripcion)) {
+                $("#descripcion").css("border","2px solid red");
+                b = false;
             }
 
-            return true;
+            if (this.estaVacio(this.evento.categoria)) {
+                $("#categoria").css("border","2px solid red");
+                b = false;
+            }
 
-            errores = [
-                "Completa el campo título.",
-                "Completa el campo descripción.",
-                "Escoge una categoría"
-            ];
 
-            if (this.evento.titulo !== '') {
-                errores.splice(0,1);
-            } else {
-                errores[0] = "Completa el campo título.";
-            }
-            if (this.evento.descripcion !== '') {
-                errores.splice(1,1);
-            }  else {
-                    errores[1] = "Completa el campo descripción";
-            }
-            if (this.evento.categoria !== '') {
-                errores.splice(1,1);
-            } else {
-                errores[2] = "Escoge una categoría";
-            }
-            if (this.evento.titulo !== '' && this.evento.descripcion !== '' && this.evento.categoria !== '') {
-               b = true;
-            }
             return b;
         }
     },

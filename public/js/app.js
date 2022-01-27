@@ -5541,6 +5541,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CreateEvento",
@@ -5570,41 +5571,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     tituloValido: function tituloValido(texto) {
       var pattern = /[a-zA-Z0-9^]+/;
       return pattern.test(texto);
+    },
+    estaVacio: function estaVacio(texto) {
+      return texto == '';
     }
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['categorias'])), {}, {
     isValid: function isValid() {
-      var b = false; //TODO Hacer correspondientes validaciones
+      var b = true;
+      $("#titulo").css("border", "none");
+      $("#descripcion").css("border", "none");
+      $("#categoria").css("border", "none"); //TODO Hacer correspondientes validaciones
       // Validaciones JS
 
-      if (!this.tituloValido(this.evento.titulo)) {
-        console.log("error");
-        return false;
+      if (this.estaVacio(this.evento.titulo) || !this.tituloValido(this.evento.titulo)) {
+        $("#titulo").css("border", "2px solid red");
+        b = false;
       }
 
-      return true;
-      errores = ["Completa el campo título.", "Completa el campo descripción.", "Escoge una categoría"];
-
-      if (this.evento.titulo !== '') {
-        errores.splice(0, 1);
-      } else {
-        errores[0] = "Completa el campo título.";
+      if (this.estaVacio(this.evento.descripcion)) {
+        $("#descripcion").css("border", "2px solid red");
+        b = false;
       }
 
-      if (this.evento.descripcion !== '') {
-        errores.splice(1, 1);
-      } else {
-        errores[1] = "Completa el campo descripción";
-      }
-
-      if (this.evento.categoria !== '') {
-        errores.splice(1, 1);
-      } else {
-        errores[2] = "Escoge una categoría";
-      }
-
-      if (this.evento.titulo !== '' && this.evento.descripcion !== '' && this.evento.categoria !== '') {
-        b = true;
+      if (this.estaVacio(this.evento.categoria)) {
+        $("#categoria").css("border", "2px solid red");
+        b = false;
       }
 
       return b;
@@ -40994,6 +40986,7 @@ var render = function () {
                   expression: "evento.categoria",
                 },
               ],
+              staticClass: "form-control",
               attrs: { id: "categoria" },
               on: {
                 change: function ($event) {
@@ -41013,17 +41006,23 @@ var render = function () {
                 },
               },
             },
-            _vm._l(_vm.categorias, function (categoria) {
-              return _c(
-                "option",
-                {
-                  key: categoria.nombre,
-                  domProps: { value: categoria.nombre },
-                },
-                [_vm._v(_vm._s(categoria.nombre))]
-              )
-            }),
-            0
+            [
+              _c("option", { attrs: { selected: "", disabled: "" } }, [
+                _vm._v("Escoge una categoría"),
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.categorias, function (categoria) {
+                return _c(
+                  "option",
+                  {
+                    key: categoria.nombre,
+                    domProps: { value: categoria.nombre },
+                  },
+                  [_vm._v(_vm._s(categoria.nombre))]
+                )
+              }),
+            ],
+            2
           ),
         ]),
         _vm._v(" "),

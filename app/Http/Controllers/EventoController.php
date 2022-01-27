@@ -35,7 +35,7 @@ class EventoController extends Controller
      */
     public function create()
     {
-        return view('eventos/crear');
+        return view('eventos/create');
 
     }
 
@@ -56,7 +56,7 @@ class EventoController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit(int $id): Response
+    public function edit(int $id)
     {
         //
     }

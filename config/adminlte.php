@@ -316,7 +316,7 @@ return [
                     [
                         'text'    => 'Agenda',
                         'icon'   => 'fas fa-calendar-alt',
-                        'url'     => 'admin/eventoCrud',    
+                        'url'     => 'admin/eventos',    
                     ],
                 ],
             ],
