@@ -30,9 +30,19 @@ Route::get('/test', function() {
     return view('test');
 });
 
-Route::get('/enviaevento', function() {
-    return view('enviaevento');
-})->middleware("auth");
+Route::middleware("auth")->group(function ()
+{
+
+    Route::get('/enviaevento', function() {
+        return view('enviaevento');
+    });
+    Route::get('/perfil', function() {
+        return view('perfil');
+    });
+    
+
+});
+
 Route::get('/detalleevento/{id}', function() {
     return view('detalleEvento');
 });
@@ -42,9 +52,7 @@ Route::get('/agenda', function() {
     return view('agenda');
 });
 
-Route::get('/perfil', function() {
-    return view('perfil');
-});
+
 
 Route::get('/user/create', [UserController::class, 'create']);
 
@@ -54,5 +62,5 @@ Route::get('/user/create', [UserController::class, 'create']);
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 

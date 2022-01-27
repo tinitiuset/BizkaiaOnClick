@@ -18,6 +18,7 @@ Route::middleware([EsAdmin::class])->group(function ()
     Route::resource("eventos",EventoController::class);
     Route::resource('user', UserController::class);
     Route::get('user/{usuario}/reactivar', [UserController::class,"reactivar"]);
+    Route::get('user/buscar', [UserController::class,"buscar"]);
     Route::get("/",function () {
 
     return view('admin/index');

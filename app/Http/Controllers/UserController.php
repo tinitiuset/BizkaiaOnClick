@@ -119,6 +119,16 @@ class UserController extends Controller
         return response()->json($usuarios);
 
     }
+    
+        /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\User  $usuario
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $usuario)
+    {
+    }
 
     /**
      * Update the specified resource in storage.
@@ -228,6 +238,26 @@ class UserController extends Controller
         // User::destroy($nombre);
         User::where("id",$id)->update(["estado" => "activo"]);
         return redirect()->route('user.index')->with('mensaje', 'Usuario habilitado');
+    }
+
+    public function buscar(Request $request){
+
+        return "hola";
+
+        // Get the search value from the request
+        // $search = $request->input('buscar');
+    
+        // // Search in the title and body columns from the posts table
+        // $posts = User::query()
+        //     ->where('usuario', 'LIKE', "%{$search}%")
+        //     ->orWhere('nombre', 'LIKE', "%{$search}%")
+        //     ->orWhere('apellidos', 'LIKE', "%{$search}%")
+        //     ->orWhere('email', 'LIKE', "%{$search}%")
+        //     ->orWhere('telefono', 'LIKE', "%{$search}%")
+        //     ->get();
+    
+        // // Return the search view with the resluts compacted
+        // return view('admin/user', compact('usuarios'));
     }
 
     

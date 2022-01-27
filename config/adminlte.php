@@ -188,7 +188,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => '/',
+    'dashboard_url' => '/admin',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -320,7 +320,15 @@ return [
                     ],
                 ],
             ],
+        ['header' => 'SALIR DE LA ADMINISTRACION'],
+            [
+                'text' => 'Regresar al sitio web',
+                'url'  => '/agenda',
+                'icon'   => 'fas fa-globe',
+                
+            ]
         ],
+
 
     /*
     |--------------------------------------------------------------------------
