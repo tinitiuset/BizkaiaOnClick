@@ -42,6 +42,10 @@ Route::get('/agenda', function() {
     return view('agenda');
 });
 
+Route::get('/perfil', function() {
+    return view('perfil');
+});
+
 Route::get('/user/create', [UserController::class, 'create']);
 
 // Route::resource('/fotos', FotoController::class);
