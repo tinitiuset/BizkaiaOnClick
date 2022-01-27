@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -36,18 +38,20 @@ class UserController extends Controller
     {
           //validaciones para el formulario
           $campos=[
-            'usuario'=>['required','string','min:2','max:30','regex:/^[a-zA-Z0-9]+$/'],
-            'nombre'=>['required','string','min:2','max:30','regex:/^[a-zA-Z]+([a-zA-Z])+$/'],
-            'apellidos'=>['required','string','min:2','max:70','regex:/^[a-zA-Z]+$/'],
-            'email'=>['required','string','max:50','regex:/^([a-zA-Z0-9.])+(@{1})+([a-zA-Z0-9]{2,30})+(\.[a-zA-Z0-9]{2,3}){1}$/'],
+            'usuario'=>['required','string','min:2','max:30','regex:/^[a-zA-Z0-9]+$/', Rule::unique('users', 'usuario')],
+            'nombre'=>['required','string','min:2','max:30','regex:/^[a-zA-Z ]+$/'],
+            'apellidos'=>['required','string','min:2','max:70','regex:/^[a-zA-Z ]+$/'],
+            'email'=>['required','string','max:50','regex:/^([a-zA-Z0-9.])+(@{1})+([a-zA-Z0-9]{2,30})+(\.[a-zA-Z0-9]{2,3}){1}$/',Rule::unique('users', 'email')],
             'fechaNac'=>['required','string','regex:/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'],
-            'telefono'=>['required','string','max:9','min:9','regex:/^(6|7|9)+([0-9]{8})/'],
-            // 'password'=>['required','string','max:100','min:8','regex:/^[a-zA-Z0-9]/'],
-            // 'confirmarPassword'=>['required','string','max:100','regex:/^[a-zA-Z0-9]/'],
+            'tipo' => ['required','in:usuario,administrador'],
+            'telefono'=>['required','string','max:9','min:9','regex:/^(6|7|9)+([0-9]{8})/',Rule::unique('users', 'telefono')],
+            'password'=>['required','string','confirmed','max:100',Password::min(8)->mixedCase()->numbers()],
+            // 'confirmarPassword'=>['required','string','max:100',Password::min(8)->mixedCase()],
             
         ];
         $mensaje=[
             'required'=>'El campo :attribute es requerido',
+            'tipo.in' => 'El tipo de usuario solo puede ser administrador o usuario',
             'min' => 'El campo :attribute debe tener como minimo :min caracteres',
             'max' => 'El campo :attribute debe tener como maximo :max caracteres',
             'regex' => 'El campo :attribute no tiene un formato adecuado',
@@ -56,13 +60,14 @@ class UserController extends Controller
             'apellidos.regex'=>'los apellidos solo puede contener letras',
             'email.regex' => 'El email debe tener el siguiente formato: (mikel@example.net)',
             'fechaNac' => 'La fecha de nacimiento debe tener el siguiente formato: AAAA-MM-DD',
-            'telefono.regex' => 'El numero de telefono debe ser unicamente numerico y empezar por los numeros 6, 7 o 9'
+            'telefono.regex' => 'El numero de telefono debe ser unicamente numerico y empezar por los numeros 6, 7 o 9',
+            'confirmed' => 'Las contraseñas deben coincidir entre si'
             
         ];
 
         $this->validate($request,$campos,$mensaje);
 
-        $datosUsuario = request()->except('_token');
+        $datosUsuario = request()->except(['_token','password_confirmation']);
 
         // if ($datosUsuario->password === $datosUsuario->confirmarPassword) {
 
@@ -70,7 +75,14 @@ class UserController extends Controller
             
         // }
 
-        // User::insert($datosUsuario);
+        // $json = json_decode($json , true);
+        // unset($json["key"]);
+
+        // unset($datosUsuario->password_confirmation);
+
+        // return $datosUsuario;
+
+        User::insert($datosUsuario);
 
         return redirect()->route('user.index')->with('mensaje','Usuario creado con éxito');
         // return redirect()->route('user.index')->with('mensaje',$datosUsuario);
@@ -113,28 +125,57 @@ class UserController extends Controller
      * @param  \App\Models\User  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $nombre)
+    public function update(Request $request, $id)
     {
 
-            //validaciones para el formulario
-            $campos=[
-                'nombre'=>'required|string|max:50',
-                'apellidos'=>'required|string|max:400'
-                
-            ];
-            $mensaje=[
-                'required'=>'El campo :attribute es requerido'
-    
-            ];
+        $campos=[
+            // 'usuario'=>['required','string','min:2','max:30','regex:/^[a-zA-Z0-9]+$/', Rule::unique('users', 'usuario')],
+            'nombre'=>['required','string','min:2','max:30','regex:/^[a-zA-Z ]+$/'],
+            'apellidos'=>['required','string','min:2','max:70','regex:/^[a-zA-Z ]+$/'],
+            // 'email'=>['required','string','max:50','regex:/^([a-zA-Z0-9.])+(@{1})+([a-zA-Z0-9]{2,30})+(\.[a-zA-Z0-9]{2,3}){1}$/',Rule::unique('users', 'email')],
+            'fechaNac'=>['required','string','regex:/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'],
+            'tipo' => ['required','in:usuario,administrador'],
+            // 'telefono'=>['required','string','max:9','min:9','regex:/^(6|7|9)+([0-9]{8})/',Rule::unique('users', 'telefono')],
+            'password'=>['required','string','confirmed','max:100',Password::min(8)->mixedCase()->numbers()],
+            // 'confirmarPassword'=>['required','string','max:100',Password::min(8)->mixedCase()],
+            
+        ];
+        $mensaje=[
+            'required'=>'El campo :attribute es requerido',
+            'tipo.in' => 'El tipo de usuario solo puede ser administrador o usuario',
+            'min' => 'El campo :attribute debe tener como minimo :min caracteres',
+            'max' => 'El campo :attribute debe tener como maximo :max caracteres',
+            'regex' => 'El campo :attribute no tiene un formato adecuado',
+            'usuario.regex'=>'El usuario unicamente debe tener caracteres alfanumericos',
+            'nombre.regex'=>'El nombre solo puede contener letras',
+            'apellidos.regex'=>'los apellidos solo puede contener letras',
+            'email.regex' => 'El email debe tener el siguiente formato: (mikel@example.net)',
+            'fechaNac' => 'La fecha de nacimiento debe tener el siguiente formato: AAAA-MM-DD',
+            'telefono.regex' => 'El numero de telefono debe ser unicamente numerico y empezar por los numeros 6, 7 o 9',
+            'confirmed' => 'Las contraseñas deben coincidir entre si'
+            
+        ];
+
+        // return User::where("id",request()->get("id"))->get("usuario")[0]->usuario.":".request()->get("usuario");
+
+        if (request()->get("usuario") != User::where("id",request()->get("id"))->get("usuario")[0]->usuario) {
+            // return "hola";
+            $campos['usuario'] = ['required','string','min:2','max:30','regex:/^[a-zA-Z0-9]+$/', Rule::unique('users', 'usuario')];
+        } elseif (request()->get("email") != User::where("id",request()->get("id"))->get("email")[0]->email) {
+            // return "hola2";
+            $campos['email'] = ['required','string','max:50','regex:/^([a-zA-Z0-9.])+(@{1})+([a-zA-Z0-9]{2,30})+(\.[a-zA-Z0-9]{2,3}){1}$/',Rule::unique('users', 'email')];
+        } elseif (request()->get("telefono") != User::where("id",request()->get("id"))->get("telefono")[0]->telefono) {
+            // return "hola3";
+            $campos['telefono'] = ['required','string','max:9','min:9','regex:/^(6|7|9)+([0-9]{8})/',Rule::unique('users', 'telefono')];
+        }
 
         $this->validate($request,$campos,$mensaje);
 
-        //recepcionamos todos los datos excepto el token y el método
-        $datosUsuario = request()->except(['_token','_method']);
+        $datosUsuario = request()->except(['_token','password_confirmation','_method']);
         //Busca el registro en user dnd nombre=nombre y hace el update
-        User::where('nombre','=',$nombre)->update($datosUsuario);
+        User::where('id','=',$id)->update($datosUsuario);
 
-        $usuario=User::findOrFail($nombre);//vuelvo a buscar la info
+        $usuario=User::findOrFail($id);//vuelvo a buscar la info
        
 
         return redirect()->route('user.index')->with('mensaje','Usuario modificado');
