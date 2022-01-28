@@ -3,6 +3,7 @@
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\FotoController;
+use App\Http\Middleware\EventoHabilitado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
