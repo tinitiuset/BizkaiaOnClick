@@ -11,10 +11,29 @@ use Illuminate\Validation\Rule;
 class UserController extends Controller
 {
     
-    public function index()
+    public function index(Request $request)
     {
 
-        $usuarios = User::paginate(25);
+        if ($request->get("buscar") != null) {
+                // Get the search value from the request
+                $search = $request->input('buscar');
+            
+                // Search in the title and body columns from the posts table
+                $usuarios = User::query()
+                    ->where('usuario', 'LIKE', "%{$search}%")
+                    ->orWhere('nombre', 'LIKE', "%{$search}%")
+                    ->orWhere('apellidos', 'LIKE', "%{$search}%")
+                    ->orWhere('email', 'LIKE', "%{$search}%")
+                    ->orWhere('telefono', 'LIKE', "%{$search}%")
+                    ->paginate(3);
+            
+                // // Return the search view with the resluts compacted
+                return view('user.index', compact('usuarios'))->with('i',(request()->input('page',1)-1) * 5);
+        }
+
+
+
+        $usuarios = User::paginate(3);
 
         return view('user.index',["usuarios" => $usuarios]);
     }
@@ -128,6 +147,9 @@ class UserController extends Controller
      */
     public function show(User $usuario)
     {
+
+        return "entra a show";
+
     }
 
     /**
@@ -238,26 +260,6 @@ class UserController extends Controller
         // User::destroy($nombre);
         User::where("id",$id)->update(["estado" => "activo"]);
         return redirect()->route('user.index')->with('mensaje', 'Usuario habilitado');
-    }
-
-    public function buscar(Request $request){
-
-        return "hola";
-
-        // Get the search value from the request
-        // $search = $request->input('buscar');
-    
-        // // Search in the title and body columns from the posts table
-        // $posts = User::query()
-        //     ->where('usuario', 'LIKE', "%{$search}%")
-        //     ->orWhere('nombre', 'LIKE', "%{$search}%")
-        //     ->orWhere('apellidos', 'LIKE', "%{$search}%")
-        //     ->orWhere('email', 'LIKE', "%{$search}%")
-        //     ->orWhere('telefono', 'LIKE', "%{$search}%")
-        //     ->get();
-    
-        // // Return the search view with the resluts compacted
-        // return view('admin/user', compact('usuarios'));
     }
 
     
