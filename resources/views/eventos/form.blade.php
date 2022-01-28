@@ -51,7 +51,7 @@
 </div>
 <div class="form-group">
     <label for="estado"> Estado: </label>
-    <select name="tipo" id="">   
+    <select name="estado" id="">   
         @if ($modo == "Editar")
             @if ($eventos->estado == "pendiente")
                 <option value="pendiente" selected>Pendiente</option>    
