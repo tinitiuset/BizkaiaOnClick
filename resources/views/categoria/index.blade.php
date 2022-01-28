@@ -7,7 +7,7 @@
     <!-- Si existe mensaje crea un div alert con botón de cierre -->
     @if (Session::has('mensaje'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ Session::get('mensajeError') }}
+        {{ Session::get('mensaje') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
@@ -59,7 +59,7 @@
                 <form action="{{ url('/admin/categoria/'.$categoria->nombre) }}" class="d-inline" method="post">
                 @csrf
                 {{ method_field('DELETE') }}
-                <button class="btn btn-danger" type="submit" onclick="return confirm('¿Quieres borrar?')"
+                <button class="btn btn-danger" type="submit" onclick="return confirm('¿Quieres borrar esta categoría?')"
                  value="Borrar"><i class="far fa-trash-alt"></i></button>
                 </form>
 

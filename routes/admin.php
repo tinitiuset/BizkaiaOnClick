@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 //añado la ruta del controlador
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\CategoriaController;
-use App\Http\Controllers\EventoController;
+use App\Http\Controllers\EventosController;
+// use App\Http\Controllers\EventoController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\EsAdmin;

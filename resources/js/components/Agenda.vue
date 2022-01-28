@@ -16,7 +16,6 @@
                     <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
                     </svg>
                 </button>
-
                 </div>
 
             </div>
@@ -35,9 +34,9 @@
 
                 <div v-for="evento in eventosFiltrados" :key="evento.id" class="py-4 col-sm-6 col-md-4 col-lg-3">
 
-                    <div class="card h-100">
-
-                        <img class="card-img-top h-50" :src="'/img/eventos/'+evento.fotos[0].ruta" alt="Card image cap">
+                    <div class="card h-100" v-if="evento.fotos.length > 0">
+                        
+                        <img class="card-img-top h-50" :src="'/img/eventos/'+evento.fotos[0].ruta" :alt="evento.titulo">
                         <div class="card-body bg-dark border border-1 border-dark">
                             <h5 class="card-title"><a :href="'/detalleevento/'+evento.id" class="text-decoration-none text-white texto-degradado">{{evento.titulo}}</a></h5>
                             <p class="card-text text-white">{{evento.descripcion}}.</p>

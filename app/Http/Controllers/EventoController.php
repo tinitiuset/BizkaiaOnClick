@@ -111,6 +111,8 @@ class EventoController extends Controller
     public function store(Request $request): JsonResponse
     {
         $evento = Evento::create($request->all());
+        // return response()->json(['mensaje' => 'agregado con exito']);
+        // redirect()->back(->with('estado','Evento agregado correctamente.');
         return response()->json($evento);
     }
 

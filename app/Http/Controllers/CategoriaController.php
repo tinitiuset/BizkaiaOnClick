@@ -158,6 +158,6 @@ class CategoriaController extends Controller
 
         //método destroy para borrar
         Categoria::destroy($nombre);
-        return redirect()->route("categoria.index")->with('mensaje', 'Categoría borrada');
+        return redirect()->route("categoria.index")->with('mensaje', 'Categoría borrada con éxito');
     }
 }
