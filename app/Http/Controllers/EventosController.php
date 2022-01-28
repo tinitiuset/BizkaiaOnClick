@@ -13,10 +13,26 @@ class EventosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $eventos = Eventos::paginate(10);
+        if ($request->get("buscar") != null) {
+            // Get the search value from the request
+            $search = $request->input('buscar');
+        
+            // Search in the title and body columns from the posts table
+            $datos['eventos'] = Eventos::query()
+                ->where('titulo', 'LIKE', "%{$search}%")
+                ->orWhere('precio', 'LIKE', "%{$search}%")
+                ->orWhere('estado', 'LIKE', "%{$search}%")
+                ->orWhere('localidad', 'LIKE', "%{$search}%")
+                ->orWhere('categoria', 'LIKE', "%{$search}%")
+                ->paginate(10);
+        
+            // // Return the search view with the resluts compacted
+            return view('eventos.index',$datos);
+        }
 
+        $eventos = Eventos::paginate(10);
         return view('eventos.index',["eventos" => $eventos]);
     }
 
@@ -41,7 +57,20 @@ class EventosController extends Controller
      */
     public function store(Request $request)
     {
-       
+         //validaciones para el formulario
+          $campos=[
+
+
+        ];
+        $mensaje=[
+        ];
+
+        $this->validate($request,$campos,$mensaje);
+
+        $datosEventos = request()->except('_token');
+        Categoria::insert($datosEventos);
+
+        return redirect()->route("eventos.index")->with('mensaje','Evento creado con éxito');
     }
 
     /**
@@ -89,9 +118,25 @@ class EventosController extends Controller
      * @param  \App\Models\Eventos  $eventos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
+         //validaciones para el formulario
+         $campos=[
+            
+        ];
+        $mensaje=[
+            
 
+        ];
+        $this->validate($request,$campos,$mensaje);
+
+         //recepcionamos todos los datos excepto el token y el método
+         $datosEventos = request()->except(['_token','_method']);
+         Eventos::where('id','=',$id)->update($datosEventos);
+ 
+         $eventos=Eventos::findOrFail($id);//vuelvo a buscar la info
+         return redirect()->route("eventos.index")->with('mensaje','Categoría modificada');
+     
       
     }
 
