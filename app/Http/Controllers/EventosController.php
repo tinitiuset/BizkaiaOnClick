@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\Eventos;
+use Illuminate\Validation\Rule;
 
 class EventosController extends Controller
 {
@@ -15,25 +16,17 @@ class EventosController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->get("buscar") != null) {
-            // Get the search value from the request
-            $search = $request->input('buscar');
-        
-            // Search in the title and body columns from the posts table
-            $datos['eventos'] = Eventos::query()
-                ->where('titulo', 'LIKE', "%{$search}%")
-                ->orWhere('precio', 'LIKE', "%{$search}%")
-                ->orWhere('estado', 'LIKE', "%{$search}%")
-                ->orWhere('localidad', 'LIKE', "%{$search}%")
-                ->orWhere('categoria', 'LIKE', "%{$search}%")
-                ->paginate(10);
-        
-            // // Return the search view with the resluts compacted
-            return view('eventos.index',$datos);
-        }
+        $buscar = $request->input('buscar');
+                
+        $eventos = Eventos::query()
+            ->where('titulo', 'LIKE', "%{$buscar}%")
+            ->orWhere('fechaInicio', 'LIKE', "%{$buscar}%")
+            ->orWhere('estado', 'LIKE', "%{$buscar}%")
+            ->orWhere('localidad', 'LIKE', "%{$buscar}%")
+            ->orWhere('categoria', 'LIKE', "%{$buscar}%")
+            ->paginate(10);
 
-        $eventos = Eventos::paginate(10);
-        return view('eventos.index',["eventos" => $eventos]);
+        return view('eventos.index', compact(['eventos','buscar']));
     }
 
     /**
@@ -58,17 +51,28 @@ class EventosController extends Controller
     public function store(Request $request)
     {
          //validaciones para el formulario
-          $campos=[
-
-
+        $campos=[
+            'titulo'=>['required','string','min:2','max:30','regex:/^[a-zA-Z ]+$/', Rule::unique('eventos', 'titulo')],
+            'fechaInicio'=>['required','string'],
+            'fechaFin'=>['required','string'],
+            'precio' =>['required','max:3','regex:/^[0-9]/'],
+            'hora'=>['required','string'],
+            'direccion'=>['required','string'],
+            'localidad'=>['required','string'],
+            'categoria'=>['required','string'],
         ];
         $mensaje=[
+            'required'=>'El campo :attribute es requerido',
+            'regex' => 'El campo :attribute no tiene un formato adecuado',
+            'min' => 'El campo :attribute debe tener como minimo :min caracteres',
+            'max' => 'El campo :attribute debe tener como maximo :max caracteres',
+            'titulo.regex' => 'El título sólo puede contener letras'
         ];
 
         $this->validate($request,$campos,$mensaje);
 
         $datosEventos = request()->except('_token');
-        Categoria::insert($datosEventos);
+        Eventos::insert($datosEventos);
 
         return redirect()->route("eventos.index")->with('mensaje','Evento creado con éxito');
     }
@@ -79,9 +83,11 @@ class EventosController extends Controller
      * @param  \App\Models\Eventos  $eventos
      * @return \Illuminate\Http\Response
      */
-    public function show(Eventos $eventos)
+    public function show($id)
     {
-        //
+        $eventos=Eventos::findOrFail($id);
+        $categorias=Categoria::all();
+        return view('eventos.show', compact(['eventos','categorias']) );
     }
 
     /**
@@ -122,11 +128,21 @@ class EventosController extends Controller
     {
          //validaciones para el formulario
          $campos=[
-            
+            'titulo'=>['required','string','min:2','max:30','regex:/^[a-zA-Z ]+$/', Rule::unique('eventos', 'titulo')],
+            'fechaInicio'=>['required','string'],
+            'fechaFin'=>['required','string'],
+            'precio' =>['required','max:3','regex:/^[0-9]/'],
+            'hora'=>['required','string'],
+            'direccion'=>['required','string'],
+            'localidad'=>['required','string'],
+            'categoria'=>['required','string'],
         ];
         $mensaje=[
-            
-
+            'required'=>'El campo :attribute es requerido',
+            'regex' => 'El campo :attribute no tiene un formato adecuado',
+            'min' => 'El campo :attribute debe tener como minimo :min caracteres',
+            'max' => 'El campo :attribute debe tener como maximo :max caracteres',
+            'titulo.regex' => 'El título sólo puede contener letras'
         ];
         $this->validate($request,$campos,$mensaje);
 

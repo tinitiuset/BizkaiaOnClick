@@ -22,6 +22,14 @@
     <div class="col-3 pe-0 text-end">
         <a href="{{ url('admin/eventos/create')}}" class="btn btn-success"> Registrar nuevo evento </a>
     </div>
+    <div class="col-9 p-0">
+        {{-- {{$old}} --}}
+            <form class="form-inline" action="{{ route('eventos.index') }}" method="GET" role="search">
+              <input class="form-control mr-sm-2 w-50" name="buscar" type="search" placeholder="Buscar evento" aria-label="Search" value="{{ old('buscar') }}">
+              {{ old('buscar') }}
+              <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+    </div>
 </div>
 <br>
 <br>
@@ -47,7 +55,7 @@
             <td>{{ $evento->localidad }}</td>
             <td>{{ $evento->categoria }}</td>
             <td>
-                <a href="{{ url('/admin/eventos/'.$evento->id.'/show')}}" class="btn btn-success" >
+                <a href="{{ url('/admin/eventos/'.$evento->id)}}" class="btn btn-success" >
                     <i class="fas fa-info"></i>
                 </a>
                 <a href="{{ url('/admin/eventos/'.$evento->id.'/edit')}}" class="btn btn-primary" >
@@ -64,7 +72,8 @@
         @endforeach
     </tbody>
 </table>
-{!!$eventos->links()!!} 
+<!-- Importante!! para que el paginador mantenga la búsqueda -->
+{!!$eventos->appends(["buscar" => $buscar])!!} 
 
 </div>
     
