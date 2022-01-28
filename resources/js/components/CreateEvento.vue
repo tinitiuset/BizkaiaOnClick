@@ -1,5 +1,5 @@
 <template>
-    <!-- <div> -->
+    <div>
         <form action="" @submit="createEvento(evento)">
             <div class="cardPersonalizada">
                 <h2 class="text-center font-weight-bold h2Personalizado">Envia tus eventos</h2>
@@ -96,7 +96,7 @@
                 </div>
             </div>
         </form>
-    <!-- </div> -->
+    </div>
 </template>
 
 <script>
