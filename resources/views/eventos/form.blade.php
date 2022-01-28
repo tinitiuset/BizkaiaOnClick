@@ -1,4 +1,3 @@
-formulario que tendrá datos en común con create y edit
 <h1> {{ $modo }} eventos </h1>
 
 @if (count($errors)>0)<!-- Comprobamos si hay algún error -->
@@ -15,7 +14,7 @@ formulario que tendrá datos en común con create y edit
 <div class="form-group">
     <label for="titulo"> Título: </label>
     <input type="text"  class="form-control"  name="titulo"
-    value="{{ isset($eventos->titulo)?$eventos->usuario:old('usuario') }}">
+    value="{{ isset($eventos->titulo)?$eventos->titulo:old('titulo') }}">
     <!-- con el método old le indicamos que en caso de error mantenga el registro-->
 </div>
 <div class="form-group">
@@ -54,13 +53,16 @@ formulario que tendrá datos en común con create y edit
     <label for="estado"> Estado: </label>
     <select name="tipo" id="">   
         @if ($modo == "Editar")
-            @if ($usuario->tipo == "administrador")
-                <option value="pendiente">Pendiente</option>    
-                <option value="aprobado" selected>Aprobado</option>
-            @else
-                <option value="pendiente" selected>Pendiente</option>
+            @if ($eventos->estado == "pendiente")
+                <option value="pendiente" selected>Pendiente</option>    
                 <option value="aprobado">Aprobado</option>
+            @else
+                
+                <option value="pendiente">Pendiente</option>    
+                <option value="aprobado"selected>Aprobado</option>
+
             @endif
+
         @else
             <option value="pendiente" selected>Pendiente</option>
             <option value="aprobado">Aprobado</option>
@@ -83,28 +85,32 @@ formulario que tendrá datos en común con create y edit
      value="{{ isset($eventos->localidad)?$eventos->localidad:old('localidad') }}">  
 </div>
 <div class="form-group">
-    <label for="usuarioAprobador"> Usuario Aprobador: </label>
-    <input type="number" class="form-control" name="usuarioAprobador"
-     value="{{ isset($eventos->usuarioAprobador)?$eventos->usuarioAprobador:old('usuarioAprobador') }}">  
-</div>
-<div class="form-group">
-    <label for="usuarioCreador"> Usuario Creador: </label>
-    <input type="number" class="form-control" name="usuarioCreador"
-     value="{{ isset($eventos->usuarioCreador)?$eventos->usuarioCreador:old('usuarioCreador') }}">  
-</div>
-
-<div class="form-group">
     <label for="categoria"> Categoría: </label>
     <select name="categoria">
-        @foreach ($categorias as $categoria)
-            <option value="{{$categoria->nombre}}">{{$categoria->nombre}}</option>
-        @endforeach
+        @if ($modo == "Editar")
+            @foreach ($categorias as $categoria)
+            
+                @if ($categoria->nombre == $eventos->categoria)
+                    <option value="{{$categoria->nombre}}" selected>{{$categoria->nombre}}</option>
+                @else
+                    <option value="{{$categoria->nombre}}">{{$categoria->nombre}}</option>
+                @endif
+            
+            @endforeach
+        @else
+
+            @foreach ($categorias as $categoria)
+                <option value="{{$categoria->nombre}}">{{$categoria->nombre}}</option>
+            @endforeach
+            
+        @endif
+        
         
     </select>
 </div>
 <br>
 <!-- Agregamos la variable $modo para diferenciar entre crear y editar-->
-<input class="btn btn-success" type="submit" value="{{ $modo }} usuario">
+<input class="btn btn-success" type="submit" value="{{ $modo }} evento">
 
 <a class="btn btn-primary" href="{{ url('admin/eventos')}}" onclick="return confirm('Seguro que quieres regresar? Se perderan todos los cambios realizados')"> Volver </a>
 

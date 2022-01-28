@@ -15,7 +15,7 @@ class EventosController extends Controller
      */
     public function index()
     {
-        $eventos = Eventos::paginate(3);
+        $eventos = Eventos::paginate(10);
 
         return view('eventos.index',["eventos" => $eventos]);
     }
@@ -63,7 +63,10 @@ class EventosController extends Controller
      */
     public function edit($id)
     {
-        
+         //método para buscar un registro
+         $eventos=Eventos::findOrFail($id);
+         $categorias=Categoria::all();
+         return view('eventos.edit', compact(['eventos','categorias']) );
     }
 
     /**
@@ -74,7 +77,8 @@ class EventosController extends Controller
      */
     public function getAll(Eventos $eventos)
     {
-        
+        $eventos = Eventos::all();
+        return response()->json($eventos);
      
     }
 
@@ -99,7 +103,9 @@ class EventosController extends Controller
      */
     public function destroy($id)
     {
-
+        //método destroy para borrar
+        Eventos::destroy($id);
+        return redirect()->route("eventos.index")->with('mensaje', 'Evento borrado con éxito');
     }
 
 
