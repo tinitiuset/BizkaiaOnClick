@@ -15,7 +15,8 @@ Route::middleware([EsAdmin::class])->group(function ()
 {
     Route::resource('categoria',CategoriaController::class);
     Route::resource('fotos',FotoController::class);
-    Route::resource("eventos",EventoController::class);
+    Route::resource("eventos",EventosController::class);
+    // Route::resource("eventos",EventoController::class);
     Route::resource('user', UserController::class);
     Route::get('user/{usuario}/reactivar', [UserController::class,"reactivar"]);
     Route::get('user/buscar', [UserController::class,"buscar"]);
