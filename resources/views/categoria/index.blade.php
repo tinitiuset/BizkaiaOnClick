@@ -20,7 +20,22 @@
 
     @endif  
 <br>
-<a href="{{ url('/admin/categoria/create')}}" class="btn btn-success"> Registrar nueva categoria </a>
+{{-- <a href="{{ url('/admin/categoria/create')}}" class="btn btn-success"> Registrar nueva categoria </a> --}}
+
+<div class="row">
+    <div class="col-3 pe-0 text-end">
+        <a href="{{ url('/admin/categoria/create')}}" class="btn btn-success"> Registrar nueva categoria </a>
+    </div>
+    <div class="col-9 p-0">
+            <form class="form-inline" action="{{ route('categoria.index') }}" method="GET">
+              <input class="form-control mr-sm-2 w-50" name="buscar" type="search" placeholder="Buscar categoria" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+    </div>
+
+</div>
+
+
 {{-- <a href="{{ url('admin')}}" class="btn btn-primary"> Volver </a> --}}
 <br>
 <br>

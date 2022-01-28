@@ -13,9 +13,24 @@ class CategoriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+
+        if ($request->get("buscar") != null) {
+            // Get the search value from the request
+            $search = $request->input('buscar');
+        
+            // Search in the title and body columns from the posts table
+            $datos['categorias'] = Categoria::query()
+                ->where('nombre', 'LIKE', "%{$search}%")
+                ->orWhere('descripcion', 'LIKE', "%{$search}%")
+                ->paginate(5);
+        
+            // // Return the search view with the resluts compacted
+            return view('categoria.index',$datos);
+        }
+
         $datos['categorias']=Categoria::paginate(5);
         return view('categoria.index',$datos);
     }
