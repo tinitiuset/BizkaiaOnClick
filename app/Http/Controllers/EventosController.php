@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\Eventos;
 
@@ -14,7 +15,7 @@ class EventosController extends Controller
      */
     public function index()
     {
-       
+       return view('eventos.index');
     }
 
     /**
@@ -25,6 +26,8 @@ class EventosController extends Controller
     public function create()
     {
         //
+        $categorias['categorias']=Categoria::all();//creo la variable $categorias y le meto en un array todos los datos la busqueda del modelo categoria
+        return view('eventos.create',$categorias);//retorno a create pasandole la variable $categorias
         
     }
 
