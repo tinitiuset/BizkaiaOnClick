@@ -14,28 +14,18 @@ class UserController extends Controller
     public function index(Request $request)
     {
 
-        if ($request->get("buscar") != null) {
-                // Get the search value from the request
-                $search = $request->input('buscar');
-            
-                // Search in the title and body columns from the posts table
-                $usuarios = User::query()
-                    ->where('usuario', 'LIKE', "%{$search}%")
-                    ->orWhere('nombre', 'LIKE', "%{$search}%")
-                    ->orWhere('apellidos', 'LIKE', "%{$search}%")
-                    ->orWhere('email', 'LIKE', "%{$search}%")
-                    ->orWhere('telefono', 'LIKE', "%{$search}%")
-                    ->paginate(3);
-            
-                // // Return the search view with the resluts compacted
-                return view('user.index', compact('usuarios'))->with('i',(request()->input('page',1)-1) * 5);
-        }
+        $buscar = $request->input('buscar');
+                
+        $usuarios = User::query()
+            ->where('usuario', 'LIKE', "%{$buscar}%")
+            ->orWhere('nombre', 'LIKE', "%{$buscar}%")
+            ->orWhere('apellidos', 'LIKE', "%{$buscar}%")
+            ->orWhere('email', 'LIKE', "%{$buscar}%")
+            ->orWhere('telefono', 'LIKE', "%{$buscar}%")
+            ->paginate(25);
 
+        return view('user.index', compact(['usuarios','buscar']));
 
-
-        $usuarios = User::paginate(3);
-
-        return view('user.index',["usuarios" => $usuarios]);
     }
 
      /**

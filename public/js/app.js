@@ -41938,7 +41938,7 @@ var render = function () {
                                 "a",
                                 {
                                   staticClass:
-                                    "nav-link text-white text-center",
+                                    "nav-link text-white text-center texto-degradado",
                                   attrs: {
                                     title: "Panel de administracion",
                                     href: "/admin",

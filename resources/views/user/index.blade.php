@@ -17,9 +17,11 @@
         <a href="{{ url('admin/user/create')}}" class="btn btn-success"> Registrar nuevo usuario </a>
     </div>
     <div class="col-9 p-0">
-            <form class="form-inline" action="{{ route('user.index') }}" method="GET">
-              <input class="form-control mr-sm-2 w-50" name="buscar" type="search" placeholder="Buscar usuario" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        {{-- {{$old}} --}}
+            <form class="form-inline" action="{{ route('user.index') }}" method="GET" role="search">
+              <input class="form-control mr-sm-2 w-50" name="buscar" type="search" placeholder="Buscar usuario" aria-label="Search" value="{{ old('buscar') }}">
+              {{ old('buscar') }}
+              <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
             </form>
     </div>
 
@@ -88,7 +90,7 @@
         @endforeach
     </tbody>
 </table>
-{!!$usuarios->links()!!} 
+{!!$usuarios->appends(["buscar" => $buscar])!!} 
 
 </div>
 @endsection

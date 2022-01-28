@@ -29,7 +29,7 @@
     <div class="col-9 p-0">
             <form class="form-inline" action="{{ route('categoria.index') }}" method="GET">
               <input class="form-control mr-sm-2 w-50" name="buscar" type="search" placeholder="Buscar categoria" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+              <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
             </form>
     </div>
 
@@ -68,7 +68,7 @@
         @endforeach
     </tbody>
 </table>
-{!!$categorias->links()!!} 
+{!!$categorias->appends(["buscar" => $buscar])!!} 
 
 </div>
 @endsection
