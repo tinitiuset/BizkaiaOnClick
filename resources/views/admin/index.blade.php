@@ -9,19 +9,50 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header">
-            <h1 class="card-title">Bienvenido al panel de administración</h1>
+        <div class="card-header bg-magenta white ">
+            <h1 class="initialism text-center">Vista rápida</h1>
         </div>
         <div class="card-body">
-        <p>Welcome to this beautiful admin panel.</p>
+            <div class="card cardDashboard">
+                <div class="">
+                    <h1 class="initialism text-center">Usuarios</h1>
+                </div>
+                <div class="card-body">
+                    <i class="fas fa-user fa-3x fa-lg"></i>
+                    {{-- {{count(User::all());}}   --}}
+                    
+                </div>
+            </div>
+            <div class="card cardDashboard">
+                <div class="">
+                    <h1 class="initialism text-center">Eventos recibidos</h1>
+                </div>
+                <div class="card-body">
+                    <i class="fas fa-pencil-alt fa-3x fa-lg"></i>
+                </div>
+            </div>
+            <div class="card cardDashboard">
+                <div class="">
+                    <h1 class="initialism text-center">Visitantes</h1>
+                </div>
+                <div class="card-body">
+                    <i class="far fa-chart-bar fa-3x fa-lg "></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header bg-magenta white ">
+            <h1 class="initialism text-center">últimos usuarios</h1>
+        </div>
+        <div class="card-body">
         </div>
     </div>
 @stop
-
+<!-- Añadimos este section para cargar hojas de estilo -->
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/estilos.css">
 @stop
 
-@section('js')
-    <script> console.log('Hi!'); </script>
-@stop

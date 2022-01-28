@@ -103,3 +103,9 @@
 
 </div>
 @endsection
+<!-- Añadimos este section para cargar hojas de estilo -->
+@section('css') 
+    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/estilos.css">
+@stop

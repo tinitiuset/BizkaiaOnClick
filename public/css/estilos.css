@@ -118,12 +118,18 @@ svg:hover {
 
 /*------------  ESTILOS DE LOGIN  ----------------------*/
 /* .card, */
-.cardPersonalizada {
+.cardPersonalizada,
+.cardDashboard {
     margin:50px 20px 50px 20px;
     background-color: black;
     border-radius: 20px;
     flex: 1 1 auto;
     padding: 1rem 1rem;
+}
+.cardDashboard {
+    background-color: #f6f6f6;
+    margin:50px;
+    border-radius: 10px;
 }
 .link-personalizado:hover {
     color:#FF08D7;
