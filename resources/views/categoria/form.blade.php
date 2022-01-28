@@ -13,9 +13,13 @@
 
     <div class="form-group">
         <label for="nombre"> Nombre </label>
+        @if ($modo == "Editar")
+            <input type="text"  class="form-control"  name="nombre" disabled="disabled"
+            value="{{ isset($categoria->nombre)?$categoria->nombre:old('nombre') }}"> 
+        @else
         <input type="text"  class="form-control"  name="nombre"
         value="{{ isset($categoria->nombre)?$categoria->nombre:old('nombre') }}">
-        <!-- con el método old le indicamos que en caso de error mantenga el registro-->
+        @endif
     </div>
     <div class="form-group">
         <label for="descripcion"> Descripción </label>
