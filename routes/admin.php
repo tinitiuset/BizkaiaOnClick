@@ -9,6 +9,8 @@ use App\Http\Controllers\EventosController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\EsAdmin;
+use App\Models\Evento;
+use App\Models\User;
 
 // Route::get('', [AdminHomeController::class, 'index']);
 
@@ -19,11 +21,27 @@ Route::middleware(["auth","esadmin","esactivo"])->group(function ()
     Route::resource("eventos",EventosController::class);
     // Route::resource("evento",EventoController::class);
     Route::resource('user', UserController::class);
+    Route::get('/perfil', function() {
+        return view('perfil');  })->name('admin.perfil');
+    Route::get('/usuario', function() {
+        return view('usuario'); })->name('admin.usuario');
+    Route::patch('user/editarperfil/{id}',[UserController::class,"editarPerfil"]);
+    Route::patch('user/editarUsuario/{id}',[UserController::class,"editarUsuario"]);
     Route::get('user/{usuario}/reactivar', [UserController::class,"reactivar"]);
     Route::get("/",function () {
 
-    return view('admin/index');
+        //metodos añadidos en la página de admin/index
+        $numUsuarios = count(User::where('estado','activo')->get());
+        $numEventosPendientes = count(Evento::where('estado','pendiente')->get());
+        //cogemos los usuarios activos y los ordenamos de manera desc por fecha de creación y cogemos 10 registros
+        $ultimosUsuarios = User::where('estado', 'activo')->orderBy('created_at','desc')->take(10)->get();
 
+
+        return response()->view('admin/index',[
+            'numUsuarios' => $numUsuarios,
+            'numEventosPendientes' => $numEventosPendientes,
+            'ultimosUsuarios' => $ultimosUsuarios
+        ]);
     });
 });
 

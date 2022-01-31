@@ -42031,52 +42031,55 @@ var render = function () {
                             ])
                           : _vm._e(),
                         _vm._v(" "),
-                        _c("li", { staticClass: "nav-item" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "nav-link text-white texto-degradado text-center",
-                              attrs: {
-                                title: "Editar perfil",
-                                href: "/register",
-                              },
-                            },
-                            [
+                        _vm.tipo == "usuario"
+                          ? _c("li", { staticClass: "nav-item" }, [
                               _c(
-                                "svg",
+                                "a",
                                 {
-                                  staticClass: "bi bi-person-circle iconoMenu",
+                                  staticClass:
+                                    "nav-link text-white texto-degradado text-center",
                                   attrs: {
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    width: "32",
-                                    height: "32",
-                                    fill: "currentColor",
-                                    viewBox: "0 0 16 16",
+                                    title: "Editar perfil",
+                                    href: "/usuario",
                                   },
                                 },
                                 [
-                                  _c("path", {
-                                    attrs: {
-                                      d: "M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z",
+                                  _c(
+                                    "svg",
+                                    {
+                                      staticClass:
+                                        "bi bi-person-circle iconoMenu",
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        width: "32",
+                                        height: "32",
+                                        fill: "currentColor",
+                                        viewBox: "0 0 16 16",
+                                      },
                                     },
-                                  }),
+                                    [
+                                      _c("path", {
+                                        attrs: {
+                                          d: "M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z",
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c("path", {
+                                        attrs: {
+                                          "fill-rule": "evenodd",
+                                          d: "M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z",
+                                        },
+                                      }),
+                                    ]
+                                  ),
                                   _vm._v(" "),
-                                  _c("path", {
-                                    attrs: {
-                                      "fill-rule": "evenodd",
-                                      d: "M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z",
-                                    },
-                                  }),
+                                  _c("span", { staticClass: "textoOpcion" }, [
+                                    _vm._v("Editar perfil"),
+                                  ]),
                                 ]
                               ),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "textoOpcion" }, [
-                                _vm._v("Editar perfil"),
-                              ]),
-                            ]
-                          ),
-                        ]),
+                            ])
+                          : _vm._e(),
                         _vm._v(" "),
                         _c("li", { staticClass: "nav-item text-center" }, [
                           _c(

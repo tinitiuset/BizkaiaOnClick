@@ -72,7 +72,7 @@ class FotoController extends Controller {
             $foto->save();
             $archivoOrigen->move("img/eventos",$archivoDestino);
 
-            return redirect()->route("fotos.index")->with('estado','Foto agregada correctamente' . $foto->id);
+            return redirect()->route("fotos.index")->with('estado','Foto agregada correctamente');
 
         }
 
