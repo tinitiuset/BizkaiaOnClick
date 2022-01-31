@@ -44,7 +44,7 @@ class FetchData
             'precio' => null,
             'direccion' => $data['direccion'] ?? '',
             'estado' => true,
-            'sala' => null,
+            'aforo' => null,
             'recinto' => $data['establishmentEs'] ?? '',
             'localidad' => $data['municipalityEs'] ?? '',
         ]);
