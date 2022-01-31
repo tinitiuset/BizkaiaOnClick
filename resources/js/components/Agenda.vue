@@ -32,12 +32,12 @@
 
             <div class="row g-3">
 
-                <div v-for="evento in eventosFiltrados" :key="evento.id" class="py-4 col-sm-6 col-md-4 col-lg-3">
+                <div v-for="evento in eventosFiltrados" :key="evento.id" class="py-4 col-md-6 col-lg-4">
 
-                    <div class="card h-100" v-if="evento.fotos.length > 0">
+                    <div class="card h-100 bg-dark" v-if="evento.fotos.length > 0">
                         
                         <img class="card-img-top h-50" :src="'/img/eventos/'+evento.fotos[0].ruta" :alt="evento.titulo">
-                        <div class="card-body bg-dark border border-1 border-dark">
+                        <div class="card-body bg-dark border border-1 border-dark h-25 overflow-hidden m-1">
                             <h5 class="card-title"><a :href="'/detalleevento/'+evento.id" class="text-decoration-none text-white texto-degradado">{{evento.titulo}}</a></h5>
                             <p class="card-text text-white">{{evento.descripcion}}.</p>
                         </div>

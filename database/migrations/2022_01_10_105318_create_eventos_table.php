@@ -17,10 +17,10 @@ class CreateEventosTable extends Migration
 
             $table->integer("id")->autoIncrement();
             $table->string("titulo")->unique();
-            $table->string("descripcion")->nullable();
+            $table->mediumText("descripcion")->nullable();
             $table->date("fechaInicio")->nullable();
             $table->date("fechaFin")->nullable();
-            $table->time("hora")->nullable();
+            $table->string("hora")->nullable();
             $table->float("precio")->nullable()->unsigned();
             $table->string("direccion")->nullable();
             $table->enum("estado",["pendiente","aprobado"])->default("pendiente");

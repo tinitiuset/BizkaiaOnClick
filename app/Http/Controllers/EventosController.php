@@ -52,7 +52,7 @@ class EventosController extends Controller
     {
          //validaciones para el formulario
         $campos=[
-            'titulo'=>['required','string','min:2','max:30','regex:/^[a-zA-Z ]+$/', Rule::unique('eventos', 'titulo')],
+            'titulo'=>['required','string','min:2','max:50','regex:/^[a-zA-Z ]+$/', Rule::unique('eventos', 'titulo')],
             'fechaInicio'=>['required','string'],
             'fechaFin'=>['required','string'],
             'precio' =>['required','max:3','regex:/^[0-9]/'],
@@ -128,7 +128,7 @@ class EventosController extends Controller
     {
          //validaciones para el formulario
          $campos=[
-            'titulo'=>['required','string','min:2','max:30','regex:/^[a-zA-Z ]+$/', Rule::unique('eventos', 'titulo')],
+            'titulo'=>['required','string','min:2','max:50','regex:/^[a-zA-Z ]+$/', Rule::unique('eventos', 'titulo')],
             'fechaInicio'=>['required','string'],
             'fechaFin'=>['required','string'],
             'precio' =>['required','max:3','regex:/^[0-9]/'],

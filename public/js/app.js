@@ -40847,10 +40847,10 @@ var render = function () {
         _vm._l(_vm.eventosFiltrados, function (evento) {
           return _c(
             "div",
-            { key: evento.id, staticClass: "py-4 col-sm-6 col-md-4 col-lg-3" },
+            { key: evento.id, staticClass: "py-4 col-md-6 col-lg-4" },
             [
               evento.fotos.length > 0
-                ? _c("div", { staticClass: "card h-100" }, [
+                ? _c("div", { staticClass: "card h-100 bg-dark" }, [
                     _c("img", {
                       staticClass: "card-img-top h-50",
                       attrs: {
@@ -40863,7 +40863,7 @@ var render = function () {
                       "div",
                       {
                         staticClass:
-                          "card-body bg-dark border border-1 border-dark",
+                          "card-body bg-dark border border-1 border-dark h-25 overflow-hidden m-1",
                       },
                       [
                         _c("h5", { staticClass: "card-title" }, [
