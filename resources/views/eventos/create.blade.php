@@ -1,4 +1,3 @@
-Formulario de creación de eventos
 @extends ('adminlte::page')
 
 @section('title','Crear Evento')
