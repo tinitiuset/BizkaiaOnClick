@@ -21,7 +21,7 @@
                     <div class="">{{ evento.fechaFin }}</div>
                     </div>
                     <div class="pt-2">{{ evento.hora }}</div>
-                    <div class="">{{ evento.sala }}</div>
+                    <div class="">{{ evento.aforo }}</div>
                     <div class="">{{ evento.recinto }}</div>
                     <div class="">{{ evento.localidad }}</div>
                 </div>
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <div class="h2">{{ evento.recinto }} {{ evento.sala }}</div>
+                <div class="h2">{{ evento.recinto }} {{ evento.aforo }}</div>
                 <div class="">{{ evento.direccion }}</div>
             </div>
         </div>

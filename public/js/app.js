@@ -41650,7 +41650,7 @@ var render = function () {
               _vm._v(_vm._s(_vm.evento.hora)),
             ]),
             _vm._v(" "),
-            _c("div", {}, [_vm._v(_vm._s(_vm.evento.sala))]),
+            _c("div", {}, [_vm._v(_vm._s(_vm.evento.aforo))]),
             _vm._v(" "),
             _c("div", {}, [_vm._v(_vm._s(_vm.evento.recinto))]),
             _vm._v(" "),
@@ -41668,7 +41668,7 @@ var render = function () {
         _vm._v(" "),
         _c("div", { staticClass: "text-center" }, [
           _c("div", { staticClass: "h2" }, [
-            _vm._v(_vm._s(_vm.evento.recinto) + " " + _vm._s(_vm.evento.sala)),
+            _vm._v(_vm._s(_vm.evento.recinto) + " " + _vm._s(_vm.evento.aforo)),
           ]),
           _vm._v(" "),
           _c("div", {}, [_vm._v(_vm._s(_vm.evento.direccion))]),
