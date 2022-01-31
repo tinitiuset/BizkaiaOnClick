@@ -14,7 +14,7 @@
         </ul>
     </div>
     @endif
-    <form action="{{ url('admin/user/editarperfil/'.auth()->user()->id) }}" method="post">
+    <form action="{{ url('admin/user/editarUsuario/'.auth()->user()->id) }}" method="post">
         @csrf
         {{ method_field('PATCH') }}
         <input type="hidden" name="id" value="{{ auth()->user()->id }}">

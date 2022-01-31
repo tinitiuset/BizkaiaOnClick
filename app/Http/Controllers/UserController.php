@@ -276,7 +276,7 @@ class UserController extends Controller
 
         $this->update($request, $id);
 
-        return redirect()->route('user.index')->with('mensaje','Usuario modificado');
+        return redirect()->route('admin.usuario')->with('mensaje','Usuario modificado');
 
     }
 

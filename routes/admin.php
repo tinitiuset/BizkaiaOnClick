@@ -9,6 +9,8 @@ use App\Http\Controllers\EventosController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\EsAdmin;
+use App\Models\Evento;
+use App\Models\User;
 
 // Route::get('', [AdminHomeController::class, 'index']);
 
@@ -20,14 +22,24 @@ Route::middleware([EsAdmin::class])->group(function ()
     // Route::resource("evento",EventoController::class);
     Route::resource('user', UserController::class);
     Route::get('/perfil', function() {
-        return view('perfil');
-    })->name('admin.perfil');
+        return view('perfil');  })->name('admin.perfil');
+    Route::get('/usuario', function() {
+        return view('usuario'); })->name('admin.usuario');
     Route::patch('user/editarperfil/{id}',[UserController::class,"editarPerfil"]);
+    Route::patch('user/editarUsuario/{id}',[UserController::class,"editarUsuario"]);
     Route::get('user/{usuario}/reactivar', [UserController::class,"reactivar"]);
     Route::get("/",function () {
 
-    return view('admin/index');
+        $numUsuarios = count(User::where('estado','activo')->get());
+        $numEventosPendientes = count(Evento::where('estado','pendiente')->get());
+        $ultimosUsuarios = User::where('estado', 'activo')->orderBy('created_at','desc')->take(10)->get();
 
+
+        return response()->view('admin/index',[
+            'numUsuarios' => $numUsuarios,
+            'numEventosPendientes' => $numEventosPendientes,
+            'ultimosUsuarios' => $ultimosUsuarios
+        ]);
     });
 });
 
