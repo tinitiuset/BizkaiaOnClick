@@ -5,11 +5,13 @@
 @section ('content')
     <div class="card-body" style="padding:30px">
         @if (count($errors)>0)
-        <div class="alert alert-danger">
-            @foreach ($errors->all() as $error) 
-                {{ $error }} <br>
-            @endforeach
-        </div>
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    @foreach ($errors->all() as $error) 
+                    <li>  {{ $error }} </li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
         <form method="POST" enctype="multipart/form-data" accept="image/jpeg, image/png" action={{url('admin/fotos')}}>
             @csrf
@@ -20,27 +22,22 @@
             <img src="" alt="" id="fotoCambio" style="height:220px">
             <div class="form-group">
                 <label for="">Evento:</label>
-                {{-- <select name="evento" id=""> --}}
+                <select name="evento" id="">
                     @foreach ($eventos as $evento)
-                        <input type="radio" name="evento" class="btn-check" value="{{$evento['id']}}" id="evento{{$evento['id']}}">
+                        {{-- <input type="radio" name="evento" class="btn-check" value="{{$evento['id']}}" id="evento{{$evento['id']}}">
                         <label class="btn btn-outline-success" for="evento{{$evento['id']}}">
                           {{$evento['titulo']}}
-                        </label>
+                        </label> --}}
                      
-                        {{-- <option value="{{$evento['id']}}">{{$evento['titulo']}}</option>     --}}
+                        <option value="{{$evento['id']}}">{{$evento['titulo']}}</option>    
                     @endforeach
                     
-                {{-- </select> --}}
+                </select>
             </div>
             <div class="form-group text-center">
-                <a href={{url('admin/fotos')}}> 
-                    <button type="button" class="btn btn-light" style="padding:8px 100px;margin-top:25px;">
-                        Volver
-                    </button>
-                </a>
-                <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
-                   Agregar foto
-                </button>
+                <input class="btn btn-success" type="submit" value="Agregar foto">
+
+                <a class="btn btn-primary" href="{{url('admin/fotos')}}"> Volver </a>
              </div>
         </form>
     </div>
