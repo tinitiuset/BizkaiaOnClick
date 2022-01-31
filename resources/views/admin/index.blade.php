@@ -35,11 +35,11 @@
             </div>
             <div class="card cardDashboard">
                 <div class="">
-                    <h1 class="initialism text-center">Visitantes</h1>
+                    <h1 class="initialism text-center">Aforo > 50</h1>
                 </div>
                 <div class="card-body text-center">
                     <i class="far fa-chart-bar fa-3x fa-lg "></i>
-                    <span class="h1 ps-2">{{$numUsuarios}}</span>
+                    <span class="h1 ps-2">{{$numEventosAforo}}</span>
                 </div>
             </div>
         </div>
