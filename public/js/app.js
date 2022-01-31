@@ -5626,7 +5626,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.bordeRojo("categoria");
       } else {
         categoriaBien = true;
-      } //Aquí cuando se pulse el botón y b sea false
+      } // if (tituloBien && descripcionBien && categoriaBien) b = true;
+
+
+      $("#btn").mouseOver(function () {
+        if (!tituloBien) this.parpadeo("titulo");
+        if (!descripcionBien) this.parapdeo("descripcion");
+        if (!categoriaBien) this.parpadeo("categoria");
+      }); //Aquí cuando se pulse el botón y b sea false
       // if (!b) {
       //     console.log("Mikel es gay");
       //     $(window).scrollTop(0,0);
@@ -5634,7 +5641,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //     if (!descripcionBien) this.parpadeo("descripcion");
       //     if (!categoriaBien) this.parpadeo("categoria");
       // }
-
 
       return b;
     }
