@@ -6,7 +6,13 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-5 col-md-6 col-xs-8">
-            <div class="card cardPersonalizada">
+            <div class="card cardPersonalizada text-white">
+                @if (Session::has('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ Session::get('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif 
                 <div class="card-header card-registro text-center">
                     <a class="card-link white text-uppercase text-decoration-none link-personalizado " href="{{ url('register')}}">Crear cuenta</a>
                     <a class="card-link white text-uppercase text-decoration-none link-personalizado " href="{{ url('login')}}">Iniciar sesión</a>

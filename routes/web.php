@@ -30,11 +30,7 @@ Route::get('/test', function() {
     return view('test');
 });
 
-Route::get('/usuario', function() {
-    return view('usuario');
-});
-
-Route::middleware("auth")->group(function ()
+Route::middleware(["auth","esactivo"])->group(function ()
 {
 
     Route::get('/enviaevento', function() {
