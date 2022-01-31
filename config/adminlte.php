@@ -258,7 +258,7 @@ return [
         ['header' => 'CONFIGURACIÓN DE CUENTA'],
         [
             'text' => 'Perfil',
-            'url'  => 'perfil',
+            'url'  => '/admin/perfil',
             'icon' => 'fas fa-fw fa-user',
         ],
         ['header' => 'GESTION DEL SITIO WEB'],

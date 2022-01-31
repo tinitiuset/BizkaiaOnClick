@@ -19,6 +19,10 @@ Route::middleware([EsAdmin::class])->group(function ()
     Route::resource("eventos",EventosController::class);
     // Route::resource("evento",EventoController::class);
     Route::resource('user', UserController::class);
+    Route::get('/perfil', function() {
+        return view('perfil');
+    })->name('admin.perfil');
+    Route::patch('user/editarperfil/{id}',[UserController::class,"editarPerfil"]);
     Route::get('user/{usuario}/reactivar', [UserController::class,"reactivar"]);
     Route::get("/",function () {
 

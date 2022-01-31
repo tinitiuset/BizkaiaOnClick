@@ -23,18 +23,18 @@
      value="{{ isset($usuario->nombre)?$usuario->nombre:old('nombre') }}">  
 </div>
 <div class="form-group">
-    <label for="usuario"> Apellidos: </label>
+    <label for="apellidos"> Apellidos: </label>
     <input type="text"  class="form-control"  name="apellidos"
     value="{{ isset($usuario->apellidos)?$usuario->apellidos:old('apellidos') }}">
     <!-- con el método old le indicamos que en caso de error mantenga el registro-->
 </div>
 <div class="form-group">
-    <label for="nombre"> Email: </label>
+    <label for="email"> Email: </label>
     <input type="email" class="form-control" name="email"
      value="{{ isset($usuario->email)?$usuario->email:old('email') }}">  
 </div>
 <div class="form-group">
-    <label for="usuario"> Fecha de nacimiento: </label>
+    <label for="fechaNac"> Fecha de nacimiento: </label>
     <input type="date"  class="form-control"  name="fechaNac"
     value="{{ isset($usuario->fechaNac)?$usuario->fechaNac:old('fechaNac') }}">
     <!-- con el método old le indicamos que en caso de error mantenga el registro-->
