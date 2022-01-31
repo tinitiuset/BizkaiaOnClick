@@ -117,7 +117,7 @@ export default {
                 hora: '',
                 precio: '',
                 direccion: '',
-                sala: '',
+                aforo: '',
                 recinto: '',
                 localidad: ''
             }

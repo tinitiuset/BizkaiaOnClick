@@ -28,7 +28,7 @@ class EventoFactory extends Factory
             'precio' => $this->faker->randomNumber(2,true),
             'direccion' => $this->faker->address(),
             'estado' => $this->faker->randomElement(["pendiente","aprobado"]),
-            'sala' => $this->faker->randomNumber(2,true),
+            'aforo' => $this->faker->randomNumber(2,true),
             'recinto' => "palacioeuskalduna",
             "localidad" => "galdakao",
             "usuarioCreador" => $this->faker->randomElement($usuariosCreadores),
