@@ -37,7 +37,7 @@ Route::middleware(["auth","esactivo"])->group(function ()
         return view('enviaevento');
     });
     Route::get('/perfil', function() {
-        return view('perfil');
+        return view('usuario');
     });
     
 

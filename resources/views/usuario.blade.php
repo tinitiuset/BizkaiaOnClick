@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'PerfilAdmin')
-@section('otrasClasesMain','body-degradado')
+@section('otrasClasesBody','body-degradado')
 @section('content')
 <div class="container">
     @if (count($errors)>0)<!-- Comprobamos si hay algún error -->
