@@ -114,15 +114,15 @@
             @endif
         </select>
     @endif
-<!-- SALA -->
+<!-- AFORO -->
 <div class="form-group">
-    <label for="sala"> Sala: </label>
+    <label for="aforo"> Aforo: </label>
     @if ($modo == "Ver")
-        <input type="text" class="form-control" name="sala" disabled="disabled"
-        value="{{ isset($eventos->sala)?$eventos->sala:old('sala') }}">
+        <input type="text" class="form-control" name="aforo" disabled="disabled"
+        value="{{ isset($eventos->aforo)?$eventos->aforo:old('aforo') }}">
     @else
-        <input type="text" class="form-control" name="sala"
-        value="{{ isset($eventos->sala)?$eventos->sala:old('sala') }}"> 
+        <input type="text" class="form-control" name="aforo"
+        value="{{ isset($eventos->aforo)?$eventos->aforo:old('aforo') }}"> 
     @endif
 </div>
 <!-- RECINTO -->

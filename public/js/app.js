@@ -41228,8 +41228,8 @@ var render = function () {
           _c("div", { staticClass: "row mb-3" }, [
             _c(
               "label",
-              { staticClass: "col-form-label white", attrs: { for: "sala" } },
-              [_vm._v("Sala:")]
+              { staticClass: "col-form-label white", attrs: { for: "aforo" } },
+              [_vm._v("Aforo:")]
             ),
             _vm._v(" "),
             _c("div", { staticClass: "col" }, [
@@ -41238,19 +41238,19 @@ var render = function () {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.evento.sala,
-                    expression: "evento.sala",
+                    value: _vm.evento.aforo,
+                    expression: "evento.aforo",
                   },
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text", placeholder: "" },
-                domProps: { value: _vm.evento.sala },
+                domProps: { value: _vm.evento.aforo },
                 on: {
                   input: function ($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.evento, "sala", $event.target.value)
+                    _vm.$set(_vm.evento, "aforo", $event.target.value)
                   },
                 },
               }),
@@ -41466,16 +41466,16 @@ var render = function () {
                     ]
                   ),
                   _vm._v(" "),
-                  _vm.evento.sala != null
+                  _vm.evento.aforo != null
                     ? _c(
                         "span",
                         {
                           staticClass: "d-block",
-                          attrs: { title: "Sala del recinto" },
+                          attrs: { title: "Aforo del recinto" },
                         },
                         [
                           _c("i", { staticClass: "fas fa-door-open" }),
-                          _vm._v(" " + _vm._s(_vm.evento.sala)),
+                          _vm._v(" " + _vm._s(_vm.evento.aforo)),
                         ]
                       )
                     : _vm._e(),

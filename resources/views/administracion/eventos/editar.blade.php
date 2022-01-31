@@ -43,8 +43,8 @@
     </div>
 
     <div>
-        <label for="sala">sala</label>
-        <input type="text" name="sala" id="">
+        <label for="aforo">aforo</label>
+        <input type="text" name="aforo" id="">
     </div>
 
     <div>

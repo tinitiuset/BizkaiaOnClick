@@ -63,12 +63,12 @@
                         <input type="text" placeholder="" v-model="evento.direccion" class="form-control">
                     </div>
                 </div>
-                <!--SALA EVENTO-->
+                <!--AFORO EVENTO-->
                 <div class="row mb-3">
-                    <label for="sala" class="col-form-label white">Sala:</label>
+                    <label for="aforo" class="col-form-label white">Aforo:</label>
 
                     <div class="col">
-                        <input type="text" placeholder="" v-model="evento.sala" class="form-control">
+                        <input type="text" placeholder="" v-model="evento.aforo" class="form-control">
                     </div>
                 </div>
                 <!--RECINTO EVENTO-->

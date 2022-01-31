@@ -17,7 +17,7 @@
                         <span class="d-block" title="Fin del evento"><i class="far fa-calendar-times"></i> {{evento.fechaFin}}</span>
                         <span class="d-block" title="Hora del evento"><i class="far fa-clock"></i> {{evento.hora}}</span>
                         <span class="d-block" title="Precio"><i class="fas fa-euro-sign"></i> {{evento.precio}}</span>
-                        <span class="d-block" title="Sala del recinto" v-if="evento.sala != null"><i class="fas fa-door-open"></i> {{evento.sala}}</span>
+                        <span class="d-block" title="Aforo del recinto" v-if="evento.aforo != null"><i class="fas fa-door-open"></i> {{evento.aforo}}</span>
                         <span class="d-block" title="Direccion fisica">{{evento.direccion}}</span>
 
                     </div>
