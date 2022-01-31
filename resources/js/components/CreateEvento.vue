@@ -185,15 +185,7 @@ export default {
             } else {
                 categoriaBien = true;
             }
-
-            // if (tituloBien && descripcionBien && categoriaBien) b = true;
-
-            $("#btn").mouseOver(function() {
-                if (!tituloBien) this.parpadeo("titulo");
-                if (!descripcionBien) this.parapdeo("descripcion");
-                if (!categoriaBien) this.parpadeo("categoria");
-            });
-
+            
             //Aquí cuando se pulse el botón y b sea false
                 // if (!b) {
                 //     console.log("Mikel es gay");
