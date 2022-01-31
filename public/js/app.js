@@ -42039,7 +42039,7 @@ var render = function () {
                                 "nav-link text-white texto-degradado text-center",
                               attrs: {
                                 title: "Editar perfil",
-                                href: "/register",
+                                href: "/usuario",
                               },
                             },
                             [

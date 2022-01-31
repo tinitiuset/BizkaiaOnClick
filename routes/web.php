@@ -30,6 +30,10 @@ Route::get('/test', function() {
     return view('test');
 });
 
+Route::get('/usuario', function() {
+    return view('usuario');
+});
+
 Route::middleware("auth")->group(function ()
 {
 

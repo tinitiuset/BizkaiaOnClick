@@ -47,28 +47,24 @@
         </div>
         <div class="card-body">
         <br>
-            <form action="{{ url('/admin/user/'.$usuarios->id) }}" method="post" enctype="multipart/form-data">
-            @csrf
-            {{ method_field('PATCH') }}
-                <table class="table table-light">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Usuario</th>
-                            <th>Email</th>
-                            <th>Estado</th> 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($usuarios as $usuario)
-                        <tr>
-                            <td>{{ $usuario->usuario }}</td>
-                            <td>{{ $usuario->email }}</td>
-                            <td>{{ $usuario->estado }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </form>
+            <table class="table table-light">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Email</th>
+                        <th>Estado</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($usuarios as $usuario)
+                    <tr>
+                        <td>{{ $usuario->usuario }}</td>
+                        <td>{{ $usuario->email }}</td>
+                        <td>{{ $usuario->estado }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 @stop
