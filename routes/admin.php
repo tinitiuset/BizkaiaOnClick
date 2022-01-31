@@ -12,7 +12,7 @@ use App\Http\Middleware\EsAdmin;
 
 // Route::get('', [AdminHomeController::class, 'index']);
 
-Route::middleware([EsAdmin::class])->group(function ()
+Route::middleware(["auth","esadmin","esactivo"])->group(function ()
 {
     Route::resource('categoria',CategoriaController::class);
     Route::resource('fotos',FotoController::class);
