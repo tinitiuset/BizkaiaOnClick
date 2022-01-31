@@ -47,7 +47,7 @@
         </div>
         <div class="card-body">
         <br>
-            <table class="table table-light">
+            {{-- <table class="table table-light">
                 <thead class="thead-light">
                     <tr>
                         <th>Usuario</th>
@@ -64,7 +64,7 @@
                     </tr>
                     @endforeach
                 </tbody>
-            </table>
+            </table> --}}
         </div>
     </div>
 @stop
