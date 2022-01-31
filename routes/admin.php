@@ -30,8 +30,10 @@ Route::middleware([EsAdmin::class])->group(function ()
     Route::get('user/{usuario}/reactivar', [UserController::class,"reactivar"]);
     Route::get("/",function () {
 
+        //metodos añadidos en la página de admin/index
         $numUsuarios = count(User::where('estado','activo')->get());
         $numEventosPendientes = count(Evento::where('estado','pendiente')->get());
+        //cogemos los usuarios activos y los ordenamos de manera desc por fecha de creación y cogemos 10 registros
         $ultimosUsuarios = User::where('estado', 'activo')->orderBy('created_at','desc')->take(10)->get();
 
 

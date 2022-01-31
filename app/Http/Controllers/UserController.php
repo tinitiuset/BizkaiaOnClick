@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Rule;
 
+
 class UserController extends Controller
 {
     
@@ -142,7 +143,7 @@ class UserController extends Controller
         return "entra a show";
 
     }
-
+    
     /**
      * Update the specified resource in storage.
      *

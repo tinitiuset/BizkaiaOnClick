@@ -27,9 +27,9 @@ class UserFactory extends Factory
         return [
             // 'id' => $this->$autoIncrement->current(),
             'id' => ++$autoIncrement,
-            'usuario' => $this->faker->name(),
-            'nombre' => $this->faker->name(),
-            'apellidos' => $this->faker->name(),
+            'usuario' => $this->faker->firstName(),
+            'nombre' => $this->faker->firstName(),
+            'apellidos' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'fechaNac' => $this->faker->date(),
             'tipo' => "usuario",
