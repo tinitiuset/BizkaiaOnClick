@@ -21,7 +21,7 @@ class Evento extends Model
         "precio",
         "direccion",
         "estado",
-        "sala",
+        "aforo",
         "recinto",
         "localidad",
         "usuarioAprobador",
