@@ -26,6 +26,7 @@ class EventoController extends Controller
         $eventos = Evento::paginate(15);
 
         return view('eventos/index',array('eventos' => $eventos));
+        
     }
 
     /**
@@ -72,8 +73,10 @@ class EventoController extends Controller
      */
     public function getAll(Request $request): JsonResponse
     {
-        $eventos = Evento::where('estado','aprobado')->where('fechaFin','>',date("Y-m-d"))->with("fotos")->get();
+
+        $eventos = Evento::where('estado','aprobado')->where('fechaFin','>=',date("Y-m-d"))->with("fotos")->get();
         return response()->json($eventos);
+
     }
 
     /**

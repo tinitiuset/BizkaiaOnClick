@@ -5343,6 +5343,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Agenda",
@@ -5351,13 +5361,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       filtroCategoria: "Todos",
       filtro: "",
       // diasSemana: ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
-      NUM_RESULTS: 25,
+      NUM_RESULTS: 24,
       // Numero de resultados por página
       pag: 1 // Página inicial
 
     };
   },
   methods: {
+    reducirTexto: function reducirTexto(texto) {
+      return texto.split(' ').slice(0, 60).join(' ');
+    },
     siguientePagina: function siguientePagina() {
       this.pag += 1;
       $(window).scrollTop(0, 0);
@@ -40854,55 +40867,63 @@ var render = function () {
                 },
               ],
               key: evento.id,
-              staticClass: "py-4 col-md-6 col-lg-4",
+              class: {
+                "d-none": evento.fotos.length === 0,
+                "py-4": true,
+                "col-md-6": true,
+                "col-lg-4": true,
+              },
             },
             [
-              evento.fotos.length > 0
-                ? _c("div", { staticClass: "card h-100 bg-dark" }, [
-                    _c("img", {
+              _c("div", { staticClass: "card h-100 bg-dark" }, [
+                evento.fotos.length > 0
+                  ? _c("img", {
                       staticClass: "card-img-top",
                       staticStyle: { height: "400px" },
                       attrs: {
                         src: "/img/eventos/" + evento.fotos[0].ruta,
                         alt: evento.titulo,
                       },
-                    }),
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "card-body bg-dark border border-1 border-dark overflow-hidden m-1",
+                  },
+                  [
+                    _c("h5", { staticClass: "card-title" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass:
+                            "text-decoration-none text-white texto-degradado",
+                          attrs: { href: "/detalleevento/" + evento.id },
+                        },
+                        [_vm._v(_vm._s(evento.titulo))]
+                      ),
+                    ]),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "card-body bg-dark border border-1 border-dark h-25 overflow-hidden m-1",
-                      },
-                      [
-                        _c("h5", { staticClass: "card-title" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "text-decoration-none text-white texto-degradado",
-                              attrs: { href: "/detalleevento/" + evento.id },
-                            },
-                            [_vm._v(_vm._s(evento.titulo))]
-                          ),
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "card-text text-white" }, [
-                          _vm._v(_vm._s(evento.descripcion) + "."),
-                        ]),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-primary botonSinRedondeo w-100",
-                        attrs: { href: "/detalleevento/" + evento.id },
-                      },
-                      [_vm._v("Ver")]
-                    ),
-                  ])
-                : _vm._e(),
+                    _c("p", { staticClass: "card-text text-white" }, [
+                      _vm._v(
+                        _vm._s(_vm.reducirTexto(evento.descripcion)) + " "
+                      ),
+                      _c("span", { staticClass: "fs-2" }, [_vm._v("...")]),
+                    ]),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-primary botonSinRedondeo w-100",
+                    attrs: { href: "/detalleevento/" + evento.id },
+                  },
+                  [_vm._v("Ver")]
+                ),
+              ]),
             ]
           )
         }),
@@ -40932,7 +40953,32 @@ var render = function () {
                         expression: "pag != 1",
                       },
                     ],
-                    staticClass: "btn btn-primary",
+                    staticClass: "btn btn-info",
+                    attrs: { href: "#", "aria-label": "Primero" },
+                    on: {
+                      click: function ($event) {
+                        $event.preventDefault()
+                        _vm.pag = 1
+                      },
+                    },
+                  },
+                  [_vm._m(0)]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "mx-2" }, [
+                _c(
+                  "a",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.pag != 1,
+                        expression: "pag != 1",
+                      },
+                    ],
+                    staticClass: "btn btn-danger",
                     attrs: { href: "#", "aria-label": "Previous" },
                     on: {
                       click: function ($event) {
@@ -40941,11 +40987,7 @@ var render = function () {
                       },
                     },
                   },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("Anterior"),
-                    ]),
-                  ]
+                  [_vm._m(1)]
                 ),
               ]),
               _vm._v(" "),
@@ -40965,8 +41007,8 @@ var render = function () {
                           "pag * NUM_RESULTS / eventosFiltrados.length < 1",
                       },
                     ],
-                    staticClass: "btn btn-primary",
-                    attrs: { href: "#", "aria-label": "Next" },
+                    staticClass: "btn btn-success",
+                    attrs: { href: "#", "aria-label": "Siguiente" },
                     on: {
                       click: function ($event) {
                         $event.preventDefault()
@@ -40974,11 +41016,37 @@ var render = function () {
                       },
                     },
                   },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("Siguiente"),
-                    ]),
-                  ]
+                  [_vm._m(2)]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "mx-2" }, [
+                _c(
+                  "a",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value:
+                          _vm.pag !=
+                          Math.ceil(_vm.eventos.length / _vm.NUM_RESULTS),
+                        expression:
+                          "pag != Math.ceil(eventos.length / NUM_RESULTS)",
+                      },
+                    ],
+                    staticClass: "btn btn-info",
+                    attrs: { href: "#", "aria-label": "Ultimo" },
+                    on: {
+                      click: function ($event) {
+                        $event.preventDefault()
+                        _vm.pag = Math.ceil(
+                          _vm.eventos.length / _vm.NUM_RESULTS
+                        )
+                      },
+                    },
+                  },
+                  [_vm._m(3)]
                 ),
               ]),
             ]
@@ -40988,7 +41056,44 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { attrs: { "aria-hidden": "true" } }, [
+      _c("i", { staticClass: "fas fa-arrow-left" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-arrow-left" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { attrs: { "aria-hidden": "true" } }, [
+      _c("i", { staticClass: "fas fa-arrow-left" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { attrs: { "aria-hidden": "true" } }, [
+      _c("i", { staticClass: "fas fa-arrow-right" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { attrs: { "aria-hidden": "true" } }, [
+      _c("i", { staticClass: "fas fa-arrow-right" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-arrow-right" }),
+    ])
+  },
+]
 render._withStripped = true
 
 

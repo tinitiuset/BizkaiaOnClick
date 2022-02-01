@@ -32,14 +32,14 @@
 
             <div class="row g-3">
 
-                <div v-for="(evento, index) in eventosFiltrados" :key="evento.id" class="py-4 col-md-6 col-lg-4" v-show="(pag - 1) * NUM_RESULTS <= index  && pag * NUM_RESULTS > index">
+                <div v-for="(evento, index) in eventosFiltrados" :key="evento.id" :class="{'d-none':evento.fotos.length === 0,'py-4':true, 'col-md-6':true, 'col-lg-4':true}" v-show="(pag - 1) * NUM_RESULTS <= index  && pag * NUM_RESULTS > index">
 
-                    <div class="card h-100 bg-dark" v-if="evento.fotos.length > 0">
+                    <div class="card h-100 bg-dark">
                         
-                        <img class="card-img-top" :src="'/img/eventos/'+evento.fotos[0].ruta" :alt="evento.titulo" style="height: 400px">
-                        <div class="card-body bg-dark border border-1 border-dark h-25 overflow-hidden m-1">
+                        <img v-if="evento.fotos.length > 0" class="card-img-top" :src="'/img/eventos/'+evento.fotos[0].ruta" :alt="evento.titulo" style="height: 400px">
+                        <div class="card-body bg-dark border border-1 border-dark overflow-hidden m-1">
                             <h5 class="card-title"><a :href="'/detalleevento/'+evento.id" class="text-decoration-none text-white texto-degradado">{{evento.titulo}}</a></h5>
-                            <p class="card-text text-white">{{evento.descripcion}}.</p>
+                            <p class="card-text text-white">{{reducirTexto(evento.descripcion)}} <span class="fs-2">...</span></p>
                         </div>
                         <a :href="'/detalleevento/'+evento.id" class="btn btn-primary botonSinRedondeo w-100">Ver</a>
 
@@ -52,13 +52,23 @@
             <nav aria-label="Page navigation" class="text-center">
                 <ul class="pagination text-center justify-content-center">
                     <li class="mx-2">
-                        <a href="#" aria-label="Previous" v-show="pag != 1" @click.prevent="anteriorPagina" class="btn btn-primary">
-                            <span aria-hidden="true">Anterior</span>
+                        <a href="#" aria-label="Primero" v-show="pag != 1" @click.prevent="pag = 1" class="btn btn-info">
+                            <span aria-hidden="true"><i class="fas fa-arrow-left"></i> <i class="fas fa-arrow-left"></i></span>
                         </a>
                     </li>
                     <li class="mx-2">
-                        <a href="#" aria-label="Next" v-show="pag * NUM_RESULTS / eventosFiltrados.length < 1" @click.prevent="siguientePagina" class="btn btn-primary">
-                            <span aria-hidden="true">Siguiente</span>
+                        <a href="#" aria-label="Previous" v-show="pag != 1" @click.prevent="anteriorPagina" class="btn btn-danger">
+                            <span aria-hidden="true"><i class="fas fa-arrow-left"></i></span>
+                        </a>
+                    </li>
+                    <li class="mx-2">
+                        <a href="#" aria-label="Siguiente" v-show="pag * NUM_RESULTS / eventosFiltrados.length < 1" @click.prevent="siguientePagina" class="btn btn-success">
+                            <span aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
+                        </a>
+                    </li>
+                    <li class="mx-2">
+                        <a href="#" aria-label="Ultimo" v-show="pag != Math.ceil(eventos.length / NUM_RESULTS)" @click.prevent="pag = Math.ceil(eventos.length / NUM_RESULTS)" class="btn btn-info">
+                            <span aria-hidden="true"><i class="fas fa-arrow-right"></i> <i class="fas fa-arrow-right"></i></span>
                         </a>
                     </li>
                 </ul>
@@ -83,7 +93,7 @@ export default {
             filtroCategoria: "Todos",
             filtro: "",
             // diasSemana: ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
-            NUM_RESULTS: 25, // Numero de resultados por página
+            NUM_RESULTS: 24, // Numero de resultados por página
             pag: 1, // Página inicial
 
         };
@@ -91,6 +101,11 @@ export default {
     },
     methods: {
 
+        reducirTexto (texto) {
+
+            return texto.split(' ').slice(0,60).join(' ');
+
+        },
         siguientePagina () {
 
             this.pag += 1; 
