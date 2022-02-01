@@ -5950,7 +5950,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      textos: ["Disfruta", "Vive", "Diviertete"],
+      textos: ["Disfruta", "Vive", "Emocionate", "Diviertete", "Descubre"],
       texto: "Bienvenido",
       contador: 0
     };
@@ -5965,11 +5965,11 @@ __webpack_require__.r(__webpack_exports__);
 
       $("#textoCambiante").animate({
         opacity: "0"
-      }, 500, function () {
+      }, 5000, function () {
         _this.texto = _this.textos[_this.contador];
         $("#textoCambiante").animate({
           opacity: "1"
-        }, 500);
+        }, 5000);
         _this.contador++;
       });
     }, 2500);
@@ -41998,26 +41998,7 @@ var render = function () {
     "div",
     { staticClass: "d-block", attrs: { href: "", id: "contenedorVideo" } },
     [
-      _c(
-        "video",
-        {
-          attrs: {
-            autoplay: "",
-            muted: "",
-            loop: "",
-            preload: "",
-            id: "myVideo",
-          },
-          domProps: { muted: true },
-        },
-        [
-          _c("source", {
-            attrs: { src: "/video/index.mp4", type: "video/mp4" },
-          }),
-          _vm._v("\n    Tu navegador no soporta video en HTML5\n    "),
-          _c("a", { attrs: { href: "" } }),
-        ]
-      ),
+      _vm._m(0),
       _vm._v(" "),
       _c("div", { staticClass: "contenido d-flex align-items-center" }, [
         _c("div", { staticClass: "container text-center" }, [
@@ -42034,7 +42015,24 @@ var render = function () {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "video",
+      { attrs: { autoplay: "", loop: "", preload: "", id: "myVideo" } },
+      [
+        _c("source", {
+          attrs: { src: "/video/videoIndex.mp4", type: "video/mp4" },
+        }),
+        _vm._v("\n    Tu navegador no soporta video en HTML5\n    "),
+        _c("a", { attrs: { href: "" } }),
+      ]
+    )
+  },
+]
 render._withStripped = true
 
 
