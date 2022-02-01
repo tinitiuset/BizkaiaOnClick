@@ -32,11 +32,11 @@
 
             <div class="row g-3">
 
-                <div v-for="evento in eventosFiltrados" :key="evento.id" class="py-4 col-md-6 col-lg-4">
+                <div v-for="(evento, index) in eventosFiltrados" :key="evento.id" class="py-4 col-md-6 col-lg-4" v-show="(pag - 1) * NUM_RESULTS <= index  && pag * NUM_RESULTS > index">
 
                     <div class="card h-100 bg-dark" v-if="evento.fotos.length > 0">
                         
-                        <img class="card-img-top h-50" :src="'/img/eventos/'+evento.fotos[0].ruta" :alt="evento.titulo">
+                        <img class="card-img-top" :src="'/img/eventos/'+evento.fotos[0].ruta" :alt="evento.titulo" style="height: 400px">
                         <div class="card-body bg-dark border border-1 border-dark h-25 overflow-hidden m-1">
                             <h5 class="card-title"><a :href="'/detalleevento/'+evento.id" class="text-decoration-none text-white texto-degradado">{{evento.titulo}}</a></h5>
                             <p class="card-text text-white">{{evento.descripcion}}.</p>
@@ -45,51 +45,24 @@
 
                     </div>
 
-                <!-- {{evento.fotos[0].id}} -->
-
-
-                <!-- {{evento}} -->
-
-                <!-- <div class="row">
-                    <img :src="" alt="">
-                    <h4><a href="/detalleevento" class="text-decoration-none text-dark texto-degradado" :id="evento.id" @mouseover="agrandarTitulo($event)" @mouseout="reducirTitulo($event)">{{ evento.titulo }}</a></h4>
-                    <h4>{{ evento.categoria }}</h4>
-                    <p>{{ evento.descripcion }}</p>
                 </div>
 
-                <div class="row">
-                    <div class="bg-dark">
-                        
-                    </div>
-                    <div>
-                        <p>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>{{evento.localidad}}</span>
-                        </p>
-                        <p>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
-                            </svg>
-                            <span>
-                                {{evento.fechaInicio.replaceAll("-","/")}} - {{evento.fechaFin.replaceAll("-","/")}}
-                                {{diasSemana}} - {{}} 
-                            </span>
-                        </p>
-                        <p>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-euro" viewBox="0 0 16 16">
-                            <path d="M4 9.42h1.063C5.4 12.323 7.317 14 10.34 14c.622 0 1.167-.068 1.659-.185v-1.3c-.484.119-1.045.17-1.659.17-2.1 0-3.455-1.198-3.775-3.264h4.017v-.928H6.497v-.936c0-.11 0-.219.008-.329h4.078v-.927H6.618c.388-1.898 1.719-2.985 3.723-2.985.614 0 1.175.05 1.659.177V2.194A6.617 6.617 0 0 0 10.341 2c-2.928 0-4.82 1.569-5.244 4.3H4v.928h1.01v1.265H4v.928z"/>
-                            </svg>
-                            <span v-if="evento.precio == 0">Gratis</span>
-                            <span v-else>{{evento.precio}}€</span>
-                        </p>
-
-                    </div>
-                </div> -->
-
             </div>
 
-            </div>
+            <nav aria-label="Page navigation" class="text-center">
+                <ul class="pagination text-center justify-content-center">
+                    <li class="mx-2">
+                        <a href="#" aria-label="Previous" v-show="pag != 1" @click.prevent="anteriorPagina" class="btn btn-primary">
+                            <span aria-hidden="true">Anterior</span>
+                        </a>
+                    </li>
+                    <li class="mx-2">
+                        <a href="#" aria-label="Next" v-show="pag * NUM_RESULTS / eventosFiltrados.length < 1" @click.prevent="siguientePagina" class="btn btn-primary">
+                            <span aria-hidden="true">Siguiente</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
 
          </div>
 
@@ -109,11 +82,30 @@ export default {
 
             filtroCategoria: "Todos",
             filtro: "",
-            diasSemana: ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
+            // diasSemana: ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
+            NUM_RESULTS: 25, // Numero de resultados por página
+            pag: 1, // Página inicial
 
         };
 
     },
+    methods: {
+
+        siguientePagina () {
+
+            this.pag += 1; 
+            $(window).scrollTop(0,0);
+
+        },
+        anteriorPagina () {
+
+            this.pag -= 1; 
+            $(window).scrollTop(0,0);
+
+        }
+
+    },
+
     computed: {
         ...mapGetters([
             'eventos',

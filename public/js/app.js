@@ -5343,33 +5343,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Agenda",
@@ -5377,8 +5350,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       filtroCategoria: "Todos",
       filtro: "",
-      diasSemana: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
+      // diasSemana: ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
+      NUM_RESULTS: 25,
+      // Numero de resultados por página
+      pag: 1 // Página inicial
+
     };
+  },
+  methods: {
+    siguientePagina: function siguientePagina() {
+      this.pag += 1;
+      $(window).scrollTop(0, 0);
+    },
+    anteriorPagina: function anteriorPagina() {
+      this.pag -= 1;
+      $(window).scrollTop(0, 0);
+    }
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['eventos', 'categorias'])), {}, {
     eventosFiltrados: function eventosFiltrados() {
@@ -5670,6 +5657,13 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -40844,15 +40838,30 @@ var render = function () {
       _c(
         "div",
         { staticClass: "row g-3" },
-        _vm._l(_vm.eventosFiltrados, function (evento) {
+        _vm._l(_vm.eventosFiltrados, function (evento, index) {
           return _c(
             "div",
-            { key: evento.id, staticClass: "py-4 col-md-6 col-lg-4" },
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value:
+                    (_vm.pag - 1) * _vm.NUM_RESULTS <= index &&
+                    _vm.pag * _vm.NUM_RESULTS > index,
+                  expression:
+                    "(pag - 1) * NUM_RESULTS <= index  && pag * NUM_RESULTS > index",
+                },
+              ],
+              key: evento.id,
+              staticClass: "py-4 col-md-6 col-lg-4",
+            },
             [
               evento.fotos.length > 0
                 ? _c("div", { staticClass: "card h-100 bg-dark" }, [
                     _c("img", {
-                      staticClass: "card-img-top h-50",
+                      staticClass: "card-img-top",
+                      staticStyle: { height: "400px" },
                       attrs: {
                         src: "/img/eventos/" + evento.fotos[0].ruta,
                         alt: evento.titulo,
@@ -40898,6 +40907,83 @@ var render = function () {
           )
         }),
         0
+      ),
+      _vm._v(" "),
+      _c(
+        "nav",
+        {
+          staticClass: "text-center",
+          attrs: { "aria-label": "Page navigation" },
+        },
+        [
+          _c(
+            "ul",
+            { staticClass: "pagination text-center justify-content-center" },
+            [
+              _c("li", { staticClass: "mx-2" }, [
+                _c(
+                  "a",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.pag != 1,
+                        expression: "pag != 1",
+                      },
+                    ],
+                    staticClass: "btn btn-primary",
+                    attrs: { href: "#", "aria-label": "Previous" },
+                    on: {
+                      click: function ($event) {
+                        $event.preventDefault()
+                        return _vm.anteriorPagina.apply(null, arguments)
+                      },
+                    },
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("Anterior"),
+                    ]),
+                  ]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "mx-2" }, [
+                _c(
+                  "a",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value:
+                          (_vm.pag * _vm.NUM_RESULTS) /
+                            _vm.eventosFiltrados.length <
+                          1,
+                        expression:
+                          "pag * NUM_RESULTS / eventosFiltrados.length < 1",
+                      },
+                    ],
+                    staticClass: "btn btn-primary",
+                    attrs: { href: "#", "aria-label": "Next" },
+                    on: {
+                      click: function ($event) {
+                        $event.preventDefault()
+                        return _vm.siguientePagina.apply(null, arguments)
+                      },
+                    },
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("Siguiente"),
+                    ]),
+                  ]
+                ),
+              ]),
+            ]
+          ),
+        ]
       ),
     ]),
   ])
@@ -41405,18 +41491,24 @@ var render = function () {
               "h2",
               {
                 staticClass: "text-lg-center font-weight-bold h2Personalizado",
+                attrs: { title: "Titulo" },
               },
               [_vm._v(_vm._s(_vm.evento.titulo))]
             ),
             _vm._v(" "),
             _c("div", { staticClass: "row mb-3 justify-content-center" }, [
-              _c("h3", [_vm._v(_vm._s(_vm.evento.categoria))]),
+              _c("h3", { attrs: { title: "Categoria" } }, [
+                _vm._v(_vm._s(_vm.evento.categoria)),
+              ]),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row mb-3 justify-content-center" }, [
               _c(
                 "div",
-                { staticClass: "col-5 g-2 rounded-1 p-2 bordeDegradado" },
+                {
+                  staticClass:
+                    "col-5 g-2 rounded-1 p-2 bordeDegradado align-self-start",
+                },
                 [
                   _c(
                     "span",
@@ -41426,6 +41518,17 @@ var render = function () {
                       _vm._v(" " + _vm._s(_vm.evento.localidad)),
                     ]
                   ),
+                  _vm._v(" "),
+                  _vm.evento.localidad != null
+                    ? _c(
+                        "span",
+                        { staticClass: "d-block", attrs: { title: "Recinto" } },
+                        [
+                          _c("i", { staticClass: "fas fa-building" }),
+                          _vm._v(" " + _vm._s(_vm.evento.recinto)),
+                        ]
+                      )
+                    : _vm._e(),
                   _vm._v(" "),
                   _c(
                     "span",
@@ -41451,26 +41554,37 @@ var render = function () {
                     ]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      staticClass: "d-block",
-                      attrs: { title: "Hora del evento" },
-                    },
-                    [
-                      _c("i", { staticClass: "far fa-clock" }),
-                      _vm._v(" " + _vm._s(_vm.evento.hora)),
-                    ]
-                  ),
+                  _vm.evento.hora != null
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "d-block",
+                          attrs: { title: "Hora del evento" },
+                        },
+                        [
+                          _c("i", { staticClass: "far fa-clock" }),
+                          _vm._v(" " + _vm._s(_vm.evento.hora)),
+                        ]
+                      )
+                    : _vm._e(),
                   _vm._v(" "),
-                  _c(
-                    "span",
-                    { staticClass: "d-block", attrs: { title: "Precio" } },
-                    [
-                      _c("i", { staticClass: "fas fa-euro-sign" }),
-                      _vm._v(" " + _vm._s(_vm.evento.precio)),
-                    ]
-                  ),
+                  _vm.evento.precio > 0
+                    ? _c(
+                        "span",
+                        { staticClass: "d-block", attrs: { title: "Precio" } },
+                        [
+                          _c("i", { staticClass: "fas fa-euro-sign" }),
+                          _vm._v(" " + _vm._s(_vm.evento.precio)),
+                        ]
+                      )
+                    : _c(
+                        "span",
+                        { staticClass: "d-block", attrs: { title: "Precio" } },
+                        [
+                          _c("i", { staticClass: "fas fa-euro-sign" }),
+                          _vm._v(" Gratis"),
+                        ]
+                      ),
                   _vm._v(" "),
                   _vm.evento.aforo != null
                     ? _c(
@@ -41504,45 +41618,64 @@ var render = function () {
           ]
         ),
         _vm._v(" "),
+        _vm.evento.fotos.length > 1
+          ? _c(
+              "div",
+              {
+                staticClass:
+                  "carousel slide col-md-6 col-lg-5 col-xl-4 mx-auto m-md-4 g-0",
+                attrs: {
+                  id: "carouselExampleControls",
+                  "data-bs-ride": "carousel",
+                },
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "carousel-inner" },
+                  _vm._l(_vm.evento.fotos, function (foto, index) {
+                    return _c(
+                      "div",
+                      {
+                        key: foto.id,
+                        class: {
+                          active: index === 0,
+                          "carousel-item": true,
+                          imgResponsiveCarousel: true,
+                        },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "d-block w-100",
+                          attrs: {
+                            src: "/img/eventos/" + foto.ruta,
+                            alt: "...",
+                          },
+                        }),
+                      ]
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._m(1),
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
         _c(
           "div",
-          {
-            staticClass:
-              "carousel slide col-md-6 col-lg-5 col-xl-4 mx-auto m-md-4 g-0",
-            attrs: {
-              id: "carouselExampleControls",
-              "data-bs-ride": "carousel",
-            },
-          },
+          { staticClass: "col-md-6 col-lg-5 col-xl-4 mx-auto m-md-4 g-0" },
           [
-            _c(
-              "div",
-              { staticClass: "carousel-inner" },
-              _vm._l(_vm.evento.fotos, function (foto, index) {
-                return _c(
-                  "div",
-                  {
-                    key: foto.id,
-                    class: {
-                      active: index === 0,
-                      "carousel-item": true,
-                      imgResponsiveCarousel: true,
-                    },
-                  },
-                  [
-                    _c("img", {
-                      staticClass: "d-block w-100",
-                      attrs: { src: "/img/eventos/" + foto.ruta, alt: "..." },
-                    }),
-                  ]
-                )
-              }),
-              0
-            ),
-            _vm._v(" "),
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._m(1),
+            _c("img", {
+              staticClass: "d-block w-100",
+              attrs: {
+                src: "/img/eventos/" + _vm.evento.fotos[0].ruta,
+                alt: "...",
+              },
+            }),
           ]
         ),
       ]

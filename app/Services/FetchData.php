@@ -21,7 +21,13 @@ class FetchData
 
         // GET last Event
         try {
-        $url = "https://api.euskadi.eus/culture/events/v1.0/events?_elements=5000&_page=1";
+
+        $url = "https://api.euskadi.eus/culture/events/v1.0/events/upcoming";
+
+        $items = self::getServiceData($url)["totalItems"];
+
+        // $url = "https://api.euskadi.eus/culture/events/v1.0/events?_elements=5000&_page=1";
+        $url = "https://api.euskadi.eus/culture/events/v1.0/events/upcoming?_elements=".$items."&_page=1";
         // Dump Data to prove it's working
         self::saveData(self::getServiceData($url));
         }catch (\Exception $e) {
@@ -35,7 +41,7 @@ class FetchData
         // TODO Arreglar campos vacios
         // TODO Arreglar formatos de fechas
 
-        foreach ($registros as $data) {
+        foreach ($registros["items"] as $data) {
             
             if ($data['provinceNoraCode'] == "48") {
 
@@ -88,6 +94,26 @@ class FetchData
                         $data['openingHoursEs'] = substr($data['openingHoursEs'],0,5);
 
                     }
+
+                    if (!isset($data['establishmentEs'])) {
+                        
+                        $data['establishmentEs'] = null;
+
+                    } else {
+
+                        $data['establishmentEs'] = utf8_decode($data['establishmentEs']);
+
+                    }
+
+                    if (!isset($data['municipalityEs'])) {
+                        
+                        $data['municipalityEs'] = null;
+
+                    } else {
+
+                        $data['municipalityEs'] = utf8_decode($data['municipalityEs']);
+
+                    }
             
                     $evento=Evento::create([
                         'titulo' => utf8_decode($data['nameEs']),
@@ -99,8 +125,8 @@ class FetchData
                         'direccion' => $data['direccion'] ?? '',
                         'estado' => "pendiente",
                         'aforo' => null,
-                        'recinto' => $data['establishmentEs'] ?? '',
-                        'localidad' => $data['municipalityEs'] ?? '',
+                        'recinto' => $data['establishmentEs'],
+                        'localidad' => $data['municipalityEs'], 
                         'categoria' => utf8_decode($data['typeEs'])
                     ]);
     
@@ -138,6 +164,7 @@ class FetchData
         $resp[] = json_decode(utf8_encode(curl_exec($curl)), true);
         curl_close($curl);
         // return $resp[0]["items"][0];
-        return $resp[0]["items"];
+        // return $resp[0]["items"];
+        return $resp[0];
     }
 }

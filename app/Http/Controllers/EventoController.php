@@ -72,7 +72,7 @@ class EventoController extends Controller
      */
     public function getAll(Request $request): JsonResponse
     {
-        $eventos = Evento::where('estado','aprobado')->with("fotos")->get();
+        $eventos = Evento::where('estado','aprobado')->where('fechaFin','>',date("Y-m-d"))->with("fotos")->get();
         return response()->json($eventos);
     }
 
