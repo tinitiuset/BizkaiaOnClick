@@ -5715,6 +5715,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "DetalleEvento",
@@ -41484,7 +41485,7 @@ var render = function () {
           "div",
           {
             staticClass:
-              "cardPersonalizada col-md-5 col-xl-7 mx-0 mx-md-2 my-0 my-md-2 rounded-0 rounded-lg-2 text-white",
+              "cardPersonalizada col-md-5 col-xl-7 mx-0 mx-md-2 my-0 my-md-2 rounded-0 text-white",
           },
           [
             _c(
@@ -41614,6 +41615,15 @@ var render = function () {
               _c("div", { staticClass: "col-6 g-0 ms-3" }, [
                 _c("p", [_vm._v(_vm._s(_vm.evento.descripcion))]),
               ]),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn bg-magenta white btn-lg btn-evento",
+                  attrs: { href: "/agenda/" },
+                },
+                [_vm._v("Volver")]
+              ),
             ]),
           ]
         ),
