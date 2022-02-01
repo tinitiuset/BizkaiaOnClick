@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid my-lg-2">
         <div class="row align-items-start flex-column-reverse flex-md-row justify-content-xl-center mx-xl-5">
-            <div class="cardPersonalizada col-md-5 col-xl-7 mx-0 mx-md-2 my-0 my-md-2 rounded-0 rounded-lg-2 text-white">
+            <div class="cardPersonalizada col-md-5 col-xl-7 mx-0 mx-md-2 my-0 my-md-2 rounded-0 text-white">
                 <h2 class="text-lg-center font-weight-bold h2Personalizado" title="Titulo">{{evento.titulo}}</h2>
                 <!--TITULO EVENTO-->
                 <div class="row mb-3 justify-content-center">
@@ -28,6 +28,7 @@
                     <div class="col-6 g-0 ms-3">
                         <p>{{evento.descripcion}}</p>
                     </div>
+                    <a :href="'/agenda/'" class="btn bg-magenta white btn-lg btn-evento">Volver</a>
 
                 </div>
             </div>

@@ -15,7 +15,7 @@
 <template>
   <div href="" class="d-block" id="contenedorVideo">
     <video autoplay muted loop preload id="myVideo" class="">
-      <source src="/video/index.mp4" type="video/mp4">
+      <source src="/video/videoIndex.mp4" type="video/mp4">
       Tu navegador no soporta video en HTML5
       <a href=""></a>
     </video>
@@ -35,7 +35,7 @@
 export default {
     data() {
       return {
-            textos: ["Disfruta","Vive","Diviertete"],
+            textos: ["Disfruta","Vive","Emocionate","Diviertete","Descubre"],
             texto: "Bienvenido",
             contador:0,
       }
@@ -49,11 +49,11 @@ export default {
     
             }
 
-            $("#textoCambiante").animate({opacity:"0"},500, () => {
+            $("#textoCambiante").animate({opacity:"0"},5000, () => {
               
               this.texto = this.textos[this.contador];
 
-              $("#textoCambiante").animate({opacity:"1"},500);
+              $("#textoCambiante").animate({opacity:"1"},5000);
 
               this.contador++;
 

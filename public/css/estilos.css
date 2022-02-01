@@ -155,4 +155,15 @@ svg:hover {
     background-color:#E5E5E5 ;
 }
 
+/*----------- ESTILOS DETALLE EVENTOS -----------*/
 
+.btn-evento {
+    width: 50%;
+}
+
+@media (min-width: 768px) {
+    .rounded-0{
+        border-radius: 50px !important;
+    }
+
+}

@@ -23,8 +23,8 @@
                 <div class="row mb-3 justify-content-center">
                     <label for="categoria" class="col-form-label white">Categoría:</label>
                     <div class="col">
-                        <select v-model="evento.categoria" class="form-control" id="categoria">
-                            <option selected disabled>Escoge una categoría</option>
+                        <select v-model="evento.categoria" class="form-select" id="categoria">
+                            <option disabled>Escoge una categoría</option>
                             <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
                         </select>
                     </div>
@@ -135,12 +135,12 @@ export default {
         estaVacio(texto) {
             return texto == '';
         },
-        parpadeo(componente) {
-            $(`#${componente}`).fadeOut();
-            $(`#${componente}`).fadeIn();
-            $(`#${componente}`).fadeOut();
-            $(`#${componente}`).fadeIn();
-        },
+        // parpadeo(componente) {
+        //     $(`#${componente}`).fadeOut();
+        //     $(`#${componente}`).fadeIn();
+        //     $(`#${componente}`).fadeOut();
+        //     $(`#${componente}`).fadeIn();
+        // },
         bordeRojo(componente) {
             $(`#${componente}`).css("border","2px solid red");
         }
@@ -149,24 +149,15 @@ export default {
         ...mapGetters(['categorias']),
         isValid() {
             let b = true;
-            let tituloBien = false;
-            let descripcionBien = false;
-            let categoriaBien = false;
             $("#titulo").css("border","none");
             $("#descripcion").css("border","none");
             $("#categoria").css("border","none");
-            //TODO Hacer correspondientes validaciones
-            // Validaciones JS
-
-            // this.estaVacio(this.evento.titulo) ? b = false : this.tituloValido(this.evento.titulo) ? tituloBien = true : b = this.bordeRojo("titulo");
-
+     
             if (this.estaVacio(this.evento.titulo)) {
                 b = false
                 this.bordeRojo("titulo");
             } else {
-               if  (this.tituloValido(this.evento.titulo)) {
-                    tituloBien = true;
-                } else {
+               if  (!this.tituloValido(this.evento.titulo)) {
                     b = false;
                     this.bordeRojo("titulo");
                 }
@@ -175,33 +166,13 @@ export default {
             if (this.estaVacio(this.evento.descripcion)) {
                 b = false;
                 this.bordeRojo("descripcion");
-            } else {
-                descripcionBien = true;
             }
 
             if (this.estaVacio(this.evento.categoria)) {
                 b = false;
                 this.bordeRojo("categoria");
-            } else {
-                categoriaBien = true;
             }
 
-            // if (tituloBien && descripcionBien && categoriaBien) b = true;
-
-            $("#btn").mouseOver(function() {
-                if (!tituloBien) this.parpadeo("titulo");
-                if (!descripcionBien) this.parapdeo("descripcion");
-                if (!categoriaBien) this.parpadeo("categoria");
-            });
-
-            //Aquí cuando se pulse el botón y b sea false
-                // if (!b) {
-                //     console.log("Mikel es gay");
-                //     $(window).scrollTop(0,0);
-                //     if (!tituloBien) this.parpadeo("titulo");
-                //     if (!descripcionBien) this.parpadeo("descripcion");
-                //     if (!categoriaBien) this.parpadeo("categoria");
-                // }
             return b;
         }
     },
@@ -210,7 +181,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

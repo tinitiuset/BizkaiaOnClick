@@ -26,7 +26,7 @@ class EventoController extends Controller
         $eventos = Evento::paginate(15);
 
         return view('eventos/index',array('eventos' => $eventos));
-        
+
     }
 
     /**
@@ -73,7 +73,6 @@ class EventoController extends Controller
      */
     public function getAll(Request $request): JsonResponse
     {
-
         $eventos = Evento::where('estado','aprobado')->where('fechaFin','>=',date("Y-m-d"))->with("fotos")->get();
         return response()->json($eventos);
 
@@ -113,10 +112,34 @@ class EventoController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
+        $categorias = Categoria::all();
+      
+        // $evento = new Evento;
+        // // $evento->titulo = request()->input('titulo');
+        // // $evento->descripcion = request()->input('descripcion');
+        // // $evento->fechaInicio = request()->input('fechaInicio');
+        // // $evento->fechaFin = request()->input('fechaFin');
+        // // $evento->hora = request()->input('hora');
+        // // $evento->precio = request()->input('hora');
+        // // $evento->direccion = request()->input('direccion');
+        // // $evento->aforo = request()->input('aforo');
+        // // $evento->recinto = request()->input('recinto');
+        // // $evento->localidad = request()->input('localidad');
+        // // $evento->categoria = request()->input('categoria');
+        // // $evento->estado = 'pendiente';
+
+
+
         $evento = Evento::create($request->all());
-        // return response()->json(['mensaje' => 'agregado con exito']);
-        // redirect()->back(->with('estado','Evento agregado correctamente.');
+        
+
+        $evento->estado = "Se ha enviado el evento satisfactoriamente.";
         return response()->json($evento);
+            
+        // return response()->json(['mensaje' => 'agregado con exito']);
+        // return redirect()->back()->with('estado','Evento agregado correctamente.');
+        // return redirect()->back()->with('estado','Selecciona una categoría.');
+        // return response()->json($evento);
     }
 
     /**
