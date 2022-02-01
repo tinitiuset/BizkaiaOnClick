@@ -49,11 +49,11 @@ export default {
     
             }
 
-            $("#textoCambiante").animate({opacity:"0"},5000, () => {
+            $("#textoCambiante").animate({opacity:"0"},500, () => {
               
               this.texto = this.textos[this.contador];
 
-              $("#textoCambiante").animate({opacity:"1"},5000);
+              $("#textoCambiante").animate({opacity:"1"},500);
 
               this.contador++;
 

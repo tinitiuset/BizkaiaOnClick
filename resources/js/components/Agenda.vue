@@ -10,12 +10,6 @@
                 <h3 class="text-center">Busca tus eventos:</h3>
                 <div class="text-center">
                 <input type="text" name="" placeholder="Buscar evento..." aria-label="Search" class="form-control d-inline form-control-dark w-50 mx-auto" id="" v-model="filtro" />
-                <button id="search-button" type="button" class="btn btn-primary" title="Actualizar">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
-                    <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
-                    <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
-                    </svg>
-                </button>
                 </div>
 
             </div>
@@ -67,7 +61,7 @@
                         </a>
                     </li>
                     <li class="mx-2">
-                        <a href="#" aria-label="Ultimo" v-show="pag != Math.ceil(eventos.length / NUM_RESULTS)" @click.prevent="pag = Math.ceil(eventos.length / NUM_RESULTS)" class="btn btn-info">
+                        <a href="#" aria-label="Ultimo" v-show="(pag != Math.ceil(eventosFiltrados.length / NUM_RESULTS)) && (eventosFiltrados.length > NUM_RESULTS)" @click.prevent="pag = Math.ceil(eventosFiltrados.length / NUM_RESULTS)" class="btn btn-info">
                             <span aria-hidden="true"><i class="fas fa-arrow-right"></i> <i class="fas fa-arrow-right"></i></span>
                         </a>
                     </li>

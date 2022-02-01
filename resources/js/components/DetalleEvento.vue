@@ -49,7 +49,7 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-            <div class="col-md-6 col-lg-5 col-xl-4 mx-auto m-md-4 g-0">
+            <div class="col-md-6 col-lg-5 col-xl-4 mx-auto m-md-4 g-0" v-else>
                 <img :src="'/img/eventos/'+evento.fotos[0].ruta" class="d-block w-100" alt="...">
             </div>
 
