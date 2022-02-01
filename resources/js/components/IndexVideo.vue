@@ -14,7 +14,7 @@
 
 <template>
   <div href="" class="d-block" id="contenedorVideo">
-    <video autoplay loop preload id="myVideo" class="">
+    <video autoplay muted loop preload id="myVideo" class="">
       <source src="/video/videoIndex.mp4" type="video/mp4">
       Tu navegador no soporta video en HTML5
       <a href=""></a>

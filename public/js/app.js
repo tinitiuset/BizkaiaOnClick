@@ -41998,7 +41998,26 @@ var render = function () {
     "div",
     { staticClass: "d-block", attrs: { href: "", id: "contenedorVideo" } },
     [
-      _vm._m(0),
+      _c(
+        "video",
+        {
+          attrs: {
+            autoplay: "",
+            muted: "",
+            loop: "",
+            preload: "",
+            id: "myVideo",
+          },
+          domProps: { muted: true },
+        },
+        [
+          _c("source", {
+            attrs: { src: "/video/videoIndex.mp4", type: "video/mp4" },
+          }),
+          _vm._v("\n    Tu navegador no soporta video en HTML5\n    "),
+          _c("a", { attrs: { href: "" } }),
+        ]
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "contenido d-flex align-items-center" }, [
         _c("div", { staticClass: "container text-center" }, [
@@ -42015,24 +42034,7 @@ var render = function () {
     ]
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "video",
-      { attrs: { autoplay: "", loop: "", preload: "", id: "myVideo" } },
-      [
-        _c("source", {
-          attrs: { src: "/video/videoIndex.mp4", type: "video/mp4" },
-        }),
-        _vm._v("\n    Tu navegador no soporta video en HTML5\n    "),
-        _c("a", { attrs: { href: "" } }),
-      ]
-    )
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
