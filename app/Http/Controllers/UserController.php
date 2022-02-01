@@ -187,6 +187,8 @@ class UserController extends Controller
 
         // return request()->get("id");
 
+        //hacemos primero una serie de comprobaciones antes de pasar el validador
+         //si el nombre de usuario es distinto  le añade la comprobación 
         if (request()->get("usuario") != User::where("id",request()->get("id"))->get("usuario")[0]->usuario) {
             // return "hola";
             $campos['usuario'] = ['required','string','min:2','max:30','regex:/^[a-zA-Z0-9]+$/', Rule::unique('users', 'usuario')];

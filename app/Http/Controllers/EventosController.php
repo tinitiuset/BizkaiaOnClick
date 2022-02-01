@@ -52,7 +52,7 @@ class EventosController extends Controller
     {
          //validaciones para el formulario
         $campos=[
-            'titulo'=>['required','string','min:2','max:50','regex:/^[a-zA-Z ]+$/', Rule::unique('eventos', 'titulo')],
+            'titulo'=>['required','string','min:2','max:50','regex:/^[a-zA-Z0-9]+$/', Rule::unique('eventos', 'titulo')],
             'fechaInicio'=>['required','string'],
             'fechaFin'=>['required','string'],
             'precio' =>['required','max:3','regex:/^[0-9]/'],
@@ -128,7 +128,7 @@ class EventosController extends Controller
     {
          //validaciones para el formulario
          $campos=[
-            'titulo'=>['required','string','min:2','max:50','regex:/^[a-zA-Z ]+$/', Rule::unique('eventos', 'titulo')],
+            // 'titulo'=>['required','string','min:2','max:50','regex:/^[a-zA-Z ]+$/', Rule::unique('eventos', 'titulo')],
             'fechaInicio'=>['required','string'],
             'fechaFin'=>['required','string'],
             'precio' =>['required','max:3','regex:/^[0-9]/'],
@@ -144,6 +144,13 @@ class EventosController extends Controller
             'max' => 'El campo :attribute debe tener como maximo :max caracteres',
             'titulo.regex' => 'El título sólo puede contener letras'
         ];
+
+        if (request()->get("titulo") != Eventos::where("id",request()->get("id"))->get("titulo")[0]->titulo) {
+            $campos['titulo'] = ['required','string','min:2','max:50', Rule::unique('eventos', 'titulo')];
+        }
+
+
+
         $this->validate($request,$campos,$mensaje);
 
          //recepcionamos todos los datos excepto el token y el método

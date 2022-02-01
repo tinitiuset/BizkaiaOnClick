@@ -10,7 +10,9 @@
     {{ method_field('PATCH') }}
     <!-- Añadimos la variable modo para diferenciar entre crear y editar-->
     @include('eventos.form',['modo'=>'Editar'] )
-    {{-- <input type="hidden" name="id" value="{{$eventos->id}}"> --}}
+    
+    <!-- cuando haces el post tb envias este campo para saber a quien estas editando -->
+    <input type="hidden" name="id" value="{{$eventos->id}}">
 </form>
 </div>
 @endsection
