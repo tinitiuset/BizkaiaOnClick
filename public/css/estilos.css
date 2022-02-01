@@ -159,6 +159,7 @@ svg:hover {
 
 .btn-evento {
     width: 50%;
+    margin-top: 50px;
 }
 
 @media (min-width: 768px) {
