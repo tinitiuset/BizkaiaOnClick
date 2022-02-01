@@ -123,7 +123,7 @@ class FetchData
                         'hora' => $data['openingHoursEs'],
                         'precio' => doubleval($data['priceEs']),
                         'direccion' => $data['direccion'] ?? '',
-                        'estado' => "pendiente",
+                        'estado' => "aprobado",
                         'aforo' => null,
                         'recinto' => $data['establishmentEs'],
                         'localidad' => $data['municipalityEs'], 
