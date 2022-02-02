@@ -4,6 +4,14 @@
 @section('otrasClasesBody','body-degradado')
 @section('content')
 <div class="container">
+          <!-- Si existe mensaje crea un div alert con botón de cierre -->
+          @if (Session::has('mensaje'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ Session::get('mensaje') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          @endif  
+      <br>
     @if (count($errors)>0)<!-- Comprobamos si hay algún error -->
 
     <div class="alert alert-danger" role="alert">
@@ -14,10 +22,10 @@
         </ul>
     </div>
     @endif
-    <form action="{{ url('admin/user/editarUsuario/'.auth()->user()->id) }}" method="post">
+    <form action="{{ url('user/editarUsuario/'.auth()->user()->id) }}" method="post">
         @csrf
         {{ method_field('PATCH') }}
-        <input type="hidden" name="id" value="{{ auth()->user()->id }}">
+        <input type="hidden" name="id" value="{{ auth()->user()->id }}"><!-- Esto hace falta para saber el id le pasamos -->
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-6 col-xs-8">

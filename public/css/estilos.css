@@ -166,5 +166,8 @@ svg:hover {
     .rounded-0{
         border-radius: 50px !important;
     }
+    .tabla-personalizada {
+       margin-left: 30%;
+    }
 
 }

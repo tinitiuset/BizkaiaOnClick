@@ -3,6 +3,14 @@
 @section('title', 'PerfilAdmin')
 @section('content')
 <div class="container">
+        <!-- Si existe mensaje crea un div alert con botón de cierre -->
+        @if (Session::has('mensaje'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ Session::get('mensaje') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif  
+    <br>
     @if (count($errors)>0)<!-- Comprobamos si hay algún error -->
 
     <div class="alert alert-danger" role="alert">

@@ -42,6 +42,7 @@ Route::middleware(["auth","esactivo"])->group(function ()
     
 
 });
+Route::patch('user/editarUsuario/{id}',[UserController::class,"editarUsuario"]);
 
 Route::get('/detalleevento/{id}', function() {
     return view('detalleEvento');

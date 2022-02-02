@@ -132,9 +132,12 @@ class EventoController extends Controller
 
         $evento = Evento::create($request->all());
         
+        $estado = [];
 
-        $evento->estado = "Se ha enviado el evento satisfactoriamente.";
-        return response()->json($evento);
+        $estado['exito'] = true;
+        $estado['mensajes']['mensaje'] = "Se ha enviado el evento satisfactoriamente.";
+
+        return response()->json($estado);
             
         // return response()->json(['mensaje' => 'agregado con exito']);
         // return redirect()->back()->with('estado','Evento agregado correctamente.');
