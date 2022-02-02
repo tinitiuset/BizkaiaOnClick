@@ -29,21 +29,24 @@ class Eventos extends Model
     ];
     protected $primaryKey = "id";
 
-    public function fotos(){
+    public function fotos()
+    {
 
-        return $this->hasMany(Foto::class,"evento","id");
-
-    }
-
-    public function usuarioAprobador(){
-
-        return $this->belongsTo(User::class,"id","usuarioAprobador");
+        return $this->hasMany(Foto::class, "evento", "id");
 
     }
 
-    public function usuarioCreador(){
+    public function usuarioAprobador()
+    {
 
-        return $this->belongsTo(User::class,"id","usuarioCreador");
+        return $this->belongsTo(User::class, "id", "usuarioAprobador");
+
+    }
+
+    public function usuarioCreador()
+    {
+
+        return $this->belongsTo(User::class, "id", "usuarioCreador");
 
     }
 
@@ -51,9 +54,8 @@ class Eventos extends Model
     public function categoria()
     {
 
-        return $this->belongsTo(Categoria::class,"nombre","categoria");
+        return $this->belongsTo(Categoria::class, "nombre", "categoria");
     }
-
 
 
 }

@@ -14,7 +14,6 @@ class CreateEventosTable extends Migration
     public function up()
     {
         Schema::create('eventos', function (Blueprint $table) {
-
             $table->integer("id")->autoIncrement();
             $table->string("titulo")->unique();
             $table->mediumText("descripcion")->nullable();
@@ -23,7 +22,7 @@ class CreateEventosTable extends Migration
             $table->string("hora")->nullable();
             $table->float("precio")->nullable()->unsigned();
             $table->string("direccion")->nullable();
-            $table->enum("estado",["pendiente","aprobado"])->default("pendiente");
+            $table->enum("estado", ["pendiente", "aprobado"])->default("pendiente");
             $table->string("aforo")->nullable();
             $table->string("recinto")->nullable();
             $table->string("localidad")->nullable();
@@ -34,7 +33,6 @@ class CreateEventosTable extends Migration
             $table->foreign('usuarioCreador')->references('id')->on('users');
             $table->foreign('categoria')->references('nombre')->on('categorias');
             $table->timestamps();
-
         });
     }
 
