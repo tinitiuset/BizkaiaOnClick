@@ -49,7 +49,7 @@
             <h1 class="initialism text-center">últimos usuarios</h1>
         </div>
         <div class="card-body">
-            <table class="table table-light table-responsive tableFixHead">
+            <table class="table table-light table-responsive tableFixHead tabla-personalizada">
                 <thead class="thead-light">
                     <tr>
                         <th>Usuario</th>
