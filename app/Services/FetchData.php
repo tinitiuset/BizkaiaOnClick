@@ -8,7 +8,7 @@ use App\Models\Categoria;
 use App\Models\Evento;
 use App\Models\Foto;
 
-class FetchData
+class FetchData 
 {
 
     public function __invoke()
