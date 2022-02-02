@@ -21,7 +21,7 @@ class CategoriaController extends Controller
         $categorias = Categoria::query()
             ->where('nombre', 'LIKE', "%{$buscar}%")
             ->orWhere('descripcion', 'LIKE', "%{$buscar}%")
-            ->paginate(5);
+            ->paginate(8);
 
         return view('categoria.index', compact(['categorias','buscar']));
 
@@ -56,6 +56,8 @@ class CategoriaController extends Controller
             'required'=>'El campo :attribute es requerido'
 
         ];
+
+
 
         $this->validate($request,$campos,$mensaje);
 
@@ -119,7 +121,7 @@ class CategoriaController extends Controller
 
         //validaciones para el formulario
         $campos=[
-            'nombre'=>'required|string|max:50',
+            // 'nombre'=>'required|string|max:50',
             'descripcion'=>'required|string|max:400'
         ];
         $mensaje=[
