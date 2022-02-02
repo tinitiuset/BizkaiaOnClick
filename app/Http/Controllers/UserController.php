@@ -246,7 +246,7 @@ class UserController extends Controller
             'apellidos'=>['required','string','min:2','max:70','regex:/^[a-zA-Z ]+$/'],
             'fechaNac'=>['string','regex:/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'],
             'tipo' => ['in:usuario,administrador'],
-            'password'=>['string','confirmed','max:100',Password::min(8)->mixedCase()->numbers()],
+            // 'password'=>['string','confirmed','max:100',Password::min(8)->mixedCase()->numbers()],
             
         ];
         $mensaje=[
@@ -276,10 +276,52 @@ class UserController extends Controller
     }
 
     public function editarUsuario(Request $request, $id) {
+        $campos=[
+            
+            'nombre'=>['required','string','min:2','max:30','regex:/^[a-zA-Z ]+$/'],
+            'apellidos'=>['required','string','min:2','max:70','regex:/^[a-zA-Z ]+$/'],
+            'fechaNac'=>['string','regex:/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'],
+            'tipo' => ['in:usuario,administrador'],
+            // 'password'=>['string','confirmed','max:100',Password::min(8)->mixedCase()->numbers()],
+            
+        ];
+        $mensaje=[
+            'required'=>'El campo :attribute es requerido',
+            'tipo.in' => 'El tipo de usuario solo puede ser administrador o usuario',
+            'min' => 'El campo :attribute debe tener como minimo :min caracteres',
+            'max' => 'El campo :attribute debe tener como maximo :max caracteres',
+            'regex' => 'El campo :attribute no tiene un formato adecuado',
+            'usuario.regex'=>'El usuario unicamente debe tener caracteres alfanumericos',
+            'nombre.regex'=>'El nombre solo puede contener letras',
+            'apellidos.regex'=>'los apellidos solo puede contener letras',
+            'email.regex' => 'El email debe tener el siguiente formato: (mikel@example.net)',
+            'fechaNac' => 'La fecha de nacimiento debe tener el siguiente formato: AAAA-MM-DD',
+            'telefono.regex' => 'El numero de telefono debe ser unicamente numerico y empezar por los numeros 6, 7 o 9',
+            'confirmed' => 'Las contraseñas deben coincidir entre si'
+            
+        ];
+        
+        $datosUsuario = request()->except(['_token','_method']);
+
+        if (($datosUsuario['password'] == null) && ($datosUsuario['password_confirmation'] == null)) {
+            
+            $datosUsuario = request()->except(['_token','password_confirmation','_method','password']);
+            unset($campos['password']);
+
+        } else {
+
+            $datosUsuario = request()->except(['_token','password_confirmation','_method']);
+            $datosUsuario['password'] = Hash::make($datosUsuario['password']);
+
+        }
+
+
+        $this->validate($request,$campos,$mensaje);
 
         $this->update($request, $id);
+        return "hola";
 
-        return redirect()->route('admin.usuario')->with('mensaje','Usuario modificado');
+        // return redirect()->route('/perfil')->with('mensaje','Usuario modificado');
 
     }
 

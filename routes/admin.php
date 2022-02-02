@@ -22,10 +22,10 @@ Route::middleware(["auth","esadmin","esactivo"])->group(function ()
     Route::resource("eventos",EventosController::class);
     // Route::resource("evento",EventoController::class);
     Route::resource('user', UserController::class);
-    Route::get('/perfil', function() {
-        return view('perfil');  })->name('admin.perfil');
-    Route::get('/usuario', function() {
-        return view('usuario'); })->name('admin.usuario');
+    // Route::get('/perfil', function() {
+    //     return view('perfil');  })->name('admin.perfil');
+    // Route::get('/usuario', function() {
+    //     return view('usuario'); })->name('admin.usuario');
     Route::patch('user/editarperfil/{id}',[UserController::class,"editarPerfil"]);
     Route::patch('user/editarUsuario/{id}',[UserController::class,"editarUsuario"]);
     Route::get('user/{usuario}/reactivar', [UserController::class,"reactivar"]);
