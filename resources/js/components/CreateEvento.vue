@@ -1,5 +1,11 @@
 <template>
     <div>
+        <div v-if="this.mensaje.exito==true" class="alert alert-success">
+            <p :key="texto.mensaje" v-for="texto in this.mensaje.mensaje">{{texto}}</p>
+        </div>
+        <div v-if="this.mensaje.exito==false" class="danger alert-danger">
+            <p :key="texto.mensaje" v-for="texto in this.mensaje.mensajes">{{texto}}</p>
+        </div>
         <form action="" @submit="createEvento(evento)">
             <div class="cardPersonalizada">
                 <h2 class="text-center font-weight-bold h2Personalizado">Envia tus eventos</h2>
@@ -126,6 +132,10 @@ export default {
     methods: {
          createEvento(evento) {
             this.$store.dispatch('createEvento', evento);
+            // console.log(this.mensaje);
+            // this.mensaje.forEach(mensaje => {
+            //     console.log(mensaje);
+            // });
             $(window).scrollTop(0,0);
         },
         tituloValido(texto) {
@@ -146,7 +156,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['categorias']),
+        ...mapGetters(['categorias','mensaje']),
         isValid() {
             let b = true;
             $("#titulo").css("border","none");

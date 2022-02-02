@@ -5540,6 +5540,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CreateEvento",
@@ -5564,7 +5570,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     createEvento: function createEvento(evento) {
-      this.$store.dispatch('createEvento', evento);
+      this.$store.dispatch('createEvento', evento); // console.log(this.mensaje);
+      // this.mensaje.forEach(mensaje => {
+      //     console.log(mensaje);
+      // });
+
       $(window).scrollTop(0, 0);
     },
     tituloValido: function tituloValido(texto) {
@@ -5584,7 +5594,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $("#".concat(componente)).css("border", "2px solid red");
     }
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['categorias'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['categorias', 'mensaje'])), {}, {
     isValid: function isValid() {
       var b = true;
       $("#titulo").css("border", "none");
@@ -6438,6 +6448,7 @@ __webpack_require__.r(__webpack_exports__);
 var state = function state() {
   return {
     eventos: [],
+    mensaje: [],
     evento: []
   };
 }; // Getters
@@ -6449,6 +6460,9 @@ var getters = {
   },
   evento: function evento(state) {
     return state.evento;
+  },
+  mensaje: function mensaje(state) {
+    return state.mensaje;
   }
 }; // Actions
 
@@ -6456,8 +6470,8 @@ var actions = {
   createEvento: function createEvento(_ref, evento) {
     var commit = _ref.commit;
     axios.post('/api/eventos', evento).then(function (res) {
-      console.log("Called CREATE");
-      console.log(res.data.estado);
+      console.log("Called CREATE"); // console.log(res.data)
+
       commit('CREATE_EVENTO', res.data);
     })["catch"](function (err) {
       console.log(err);
@@ -6493,8 +6507,10 @@ var actions = {
 }; // Mutations
 
 var mutations = {
-  CREATE_EVENTO: function CREATE_EVENTO(state, evento) {
-    state.eventos.unshift(evento);
+  CREATE_EVENTO: function CREATE_EVENTO(state, mensaje) {
+    // state.eventos.unshift(evento)
+    // return state.mensaje = mensaje
+    return state.mensaje = mensaje;
   },
   FETCH_EVENTO: function FETCH_EVENTO(state, evento) {
     return state.evento = evento;
@@ -41049,6 +41065,28 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    this.mensaje.exito == true
+      ? _c(
+          "div",
+          { staticClass: "alert alert-success" },
+          _vm._l(this.mensaje.mensaje, function (texto) {
+            return _c("p", { key: texto.mensaje }, [_vm._v(_vm._s(texto))])
+          }),
+          0
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    this.mensaje.exito == false
+      ? _c(
+          "div",
+          { staticClass: "danger alert-danger" },
+          _vm._l(this.mensaje.mensajes, function (texto) {
+            return _c("p", { key: texto.mensaje }, [_vm._v(_vm._s(texto))])
+          }),
+          0
+        )
+      : _vm._e(),
+    _vm._v(" "),
     _c(
       "form",
       {
