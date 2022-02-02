@@ -62,7 +62,7 @@
 
                     </div>
                     <div class="col-6 form-group white">
-                        Precio: <input type="number" placeholder="" min=0 v-model="evento.precio" class="form-control">
+                        Precio: <input id="precio" type="number" placeholder="" min=0 v-model="evento.precio" class="form-control">
 
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                     <label for="direccion" class="col-form-label white">Dirección:</label>
 
                     <div class="col">
-                        <input type="text" placeholder="" v-model="evento.direccion" class="form-control">
+                        <input id="direccion" type="text" placeholder="" v-model="evento.direccion" class="form-control">
                     </div>
                 </div>
                 <!--AFORO EVENTO-->
@@ -79,7 +79,7 @@
                     <label for="aforo" class="col-form-label white">Aforo:</label>
 
                     <div class="col">
-                        <input type="number" placeholder="" v-model="evento.aforo" class="form-control">
+                        <input id="aforo" type="number" placeholder="" v-model="evento.aforo" class="form-control">
                     </div>
                 </div>
                 <!--RECINTO EVENTO-->
@@ -87,7 +87,7 @@
                     <label for="recinto" class="col-form-label white">Recinto:</label>
 
                     <div class="col">
-                        <input type="text" placeholder="" v-model="evento.recinto" class="form-control">
+                        <input id="recinto" type="text" placeholder="" v-model="evento.recinto" class="form-control">
                     </div>
                 </div>
                 <!--LOCALIDAD EVENTO-->
@@ -95,7 +95,7 @@
                     <label for="localidad" class="col-form-label white">Localidad:</label>
 
                     <div class="col">
-                        <input type="text" placeholder="" v-model="evento.localidad" class="form-control">
+                        <input id="localidad" type="text" placeholder="" v-model="evento.localidad" class="form-control">
                     </div>
                 </div>
                 <!--BOTON ENVIAR EVENTO-->
@@ -140,9 +140,40 @@ export default {
             $(window).scrollTop(0,0);
         },
         tituloValido(texto) {
-            const pattern = /[a-zA-Z0-9^]+/;
+            const pattern = /^[a-zA-Z0-9]+$/;
                 return pattern.test(texto);
         },
+        precioValido(texto) {
+
+            if ($.isNumeric(texto)) {
+                
+                if (parseInt(texto) <= 999) {
+
+                    return true;
+
+                }
+
+            }
+
+            return false;
+
+        },
+        aforoValido(texto) {
+
+            if ($.isNumeric(texto)) {
+                
+                if (parseInt(texto) <= 100000) {
+
+                    return true;
+
+                }
+
+            }
+
+            return false;
+
+        },
+
         estaVacio(texto) {
             return texto == '';
         },
@@ -182,6 +213,36 @@ export default {
             if (this.estaVacio(this.evento.categoria)) {
                 b = false;
                 this.bordeRojo("categoria");
+            }
+            if  (!this.aforoValido(this.evento.aforo)) {
+                    b = false;
+                    this.bordeRojo("aforo");
+            }
+
+            if (this.estaVacio(this.evento.precio)) {
+                b = false;
+                this.bordeRojo("precio");
+            } else {
+
+                if  (!this.precioValido(this.evento.precio)) {
+                    b = false;
+                    this.bordeRojo("precio");
+                }
+
+            }
+
+            if (this.estaVacio(this.evento.direccion)) {
+                b = false;
+                this.bordeRojo("direccion");
+            }
+
+            if (this.estaVacio(this.evento.localidad)) {
+                b = false;
+                this.bordeRojo("localidad");
+            }
+            if (this.estaVacio(this.evento.recinto)) {
+                b = false;
+                this.bordeRojo("recinto");
             }
 
             return b;

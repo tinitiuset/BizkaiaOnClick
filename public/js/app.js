@@ -5579,8 +5579,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $(window).scrollTop(0, 0);
     },
     tituloValido: function tituloValido(texto) {
-      var pattern = /[a-zA-Z0-9^]+/;
+      var pattern = /^[a-zA-Z0-9]+$/;
       return pattern.test(texto);
+    },
+    precioValido: function precioValido(texto) {
+      if ($.isNumeric(texto)) {
+        if (parseInt(texto) <= 999) {
+          return true;
+        }
+      }
+
+      return false;
+    },
+    aforoValido: function aforoValido(texto) {
+      if ($.isNumeric(texto)) {
+        if (parseInt(texto) <= 100000) {
+          return true;
+        }
+      }
+
+      return false;
     },
     estaVacio: function estaVacio(texto) {
       return texto == '';
@@ -5620,6 +5638,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (this.estaVacio(this.evento.categoria)) {
         b = false;
         this.bordeRojo("categoria");
+      }
+
+      if (!this.aforoValido(this.evento.aforo)) {
+        b = false;
+        this.bordeRojo("aforo");
+      }
+
+      if (this.estaVacio(this.evento.precio)) {
+        b = false;
+        this.bordeRojo("precio");
+      } else {
+        if (!this.precioValido(this.evento.precio)) {
+          b = false;
+          this.bordeRojo("precio");
+        }
+      }
+
+      if (this.estaVacio(this.evento.direccion)) {
+        b = false;
+        this.bordeRojo("direccion");
+      }
+
+      if (this.estaVacio(this.evento.localidad)) {
+        b = false;
+        this.bordeRojo("localidad");
+      }
+
+      if (this.estaVacio(this.evento.recinto)) {
+        b = false;
+        this.bordeRojo("recinto");
       }
 
       return b;
@@ -41352,7 +41400,12 @@ var render = function () {
                   },
                 ],
                 staticClass: "form-control",
-                attrs: { type: "number", placeholder: "", min: "0" },
+                attrs: {
+                  id: "precio",
+                  type: "number",
+                  placeholder: "",
+                  min: "0",
+                },
                 domProps: { value: _vm.evento.precio },
                 on: {
                   input: function ($event) {
@@ -41387,7 +41440,7 @@ var render = function () {
                   },
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", placeholder: "" },
+                attrs: { id: "direccion", type: "text", placeholder: "" },
                 domProps: { value: _vm.evento.direccion },
                 on: {
                   input: function ($event) {
@@ -41419,7 +41472,7 @@ var render = function () {
                   },
                 ],
                 staticClass: "form-control",
-                attrs: { type: "number", placeholder: "" },
+                attrs: { id: "aforo", type: "number", placeholder: "" },
                 domProps: { value: _vm.evento.aforo },
                 on: {
                   input: function ($event) {
@@ -41454,7 +41507,7 @@ var render = function () {
                   },
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", placeholder: "" },
+                attrs: { id: "recinto", type: "text", placeholder: "" },
                 domProps: { value: _vm.evento.recinto },
                 on: {
                   input: function ($event) {
@@ -41489,7 +41542,7 @@ var render = function () {
                   },
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", placeholder: "" },
+                attrs: { id: "localidad", type: "text", placeholder: "" },
                 domProps: { value: _vm.evento.localidad },
                 on: {
                   input: function ($event) {
