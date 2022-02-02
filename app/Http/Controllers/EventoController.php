@@ -108,7 +108,6 @@ class EventoController extends Controller
                 "recinto" => request()->input('recinto'),
                 "localidad" => request()->input('localidad'),
                 "categoria" => request()->input('categoria'),
-                "usuarioCreador" => auth()->user(),
                 "estado" => 'pendiente'
             ]);
         }

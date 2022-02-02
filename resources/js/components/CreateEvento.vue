@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div v-if="this.mensajes.exito==true" class="alert alert-success my-3 fs-5 text-center">
+        <div v-if="this.mensajes.exito==true" class="alert alert-success my-3 fs-5 fw-bold text-center">
             <p :key="mensaje[0]" v-for="mensaje in this.mensajes">{{mensaje[0]}}</p>
         </div>
-        <div v-if="this.mensajes.exito==false" class="danger alert-danger my-3 fs-5 p-2 rounded-3" role="danger">
+        <div v-if="this.mensajes.exito==false" class="danger alert-danger my-3 fs-5 fw-bold p-2 rounded-3" role="danger">
 
             <p v-if="this.mensajes.mensajes.length == 1" class="text-center">{{this.mensajes.mensajes[0][0]}}</p>
 
