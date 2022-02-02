@@ -40743,7 +40743,7 @@ var render = function () {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row text-center mx-auto my-2" }, [
-        _c("h3", [_vm._v("Categorias:")]),
+        _c("h3", [_vm._v("Categorías:")]),
         _vm._v(" "),
         _c(
           "select",

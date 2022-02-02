@@ -14,7 +14,7 @@
 
             </div>
             <div class="row text-center mx-auto my-2">
-                <h3>Categorias:</h3>
+                <h3>Categorías:</h3>
                 <select class="p-0 w-auto mx-auto" name="" id="" v-model="filtroCategoria">
                     <option value="Todos">Todos</option>
                     <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
