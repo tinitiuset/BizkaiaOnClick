@@ -155,7 +155,7 @@ class EventoController extends Controller
             $errores = $validador->errors()->getMessages();
 
             // array_push($estado['mensajes'],$errores[0]);
-            
+
             foreach ($errores as $valor) {
                 array_push($estado['mensajes'],$valor);
             }
@@ -190,7 +190,7 @@ class EventoController extends Controller
         }
 
         return response()->json($estado);
-            
+
         // return response()->json(['mensaje' => 'agregado con exito']);
         // return redirect()->back()->with('estado','Evento agregado correctamente.');
         // return redirect()->back()->with('estado','Selecciona una categoría.');

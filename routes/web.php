@@ -34,12 +34,12 @@ Route::middleware(["auth","esactivo"])->group(function ()
 {
 
     Route::get('/enviaevento', function() {
-        return view('enviaevento');
+        return view('enviaEvento');
     });
     Route::get('/perfil', function() {
         return view('usuario');
     });
-    
+
 
 });
 Route::patch('user/editarUsuario/{id}',[UserController::class,"editarUsuario"]);
