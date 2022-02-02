@@ -184,7 +184,7 @@ export default {
         //     $(`#${componente}`).fadeIn();
         // },
         bordeRojo(componente) {
-            $(`#${componente}`).css("border","2px solid red");
+            $(`#${componente}`).css("border","3px solid red");
         }
     },
     computed: {
@@ -194,6 +194,11 @@ export default {
             $("#titulo").css("border","none");
             $("#descripcion").css("border","none");
             $("#categoria").css("border","none");
+            $("#precio").css("border","none");
+            $("#direccion").css("border","none");
+            $("#aforo").css("border","none");
+            $("#recinto").css("border","none");
+            $("#localidad").css("border","none");
      
             if (this.estaVacio(this.evento.titulo)) {
                 b = false

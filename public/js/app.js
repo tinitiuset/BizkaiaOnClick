@@ -5610,7 +5610,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //     $(`#${componente}`).fadeIn();
     // },
     bordeRojo: function bordeRojo(componente) {
-      $("#".concat(componente)).css("border", "2px solid red");
+      $("#".concat(componente)).css("border", "3px solid red");
     }
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['categorias', 'mensajes'])), {}, {
@@ -5619,6 +5619,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $("#titulo").css("border", "none");
       $("#descripcion").css("border", "none");
       $("#categoria").css("border", "none");
+      $("#precio").css("border", "none");
+      $("#direccion").css("border", "none");
+      $("#aforo").css("border", "none");
+      $("#recinto").css("border", "none");
+      $("#localidad").css("border", "none");
 
       if (this.estaVacio(this.evento.titulo)) {
         b = false;
@@ -6520,7 +6525,6 @@ var actions = {
     var commit = _ref.commit;
     axios.post('/api/eventos', evento).then(function (res) {
       console.log("Called CREATE");
-      console.log(res.data);
       commit('CREATE_EVENTO', res.data);
     })["catch"](function (err) {
       console.log(err);

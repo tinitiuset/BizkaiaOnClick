@@ -25,7 +25,6 @@ let actions = {
         axios.post('/api/eventos', evento)
             .then(res => {
                 console.log("Called CREATE")
-                console.log(res.data)
                 commit('CREATE_EVENTO', res.data)
             }).catch(err => {
             console.log(err)
