@@ -51,18 +51,24 @@ class EventosController extends Controller
     public function store(Request $request)
     {
          //validaciones para el formulario
-        $campos=[
+         $campos=[
             'titulo'=>['required','string','min:2','max:50','regex:/^[a-zA-Z0-9]+$/', Rule::unique('eventos', 'titulo')],
-            'fechaInicio'=>['required','string'],
-            'fechaFin'=>['required','string'],
-            'precio' =>['required','max:3','regex:/^[0-9]/'],
-            'hora'=>['required','string'],
+            'fechaInicio'=>['required','string','regex:/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'],
+            'fechaFin'=>['required','string','regex:/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/','after_or_equal:fechaInicio'],
+            'precio' =>['integer','required','max:999'],
+            'hora'=>['required','string','regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/'],
+            'aforo' => ['integer','max:100000'],
             'direccion'=>['required','string'],
             'localidad'=>['required','string'],
-            'categoria'=>['required','string'],
+            'categoria'=>['required','string']
         ];
         $mensaje=[
             'required'=>'El campo :attribute es requerido',
+            'after_or_equal' => 'La fecha de fin debe ser igual o superior a la fecha de inicio',
+            'fechaInicio' => 'La fecha de inicio debe tener el siguiente formato: AAAA-MM-DD',
+            'fechaFin' => 'La fecha de fin debe tener el siguiente formato: AAAA-MM-DD',
+            'hora.regex' => 'La hora debe tener el siguiente formato: HH:MM',
+            'integer' => 'El campo :attribute debe ser numerico',
             'regex' => 'El campo :attribute no tiene un formato adecuado',
             'min' => 'El campo :attribute debe tener como minimo :min caracteres',
             'max' => 'El campo :attribute debe tener como maximo :max caracteres',
@@ -72,6 +78,7 @@ class EventosController extends Controller
         $this->validate($request,$campos,$mensaje);
 
         $datosEventos = request()->except('_token');
+        $datosEventos['hora'] = 
         Eventos::insert($datosEventos);
 
         return redirect()->route("eventos.index")->with('mensaje','Evento creado con éxito');
@@ -100,6 +107,7 @@ class EventosController extends Controller
     {
          //método para buscar un registro
          $eventos=Eventos::findOrFail($id);
+         $eventos['hora'] = date("H:i",strtotime($eventos['hora']));
          $categorias=Categoria::all();
          return view('eventos.edit', compact(['eventos','categorias']) );
     }
@@ -128,17 +136,23 @@ class EventosController extends Controller
     {
          //validaciones para el formulario
          $campos=[
-            // 'titulo'=>['required','string','min:2','max:50','regex:/^[a-zA-Z ]+$/', Rule::unique('eventos', 'titulo')],
-            'fechaInicio'=>['required','string'],
-            'fechaFin'=>['required','string'],
-            'precio' =>['required','max:3','regex:/^[0-9]/'],
-            'hora'=>['required','string'],
+            // 'titulo'=>['required','string','min:2','max:50','regex:/^[a-zA-Z0-9]+$/', Rule::unique('eventos', 'titulo')],
+            'fechaInicio'=>['required','string','regex:/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'],
+            'fechaFin'=>['required','string','regex:/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/','after_or_equal:fechaInicio'],
+            'precio' =>['integer','required','max:999'],
+            'hora'=>['required','string','regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/'],
+            'aforo' => ['integer','max:100000'],
             'direccion'=>['required','string'],
             'localidad'=>['required','string'],
-            'categoria'=>['required','string'],
+            'categoria'=>['required','string']
         ];
         $mensaje=[
             'required'=>'El campo :attribute es requerido',
+            'after_or_equal' => 'La fecha de fin debe ser igual o superior a la fecha de inicio',
+            'fechaInicio' => 'La fecha de inicio debe tener el siguiente formato: AAAA-MM-DD',
+            'fechaFin' => 'La fecha de fin debe tener el siguiente formato: AAAA-MM-DD',
+            'hora.regex' => 'La hora debe tener el siguiente formato: HH:MM',
+            'integer' => 'El campo :attribute debe ser numerico',
             'regex' => 'El campo :attribute no tiene un formato adecuado',
             'min' => 'El campo :attribute debe tener como minimo :min caracteres',
             'max' => 'El campo :attribute debe tener como maximo :max caracteres',
@@ -146,7 +160,7 @@ class EventosController extends Controller
         ];
 
         if (request()->get("titulo") != Eventos::where("id",request()->get("id"))->get("titulo")[0]->titulo) {
-            $campos['titulo'] = ['required','string','min:2','max:50', Rule::unique('eventos', 'titulo')];
+            $campos['titulo'] = ['required','string','min:2','max:50','regex:/^[a-zA-Z0-9]+$/', Rule::unique('eventos', 'titulo')];
         }
 
 

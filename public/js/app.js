@@ -41069,7 +41069,7 @@ var render = function () {
     this.mensajes.exito == true
       ? _c(
           "div",
-          { staticClass: "alert alert-success my-3 fs-5 text-center" },
+          { staticClass: "alert alert-success my-3 fs-5 fw-bold text-center" },
           _vm._l(this.mensajes, function (mensaje) {
             return _c("p", { key: mensaje[0] }, [_vm._v(_vm._s(mensaje[0]))])
           }),
@@ -41081,7 +41081,7 @@ var render = function () {
       ? _c(
           "div",
           {
-            staticClass: "danger alert-danger my-3 fs-5 p-2 rounded-3",
+            staticClass: "danger alert-danger my-3 fs-5 fw-bold p-2 rounded-3",
             attrs: { role: "danger" },
           },
           [

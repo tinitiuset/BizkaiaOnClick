@@ -104,7 +104,6 @@ class EventoController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        // $categorias = Categoria::all();
 
         $campos=[
             'titulo'=>['required','string','min:2','max:50','regex:/^[a-zA-Z0-9]+$/', Rule::unique('eventos', 'titulo')],
@@ -151,9 +150,6 @@ class EventoController extends Controller
 
             $estado['exito'] = true;
             $estado['mensajes'][0] = "Se ha enviado el evento satisfactoriamente.";
-            // $datos = $request->all();
-            // $datos['usuarioCreador'] = auth()->user()->usuario;
-            // $evento = Evento::create($datos);
             Evento::create([
 
                 "titulo" => request()->input('titulo'),
@@ -167,7 +163,6 @@ class EventoController extends Controller
                 "recinto" => request()->input('recinto'),
                 "localidad" => request()->input('localidad'),
                 "categoria" => request()->input('categoria'),
-                "usuarioCreador" => auth()->user(),
                 "estado" => 'pendiente'
 
 
@@ -178,10 +173,6 @@ class EventoController extends Controller
 
         return response()->json($estado);
 
-        // return response()->json(['mensaje' => 'agregado con exito']);
-        // return redirect()->back()->with('estado','Evento agregado correctamente.');
-        // return redirect()->back()->with('estado','Selecciona una categoría.');
-        // return response()->json($evento);
     }
 
     /**
