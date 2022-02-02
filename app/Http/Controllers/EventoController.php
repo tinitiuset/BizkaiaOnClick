@@ -11,7 +11,12 @@ use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Foto;
 use Illuminate\Http\Response;
+use Illuminate\Log\Logger;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class EventoController extends Controller
 {
@@ -112,30 +117,77 @@ class EventoController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        $categorias = Categoria::all();
-      
-        // $evento = new Evento;
-        // // $evento->titulo = request()->input('titulo');
-        // // $evento->descripcion = request()->input('descripcion');
-        // // $evento->fechaInicio = request()->input('fechaInicio');
-        // // $evento->fechaFin = request()->input('fechaFin');
-        // // $evento->hora = request()->input('hora');
-        // // $evento->precio = request()->input('hora');
-        // // $evento->direccion = request()->input('direccion');
-        // // $evento->aforo = request()->input('aforo');
-        // // $evento->recinto = request()->input('recinto');
-        // // $evento->localidad = request()->input('localidad');
-        // // $evento->categoria = request()->input('categoria');
-        // // $evento->estado = 'pendiente';
+        // $categorias = Categoria::all();
 
+        $campos=[
+            'titulo'=>['required','string','min:2','max:50','regex:/^[a-zA-Z0-9]+$/', Rule::unique('eventos', 'titulo')],
+            'fechaInicio'=>['required','string','regex:/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'],
+            'fechaFin'=>['required','string','regex:/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/','after_or_equal:fechaInicio'],
+            'precio' =>['integer','required','max:999'],
+            'hora'=>['required','string','regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/'],
+            'aforo' => ['integer','max:100000'],
+            'direccion'=>['required','string'],
+            'localidad'=>['required','string'],
+            'categoria'=>['required','string']
+        ];
+        $mensaje=[
+            'required'=>'El campo :attribute es requerido',
+            'after_or_equal' => 'La fecha de fin debe ser igual o superior a la fecha de inicio',
+            'fechaInicio' => 'La fecha de inicio debe tener el siguiente formato: AAAA-MM-DD',
+            'fechaFin' => 'La fecha de fin debe tener el siguiente formato: AAAA-MM-DD',
+            'hora.regex' => 'La hora debe tener el siguiente formato: HH:MM',
+            'integer' => 'El campo :attribute debe ser numerico',
+            'regex' => 'El campo :attribute no tiene un formato adecuado',
+            'min' => 'El campo :attribute debe tener como minimo :min caracteres',
+            'max' => 'El campo :attribute debe tener como maximo :max caracteres',
+            'titulo.regex' => 'El título sólo puede contener letras'
+        ];
 
+        $validador = Validator::make($request->all(), $campos, $mensaje);
 
-        $evento = Evento::create($request->all());
-        
         $estado = [];
 
-        $estado['exito'] = true;
-        $estado['mensajes']['mensaje'] = "Se ha enviado el evento satisfactoriamente.";
+        $estado['mensajes'] = [];
+
+        if ($validador->fails()) {
+
+            $estado['exito'] = false;
+            $errores = $validador->errors()->getMessages();
+
+            // array_push($estado['mensajes'],$errores[0]);
+            
+            foreach ($errores as $valor) {
+                array_push($estado['mensajes'],$valor);
+            }
+
+        } else {
+
+            $estado['exito'] = true;
+            $estado['mensajes'][0] = "Se ha enviado el evento satisfactoriamente.";
+            // $datos = $request->all();
+            // $datos['usuarioCreador'] = auth()->user()->usuario;
+            // $evento = Evento::create($datos);
+            Evento::create([
+
+                "titulo" => request()->input('titulo'),
+                "descripcion" => request()->input('descripcion'),
+                "fechaInicio" => request()->input('fechaInicio'),
+                "fechaFin" => request()->input('fechaFin'),
+                "hora" => request()->input('hora'),
+                "precio" => request()->input('precio'),
+                "direccion" => request()->input('direccion'),
+                "aforo" => request()->input('aforo'),
+                "recinto" => request()->input('recinto'),
+                "localidad" => request()->input('localidad'),
+                "categoria" => request()->input('categoria'),
+                "usuarioCreador" => auth()->user(),
+                "estado" => 'pendiente'
+
+
+            ]);
+
+
+        }
 
         return response()->json($estado);
             

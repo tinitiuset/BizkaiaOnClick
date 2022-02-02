@@ -5546,6 +5546,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CreateEvento",
@@ -5570,11 +5575,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     createEvento: function createEvento(evento) {
-      this.$store.dispatch('createEvento', evento); // console.log(this.mensaje);
-      // this.mensaje.forEach(mensaje => {
-      //     console.log(mensaje);
-      // });
-
+      this.$store.dispatch('createEvento', evento);
       $(window).scrollTop(0, 0);
     },
     tituloValido: function tituloValido(texto) {
@@ -5594,7 +5595,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $("#".concat(componente)).css("border", "2px solid red");
     }
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['categorias', 'mensaje'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['categorias', 'mensajes'])), {}, {
     isValid: function isValid() {
       var b = true;
       $("#titulo").css("border", "none");
@@ -6448,7 +6449,7 @@ __webpack_require__.r(__webpack_exports__);
 var state = function state() {
   return {
     eventos: [],
-    mensaje: [],
+    mensajes: [],
     evento: []
   };
 }; // Getters
@@ -6461,8 +6462,8 @@ var getters = {
   evento: function evento(state) {
     return state.evento;
   },
-  mensaje: function mensaje(state) {
-    return state.mensaje;
+  mensajes: function mensajes(state) {
+    return state.mensajes;
   }
 }; // Actions
 
@@ -6470,8 +6471,8 @@ var actions = {
   createEvento: function createEvento(_ref, evento) {
     var commit = _ref.commit;
     axios.post('/api/eventos', evento).then(function (res) {
-      console.log("Called CREATE"); // console.log(res.data)
-
+      console.log("Called CREATE");
+      console.log(res.data);
       commit('CREATE_EVENTO', res.data);
     })["catch"](function (err) {
       console.log(err);
@@ -6507,10 +6508,10 @@ var actions = {
 }; // Mutations
 
 var mutations = {
-  CREATE_EVENTO: function CREATE_EVENTO(state, mensaje) {
+  CREATE_EVENTO: function CREATE_EVENTO(state, mensajes) {
     // state.eventos.unshift(evento)
     // return state.mensaje = mensaje
-    return state.mensaje = mensaje;
+    return state.mensajes = mensajes;
   },
   FETCH_EVENTO: function FETCH_EVENTO(state, evento) {
     return state.evento = evento;
@@ -41065,25 +41066,39 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    this.mensaje.exito == true
+    this.mensajes.exito == true
       ? _c(
           "div",
-          { staticClass: "alert alert-success" },
-          _vm._l(this.mensaje.mensaje, function (texto) {
-            return _c("p", { key: texto.mensaje }, [_vm._v(_vm._s(texto))])
+          { staticClass: "alert alert-success my-3 fs-5 text-center" },
+          _vm._l(this.mensajes, function (mensaje) {
+            return _c("p", { key: mensaje[0] }, [_vm._v(_vm._s(mensaje[0]))])
           }),
           0
         )
       : _vm._e(),
     _vm._v(" "),
-    this.mensaje.exito == false
+    this.mensajes.exito == false
       ? _c(
           "div",
-          { staticClass: "danger alert-danger" },
-          _vm._l(this.mensaje.mensajes, function (texto) {
-            return _c("p", { key: texto.mensaje }, [_vm._v(_vm._s(texto))])
-          }),
-          0
+          {
+            staticClass: "danger alert-danger my-3 fs-5 p-2 rounded-3",
+            attrs: { role: "danger" },
+          },
+          [
+            this.mensajes.mensajes.length == 1
+              ? _c("p", { staticClass: "text-center" }, [
+                  _vm._v(_vm._s(this.mensajes.mensajes[0][0])),
+                ])
+              : _c(
+                  "ul",
+                  _vm._l(this.mensajes.mensajes, function (mensaje) {
+                    return _c("li", { key: mensaje[0] }, [
+                      _vm._v(_vm._s(mensaje[0])),
+                    ])
+                  }),
+                  0
+                ),
+          ]
         )
       : _vm._e(),
     _vm._v(" "),
@@ -41102,7 +41117,7 @@ var render = function () {
           _c(
             "h2",
             { staticClass: "text-center font-weight-bold h2Personalizado" },
-            [_vm._v("Envia tus eventos")]
+            [_vm._v("Envía tus eventos")]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "row mb-3 justify-content-center" }, [
@@ -41216,23 +41231,17 @@ var render = function () {
                     },
                   },
                 },
-                [
-                  _c("option", { attrs: { disabled: "" } }, [
-                    _vm._v("Escoge una categoría"),
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.categorias, function (categoria) {
-                    return _c(
-                      "option",
-                      {
-                        key: categoria.nombre,
-                        domProps: { value: categoria.nombre },
-                      },
-                      [_vm._v(_vm._s(categoria.nombre))]
-                    )
-                  }),
-                ],
-                2
+                _vm._l(_vm.categorias, function (categoria) {
+                  return _c(
+                    "option",
+                    {
+                      key: categoria.nombre,
+                      domProps: { value: categoria.nombre },
+                    },
+                    [_vm._v(_vm._s(categoria.nombre))]
+                  )
+                }),
+                0
               ),
             ]),
           ]),
@@ -41410,7 +41419,7 @@ var render = function () {
                   },
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", placeholder: "" },
+                attrs: { type: "number", placeholder: "" },
                 domProps: { value: _vm.evento.aforo },
                 on: {
                   input: function ($event) {
@@ -41514,7 +41523,7 @@ var render = function () {
                       },
                     },
                   },
-                  [_vm._v("Crear Evento\n                    ")]
+                  [_vm._v("Enviar Evento\n                    ")]
                 ),
               ]
             ),

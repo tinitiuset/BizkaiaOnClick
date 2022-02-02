@@ -1,14 +1,19 @@
 <template>
     <div>
-        <div v-if="this.mensaje.exito==true" class="alert alert-success">
-            <p :key="texto.mensaje" v-for="texto in this.mensaje.mensaje">{{texto}}</p>
+        <div v-if="this.mensajes.exito==true" class="alert alert-success my-3 fs-5 text-center">
+            <p :key="mensaje[0]" v-for="mensaje in this.mensajes">{{mensaje[0]}}</p>
         </div>
-        <div v-if="this.mensaje.exito==false" class="danger alert-danger">
-            <p :key="texto.mensaje" v-for="texto in this.mensaje.mensajes">{{texto}}</p>
+        <div v-if="this.mensajes.exito==false" class="danger alert-danger my-3 fs-5 p-2 rounded-3" role="danger">
+
+            <p v-if="this.mensajes.mensajes.length == 1" class="text-center">{{this.mensajes.mensajes[0][0]}}</p>
+
+            <ul v-else>
+                <li :key="mensaje[0]" v-for="mensaje in this.mensajes.mensajes">{{mensaje[0]}}</li>
+            </ul>
         </div>
         <form action="" @submit="createEvento(evento)">
             <div class="cardPersonalizada">
-                <h2 class="text-center font-weight-bold h2Personalizado">Envia tus eventos</h2>
+                <h2 class="text-center font-weight-bold h2Personalizado">Envía tus eventos</h2>
                 <!--TITULO EVENTO-->
                 <div class="row mb-3 justify-content-center">
                     <label for="titulo" class="col-form-label white">Título:</label>
@@ -30,7 +35,7 @@
                     <label for="categoria" class="col-form-label white">Categoría:</label>
                     <div class="col">
                         <select v-model="evento.categoria" class="form-select" id="categoria">
-                            <option disabled>Escoge una categoría</option>
+                            <!-- <option disabled selected>Escoge una categoría</option> -->
                             <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
                         </select>
                     </div>
@@ -74,7 +79,7 @@
                     <label for="aforo" class="col-form-label white">Aforo:</label>
 
                     <div class="col">
-                        <input type="text" placeholder="" v-model="evento.aforo" class="form-control">
+                        <input type="number" placeholder="" v-model="evento.aforo" class="form-control">
                     </div>
                 </div>
                 <!--RECINTO EVENTO-->
@@ -96,7 +101,7 @@
                 <!--BOTON ENVIAR EVENTO-->
                 <div class="row mb-0">
                     <div class="d-grid gap-2 col-10 mx-auto" id="btn">
-                        <button :disabled="!isValid" class="btn btn-primary mt-2 btn-lg btnPersonalizado" @click.prevent="createEvento(evento)">Crear Evento
+                        <button :disabled="!isValid" class="btn btn-primary mt-2 btn-lg btnPersonalizado" @click.prevent="createEvento(evento)">Enviar Evento
                         </button>
                     </div>
                 </div>
@@ -132,10 +137,6 @@ export default {
     methods: {
          createEvento(evento) {
             this.$store.dispatch('createEvento', evento);
-            // console.log(this.mensaje);
-            // this.mensaje.forEach(mensaje => {
-            //     console.log(mensaje);
-            // });
             $(window).scrollTop(0,0);
         },
         tituloValido(texto) {
@@ -156,7 +157,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['categorias','mensaje']),
+        ...mapGetters(['categorias','mensajes']),
         isValid() {
             let b = true;
             $("#titulo").css("border","none");
