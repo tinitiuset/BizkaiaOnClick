@@ -1,12 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\EventoController;
-use App\Http\Controllers\CategoriaController;
-use App\Http\Controllers\EventoAdminController;
-use App\Http\Controllers\FotoController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -20,48 +14,27 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-//Route::get('/', [InicioController::class, 'index'])->name('inicio');
+Auth::routes();
 
-Route::get('/', function () {
-    return view('index');
-})->name("index");
+// Pagina index
+Route::get('/', function () { return view('index');})->name("index");
 
-Route::get('/test', function() {
-    return view('test');
-});
-
+// Solo si logueado
 Route::middleware(["auth","esactivo"])->group(function ()
 {
-
+    // Registrar evento nuevo
     Route::get('/enviaevento', function() {
         return view('enviaEvento');
     });
+    // Ver perfil
     Route::get('/perfil', function() {
         return view('usuario');
     });
 
-
-});
-Route::patch('user/editarUsuario/{id}',[UserController::class,"editarUsuario"]);
-
-Route::get('/detalleevento/{id}', function() {
-    return view('detalleEvento');
 });
 
-// Route::get('/agenda',[EventoController::class,"index"]);
-Route::get('/agenda', function() {
-    return view('agenda');
-});
+// Ver agenda
+Route::get('/agenda', function() { return view('agenda');});
 
-
-
-Route::get('/user/create', [UserController::class, 'create']);
-
-// Route::resource('/fotos', FotoController::class);
-
-// Route::resource('eventos',EventoController::class);
-
-Auth::routes();
-
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
-
+// Ver evento
+Route::get('/detalleevento/{id}', function() { return view('detalleEvento');});

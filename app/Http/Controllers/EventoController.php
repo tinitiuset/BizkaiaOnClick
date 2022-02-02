@@ -20,19 +20,6 @@ use Illuminate\Support\Facades\Log;
 
 class EventoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index() {
-
-
-        $eventos = Evento::paginate(15);
-
-        return view('eventos/index',array('eventos' => $eventos));
-
-    }
 
     /**
      * Show the form for creating a new resource.
