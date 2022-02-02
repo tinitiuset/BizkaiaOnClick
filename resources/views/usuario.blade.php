@@ -22,7 +22,7 @@
         </ul>
     </div>
     @endif
-    <form action="{{ url('admin/user/editarUsuario/'.auth()->user()->id) }}" method="post">
+    <form action="{{ url('user/editarUsuario/'.auth()->user()->id) }}" method="post">
         @csrf
         {{ method_field('PATCH') }}
         <input type="hidden" name="id" value="{{ auth()->user()->id }}"><!-- Esto hace falta para saber el id le pasamos -->

@@ -319,9 +319,8 @@ class UserController extends Controller
         $this->validate($request,$campos,$mensaje);
 
         $this->update($request, $id);
-        return "hola";
 
-        // return redirect()->route('/perfil')->with('mensaje','Usuario modificado');
+        return redirect('/perfil')->with('mensaje','Usuario modificado');
 
     }
 
