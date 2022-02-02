@@ -36,9 +36,9 @@ Route::middleware(["auth","esactivo"])->group(function ()
     Route::get('/enviaevento', function() {
         return view('enviaevento');
     });
-    Route::get('/perfil', function() {
-        return view('usuario');
-    });
+    // Route::get('/perfil', function() {
+    //     return view('usuario');
+    // });
     
 
 });
