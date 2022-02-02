@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,24 +17,29 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 // Pagina index
-Route::get('/', function () { return view('index');})->name("index");
+Route::get('/', function () {
+    return view('index');
+})->name("index");
 
 // Solo si logueado
-Route::middleware(["auth","esactivo"])->group(function ()
-{
+Route::middleware(["auth", "esactivo"])->group(function () {
     // Registrar evento nuevo
-    Route::get('/enviaevento', function() {
+    Route::get('/enviaevento', function () {
         return view('enviaEvento');
     });
     // Ver perfil
-    Route::get('/perfil', function() {
+    Route::get('/perfil', function () {
         return view('usuario');
     });
 
 });
 
 // Ver agenda
-Route::get('/agenda', function() { return view('agenda');});
+Route::get('/agenda', function () {
+    return view('agenda');
+});
 
 // Ver evento
-Route::get('/detalleevento/{id}', function() { return view('detalleEvento');});
+Route::get('/detalleevento/{id}', function () {
+    return view('detalleEvento');
+});

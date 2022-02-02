@@ -3,21 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
-use Illuminate\Http\Request;
 use App\Models\Eventos;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class EventosController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index(Request $request)
     {
         $buscar = $request->input('buscar');
-                
+
         $eventos = Eventos::query()
             ->where('titulo', 'LIKE', "%{$buscar}%")
             ->orWhere('fechaInicio', 'LIKE', "%{$buscar}%")
@@ -26,27 +32,28 @@ class EventosController extends Controller
             ->orWhere('categoria', 'LIKE', "%{$buscar}%")
             ->paginate(10);
 
-        return view('eventos.index', compact(['eventos','buscar']));
+        return view('eventos.index', compact(['eventos', 'buscar']));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {
-        //
-        $categorias['categorias']=Categoria::all();//creo la variable $categorias y le meto en un array todos los datos la busqueda del modelo categoria
-        return view('eventos.create',$categorias);//retorno a create pasandole la variable $categorias
-        
+        // Creo la variable $categorias y le meto en un array todos los datos la busqueda del modelo categoria
+        $categorias['categorias'] = Categoria::all();
+        // Retorno a create pasandole la variable $categorias
+        return view('eventos.create', $categorias);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
@@ -75,33 +82,33 @@ class EventosController extends Controller
             'titulo.regex' => 'El título sólo puede contener letras'
         ];
 
-        $this->validate($request,$campos,$mensaje);
+        $this->validate($request, $campos, $mensaje);
 
         $datosEventos = request()->except('_token');
         $datosEventos['hora'] = 
         Eventos::insert($datosEventos);
 
-        return redirect()->route("eventos.index")->with('mensaje','Evento creado con éxito');
+        return redirect()->route("eventos.index")->with('mensaje', 'Evento creado con éxito');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Eventos  $eventos
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return View
      */
     public function show($id)
     {
-        $eventos=Eventos::findOrFail($id);
-        $categorias=Categoria::all();
-        return view('eventos.show', compact(['eventos','categorias']) );
+        $eventos = Eventos::findOrFail($id);
+        $categorias = Categoria::all();
+        return view('eventos.show', compact(['eventos', 'categorias']));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Eventos  $eventos
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return View
      */
     public function edit($id)
     {
@@ -115,22 +122,25 @@ class EventosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Eventos  $eventos
-     * @return \Illuminate\Http\Response
+     * @param Eventos $eventos
+     * @return JsonResponse
      */
     public function getAll(Eventos $eventos)
     {
         $eventos = Eventos::all();
         return response()->json($eventos);
-     
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Eventos  $eventos
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
+     * @throws ValidationException
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function update(Request $request, $id)
     {
@@ -163,33 +173,27 @@ class EventosController extends Controller
             $campos['titulo'] = ['required','string','min:2','max:50','regex:/^[a-zA-Z0-9]+$/', Rule::unique('eventos', 'titulo')];
         }
 
+        $this->validate($request, $campos, $mensaje);
 
+        // Recepcionamos todos los datos excepto el token y el método
+        $datosEventos = request()->except(['_token', '_method']);
+        Eventos::where('id', '=', $id)->update($datosEventos);
 
-        $this->validate($request,$campos,$mensaje);
-
-         //recepcionamos todos los datos excepto el token y el método
-         $datosEventos = request()->except(['_token','_method']);
-         Eventos::where('id','=',$id)->update($datosEventos);
- 
-         $eventos=Eventos::findOrFail($id);//vuelvo a buscar la info
-         return redirect()->route("eventos.index")->with('mensaje','Categoría modificada');
-     
-      
+        // Vuelvo a buscar la info
+        $eventos = Eventos::findOrFail($id);
+        return redirect()->route("eventos.index")->with('mensaje', 'Categoría modificada');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Eventos  $eventos
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return RedirectResponse
      */
     public function destroy($id)
     {
-        //método destroy para borrar
+        // Método destroy para borrar
         Eventos::destroy($id);
         return redirect()->route("eventos.index")->with('mensaje', 'Evento borrado con éxito');
     }
-
-
-       
 }

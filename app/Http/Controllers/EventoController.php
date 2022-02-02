@@ -22,43 +22,7 @@ class EventoController extends Controller
 {
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        return view('eventos/create');
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return View
-     */
-    public function show(int $id): View
-    {
-        return view ('eventos.detalle', array('id' => $id));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function edit(int $id)
-    {
-        //
-    }
-
-
-    // API SECTION
-
-    /**
-     * Get a resource in storage.
+     * Get all resources in storage.
      *
      * @param Request $request
      * @return JsonResponse
@@ -67,24 +31,10 @@ class EventoController extends Controller
     {
         $eventos = Evento::where('estado','aprobado')->where('fechaFin','>=',date("Y-m-d"))->with("fotos")->get();
         return response()->json($eventos);
-
     }
 
     /**
      * Get a resource in storage.
-     *
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function getAllEventsCategoriesAndFirstPhoto(Request $request): JsonResponse
-    {
-        $eventos = Evento::all();
-        $categorias = Categoria::all();
-        return response()->json(array($eventos,$categorias));
-    }
-
-    /**
-     * Get all resources in storage.
      *
      * @param Request $request
      * @param int $id
@@ -104,7 +54,6 @@ class EventoController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-
         $campos=[
             'titulo'=>['required','string','min:2','max:50','regex:/^[a-zA-Z0-9]+$/', Rule::unique('eventos', 'titulo')],
             'fechaInicio'=>['required','string','regex:/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'],
@@ -131,16 +80,12 @@ class EventoController extends Controller
 
         $validador = Validator::make($request->all(), $campos, $mensaje);
 
-        $estado = [];
-
         $estado['mensajes'] = [];
 
         if ($validador->fails()) {
 
             $estado['exito'] = false;
             $errores = $validador->errors()->getMessages();
-
-            // array_push($estado['mensajes'],$errores[0]);
 
             foreach ($errores as $valor) {
                 array_push($estado['mensajes'],$valor);
@@ -164,15 +109,9 @@ class EventoController extends Controller
                 "localidad" => request()->input('localidad'),
                 "categoria" => request()->input('categoria'),
                 "estado" => 'pendiente'
-
-
             ]);
-
-
         }
-
         return response()->json($estado);
-
     }
 
     /**
@@ -199,7 +138,6 @@ class EventoController extends Controller
     public function delete(Request $request, int $id): JsonResponse
     {
         Evento::destroy($id);
-
         return response()->json("ok");
     }
 }
