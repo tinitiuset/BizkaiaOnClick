@@ -30,9 +30,9 @@ class CreateEventosTable extends Migration
             $table->integer("usuarioAprobador")->nullable();
             $table->integer("usuarioCreador")->nullable();
             $table->string("categoria");
-            $table->foreign('usuarioAprobador')->references('id')->on('users');
-            $table->foreign('usuarioCreador')->references('id')->on('users');
-            $table->foreign('categoria')->references('nombre')->on('categorias');
+            $table->foreign('usuarioAprobador')->references('id')->on('users')->onUpdate("cascade");
+            $table->foreign('usuarioCreador')->references('id')->on('users')->onUpdate("cascade");
+            $table->foreign('categoria')->references('nombre')->on('categorias')->onUpdate("cascade");
             $table->timestamps();
 
         });

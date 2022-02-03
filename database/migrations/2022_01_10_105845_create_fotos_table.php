@@ -17,7 +17,7 @@ class CreateFotosTable extends Migration
             $table->integer("id")->autoIncrement();
             $table->string('ruta');
             $table->integer('evento');
-            $table->foreign('evento')->references('id')->on('eventos');
+            $table->foreign('evento')->references('id')->on('eventos')->onDelete('cascade')->onUpdate("cascade");
             $table->timestamps();
         });
     }
