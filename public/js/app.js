@@ -5546,6 +5546,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CreateEvento",
@@ -5570,16 +5575,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     createEvento: function createEvento(evento) {
-      this.$store.dispatch('createEvento', evento); // console.log(this.mensaje);
-      // this.mensaje.forEach(mensaje => {
-      //     console.log(mensaje);
-      // });
-
+      this.$store.dispatch('createEvento', evento);
       $(window).scrollTop(0, 0);
     },
     tituloValido: function tituloValido(texto) {
-      var pattern = /[a-zA-Z0-9^]+/;
+      var pattern = /^[a-zA-Z0-9]+$/;
       return pattern.test(texto);
+    },
+    precioValido: function precioValido(texto) {
+      if ($.isNumeric(texto)) {
+        if (parseInt(texto) <= 999) {
+          return true;
+        }
+      }
+
+      return false;
+    },
+    aforoValido: function aforoValido(texto) {
+      if ($.isNumeric(texto)) {
+        if (parseInt(texto) <= 100000) {
+          return true;
+        }
+      }
+
+      return false;
     },
     estaVacio: function estaVacio(texto) {
       return texto == '';
@@ -5591,15 +5610,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //     $(`#${componente}`).fadeIn();
     // },
     bordeRojo: function bordeRojo(componente) {
-      $("#".concat(componente)).css("border", "2px solid red");
+      $("#".concat(componente)).css("border", "3px solid red");
     }
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['categorias', 'mensaje'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['categorias', 'mensajes'])), {}, {
     isValid: function isValid() {
       var b = true;
       $("#titulo").css("border", "none");
       $("#descripcion").css("border", "none");
       $("#categoria").css("border", "none");
+      $("#precio").css("border", "none");
+      $("#direccion").css("border", "none");
+      $("#aforo").css("border", "none");
+      $("#recinto").css("border", "none");
+      $("#localidad").css("border", "none");
 
       if (this.estaVacio(this.evento.titulo)) {
         b = false;
@@ -5619,6 +5643,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (this.estaVacio(this.evento.categoria)) {
         b = false;
         this.bordeRojo("categoria");
+      }
+
+      if (!this.aforoValido(this.evento.aforo)) {
+        b = false;
+        this.bordeRojo("aforo");
+      }
+
+      if (this.estaVacio(this.evento.precio)) {
+        b = false;
+        this.bordeRojo("precio");
+      } else {
+        if (!this.precioValido(this.evento.precio)) {
+          b = false;
+          this.bordeRojo("precio");
+        }
+      }
+
+      if (this.estaVacio(this.evento.direccion)) {
+        b = false;
+        this.bordeRojo("direccion");
+      }
+
+      if (this.estaVacio(this.evento.localidad)) {
+        b = false;
+        this.bordeRojo("localidad");
+      }
+
+      if (this.estaVacio(this.evento.recinto)) {
+        b = false;
+        this.bordeRojo("recinto");
       }
 
       return b;
@@ -6448,7 +6502,7 @@ __webpack_require__.r(__webpack_exports__);
 var state = function state() {
   return {
     eventos: [],
-    mensaje: [],
+    mensajes: [],
     evento: []
   };
 }; // Getters
@@ -6461,8 +6515,8 @@ var getters = {
   evento: function evento(state) {
     return state.evento;
   },
-  mensaje: function mensaje(state) {
-    return state.mensaje;
+  mensajes: function mensajes(state) {
+    return state.mensajes;
   }
 }; // Actions
 
@@ -6470,8 +6524,7 @@ var actions = {
   createEvento: function createEvento(_ref, evento) {
     var commit = _ref.commit;
     axios.post('/api/eventos', evento).then(function (res) {
-      console.log("Called CREATE"); // console.log(res.data)
-
+      console.log("Called CREATE");
       commit('CREATE_EVENTO', res.data);
     })["catch"](function (err) {
       console.log(err);
@@ -6507,10 +6560,10 @@ var actions = {
 }; // Mutations
 
 var mutations = {
-  CREATE_EVENTO: function CREATE_EVENTO(state, mensaje) {
+  CREATE_EVENTO: function CREATE_EVENTO(state, mensajes) {
     // state.eventos.unshift(evento)
     // return state.mensaje = mensaje
-    return state.mensaje = mensaje;
+    return state.mensajes = mensajes;
   },
   FETCH_EVENTO: function FETCH_EVENTO(state, evento) {
     return state.evento = evento;
@@ -41065,25 +41118,39 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    this.mensaje.exito == true
+    this.mensajes.exito == true
       ? _c(
           "div",
-          { staticClass: "alert alert-success" },
-          _vm._l(this.mensaje.mensaje, function (texto) {
-            return _c("p", { key: texto.mensaje }, [_vm._v(_vm._s(texto))])
+          { staticClass: "alert alert-success my-3 fs-5 fw-bold text-center" },
+          _vm._l(this.mensajes, function (mensaje) {
+            return _c("p", { key: mensaje[0] }, [_vm._v(_vm._s(mensaje[0]))])
           }),
           0
         )
       : _vm._e(),
     _vm._v(" "),
-    this.mensaje.exito == false
+    this.mensajes.exito == false
       ? _c(
           "div",
-          { staticClass: "danger alert-danger" },
-          _vm._l(this.mensaje.mensajes, function (texto) {
-            return _c("p", { key: texto.mensaje }, [_vm._v(_vm._s(texto))])
-          }),
-          0
+          {
+            staticClass: "danger alert-danger my-3 fs-5 fw-bold p-2 rounded-3",
+            attrs: { role: "danger" },
+          },
+          [
+            this.mensajes.mensajes.length == 1
+              ? _c("p", { staticClass: "text-center" }, [
+                  _vm._v(_vm._s(this.mensajes.mensajes[0][0])),
+                ])
+              : _c(
+                  "ul",
+                  _vm._l(this.mensajes.mensajes, function (mensaje) {
+                    return _c("li", { key: mensaje[0] }, [
+                      _vm._v(_vm._s(mensaje[0])),
+                    ])
+                  }),
+                  0
+                ),
+          ]
         )
       : _vm._e(),
     _vm._v(" "),
@@ -41102,7 +41169,7 @@ var render = function () {
           _c(
             "h2",
             { staticClass: "text-center font-weight-bold h2Personalizado" },
-            [_vm._v("Envia tus eventos")]
+            [_vm._v("Envía tus eventos")]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "row mb-3 justify-content-center" }, [
@@ -41216,23 +41283,17 @@ var render = function () {
                     },
                   },
                 },
-                [
-                  _c("option", { attrs: { disabled: "" } }, [
-                    _vm._v("Escoge una categoría"),
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.categorias, function (categoria) {
-                    return _c(
-                      "option",
-                      {
-                        key: categoria.nombre,
-                        domProps: { value: categoria.nombre },
-                      },
-                      [_vm._v(_vm._s(categoria.nombre))]
-                    )
-                  }),
-                ],
-                2
+                _vm._l(_vm.categorias, function (categoria) {
+                  return _c(
+                    "option",
+                    {
+                      key: categoria.nombre,
+                      domProps: { value: categoria.nombre },
+                    },
+                    [_vm._v(_vm._s(categoria.nombre))]
+                  )
+                }),
+                0
               ),
             ]),
           ]),
@@ -41343,7 +41404,12 @@ var render = function () {
                   },
                 ],
                 staticClass: "form-control",
-                attrs: { type: "number", placeholder: "", min: "0" },
+                attrs: {
+                  id: "precio",
+                  type: "number",
+                  placeholder: "",
+                  min: "0",
+                },
                 domProps: { value: _vm.evento.precio },
                 on: {
                   input: function ($event) {
@@ -41378,7 +41444,7 @@ var render = function () {
                   },
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", placeholder: "" },
+                attrs: { id: "direccion", type: "text", placeholder: "" },
                 domProps: { value: _vm.evento.direccion },
                 on: {
                   input: function ($event) {
@@ -41410,7 +41476,7 @@ var render = function () {
                   },
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", placeholder: "" },
+                attrs: { id: "aforo", type: "number", placeholder: "" },
                 domProps: { value: _vm.evento.aforo },
                 on: {
                   input: function ($event) {
@@ -41445,7 +41511,7 @@ var render = function () {
                   },
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", placeholder: "" },
+                attrs: { id: "recinto", type: "text", placeholder: "" },
                 domProps: { value: _vm.evento.recinto },
                 on: {
                   input: function ($event) {
@@ -41480,7 +41546,7 @@ var render = function () {
                   },
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", placeholder: "" },
+                attrs: { id: "localidad", type: "text", placeholder: "" },
                 domProps: { value: _vm.evento.localidad },
                 on: {
                   input: function ($event) {
@@ -41514,7 +41580,7 @@ var render = function () {
                       },
                     },
                   },
-                  [_vm._v("Crear Evento\n                    ")]
+                  [_vm._v("Enviar Evento\n                    ")]
                 ),
               ]
             ),

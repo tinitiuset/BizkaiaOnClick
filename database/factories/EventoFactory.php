@@ -23,7 +23,7 @@ class EventoFactory extends Factory
             'titulo' => $this->faker->name(),
             'descripcion' => $this->faker->text(),
             'fechaInicio' => $this->faker->date(),
-            'fechaFin' => $this->faker->date(),
+            'fechaFin' => $this->faker->dateTimeBetween('+0 days', '+2 years'),
             'hora' => $this->faker->date("H:i:s"),
             'precio' => $this->faker->randomNumber(2,true),
             'direccion' => $this->faker->address(),

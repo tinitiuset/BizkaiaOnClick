@@ -1,7 +1,7 @@
 // Initial State
 const state = () => ({
     eventos: [],
-    mensaje: [],
+    mensajes: [],
     evento : []
 })
 
@@ -14,8 +14,8 @@ const getters = {
     evento: state => {
         return state.evento
     },
-    mensaje: state => {
-        return state.mensaje
+    mensajes: state => {
+        return state.mensajes
     }
 }
 
@@ -25,7 +25,6 @@ let actions = {
         axios.post('/api/eventos', evento)
             .then(res => {
                 console.log("Called CREATE")
-                // console.log(res.data)
                 commit('CREATE_EVENTO', res.data)
             }).catch(err => {
             console.log(err)
@@ -65,10 +64,10 @@ let actions = {
 // Mutations
 
 const mutations = {
-    CREATE_EVENTO(state, mensaje) {
+    CREATE_EVENTO(state, mensajes) {
         // state.eventos.unshift(evento)
         // return state.mensaje = mensaje
-        return state.mensaje = mensaje
+        return state.mensajes = mensajes
     },
     FETCH_EVENTO(state, evento) {
         return state.evento = evento

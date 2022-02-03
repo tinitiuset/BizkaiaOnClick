@@ -9,6 +9,7 @@ class Categoria extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
     protected $table = "categorias";
     protected $fillable = [
         "nombre",
@@ -16,14 +17,13 @@ class Categoria extends Model
     ];
     protected $primaryKey = "nombre";
     protected $keyType = "string";
-    public $timestamps = false;
 
     /**
      * Obtengo los eventos relacionados a esta categoria
      */
     public function eventos()
     {
-        return $this->hasMany(Evento::class,"categoria","nombre");
+        return $this->hasMany(Evento::class, "categoria", "nombre");
     }
 
 }
