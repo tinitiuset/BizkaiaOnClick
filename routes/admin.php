@@ -21,7 +21,6 @@ Route::middleware(["auth", "esadmin", "esactivo"])->group(function () {
         return view('usuario');
     })->name('admin.usuario');
     Route::patch('user/editarperfil/{id}', [UserController::class, "editarPerfil"]);
-    Route::patch('user/editarUsuario/{id}', [UserController::class, "editarUsuario"]);
     Route::get('user/{usuario}/reactivar', [UserController::class, "reactivar"]);
     Route::get("/", function () {
 
