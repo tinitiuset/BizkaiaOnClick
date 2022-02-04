@@ -1,0 +1,178 @@
+/*-------------- COLORES -------------*/
+.white {
+    color: white;
+}
+.magenta {
+    color:#FF08D7;   
+}
+.morado {
+    color: #b062fe;
+}
+.azul {
+    color: #3385ff;
+}
+
+.bg-magenta {
+    background-color: #FF08D7; 
+}
+.bg-azul {
+    background-color:#3385ff ;
+}
+.bg-morado {
+    background-color:#b062fe ;
+}
+
+.body-degradado {
+    margin: 0;
+    box-sizing: border-box;
+    background: linear-gradient(to bottom, #FF08D7, #b062fe, #3385ff);
+    background-size: cover;
+}
+
+/* .texto-degradado {
+    color: white;
+} */
+
+.bordeDegradado {
+
+    border-color:#FF08D7;
+    border-width: 0.25rem;
+    border-style: solid;
+    /* border-color: #b062fe; */
+
+}
+
+.texto-degradado:hover, 
+.h2Personalizado {
+    background: linear-gradient(to bottom, #FF08D7, #b062fe, #3385ff);
+    -webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+    /* color: seagreen; */
+}
+.h2Personalizado {
+    padding-top: 20px;
+}
+
+svg:hover {
+
+    /* fill: linear-gradient(to bottom, #FF08D7, #b062fe, #3385ff); */
+    background: linear-gradient(to bottom, #FF08D7, #b062fe, #3385ff);
+    -webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+}
+
+
+.magenta-hover:hover {
+    color:#FF08D7;   
+}
+
+.navbar-color{
+    background-color: black;
+    border: none;
+
+}
+#navbar-button{
+    color:#FF08D7;
+    border: none;
+}
+.navbar-link {
+    line-height: 1; 
+    display: block;
+    padding: 0.5rem 1rem;
+    color: white;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    
+}
+.navbar-link:hover{
+    color:#FF08D7;
+}
+.logo-movil {
+    width: 150px;
+}
+
+.botonSinRedondeo {
+
+    border-radius: 0;
+
+}
+
+/* .carousel-inner > .carousel-item >img{
+    min-height : 300px;
+    max-height : 300px;
+    width : 100%;
+  } */
+
+  .imgResponsiveCarousel img {
+    width: auto;
+    height: 225px;
+    max-height: 225px;
+  }
+
+  .carousel-control:hover {
+
+    background-color: rgba(0, 0, 0, 1);
+
+  }
+
+/*------------  ESTILOS DE LOGIN  ----------------------*/
+/* .card, */
+.cardPersonalizada,
+.cardDashboard {
+    margin:50px 20px 50px 20px;
+    background-color: black;
+    border-radius: 20px;
+    flex: 1 1 auto;
+    padding: 1rem 1rem;
+}
+.cardDashboard {
+    background-color: #f6f6f6;
+    margin:50px;
+    border-radius: 10px;
+}
+.link-personalizado:hover {
+    color:#FF08D7;
+}
+.btn-login {
+    border-radius: 50px; 
+}
+.margin-110 {
+    margin: 110px 20px 110px 20px;
+}
+
+/*----------  ESTILOS FORM EVENTOS ------------*/
+.btnPersonalizado,
+.btnPersonalizado:hover {
+    border-radius: 50px; 
+    margin: 20px;
+    background-color: #FF08D7; 
+    border: none;
+}
+
+/*----------- ESTILOS EDITAR PERFIL -----------*/
+.card-perfil {
+    background-color:#E5E5E5 ;
+}
+
+/*----------- ESTILOS DETALLE EVENTOS -----------*/
+
+.btn-evento {
+    width: 50%;
+    margin-top: 50px;
+}
+
+@media (min-width: 768px) {
+    .rounded-0{
+        border-radius: 50px !important;
+    }
+    .tabla-personalizada {
+       padding-left: 20%;
+    }
+
+}
+@media (min-width: 1200px) { 
+    .tabla-personalizada {
+        padding-left: 30%;
+     }
+}

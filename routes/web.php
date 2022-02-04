@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
+// Pagina index
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+})->name("index");
+
+// Solo si logueado
+Route::middleware(["auth", "esactivo"])->group(function () {
+    // Registrar evento nuevo
+    Route::get('/enviaevento', function () {
+        return view('enviaEvento');
+    });
+    // Ver perfil
+    Route::get('/perfil', function () {
+        return view('usuario');
+    });
+    Route::patch('user/editarUsuario/{id}', [UserController::class, "editarUsuario"]);
+
+});
+
+// Ver agenda
+Route::get('/agenda', function () {
+    return view('agenda');
+});
+
+// Ver evento
+Route::get('/detalleevento/{id}', function () {
+    return view('detalleEvento');
 });
