@@ -16,7 +16,15 @@
             <div class="row text-center mx-auto my-2">
                 <h3>Categorías:</h3>
                 <select class="p-0 w-auto mx-auto" name="" id="" v-model="filtroCategoria">
-                    <option value="Todos">Todos</option>
+                    <option value="">Todos</option>
+                    <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
+                </select>
+                <select class="p-0 w-auto mx-auto" name="" id="" v-model="filtroCategoria">
+                    <option value="">Todos</option>
+                    <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
+                </select>
+                <select class="p-0 w-auto mx-auto" name="" id="" v-model="filtroCategoria">
+                    <option value="">Todos</option>
                     <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
                 </select>
             </div>
@@ -84,8 +92,12 @@ export default {
 
         return {
 
-            filtroCategoria: "Todos",
+            filtroCategoria: "",
+            filtroPrecio: "",
+            filtroLocalidad: "",
+            filtroFechaInicio: "",
             filtro: "",
+            eventosFiltrados: "",
             // diasSemana: ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
             NUM_RESULTS: 24, // Numero de resultados por página
             pag: 1, // Página inicial
@@ -111,6 +123,21 @@ export default {
             this.pag -= 1; 
             $(window).scrollTop(0,0);
 
+        },
+        filter(){
+            this.eventosFiltrados = this.filterByCategory(this.filterByLocalidad(this.eventos))
+        },
+        filterByCategory(eventosFiltrados){
+            if (this.filtroCategoria == "") {
+                return eventosFiltrados;
+            }
+            return eventosFiltrados.filter(e => e.categoria == this.filtroCategoria);
+        },
+        filterByLocalidad(eventosFiltrados){
+            if (this.filtroLocalidad == "") {
+                return eventosFiltrados;
+            }
+            return eventosFiltrados.filter(e => e.localidad == this.filtroLocalidad);
         }
 
     },
@@ -119,7 +146,7 @@ export default {
         ...mapGetters([
             'eventos',
             'categorias'
-        ]), eventosFiltrados() {
+        ])/* , eventosFiltrados() {
 
             
             if (this.filtro != "") {
@@ -185,12 +212,17 @@ export default {
 
 
 
-        }
+        } */
     }, beforeMount () {
 
         this.$store.dispatch('fetchEventos');
         this.$store.dispatch('fetchCategorias');
 
-    }
+    },
+    watch: {
+        filtroCategoria: function(newData, oldData){
+            this.filter();
+        }
+    },
 }
 </script>
