@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // Pagina index
 Route::get('/', function () {
@@ -22,7 +24,7 @@ Route::get('/', function () {
 })->name("index");
 
 // Solo si logueado
-Route::middleware(["auth", "esactivo"])->group(function () {
+Route::middleware(["auth", "esactivo","verified"])->group(function () {
     // Registrar evento nuevo
     Route::get('/enviaevento', function () {
         return view('enviaEvento');
@@ -33,7 +35,17 @@ Route::middleware(["auth", "esactivo"])->group(function () {
     });
     Route::patch('user/editarUsuario/{id}', [UserController::class, "editarUsuario"]);
 
+    Route::get('/email/verify', function () {
+        return view('enviaEvento');
+    })->name('verification.notice');
+
 });
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect('/agenda');
+})->middleware(['auth', 'signed'])->name('verification.verify');
 
 // Ver agenda
 Route::get('/agenda', function () {

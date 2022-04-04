@@ -5347,13 +5347,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Agenda",
   data: function data() {
     return {
-      filtroCategoria: "Todos",
+      filtroCategoria: "",
+      filtroPrecio: "",
+      filtroLocalidad: "",
+      filtroFechaInicio: "",
       filtro: "",
+      eventosFiltrados: "",
       // diasSemana: ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
       NUM_RESULTS: 24,
       // Numero de resultados por página
@@ -5372,50 +5384,42 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     anteriorPagina: function anteriorPagina() {
       this.pag -= 1;
       $(window).scrollTop(0, 0);
-    }
-  },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['eventos', 'categorias'])), {}, {
-    eventosFiltrados: function eventosFiltrados() {
+    },
+    filter: function filter() {
+      this.eventosFiltrados = this.filterByCategory(this.filterByLocalidad(this.eventos));
+    },
+    filterByCategory: function filterByCategory(eventosFiltrados) {
       var _this = this;
 
-      if (this.filtro != "") {
-        this.filtrado = [];
-
-        if (this.filtroCategoria == "Todos") {
-          this.eventos.forEach(function (evento) {
-            if (evento.titulo.toLowerCase().includes(_this.filtro.toLowerCase()) || evento.descripcion.toLowerCase().includes(_this.filtro.toLowerCase())) {
-              _this.filtrado.push(evento);
-            }
-          });
-        } else {
-          this.eventos.forEach(function (evento) {
-            if (_this.filtroCategoria == evento.categoria) {
-              if (evento.titulo.toLowerCase().includes(_this.filtro.toLowerCase()) || evento.descripcion.toLowerCase().includes(_this.filtro.toLowerCase())) {
-                _this.filtrado.push(evento);
-              }
-            }
-          });
-        }
-
-        return this.filtrado;
+      if (this.filtroCategoria == "") {
+        return eventosFiltrados;
       }
 
-      if (this.filtroCategoria == "Todos") {
-        return this.eventos;
-      }
-
-      this.filtrado = [];
-      this.eventos.forEach(function (evento) {
-        if (_this.filtroCategoria == evento.categoria) {
-          _this.filtrado.push(evento);
-        }
+      return eventosFiltrados.filter(function (e) {
+        return e.categoria == _this.filtroCategoria;
       });
-      return this.filtrado;
+    },
+    filterByLocalidad: function filterByLocalidad(eventosFiltrados) {
+      var _this2 = this;
+
+      if (this.filtroLocalidad == "") {
+        return eventosFiltrados;
+      }
+
+      return eventosFiltrados.filter(function (e) {
+        return e.localidad == _this2.filtroLocalidad;
+      });
     }
-  }),
+  },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['eventos', 'categorias'])),
   beforeMount: function beforeMount() {
     this.$store.dispatch('fetchEventos');
     this.$store.dispatch('fetchCategorias');
+  },
+  watch: {
+    filtroCategoria: function filtroCategoria(newData, oldData) {
+      this.filter();
+    }
   }
 });
 
@@ -40828,7 +40832,99 @@ var render = function () {
             },
           },
           [
-            _c("option", { attrs: { value: "Todos" } }, [_vm._v("Todos")]),
+            _c("option", { attrs: { value: "" } }, [_vm._v("Todos")]),
+            _vm._v(" "),
+            _vm._l(_vm.categorias, function (categoria) {
+              return _c(
+                "option",
+                {
+                  key: categoria.nombre,
+                  domProps: { value: categoria.nombre },
+                },
+                [_vm._v(_vm._s(categoria.nombre))]
+              )
+            }),
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.filtroCategoria,
+                expression: "filtroCategoria",
+              },
+            ],
+            staticClass: "p-0 w-auto mx-auto",
+            attrs: { name: "", id: "" },
+            on: {
+              change: function ($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function (o) {
+                    return o.selected
+                  })
+                  .map(function (o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.filtroCategoria = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+            },
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [_vm._v("Todos")]),
+            _vm._v(" "),
+            _vm._l(_vm.categorias, function (categoria) {
+              return _c(
+                "option",
+                {
+                  key: categoria.nombre,
+                  domProps: { value: categoria.nombre },
+                },
+                [_vm._v(_vm._s(categoria.nombre))]
+              )
+            }),
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.filtroCategoria,
+                expression: "filtroCategoria",
+              },
+            ],
+            staticClass: "p-0 w-auto mx-auto",
+            attrs: { name: "", id: "" },
+            on: {
+              change: function ($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function (o) {
+                    return o.selected
+                  })
+                  .map(function (o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.filtroCategoria = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+            },
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [_vm._v("Todos")]),
             _vm._v(" "),
             _vm._l(_vm.categorias, function (categoria) {
               return _c(
