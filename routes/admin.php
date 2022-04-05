@@ -9,7 +9,7 @@ use App\Models\Eventos;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(["auth", "esadmin", "esactivo"])->group(function () {
+Route::middleware(["auth", "esadmin", "esactivo","verified"])->group(function () {
     Route::resource('categoria', CategoriaController::class);
     Route::resource('fotos', FotoController::class);
     Route::resource("eventos", EventosController::class);

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -35,17 +36,32 @@ Route::middleware(["auth", "esactivo","verified"])->group(function () {
     });
     Route::patch('user/editarUsuario/{id}', [UserController::class, "editarUsuario"]);
 
-    Route::get('/email/verify', function () {
-        return view('enviaEvento');
-    })->name('verification.notice');
-
 });
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
- 
-    return redirect('/agenda');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+Route::middleware(["auth", "esactivo"])->group(function () {
+
+    Route::get('/email/verify', function () {
+
+        redirect()->route('verification.resend');
+
+        return view('auth.verify-register');
+    })->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+
+        $request->fulfill();
+     
+        return redirect('/agenda');
+
+    })->middleware(['auth', 'signed'])->name('verification.verify');
+
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+     
+        return back()->with('message', 'Verification link sent!');
+    })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+});
 
 // Ver agenda
 Route::get('/agenda', function () {
