@@ -19,14 +19,11 @@
                     <option value="">Todos</option>
                     <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
                 </select>
-                <select class="p-0 w-auto mx-auto" name="" id="" v-model="filtroCategoria">
+                <select class="p-0 w-auto mx-auto" name="" id="" v-model="filtroPrecio">
                     <option value="">Todos</option>
-                    <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
+                    <option v-for="(precio, idx) in precios" :key="idx" :value="precio.value">{{precio.name}}</option>
                 </select>
-                <select class="p-0 w-auto mx-auto" name="" id="" v-model="filtroCategoria">
-                    <option value="">Todos</option>
-                    <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
-                </select>
+                
             </div>
         </div>
 
@@ -101,7 +98,14 @@ export default {
             // diasSemana: ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
             NUM_RESULTS: 24, // Numero de resultados por página
             pag: 1, // Página inicial
-
+            precios: [
+                {name: 'menos de 20€', value: {minValue: 0, maxValue: 20} },
+                {name: 'entre 20€ y 60€', value: {minValue: 20, maxValue: 60}},
+                {name: 'entre 60€ y 100€', value: {minValue: 60, maxValue: 100}},
+                {name: 'entre 100€ y 150€', value: {minValue: 100, maxValue: 150}},
+                {name: 'entre 150€ y 200€', value: {minValue: 150, maxValue: 200}},
+                {name: 'más de 200€', value: {minValue: 200, maxValue: null}},
+            ]
         };
 
     },
@@ -125,13 +129,20 @@ export default {
 
         },
         filter(){
-            this.eventosFiltrados = this.filterByCategory(this.filterByLocalidad(this.eventos))
+            console.log(this.eventos)
+            this.eventosFiltrados = this.filterByCategory(this.filterByPrice(this.eventos))
         },
         filterByCategory(eventosFiltrados){
             if (this.filtroCategoria == "") {
                 return eventosFiltrados;
             }
             return eventosFiltrados.filter(e => e.categoria == this.filtroCategoria);
+        },
+        filterByPrice(eventosFiltrados){
+            if (this.filtroPrecio == "") {
+                return eventosFiltrados;
+            }
+            return eventosFiltrados.filter(e => e.precio < this.filtroPrecio.maxValue && e.precio > this.filtroPrecio.minValue);
         },
         filterByLocalidad(eventosFiltrados){
             if (this.filtroLocalidad == "") {
@@ -213,14 +224,19 @@ export default {
 
 
         } */
-    }, beforeMount () {
+    }, 
+    beforeMount: async function() {
 
-        this.$store.dispatch('fetchEventos');
-        this.$store.dispatch('fetchCategorias');
-
+        await this.$store.dispatch('fetchEventos');
+        await this.$store.dispatch('fetchCategorias');
+        this.eventosFiltrados = this.eventos;
+        console.log(this.eventos)
     },
     watch: {
         filtroCategoria: function(newData, oldData){
+            this.filter();
+        },
+        filtroPrecio: function(newData, oldData){
             this.filter();
         }
     },
