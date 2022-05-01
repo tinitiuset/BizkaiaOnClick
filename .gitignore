@@ -3,6 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
+!/vendor/laravel/framework/src/Illuminate/Validation/Rules/*
 .env
 .env.backup
 .phpunit.result.cache
