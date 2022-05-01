@@ -40,11 +40,12 @@ Route::middleware(["auth", "esactivo","verified"])->group(function () {
 
 Route::middleware(["auth", "esactivo"])->group(function () {
 
-    Route::get('/email/verify', function () {
+    Route::get('/email/verify', function (Request $request) {
 
-        redirect()->route('verification.resend');
+        // $request->user()->sendEmailVerificationNotification();
 
         return view('auth.verify-register');
+        
     })->name('verification.notice');
 
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
