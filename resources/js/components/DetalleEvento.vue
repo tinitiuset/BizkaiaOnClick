@@ -23,6 +23,7 @@
 
                         <span class="d-block" title="Aforo del recinto" v-if="evento.aforo != null"><i class="fas fa-door-open"></i> {{evento.aforo}}</span>
                         <span class="d-block" title="Direccion fisica">{{evento.direccion}}</span>
+                        <span class="d-block" title="URL Evento" v-if="evento.URL != null"><i class="fas fa-globe"></i> <a :href="''+evento.URL">Ir al sitio web</a></span>
 
                     </div>
                     <div class="col-6 g-0 ms-3">
@@ -76,6 +77,8 @@ export default {
         ...mapGetters([
             'evento',
         ])
+
+        
 
     }, 
     mounted() {

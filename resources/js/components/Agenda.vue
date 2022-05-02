@@ -9,21 +9,36 @@
             <div class="row mx-auto my-2">
                 <h3 class="text-center">Busca tus eventos:</h3>
                 <div class="text-center">
-                <input type="text" name="" placeholder="Buscar evento..." aria-label="Search" class="form-control d-inline form-control-dark w-50 mx-auto" id="" v-model="filtro" />
+                <input type="text" name="" placeholder="Buscar evento..." aria-label="Search" class="form-control d-inline form-control-dark w-50 mx-auto" id="" v-model="filtroPalabra" />
                 </div>
 
             </div>
             <div class="row text-center mx-auto my-2">
-                <h3>Categorías:</h3>
-                <select class="p-0 w-auto mx-auto" name="" id="" v-model="filtroCategoria">
-                    <option value="">Todos</option>
-                    <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
-                </select>
-                <select class="p-0 w-auto mx-auto" name="" id="" v-model="filtroPrecio">
-                    <option value="">Todos</option>
-                    <option v-for="(precio, idx) in precios" :key="idx" :value="precio.value">{{precio.name}}</option>
-                </select>
-                
+                <div class="col">
+                    <h3>Filtros:</h3>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="" class="fw-bold">
+                                Categoria:
+                            </label>
+                            <select class="p-0 w-auto mx-auto" name="" id="" v-model="filtroCategoria">
+                                <option value="">Todos</option>
+                                <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label for="" class="fw-bold">
+                                Precio:
+                            </label>
+                            <select class="p-0 w-auto mx-auto" name="" id="" v-model="filtroPrecio">
+                                <option value="">Todos</option>
+                                <option v-for="(precio, idx) in precios" :key="idx" :value="precio.value">{{precio.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
         </div>
 
@@ -93,7 +108,7 @@ export default {
             filtroPrecio: "",
             filtroLocalidad: "",
             filtroFechaInicio: "",
-            filtro: "",
+            filtroPalabra: "",
             eventosFiltrados: "",
             // diasSemana: ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
             NUM_RESULTS: 24, // Numero de resultados por página
@@ -129,8 +144,7 @@ export default {
 
         },
         filter(){
-            console.log(this.eventos)
-            this.eventosFiltrados = this.filterByCategory(this.filterByPrice(this.eventos))
+            this.eventosFiltrados = this.filterByCategory(this.filterByPrice(this.filterByPalabra(this.eventos)))
         },
         filterByCategory(eventosFiltrados){
             if (this.filtroCategoria == "") {
@@ -149,6 +163,21 @@ export default {
                 return eventosFiltrados;
             }
             return eventosFiltrados.filter(e => e.localidad == this.filtroLocalidad);
+        },
+        filterByPalabra(eventosFiltrados){
+
+            console.log("hola"+this.filtroPalabra)
+
+            if (this.filtroPalabra == "") {
+                
+                return eventosFiltrados;
+
+            }
+
+            return eventosFiltrados.filter(e => {
+                return (e.titulo.toLowerCase().includes(this.filtroPalabra.toLowerCase())) || (e.descripcion.toLowerCase().includes(this.filtroPalabra.toLowerCase()));
+            });
+
         }
 
     },
@@ -238,6 +267,11 @@ export default {
         },
         filtroPrecio: function(newData, oldData){
             this.filter();
+        },
+        filtroPalabra: function(newData, oldData) {
+
+            this.filter();
+
         }
     },
 }

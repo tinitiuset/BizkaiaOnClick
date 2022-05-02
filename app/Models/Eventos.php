@@ -25,7 +25,8 @@ class Eventos extends Model
         "localidad",
         "usuarioAprobador",
         "usuarioCreador",
-        "categoria"
+        "categoria",
+        "URL"
     ];
     protected $primaryKey = "id";
 

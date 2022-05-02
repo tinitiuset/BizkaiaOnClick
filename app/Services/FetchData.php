@@ -7,6 +7,7 @@ use App\Http\Controllers\EventoController;
 use App\Models\Categoria;
 use App\Models\Evento;
 use App\Models\Foto;
+use Illuminate\Support\Facades\Log;
 
 class FetchData
 {
@@ -64,6 +65,8 @@ class FetchData
                     else
                         $data['municipalityEs'] = utf8_decode($data['municipalityEs']);
 
+                    $data['sourceUrlEs'] = isset($data['sourceUrlEs']) ? $data['sourceUrlEs'] : null;
+
                     Evento::create([
                         'titulo' => utf8_decode($data['nameEs']),
                         'descripcion'=> $data['descriptionEs'],
@@ -76,7 +79,8 @@ class FetchData
                         'aforo' => null,
                         'recinto' => $data['establishmentEs'],
                         'localidad' => $data['municipalityEs'],
-                        'categoria' => utf8_decode($data['typeEs'])
+                        'categoria' => utf8_decode($data['typeEs']),
+                        'URL' => $data['sourceUrlEs']
                     ]);
                     foreach ($data['images'] as $imagen) {
                         $idEvento=Evento::where("titulo",utf8_decode($data['nameEs']))->get("id");
