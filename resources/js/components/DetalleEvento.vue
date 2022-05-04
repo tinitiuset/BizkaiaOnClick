@@ -33,7 +33,7 @@
 
                 </div>
             </div>
-            <div id="carouselExampleControls" class="carousel slide col-md-6 col-lg-5 col-xl-4 mx-auto m-md-4 g-0" data-bs-ride="carousel" style="" v-if="evento.fotos.length > 1">
+            <div id="carouselExampleControls" class="carousel slide col-md-6 col-lg-5 col-xl-4 mx-auto m-md-4 g-0" data-bs-ride="carousel" style="" v-if="evento.fotos && evento.fotos.length > 1">
                 <div class="carousel-inner">
                     <div :class="{ 'active': index === 0, 'carousel-item' : true, 'imgResponsiveCarousel' : true }" v-for="(foto, index) in evento.fotos" :key="foto.id">
 
@@ -51,7 +51,7 @@
                 </button>
             </div>
             <div class="col-md-6 col-lg-5 col-xl-4 mx-auto m-md-4 g-0" v-else>
-                <img :src="'/img/eventos/'+evento.fotos[0].ruta" class="d-block w-100" alt="...">
+                <img v-if="evento.fotos" :src="'/img/eventos/'+evento.fotos[0].ruta" class="d-block w-100" alt="...">
             </div>
 
         </div>

@@ -5386,6 +5386,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Agenda",
@@ -6501,24 +6506,123 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_eventos__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/eventos */ "./resources/js/store/modules/eventos.js");
 /* harmony import */ var _modules_usuarios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/usuarios */ "./resources/js/store/modules/usuarios.js");
 /* harmony import */ var _modules_categorias__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/categorias */ "./resources/js/store/modules/categorias.js");
+/* harmony import */ var _modules_alertas__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/alertas */ "./resources/js/store/modules/alertas.js");
 
 
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_4__["default"]);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_4__["default"].Store({
+
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_5__["default"]);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_5__["default"].Store({
   modules: {
     eventos: _modules_eventos__WEBPACK_IMPORTED_MODULE_0__["default"],
     usuarios: _modules_usuarios__WEBPACK_IMPORTED_MODULE_1__["default"],
-    categorias: _modules_categorias__WEBPACK_IMPORTED_MODULE_2__["default"]
+    categorias: _modules_categorias__WEBPACK_IMPORTED_MODULE_2__["default"],
+    alertas: _modules_alertas__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 }));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/alertas.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/modules/alertas.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// Initial State
+var state = function state() {
+  return {
+    alertas: [],
+    alerta: []
+  };
+}; // Getters
+
+
+var getters = {
+  alertas: function alertas(state) {
+    return state.alertas;
+  },
+  alerta: function alerta(state) {
+    return state.alerta;
+  }
+}; // Actions
+
+var actions = {
+  createAlerta: function createAlerta(_ref, alerta) {
+    var commit = _ref.commit;
+    axios.post('/api/alertas', alerta).then(function (res) {
+      console.log("Called CREATE");
+      commit('CREATE_ALERTA', res.data);
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  },
+  fetchAlerta: function fetchAlerta(_ref2, id) {
+    var commit = _ref2.commit;
+    axios.get("/api/alertas/".concat(id)).then(function (res) {
+      console.log("Called GET");
+      commit('FETCH_ALERTA', res.data);
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  },
+  fetchAlertas: function fetchAlertas(_ref3) {
+    var commit = _ref3.commit;
+    axios.get('/api/alertas').then(function (res) {
+      console.log("Called GET ALL");
+      console.log(res.data);
+      commit('FETCH_ALERTAS', res.data);
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  },
+  deleteAlerta: function deleteAlerta(_ref4, alerta) {
+    var commit = _ref4.commit;
+    axios["delete"]("/api/alertas/".concat(alerta.categoria)).then(function (res) {
+      console.log("Called DELETE");
+      if (res.data === 'ok') commit('DELETE_ALERTA', alerta);
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  }
+}; // Mutations
+
+var mutations = {
+  CREATE_ALERTA: function CREATE_ALERTA(state, alerta) {
+    state.alertas.unshift(alerta);
+  },
+  FETCH_ALERTA: function FETCH_ALERTA(state, alerta) {
+    return state.alerta = alerta;
+  },
+  FETCH_ALERTAS: function FETCH_ALERTAS(state, alertas) {
+    return state.alertas = alertas;
+  },
+  DELETE_ALERTA: function DELETE_ALERTA(state, alerta) {
+    var index = state.alertas.findIndex(function (item) {
+      return item.id === alerta.id;
+    });
+    state.alertas.splice(index, 1);
+  }
+}; // Exports
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  state: state,
+  getters: getters,
+  actions: actions,
+  mutations: mutations
+});
 
 /***/ }),
 
@@ -6574,6 +6678,7 @@ var actions = {
     var commit = _ref3.commit;
     axios.get('/api/categorias').then(function (res) {
       console.log("Called GET ALL");
+      console.log(res.data);
       commit('FETCH_CATEGORIAS', res.data);
     })["catch"](function (err) {
       console.log(err);
@@ -41747,6 +41852,8 @@ var render = function () {
                 ],
                 2
               ),
+              _vm._v(" "),
+              _c("span", { staticClass: "fa fa-star unchecked" }),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-4" }, [
@@ -42743,7 +42850,7 @@ var render = function () {
           ]
         ),
         _vm._v(" "),
-        _vm.evento.fotos.length > 1
+        _vm.evento.fotos && _vm.evento.fotos.length > 1
           ? _c(
               "div",
               {
@@ -42792,13 +42899,15 @@ var render = function () {
               "div",
               { staticClass: "col-md-6 col-lg-5 col-xl-4 mx-auto m-md-4 g-0" },
               [
-                _c("img", {
-                  staticClass: "d-block w-100",
-                  attrs: {
-                    src: "/img/eventos/" + _vm.evento.fotos[0].ruta,
-                    alt: "...",
-                  },
-                }),
+                _vm.evento.fotos
+                  ? _c("img", {
+                      staticClass: "d-block w-100",
+                      attrs: {
+                        src: "/img/eventos/" + _vm.evento.fotos[0].ruta,
+                        alt: "...",
+                      },
+                    })
+                  : _vm._e(),
               ]
             ),
       ]

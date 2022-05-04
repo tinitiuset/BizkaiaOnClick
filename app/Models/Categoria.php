@@ -26,4 +26,10 @@ class Categoria extends Model
         return $this->hasMany(Evento::class, "categoria", "nombre");
     }
 
+    public function usuariosAlertados() {
+
+        return $this->belongsToMany(User::class);
+
+    }
+
 }
