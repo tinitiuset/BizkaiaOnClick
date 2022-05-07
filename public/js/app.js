@@ -41853,6 +41853,8 @@ var render = function () {
                 2
               ),
               _vm._v(" "),
+              _c("span", { staticClass: "fa fa-star checked" }),
+              _vm._v(" "),
               _c("span", { staticClass: "fa fa-star unchecked" }),
             ]),
             _vm._v(" "),

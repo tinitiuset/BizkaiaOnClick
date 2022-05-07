@@ -26,7 +26,7 @@
                                 <option value="">Todos</option>
                                 <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
                             </select>
-                            <!-- <span class = "fa fa-star checked"></span> -->
+                            <span class = "fa fa-star checked"></span>
                             <!-- To display unchecked star rating icons -->
                             <span class = "fa fa-star unchecked"></span>
                             <!-- <i class="fas fa-star"></i> -->

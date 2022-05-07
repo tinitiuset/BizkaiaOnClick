@@ -28,7 +28,7 @@ class Categoria extends Model
 
     public function usuariosAlertados() {
 
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'alertas', 'categoria', 'idUsuario');
 
     }
 

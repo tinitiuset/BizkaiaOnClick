@@ -64,9 +64,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     }
 
-    public function alertasCategorias () {
+    public function alertas() {
 
-       return $this->belongsToMany(Categoria::class, 'categorias', 'idUsuario', 'categoria');
+       return $this->belongsToMany(Categoria::class, 'alertas', 'idUsuario', 'categoria');
 
     }
 

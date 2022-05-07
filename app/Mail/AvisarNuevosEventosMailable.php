@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Evento;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -20,7 +21,7 @@ class AvisarNuevosEventosMailable extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Evento $eventos)
     {
         //
     }

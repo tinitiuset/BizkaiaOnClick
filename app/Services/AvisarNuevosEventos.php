@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\Http\Controllers\EventoController;
+use App\Mail\AvisarNuevosEventosMailable;
 use App\Models\Categoria;
 use App\Models\Evento;
 use App\Models\Foto;
@@ -23,11 +24,24 @@ class AvisarNuevosEventos
 
         // GET last Events
 
-        $usuarios = User::all();
+        $usuarios = User::with('alertas')->get();
 
         foreach ($usuarios as $usuario) {
+
+            Log::error("hola: ".$usuario);
+            Log::error("hola: ".$usuario->categorias);
             
-            
+            if (count($usuario->alertas) > 0) {
+                
+                foreach ($usuario->alertas as $categoriaAlerta) {
+                    
+                    $eventos = Evento::where("estado","aprobado")->where('fechaFin','>=',date("Y-m-d"))->where('');
+
+                    new AvisarNuevosEventosMailable($eventos);
+
+                }
+
+            }
 
         }
 
