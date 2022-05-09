@@ -25,6 +25,7 @@ class Eventos extends Model
         "localidad",
         "usuarioAprobador",
         "usuarioCreador",
+        "fechaAprobado",
         "categoria",
         "URL"
     ];

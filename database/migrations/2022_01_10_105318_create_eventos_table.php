@@ -28,6 +28,7 @@ class CreateEventosTable extends Migration
             $table->string("localidad")->nullable();
             $table->integer("usuarioAprobador")->nullable();
             $table->integer("usuarioCreador")->nullable();
+            $table->date("fechaAprobado")->nullable();
             $table->string("URL")->nullable();
             $table->string("categoria");
             $table->foreign('usuarioAprobador')->references('id')->on('users')->onUpdate("cascade");

@@ -5391,6 +5391,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Agenda",
@@ -5398,8 +5416,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       filtroCategoria: "",
       filtroPrecio: "",
+      filtroGratis: "",
       filtroLocalidad: "",
       filtroFechaInicio: "",
+      filtroFechaFin: "",
       filtroPalabra: "",
       eventosFiltrados: "",
       // diasSemana: ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
@@ -5497,8 +5517,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     filterByPalabra: function filterByPalabra(eventosFiltrados) {
       var _this4 = this;
 
-      console.log("hola" + this.filtroPalabra);
-
       if (this.filtroPalabra == "") {
         return eventosFiltrados;
       }
@@ -5540,6 +5558,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     return beforeMount;
   }(),
+  mounted: function mounted() {
+    this.filter();
+  },
   watch: {
     filtroCategoria: function filtroCategoria(newData, oldData) {
       this.filter();
@@ -5548,6 +5569,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.filter();
     },
     filtroPalabra: function filtroPalabra(newData, oldData) {
+      this.filter();
+    },
+    filtroFechas: function filtroFechas(newData, oldData) {
       this.filter();
     }
   }
@@ -41859,54 +41883,157 @@ var render = function () {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-4" }, [
-              _c("label", { staticClass: "fw-bold", attrs: { for: "" } }, [
-                _vm._v(
-                  "\n                            Precio:\n                        "
+              _c("div", { staticClass: "me-2 d-inline" }, [
+                _c("label", { staticClass: "fw-bold", attrs: { for: "" } }, [
+                  _vm._v(
+                    "\n                                Precio:\n                            "
+                  ),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.filtroPrecio,
+                        expression: "filtroPrecio",
+                      },
+                    ],
+                    staticClass: "p-0 w-auto mx-auto",
+                    attrs: { name: "", id: "" },
+                    on: {
+                      change: function ($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function (o) {
+                            return o.selected
+                          })
+                          .map(function (o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.filtroPrecio = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                    },
+                  },
+                  [
+                    _c("option", { attrs: { value: "" } }, [_vm._v("Todos")]),
+                    _vm._v(" "),
+                    _vm._l(_vm.precios, function (precio, idx) {
+                      return _c(
+                        "option",
+                        { key: idx, domProps: { value: precio.value } },
+                        [_vm._v(_vm._s(precio.name))]
+                      )
+                    }),
+                  ],
+                  2
                 ),
               ]),
               _vm._v(" "),
-              _c(
-                "select",
-                {
+              _c("div", { staticClass: "d-inline" }, [
+                _c("input", {
                   directives: [
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.filtroPrecio,
-                      expression: "filtroPrecio",
+                      value: _vm.filtroGratis,
+                      expression: "filtroGratis",
                     },
                   ],
-                  staticClass: "p-0 w-auto mx-auto",
-                  attrs: { name: "", id: "" },
+                  staticClass: "mx-auto",
+                  attrs: { type: "checkbox", name: "", id: "" },
+                  domProps: {
+                    checked: Array.isArray(_vm.filtroGratis)
+                      ? _vm._i(_vm.filtroGratis, null) > -1
+                      : _vm.filtroGratis,
+                  },
                   on: {
                     change: function ($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function (o) {
-                          return o.selected
-                        })
-                        .map(function (o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.filtroPrecio = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
+                      var $$a = _vm.filtroGratis,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.filtroGratis = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.filtroGratis = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.filtroGratis = $$c
+                      }
                     },
                   },
-                },
-                [
-                  _c("option", { attrs: { value: "" } }, [_vm._v("Todos")]),
-                  _vm._v(" "),
-                  _vm._l(_vm.precios, function (precio, idx) {
-                    return _c(
-                      "option",
-                      { key: idx, domProps: { value: precio.value } },
-                      [_vm._v(_vm._s(precio.name))]
-                    )
-                  }),
+                }),
+                _vm._v(" "),
+                _c("label", { staticClass: "fw-bold", attrs: { for: "" } }, [
+                  _vm._v("Gratis"),
+                ]),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-4" }, [
+              _c("label", { staticClass: "fw-bold", attrs: { for: "" } }, [
+                _vm._v(
+                  "\n                            Fecha inicio:\n                        "
+                ),
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filtroFechaInicio,
+                    expression: "filtroFechaInicio",
+                  },
                 ],
-                2
-              ),
+                attrs: { type: "date", name: "", id: "" },
+                domProps: { value: _vm.filtroFechaInicio },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.filtroFechaInicio = $event.target.value
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "fw-bold", attrs: { for: "" } }, [
+                _vm._v(
+                  "\n                            Fecha fin:\n                        "
+                ),
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filtroFechaFin,
+                    expression: "filtroFechaFin",
+                  },
+                ],
+                attrs: { type: "date", name: "", id: "" },
+                domProps: { value: _vm.filtroFechaFin },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.filtroFechaFin = $event.target.value
+                  },
+                },
+              }),
             ]),
           ]),
         ]),

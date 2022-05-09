@@ -32,14 +32,32 @@
                             <!-- <i class="fas fa-star"></i> -->
                         </div>
                         <div class="col-4">
-                            <label for="" class="fw-bold">
-                                Precio:
-                            </label>
-                            <select class="p-0 w-auto mx-auto" name="" id="" v-model="filtroPrecio">
-                                <option value="">Todos</option>
-                                <option v-for="(precio, idx) in precios" :key="idx" :value="precio.value">{{precio.name}}</option>
-                            </select>
+                            <div class="me-2 d-inline">
+                                <label for="" class="fw-bold">
+                                    Precio:
+                                </label>
+                                <select class="p-0 w-auto mx-auto" name="" id="" v-model="filtroPrecio">
+                                    <option value="">Todos</option>
+                                    <option v-for="(precio, idx) in precios" :key="idx" :value="precio.value">{{precio.name}}</option>
+                                </select>
+                            </div>
+                            <div class="d-inline">
+                                <input type="checkbox" class="mx-auto" name="" id="" v-model="filtroGratis">
+                                <label for="" class="fw-bold">Gratis</label>
+                            </div>
+                            
 
+
+                        </div>
+                        <div class="col-4">
+                            <label for="" class="fw-bold">
+                                Fecha inicio:
+                            </label>
+                            <input type="date" name="" id="" v-model="filtroFechaInicio">
+                            <label for="" class="fw-bold">
+                                Fecha fin:
+                            </label>
+                            <input type="date" name="" id="" v-model="filtroFechaFin">
                         </div>
                     </div>
                     
@@ -111,8 +129,10 @@ export default {
 
             filtroCategoria: "",
             filtroPrecio: "",
+            filtroGratis: "",
             filtroLocalidad: "",
             filtroFechaInicio: "",
+            filtroFechaFin: "",
             filtroPalabra: "",
             eventosFiltrados: "",
             // diasSemana: ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
@@ -170,8 +190,6 @@ export default {
             return eventosFiltrados.filter(e => e.localidad == this.filtroLocalidad);
         },
         filterByPalabra(eventosFiltrados){
-
-            console.log("hola"+this.filtroPalabra)
 
             if (this.filtroPalabra == "") {
                 
@@ -266,6 +284,11 @@ export default {
         this.eventosFiltrados = this.eventos;
         console.log(this.eventos)
     },
+    mounted: function () {
+
+        this.filter();
+
+    },
     watch: {
         filtroCategoria: function(newData, oldData){
             this.filter();
@@ -274,6 +297,11 @@ export default {
             this.filter();
         },
         filtroPalabra: function(newData, oldData) {
+
+            this.filter();
+
+        },
+        filtroFechas: function(newData, oldData) {
 
             this.filter();
 

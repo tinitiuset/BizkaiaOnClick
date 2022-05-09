@@ -31,6 +31,7 @@ class EventoFactory extends Factory
             'aforo' => $this->faker->randomNumber(2,true),
             'recinto' => "palacioeuskalduna",
             "localidad" => "galdakao",
+            "fechaAprobado" => null,
             "usuarioCreador" => $this->faker->randomElement($usuariosCreadores),
             "usuarioAprobador" => $this->faker->randomElement($usuariosAprobadores),
             "categoria" => $this->faker->randomElement($categorias)
