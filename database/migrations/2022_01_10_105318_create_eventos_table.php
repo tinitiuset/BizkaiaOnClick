@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateEventosTable extends Migration
@@ -28,7 +29,7 @@ class CreateEventosTable extends Migration
             $table->string("localidad")->nullable();
             $table->integer("usuarioAprobador")->nullable();
             $table->integer("usuarioCreador")->nullable();
-            $table->date("fechaAprobado")->nullable();
+            $table->timestamp("fechaAprobado")->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string("URL")->nullable();
             $table->string("categoria");
             $table->foreign('usuarioAprobador')->references('id')->on('users')->onUpdate("cascade");

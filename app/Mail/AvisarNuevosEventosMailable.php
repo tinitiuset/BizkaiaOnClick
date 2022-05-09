@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Evento;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -14,6 +15,8 @@ class AvisarNuevosEventosMailable extends Mailable
 
 
     public $subject = "¡Nuevos eventos interesantes en BizkaiaOnClick!";
+    public $eventos = null;
+    public $usuario = null;
 
 
     /**
@@ -21,9 +24,12 @@ class AvisarNuevosEventosMailable extends Mailable
      *
      * @return void
      */
-    public function __construct(Evento $eventos)
+    public function __construct(array $eventos, User $usuario)
     {
-        //
+
+        $this->eventos=$eventos;
+        $this->usuario=$usuario;
+
     }
 
     /**
@@ -33,6 +39,6 @@ class AvisarNuevosEventosMailable extends Mailable
      */
     public function build()
     {
-        return $this->view('email.avisarNuevosEventos');
+        return $this->view('emails.avisarNuevosEventos');
     }
 }

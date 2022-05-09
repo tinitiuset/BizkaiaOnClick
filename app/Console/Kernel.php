@@ -22,7 +22,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(new AvisarNuevosEventos)->everyMinute();
 
         // FetchData From Open Data Euskadi
-        $schedule->call(new FetchData)->everyMinute();
+        // $schedule->call(new FetchData)->everyMinute();
 
         //Avisar de los eventos
         

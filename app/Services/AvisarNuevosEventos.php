@@ -10,6 +10,7 @@ use App\Models\Evento;
 use App\Models\Foto;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class AvisarNuevosEventos
 {
@@ -32,14 +33,32 @@ class AvisarNuevosEventos
             Log::error("hola: ".$usuario->categorias);
             
             if (count($usuario->alertas) > 0) {
+
+                $eventosTotal = [];
                 
                 foreach ($usuario->alertas as $categoriaAlerta) {
                     
-                    $eventos = Evento::where("estado","aprobado")->where('fechaFin','>=',date("Y-m-d"))->where('');
+                    $eventos = Evento::where("estado","aprobado")->where('fechaAprobado','<=',date("Y-m-d H:i:s"))->where('fechaAprobado','>',date("Y-m-d H:i:s", strtotime('-6 hours')))->where("categoria",$categoriaAlerta->nombre);
 
-                    new AvisarNuevosEventosMailable($eventos);
+                    if ($eventos->count() > 0) {
+
+                        $eventosTotal[$categoriaAlerta->categoria] = $eventos;
+
+                    }
 
                 }
+
+                if (count($eventosTotal) > 0) {
+
+                    $usuario = User::findOrFail($usuario->id);
+                    
+                    $correo = new AvisarNuevosEventosMailable($eventosTotal, $usuario);
+
+                    Mail::to($usuario->email)->send($correo);
+
+                }
+
+                
 
             }
 

@@ -76,6 +76,7 @@ class FetchData
                         'precio' => doubleval($data['priceEs']),
                         'direccion' => $data['direccion'] ?? '',
                         'estado' => "aprobado",
+                        'fechaAprobado' => date("Y-m-d H:i:s"),
                         'aforo' => null,
                         'recinto' => $data['establishmentEs'],
                         'localidad' => $data['municipalityEs'],

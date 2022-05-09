@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Evento;
 use App\Models\Eventos;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -179,11 +180,28 @@ class EventosController extends Controller
 
         // Recepcionamos todos los datos excepto el token y el método
         $datosEventos = request()->except(['_token', '_method']);
+
+        if (Eventos::findOrFail($id) != $datosEventos['estado']) {
+
+            if ($datosEventos['estado'] == "aprobado") {
+                
+                $datosEventos["fechaAprobado"] = date("Y-m-d H:i:s");
+
+            } else {
+
+                $datosEventos["fechaAprobado"] = null;
+
+            }
+            
+            
+
+        }
+
         Eventos::where('id', '=', $id)->update($datosEventos);
 
         // Vuelvo a buscar la info
         $eventos = Eventos::findOrFail($id);
-        return redirect()->route("eventos.index")->with('mensaje', 'Categoría modificada');
+        return redirect()->route("eventos.index")->with('mensaje', 'Evento modificado');
     }
 
     /**
