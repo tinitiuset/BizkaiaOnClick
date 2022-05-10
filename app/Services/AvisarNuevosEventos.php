@@ -38,11 +38,11 @@ class AvisarNuevosEventos
                 
                 foreach ($usuario->alertas as $categoriaAlerta) {
                     
-                    $eventos = Evento::where("estado","aprobado")->where('fechaAprobado','<=',date("Y-m-d H:i:s"))->where('fechaAprobado','>',date("Y-m-d H:i:s", strtotime('-6 hours')))->where("categoria",$categoriaAlerta->nombre);
+                    $eventos = Evento::where("estado","aprobado")->where('fechaAprobado','<=',date("Y-m-d H:i:s"))->where('fechaAprobado','>',date("Y-m-d H:i:s", strtotime('-6 hours')))->where("categoria",$categoriaAlerta->nombre)->get();
 
                     if ($eventos->count() > 0) {
 
-                        $eventosTotal[$categoriaAlerta->categoria] = $eventos;
+                        $eventosTotal[$categoriaAlerta->nombre] = $eventos;
 
                     }
 
