@@ -169,7 +169,7 @@ export default {
 
         },
         filter(){
-            this.eventosFiltrados = this.filterByCategory(this.filterByPrice(this.filterByPalabra(this.eventos)))
+            this.eventosFiltrados = this.filterByCategory(this.filterByPrice(this.filterByPalabra(this.filterByFecha(this.eventos))));
         },
         filterByCategory(eventosFiltrados){
             if (this.filtroCategoria == "") {
@@ -211,6 +211,19 @@ export default {
                 return (e.titulo.toLowerCase().includes(this.filtroPalabra.toLowerCase())) || (e.descripcion.toLowerCase().includes(this.filtroPalabra.toLowerCase()));
             });
 
+        },
+        filterByFecha(eventosFiltrados) {   
+           if (this.filtroFechaInicio == "" && this.filtroFechaFin == "") {
+               return eventosFiltrados;
+           }
+
+           if (this.filtroFechaInicio != "" && this.filtroFechaFin != "") {
+               return eventosFiltrados.filter(e=> e.fechaInicio>=this.filtroFechaInicio && e.fechaFin<=this.filtroFechaFin);
+           } else if (this.filtroFechaInicio != "") {
+                return eventosFiltrados.filter(e=> e.fechaInicio>=this.filtroFechaInicio);
+           } else {
+                return eventosFiltrados.filter(e=> e.fechaFin<=this.filtroFechaFin);
+           } 
         }
 
     },
@@ -311,16 +324,21 @@ export default {
             this.filter();
 
         },
-        filtroGratis: function(newData, oldData) {
+        filtroFechaInicio: function(newData, oldData) {
 
             this.filter();
 
         },
-        filtroFechas: function(newData, oldData) {
+        filtroFechaFin: function(newData, oldData) {
 
             this.filter();
 
-        }
+        },
+        filtroGratis: function(newData, oldData) {
+            
+            this.filter();
+
+        },
     },
 }
 </script>
