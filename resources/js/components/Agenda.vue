@@ -204,18 +204,14 @@ export default {
         },
         filterByFecha(eventosFiltrados) {   
            if (this.filtroFechaInicio == "" && this.filtroFechaFin == "") {
-               console.log("Ninguna fecha");
                return eventosFiltrados;
            }
 
            if (this.filtroFechaInicio != "" && this.filtroFechaFin != "") {
-               console.log("Dos fechas")
                return eventosFiltrados.filter(e=> e.fechaInicio>=this.filtroFechaInicio && e.fechaFin<=this.filtroFechaFin);
            } else if (this.filtroFechaInicio != "") {
-               console.log("Solo inicio");
                 return eventosFiltrados.filter(e=> e.fechaInicio>=this.filtroFechaInicio);
            } else {
-               console.log("Solo fin");
                 return eventosFiltrados.filter(e=> e.fechaFin<=this.filtroFechaFin);
            } 
         }
