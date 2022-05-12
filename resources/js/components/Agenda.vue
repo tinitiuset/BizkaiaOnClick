@@ -169,7 +169,7 @@ export default {
 
         },
         filter(){
-            this.eventosFiltrados = this.filterByCategory(this.filterByPrice(this.filterByPalabra(this.eventos)))
+            this.eventosFiltrados = this.filterByCategory(this.filterByPrice(this.filterByPalabra(this.filterByFecha(this.eventos))));
         },
         filterByCategory(eventosFiltrados){
             if (this.filtroCategoria == "") {
@@ -201,6 +201,23 @@ export default {
                 return (e.titulo.toLowerCase().includes(this.filtroPalabra.toLowerCase())) || (e.descripcion.toLowerCase().includes(this.filtroPalabra.toLowerCase()));
             });
 
+        },
+        filterByFecha(eventosFiltrados) {   
+           if (this.filtroFechaInicio == "" && this.filtroFechaFin == "") {
+               console.log("Ninguna fecha");
+               return eventosFiltrados;
+           }
+
+           if (this.filtroFechaInicio != "" && this.filtroFechaFin != "") {
+               console.log("Dos fechas")
+               return eventosFiltrados.filter(e=> e.fechaInicio>=this.filtroFechaInicio && e.fechaFin<=this.filtroFechaFin);
+           } else if (this.filtroFechaInicio != "") {
+               console.log("Solo inicio");
+                return eventosFiltrados.filter(e=> e.fechaInicio>=this.filtroFechaInicio);
+           } else {
+               console.log("Solo fin");
+                return eventosFiltrados.filter(e=> e.fechaFin<=this.filtroFechaFin);
+           } 
         }
 
     },
@@ -301,7 +318,13 @@ export default {
             this.filter();
 
         },
-        filtroFechas: function(newData, oldData) {
+        filtroFechaInicio: function(newData, oldData) {
+
+            this.filter();
+
+        },
+
+        filtroFechaFin: function(newData, oldData) {
 
             this.filter();
 
