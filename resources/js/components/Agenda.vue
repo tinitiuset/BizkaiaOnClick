@@ -36,7 +36,7 @@
                                 <label for="" class="fw-bold">
                                     Precio:
                                 </label>
-                                <select class="p-0 w-auto mx-auto" name="" id="" v-model="filtroPrecio">
+                                <select class="p-0 w-auto mx-auto" name="" id="selectPrecio" v-model="filtroPrecio">
                                     <option value="">Todos</option>
                                     <option v-for="(precio, idx) in precios" :key="idx" :value="precio.value">{{precio.name}}</option>
                                 </select>
@@ -179,8 +179,17 @@ export default {
         },
         filterByPrice(eventosFiltrados){
             if (this.filtroPrecio == "") {
+                if(this.filtroGratis == true){
+                    return eventosFiltrados.filter(e => e.precio == 0);
+                }
                 return eventosFiltrados;
+            }else{
+                if(this.filtroGratis == true){
+                    this.filtroPrecio = "";
+                    return eventosFiltrados.filter(e => e.precio == 0);
+                }
             }
+
             return eventosFiltrados.filter(e => e.precio < this.filtroPrecio.maxValue && e.precio > this.filtroPrecio.minValue);
         },
         filterByLocalidad(eventosFiltrados){
@@ -189,6 +198,7 @@ export default {
             }
             return eventosFiltrados.filter(e => e.localidad == this.filtroLocalidad);
         },
+
         filterByPalabra(eventosFiltrados){
 
             if (this.filtroPalabra == "") {
@@ -297,6 +307,11 @@ export default {
             this.filter();
         },
         filtroPalabra: function(newData, oldData) {
+
+            this.filter();
+
+        },
+        filtroGratis: function(newData, oldData) {
 
             this.filter();
 
