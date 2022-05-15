@@ -17,6 +17,7 @@ class Categoria extends Model
     ];
     protected $primaryKey = "nombre";
     protected $keyType = "string";
+    protected $hidden = ['pivot','created_at','updated_at'];
 
     /**
      * Obtengo los eventos relacionados a esta categoria

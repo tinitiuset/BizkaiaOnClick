@@ -5409,11 +5409,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Agenda",
   data: function data() {
     return {
+      csrf: document.head.querySelector('meta[name="csrf-token"]') ? document.head.querySelector('meta[name="csrf-token"]').content : '',
       filtroCategoria: "",
       filtroPrecio: "",
       filtroGratis: "",
@@ -5421,6 +5432,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       filtroFechaInicio: "",
       filtroFechaFin: "",
       filtroPalabra: "",
+      favorito: false,
       eventosFiltrados: "",
       // diasSemana: ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
       NUM_RESULTS: 24,
@@ -5467,6 +5479,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   methods: {
+    addFavorito: function addFavorito() {
+      document.getElementById("addFavorito").submit();
+    },
+    removeFavorito: function removeFavorito() {
+      document.getElementById("removeFavorito").submit();
+    },
+    esFavorito: function esFavorito() {
+      var _this = this;
+
+      this.favorito = this.alertas.filter(function (alerta) {
+        return alerta.nombre == _this.filtroCategoria;
+      }).length > 0;
+      console.log(this.filtroCategoria);
+      console.log(this.favorito);
+    },
     reducirTexto: function reducirTexto(texto) {
       return texto.split(' ').slice(0, 60).join(' ');
     },
@@ -5479,54 +5506,88 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $(window).scrollTop(0, 0);
     },
     filter: function filter() {
-      this.eventosFiltrados = this.filterByCategory(this.filterByPrice(this.filterByPalabra(this.eventos)));
+      this.eventosFiltrados = this.filterByCategory(this.filterByPrice(this.filterByPalabra(this.filterByFecha(this.eventos))));
     },
     filterByCategory: function filterByCategory(eventosFiltrados) {
-      var _this = this;
+      var _this2 = this;
 
       if (this.filtroCategoria == "") {
         return eventosFiltrados;
       }
 
       return eventosFiltrados.filter(function (e) {
-        return e.categoria == _this.filtroCategoria;
+        return e.categoria == _this2.filtroCategoria;
       });
     },
     filterByPrice: function filterByPrice(eventosFiltrados) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.filtroPrecio == "") {
+        if (this.filtroGratis == true) {
+          return eventosFiltrados.filter(function (e) {
+            return e.precio == 0;
+          });
+        }
+
         return eventosFiltrados;
+      } else {
+        if (this.filtroGratis == true) {
+          this.filtroPrecio = "";
+          return eventosFiltrados.filter(function (e) {
+            return e.precio == 0;
+          });
+        }
       }
 
       return eventosFiltrados.filter(function (e) {
-        return e.precio < _this2.filtroPrecio.maxValue && e.precio > _this2.filtroPrecio.minValue;
+        return e.precio < _this3.filtroPrecio.maxValue && e.precio > _this3.filtroPrecio.minValue;
       });
     },
     filterByLocalidad: function filterByLocalidad(eventosFiltrados) {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.filtroLocalidad == "") {
         return eventosFiltrados;
       }
 
       return eventosFiltrados.filter(function (e) {
-        return e.localidad == _this3.filtroLocalidad;
+        return e.localidad == _this4.filtroLocalidad;
       });
     },
     filterByPalabra: function filterByPalabra(eventosFiltrados) {
-      var _this4 = this;
+      var _this5 = this;
 
       if (this.filtroPalabra == "") {
         return eventosFiltrados;
       }
 
       return eventosFiltrados.filter(function (e) {
-        return e.titulo.toLowerCase().includes(_this4.filtroPalabra.toLowerCase()) || e.descripcion.toLowerCase().includes(_this4.filtroPalabra.toLowerCase());
+        return e.titulo.toLowerCase().includes(_this5.filtroPalabra.toLowerCase()) || e.descripcion.toLowerCase().includes(_this5.filtroPalabra.toLowerCase());
       });
+    },
+    filterByFecha: function filterByFecha(eventosFiltrados) {
+      var _this6 = this;
+
+      if (this.filtroFechaInicio == "" && this.filtroFechaFin == "") {
+        return eventosFiltrados;
+      }
+
+      if (this.filtroFechaInicio != "" && this.filtroFechaFin != "") {
+        return eventosFiltrados.filter(function (e) {
+          return e.fechaInicio >= _this6.filtroFechaInicio && e.fechaFin <= _this6.filtroFechaFin;
+        });
+      } else if (this.filtroFechaInicio != "") {
+        return eventosFiltrados.filter(function (e) {
+          return e.fechaInicio >= _this6.filtroFechaInicio;
+        });
+      } else {
+        return eventosFiltrados.filter(function (e) {
+          return e.fechaFin <= _this6.filtroFechaFin;
+        });
+      }
     }
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['eventos', 'categorias'])),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['eventos', 'categorias', 'alertas'])),
   beforeMount: function () {
     var _beforeMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -5541,10 +5602,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               return this.$store.dispatch('fetchCategorias');
 
             case 4:
+              _context.next = 6;
+              return this.$store.dispatch('fetchAlertas');
+
+            case 6:
               this.eventosFiltrados = this.eventos;
               console.log(this.eventos);
 
-            case 6:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -5563,6 +5628,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   watch: {
     filtroCategoria: function filtroCategoria(newData, oldData) {
+      this.esFavorito();
       this.filter();
     },
     filtroPrecio: function filtroPrecio(newData, oldData) {
@@ -5571,7 +5637,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     filtroPalabra: function filtroPalabra(newData, oldData) {
       this.filter();
     },
-    filtroFechas: function filtroFechas(newData, oldData) {
+    filtroFechaInicio: function filtroFechaInicio(newData, oldData) {
+      this.filter();
+    },
+    filtroFechaFin: function filtroFechaFin(newData, oldData) {
+      this.filter();
+    },
+    filtroGratis: function filtroGratis(newData, oldData) {
       this.filter();
     }
   }
@@ -6585,9 +6657,12 @@ var getters = {
 
 var actions = {
   createAlerta: function createAlerta(_ref, alerta) {
-    var commit = _ref.commit;
-    axios.post('/api/alertas', alerta).then(function (res) {
+    var commit = _ref.commit,
+        state = _ref.state;
+    console.log(alerta);
+    axios.post('/alertas', alerta).then(function (res) {
       console.log("Called CREATE");
+      console.log(res.data);
       commit('CREATE_ALERTA', res.data);
     })["catch"](function (err) {
       console.log(err);
@@ -6595,7 +6670,7 @@ var actions = {
   },
   fetchAlerta: function fetchAlerta(_ref2, id) {
     var commit = _ref2.commit;
-    axios.get("/api/alertas/".concat(id)).then(function (res) {
+    axios.get("/alertas/".concat(id)).then(function (res) {
       console.log("Called GET");
       commit('FETCH_ALERTA', res.data);
     })["catch"](function (err) {
@@ -6604,7 +6679,7 @@ var actions = {
   },
   fetchAlertas: function fetchAlertas(_ref3) {
     var commit = _ref3.commit;
-    axios.get('/api/alertas').then(function (res) {
+    axios.get('/alertas').then(function (res) {
       console.log("Called GET ALL");
       console.log(res.data);
       commit('FETCH_ALERTAS', res.data);
@@ -6613,10 +6688,12 @@ var actions = {
     });
   },
   deleteAlerta: function deleteAlerta(_ref4, alerta) {
-    var commit = _ref4.commit;
-    axios["delete"]("/api/alertas/".concat(alerta.categoria)).then(function (res) {
+    var commit = _ref4.commit,
+        state = _ref4.state;
+    axios["delete"]("/alertas/".concat(alerta)).then(function (res) {
       console.log("Called DELETE");
-      if (res.data === 'ok') commit('DELETE_ALERTA', alerta);
+      console.log(res.data);
+      if (res.data === 'eliminada') commit('DELETE_ALERTA', alerta);
     })["catch"](function (err) {
       console.log(err);
     });
@@ -6626,6 +6703,7 @@ var actions = {
 var mutations = {
   CREATE_ALERTA: function CREATE_ALERTA(state, alerta) {
     state.alertas.unshift(alerta);
+    console.log(state.alertas);
   },
   FETCH_ALERTA: function FETCH_ALERTA(state, alerta) {
     return state.alerta = alerta;
@@ -41877,9 +41955,126 @@ var render = function () {
                 2
               ),
               _vm._v(" "),
-              _c("span", { staticClass: "fa fa-star checked" }),
+              _c(
+                "form",
+                {
+                  staticClass: "d-inline",
+                  attrs: {
+                    action: "/alertas/" + _vm.filtroCategoria,
+                    method: "post",
+                    id: "removeFavorito",
+                  },
+                },
+                [
+                  _c("input", {
+                    attrs: { type: "hidden", name: "_token" },
+                    domProps: { value: _vm.csrf },
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "_method", value: "DELETE" },
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "svg",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.favorito && _vm.filtroCategoria != "",
+                          expression: "favorito && filtroCategoria != ''",
+                        },
+                      ],
+                      staticClass: "svg-inline--fa fa-star fa-w-18 checked",
+                      attrs: {
+                        "aria-hidden": "true",
+                        focusable: "false",
+                        "data-prefix": "fa",
+                        "data-icon": "star",
+                        role: "img",
+                        xmlns: "http://www.w3.org/2000/svg",
+                        viewBox: "0 0 576 512",
+                        "data-fa-i2svg": "",
+                      },
+                      on: { click: _vm.removeFavorito },
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          fill: "currentColor",
+                          d: "M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z",
+                        },
+                      }),
+                    ]
+                  ),
+                ]
+              ),
               _vm._v(" "),
-              _c("span", { staticClass: "fa fa-star unchecked" }),
+              _c(
+                "form",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.favorito && _vm.filtroCategoria != "",
+                      expression: "!favorito && filtroCategoria != ''",
+                    },
+                  ],
+                  staticClass: "d-inline",
+                  attrs: {
+                    action: "/alertas",
+                    method: "post",
+                    id: "addFavorito",
+                  },
+                },
+                [
+                  _c("input", {
+                    attrs: { type: "hidden", name: "_token" },
+                    domProps: { value: _vm.csrf },
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "categoria" },
+                    domProps: { value: _vm.filtroCategoria },
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "svg",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.favorito && _vm.filtroCategoria != "",
+                          expression: "!favorito && filtroCategoria != ''",
+                        },
+                      ],
+                      staticClass: "svg-inline--fa fa-star fa-w-18 unchecked",
+                      attrs: {
+                        "aria-hidden": "true",
+                        focusable: "false",
+                        "data-prefix": "fa",
+                        "data-icon": "star",
+                        role: "img",
+                        xmlns: "http://www.w3.org/2000/svg",
+                        viewBox: "0 0 576 512",
+                        "data-fa-i2svg": "",
+                      },
+                      on: { click: _vm.addFavorito },
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          fill: "currentColor",
+                          d: "M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z",
+                        },
+                      }),
+                    ]
+                  ),
+                ]
+              ),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-4" }, [
@@ -41902,7 +42097,7 @@ var render = function () {
                       },
                     ],
                     staticClass: "p-0 w-auto mx-auto",
-                    attrs: { name: "", id: "" },
+                    attrs: { name: "", id: "selectPrecio" },
                     on: {
                       change: function ($event) {
                         var $$selectedVal = Array.prototype.filter

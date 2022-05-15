@@ -26,9 +26,19 @@
                                 <option value="">Todos</option>
                                 <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
                             </select>
-                            <span class = "fa fa-star checked"></span>
+                            <form :action="'/alertas/'+filtroCategoria" method="post" id="removeFavorito" class="d-inline"  >
+                                <input type="hidden" name="_token" :value="csrf">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <svg class="svg-inline--fa fa-star fa-w-18 checked" v-show="favorito && filtroCategoria != ''" @click="removeFavorito" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
+                            </form>
+                            
                             <!-- To display unchecked star rating icons -->
-                            <span class = "fa fa-star unchecked"></span>
+                            <form action="/alertas" method="post" id="addFavorito" class="d-inline" v-show="!favorito && filtroCategoria != ''" >
+                                <input type="hidden" name="_token" :value="csrf">
+                                <input type="hidden" name="categoria" :value="filtroCategoria">
+                                <svg class="svg-inline--fa fa-star fa-w-18 unchecked" v-show="!favorito && filtroCategoria != ''" @click="addFavorito" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
+                            </form>
+                            
                             <!-- <i class="fas fa-star"></i> -->
                         </div>
                         <div class="col-4">
@@ -127,6 +137,7 @@ export default {
 
         return {
 
+            csrf: document.head.querySelector('meta[name="csrf-token"]') ? document.head.querySelector('meta[name="csrf-token"]').content : '',
             filtroCategoria: "",
             filtroPrecio: "",
             filtroGratis: "",
@@ -134,6 +145,7 @@ export default {
             filtroFechaInicio: "",
             filtroFechaFin: "",
             filtroPalabra: "",
+            favorito: false,
             eventosFiltrados: "",
             // diasSemana: ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
             NUM_RESULTS: 24, // Numero de resultados por página
@@ -151,6 +163,25 @@ export default {
     },
     methods: {
 
+        addFavorito () {
+
+            document.getElementById("addFavorito").submit();
+
+        },
+        removeFavorito () {
+
+            document.getElementById("removeFavorito").submit();
+
+
+        },
+        esFavorito() {
+
+            this.favorito = this.alertas.filter(alerta => alerta.nombre == this.filtroCategoria).length > 0;
+
+            console.log(this.filtroCategoria)
+            console.log(this.favorito)
+
+        },
         reducirTexto (texto) {
 
             return texto.split(' ').slice(0,60).join(' ');
@@ -231,7 +262,8 @@ export default {
     computed: {
         ...mapGetters([
             'eventos',
-            'categorias'
+            'categorias',
+            'alertas'
         ])/* , eventosFiltrados() {
 
             
@@ -304,6 +336,7 @@ export default {
 
         await this.$store.dispatch('fetchEventos');
         await this.$store.dispatch('fetchCategorias');
+        await this.$store.dispatch('fetchAlertas');
         this.eventosFiltrados = this.eventos;
         console.log(this.eventos)
     },
@@ -314,6 +347,7 @@ export default {
     },
     watch: {
         filtroCategoria: function(newData, oldData){
+            this.esFavorito();
             this.filter();
         },
         filtroPrecio: function(newData, oldData){

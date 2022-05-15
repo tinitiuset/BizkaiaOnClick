@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlertasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,15 @@ Route::middleware(["auth", "esactivo","verified"])->group(function () {
         return view('usuario');
     });
     Route::patch('user/editarUsuario/{id}', [UserController::class, "editarUsuario"]);
+
+    Route::prefix("/alertas")->group(function() {
+
+        Route::get("/",[AlertasController::class,"index"]);
+        Route::delete("/{nombre}",[AlertasController::class,"destroy"]);
+        Route::post("/",[AlertasController::class,"store"]);
+
+
+    });
 
 });
 

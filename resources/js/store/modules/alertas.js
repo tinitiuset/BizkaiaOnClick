@@ -17,10 +17,12 @@ const getters = {
 
 // Actions
 let actions = {
-    createAlerta({commit}, alerta) {
-        axios.post('/api/alertas', alerta)
+    createAlerta({commit, state}, alerta) {
+        console.log(alerta)
+        axios.post('/alertas', alerta)
             .then(res => {
                 console.log("Called CREATE")
+                console.log(res.data)
                 commit('CREATE_ALERTA', res.data)
             }).catch(err => {
             console.log(err)
@@ -28,7 +30,7 @@ let actions = {
 
     },
     fetchAlerta({commit}, id) {
-        axios.get(`/api/alertas/${id}`)
+        axios.get(`/alertas/${id}`)
             .then(res => {
                 console.log("Called GET")
                 commit('FETCH_ALERTA', res.data)
@@ -37,7 +39,7 @@ let actions = {
         })
     },
     fetchAlertas({commit}) {
-        axios.get('/api/alertas')
+        axios.get('/alertas')
             .then(res => {
                 console.log("Called GET ALL")
                 console.log(res.data)
@@ -46,11 +48,12 @@ let actions = {
             console.log(err)
         })
     },
-    deleteAlerta({commit}, alerta) {
-        axios.delete(`/api/alertas/${alerta.categoria}`)
+    deleteAlerta({commit, state}, alerta) {
+        axios.delete(`/alertas/${alerta}`)
             .then(res => {
                 console.log("Called DELETE")
-                if (res.data === 'ok')
+                console.log(res.data)
+                if (res.data === 'eliminada')
                     commit('DELETE_ALERTA', alerta)
             }).catch(err => {
             console.log(err)
@@ -63,6 +66,7 @@ let actions = {
 const mutations = {
     CREATE_ALERTA(state, alerta) {
         state.alertas.unshift(alerta)
+        console.log(state.alertas)
     },
     FETCH_ALERTA(state, alerta) {
         return state.alerta = alerta
