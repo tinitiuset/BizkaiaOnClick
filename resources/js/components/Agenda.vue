@@ -5,7 +5,16 @@
         <!-- {{eventos}} -->
 
         <div class="container-fluid my-4 g-0">
-
+            <div class="row mx-5 my-2" v-if="mensaje || mensajeeliminado">
+                <div class="alert text-center alert-success alert-dismissible fade show fw-bold" role="alert" v-if="mensaje">
+                    {{mensaje}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="alert text-center alert-danger alert-dismissible fade show fw-bold" role="alert" v-else-if="mensajeeliminado">
+                    {{mensajeeliminado}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
             <div class="row mx-auto my-2">
                 <h3 class="text-center">Busca tus eventos:</h3>
                 <div class="text-center">
@@ -29,14 +38,14 @@
                             <form :action="'/alertas/'+filtroCategoria" method="post" id="removeFavorito" class="d-inline"  >
                                 <input type="hidden" name="_token" :value="csrf">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <svg class="svg-inline--fa fa-star fa-w-18 checked" v-show="favorito && filtroCategoria != ''" @click="removeFavorito" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
+                                <svg style="cursor: pointer" class="svg-inline--fa fa-star fa-w-18 checked" v-show="favorito && filtroCategoria != ''" @click="removeFavorito" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
                             </form>
                             
                             <!-- To display unchecked star rating icons -->
                             <form action="/alertas" method="post" id="addFavorito" class="d-inline" v-show="!favorito && filtroCategoria != ''" >
                                 <input type="hidden" name="_token" :value="csrf">
                                 <input type="hidden" name="categoria" :value="filtroCategoria">
-                                <svg class="svg-inline--fa fa-star fa-w-18 unchecked" v-show="!favorito && filtroCategoria != ''" @click="addFavorito" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
+                                <svg style="cursor: pointer" class="svg-inline--fa fa-star fa-w-18 unchecked" v-show="!favorito && filtroCategoria != ''" @click="addFavorito" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
                             </form>
                             
                             <!-- <i class="fas fa-star"></i> -->
@@ -51,13 +60,6 @@
                                     <option v-for="(precio, idx) in precios" :key="idx" :value="precio.value">{{precio.name}}</option>
                                 </select>
                             </div>
-                            <div class="d-inline">
-                                <input type="checkbox" class="mx-auto" name="" id="" v-model="filtroGratis">
-                                <label for="" class="fw-bold">Gratis</label>
-                            </div>
-                            
-
-
                         </div>
                         <div class="col-4">
                             <label for="" class="fw-bold">
@@ -133,6 +135,10 @@
 import {mapGetters} from 'vuex';
 export default {
     name: "Agenda",
+    props: {
+        mensaje: String,
+        mensajeeliminado: String
+    },
     data () {
 
         return {
@@ -151,6 +157,7 @@ export default {
             NUM_RESULTS: 24, // Numero de resultados por página
             pag: 1, // Página inicial
             precios: [
+                {name: 'Gratuito', value: {minValue: 0, maxValue: 0} },
                 {name: 'menos de 20€', value: {minValue: 0, maxValue: 20} },
                 {name: 'entre 20€ y 60€', value: {minValue: 20, maxValue: 60}},
                 {name: 'entre 60€ y 100€', value: {minValue: 60, maxValue: 100}},
@@ -177,9 +184,6 @@ export default {
         esFavorito() {
 
             this.favorito = this.alertas.filter(alerta => alerta.nombre == this.filtroCategoria).length > 0;
-
-            console.log(this.filtroCategoria)
-            console.log(this.favorito)
 
         },
         reducirTexto (texto) {
@@ -209,16 +213,13 @@ export default {
             return eventosFiltrados.filter(e => e.categoria == this.filtroCategoria);
         },
         filterByPrice(eventosFiltrados){
+
             if (this.filtroPrecio == "") {
-                if(this.filtroGratis == true){
-                    return eventosFiltrados.filter(e => e.precio == 0);
-                }
                 return eventosFiltrados;
-            }else{
-                if(this.filtroGratis == true){
-                    this.filtroPrecio = "";
-                    return eventosFiltrados.filter(e => e.precio == 0);
-                }
+            }
+
+            if (this.filtroPrecio.maxValue == 0) {
+               return eventosFiltrados.filter(e => e.precio == 0);
             }
 
             return eventosFiltrados.filter(e => e.precio < this.filtroPrecio.maxValue && e.precio > this.filtroPrecio.minValue);
@@ -264,7 +265,14 @@ export default {
             'eventos',
             'categorias',
             'alertas'
-        ])/* , eventosFiltrados() {
+        ]), eventosCargados () {
+
+            return this.eventos;
+
+        }
+        
+        
+        /* , eventosFiltrados() {
 
             
             if (this.filtro != "") {
@@ -337,8 +345,19 @@ export default {
         await this.$store.dispatch('fetchEventos');
         await this.$store.dispatch('fetchCategorias');
         await this.$store.dispatch('fetchAlertas');
-        this.eventosFiltrados = this.eventos;
-        console.log(this.eventos)
+
+        // window.setInterval()
+
+        // while (true) {
+            
+        //     if (this.eventos.length > 0) {
+                
+                // this.eventosFiltrados = this.eventos;
+
+        //     }
+
+        // }
+
     },
     mounted: function () {
 
@@ -346,6 +365,9 @@ export default {
 
     },
     watch: {
+        eventos: function(newData, oldData){
+            this.eventosFiltrados = this.eventos
+        },
         filtroCategoria: function(newData, oldData){
             this.esFavorito();
             this.filter();

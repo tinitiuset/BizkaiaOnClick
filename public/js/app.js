@@ -5419,9 +5419,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Agenda",
+  props: {
+    mensaje: String,
+    mensajeeliminado: String
+  },
   data: function data() {
     return {
       csrf: document.head.querySelector('meta[name="csrf-token"]') ? document.head.querySelector('meta[name="csrf-token"]').content : '',
@@ -5440,6 +5446,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       pag: 1,
       // Página inicial
       precios: [{
+        name: 'Gratuito',
+        value: {
+          minValue: 0,
+          maxValue: 0
+        }
+      }, {
         name: 'menos de 20€',
         value: {
           minValue: 0,
@@ -5491,8 +5503,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.favorito = this.alertas.filter(function (alerta) {
         return alerta.nombre == _this.filtroCategoria;
       }).length > 0;
-      console.log(this.filtroCategoria);
-      console.log(this.favorito);
     },
     reducirTexto: function reducirTexto(texto) {
       return texto.split(' ').slice(0, 60).join(' ');
@@ -5523,20 +5533,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this3 = this;
 
       if (this.filtroPrecio == "") {
-        if (this.filtroGratis == true) {
-          return eventosFiltrados.filter(function (e) {
-            return e.precio == 0;
-          });
-        }
-
         return eventosFiltrados;
-      } else {
-        if (this.filtroGratis == true) {
-          this.filtroPrecio = "";
-          return eventosFiltrados.filter(function (e) {
-            return e.precio == 0;
-          });
-        }
+      }
+
+      if (this.filtroPrecio.maxValue == 0) {
+        return eventosFiltrados.filter(function (e) {
+          return e.precio == 0;
+        });
       }
 
       return eventosFiltrados.filter(function (e) {
@@ -5587,7 +5590,51 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     }
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['eventos', 'categorias', 'alertas'])),
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['eventos', 'categorias', 'alertas'])), {}, {
+    eventosCargados: function eventosCargados() {
+      return this.eventos;
+    }
+    /* , eventosFiltrados() {
+          
+        if (this.filtro != "") {
+              this.filtrado = [];
+              if (this.filtroCategoria == "Todos") {
+                
+                this.eventos.forEach(evento => {
+                    
+                    if ((evento.titulo.toLowerCase().includes(this.filtro.toLowerCase())) || (evento.descripcion.toLowerCase().includes(this.filtro.toLowerCase()))) {
+                          this.filtrado.push(evento);
+                      }
+                  });
+              } else {
+                  this.eventos.forEach(evento => {
+                    
+                    if (this.filtroCategoria == evento.categoria) {
+                        
+                        if ((evento.titulo.toLowerCase().includes(this.filtro.toLowerCase())) || (evento.descripcion.toLowerCase().includes(this.filtro.toLowerCase()))) {
+                              this.filtrado.push(evento);
+                          }
+                      }
+                  });
+              }
+            
+                return this.filtrado
+          }
+          if (this.filtroCategoria == "Todos") {
+            
+            return this.eventos;
+          }
+          this.filtrado = [];
+          this.eventos.forEach(evento => {
+            
+            if (this.filtroCategoria == evento.categoria) {
+                  this.filtrado.push(evento);
+              }
+          });
+          return this.filtrado;
+            } */
+
+  }),
   beforeMount: function () {
     var _beforeMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -5606,10 +5653,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               return this.$store.dispatch('fetchAlertas');
 
             case 6:
-              this.eventosFiltrados = this.eventos;
-              console.log(this.eventos);
-
-            case 8:
             case "end":
               return _context.stop();
           }
@@ -5627,6 +5670,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.filter();
   },
   watch: {
+    eventos: function eventos(newData, oldData) {
+      this.eventosFiltrados = this.eventos;
+    },
     filtroCategoria: function filtroCategoria(newData, oldData) {
       this.esFavorito();
       this.filter();
@@ -41861,6 +41907,60 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "container-fluid my-4 g-0" }, [
+      _vm.mensaje || _vm.mensajeeliminado
+        ? _c("div", { staticClass: "row mx-5 my-2" }, [
+            _vm.mensaje
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "alert text-center alert-success alert-dismissible fade show fw-bold",
+                    attrs: { role: "alert" },
+                  },
+                  [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(_vm.mensaje) +
+                        "\n                "
+                    ),
+                    _c("button", {
+                      staticClass: "btn-close",
+                      attrs: {
+                        type: "button",
+                        "data-bs-dismiss": "alert",
+                        "aria-label": "Close",
+                      },
+                    }),
+                  ]
+                )
+              : _vm.mensajeeliminado
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "alert text-center alert-danger alert-dismissible fade show fw-bold",
+                    attrs: { role: "alert" },
+                  },
+                  [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(_vm.mensajeeliminado) +
+                        "\n                "
+                    ),
+                    _c("button", {
+                      staticClass: "btn-close",
+                      attrs: {
+                        type: "button",
+                        "data-bs-dismiss": "alert",
+                        "aria-label": "Close",
+                      },
+                    }),
+                  ]
+                )
+              : _vm._e(),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c("div", { staticClass: "row mx-auto my-2" }, [
         _c("h3", { staticClass: "text-center" }, [
           _vm._v("Busca tus eventos:"),
@@ -41987,6 +42087,7 @@ var render = function () {
                         },
                       ],
                       staticClass: "svg-inline--fa fa-star fa-w-18 checked",
+                      staticStyle: { cursor: "pointer" },
                       attrs: {
                         "aria-hidden": "true",
                         focusable: "false",
@@ -42052,6 +42153,7 @@ var render = function () {
                         },
                       ],
                       staticClass: "svg-inline--fa fa-star fa-w-18 unchecked",
+                      staticStyle: { cursor: "pointer" },
                       attrs: {
                         "aria-hidden": "true",
                         focusable: "false",
@@ -42127,51 +42229,6 @@ var render = function () {
                   ],
                   2
                 ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "d-inline" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.filtroGratis,
-                      expression: "filtroGratis",
-                    },
-                  ],
-                  staticClass: "mx-auto",
-                  attrs: { type: "checkbox", name: "", id: "" },
-                  domProps: {
-                    checked: Array.isArray(_vm.filtroGratis)
-                      ? _vm._i(_vm.filtroGratis, null) > -1
-                      : _vm.filtroGratis,
-                  },
-                  on: {
-                    change: function ($event) {
-                      var $$a = _vm.filtroGratis,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = null,
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 && (_vm.filtroGratis = $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            (_vm.filtroGratis = $$a
-                              .slice(0, $$i)
-                              .concat($$a.slice($$i + 1)))
-                        }
-                      } else {
-                        _vm.filtroGratis = $$c
-                      }
-                    },
-                  },
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "fw-bold", attrs: { for: "" } }, [
-                  _vm._v("Gratis"),
-                ]),
               ]),
             ]),
             _vm._v(" "),

@@ -48,7 +48,7 @@ class AlertasController extends Controller
         ]);
 
         $categoria = Categoria::where("nombre",$request->categoria)->get();
-        return redirect("/agenda");
+        return redirect("/agenda")->with('mensaje', 'Has marcado la categoria "'.$request->categoria.'" como favorita');
     }
 
     /**
@@ -64,7 +64,7 @@ class AlertasController extends Controller
         Log::error("borro: ".$id);
 
         DB::table('alertas')->where('idUsuario', Auth::user()->id)->where("categoria",$id)->delete();
-        return redirect("/agenda");
+        return redirect("/agenda")->with('mensajeEliminado', 'Has desmarcado la categoria "'.$id.'" como favorita');
     }
 
 }
