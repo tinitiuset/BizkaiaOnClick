@@ -265,11 +265,7 @@ export default {
             'eventos',
             'categorias',
             'alertas'
-        ]), eventosCargados () {
-
-            return this.eventos;
-
-        }
+        ])
         
         
         /* , eventosFiltrados() {
