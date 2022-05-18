@@ -28,25 +28,37 @@
 
                     <div class="row">
                         <div class="col-4">
-                            <label for="" class="fw-bold">
-                                Categoria:
-                            </label>
-                            <select class="p-0 w-auto mx-auto" name="" id="" v-model="filtroCategoria">
-                                <option value="">Todos</option>
-                                <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
-                            </select>
-                            <form :action="'/alertas/'+filtroCategoria" method="post" id="removeFavorito" class="d-inline"  >
-                                <input type="hidden" name="_token" :value="csrf">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <svg style="cursor: pointer" class="svg-inline--fa fa-star fa-w-18 checked" v-show="favorito && filtroCategoria != ''" @click="removeFavorito" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                            </form>
-                            
-                            <!-- To display unchecked star rating icons -->
-                            <form action="/alertas" method="post" id="addFavorito" class="d-inline" v-show="!favorito && filtroCategoria != ''" >
-                                <input type="hidden" name="_token" :value="csrf">
-                                <input type="hidden" name="categoria" :value="filtroCategoria">
-                                <svg style="cursor: pointer" class="svg-inline--fa fa-star fa-w-18 unchecked" v-show="!favorito && filtroCategoria != ''" @click="addFavorito" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                            </form>
+                            <div class="row">
+                                <div class="col-6 g-0">
+                                    <label for="" class="fw-bold">Localidad:</label>
+                                    <select name="p-0 w-100 mx-auto" id="" v-model="filtroLocalidad">
+                                        <option value="">Todas</option>
+                                        <option v-for="localidad in localidades" :key="localidad" :value="localidad">{{localidad}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-6 g-0">
+                                    <label for="" class="fw-bold">
+                                        Categoria:
+                                    </label>
+                                    <select class="p-0 w-50 mx-auto" name="" id="" v-model="filtroCategoria">
+                                        <option value="">Todos</option>
+                                        <option v-for="categoria in categorias" :key="categoria.nombre" :value="categoria.nombre">{{categoria.nombre}}</option>
+                                    </select>
+                                    <form :action="'/alertas/'+filtroCategoria" method="post" id="removeFavorito" class="d-inline"  >
+                                        <input type="hidden" name="_token" :value="csrf">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <svg style="cursor: pointer" class="svg-inline--fa fa-star fa-w-18 checked" v-show="favorito && filtroCategoria != ''" @click="removeFavorito" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
+                                    </form>
+                                    
+                                    <!-- To display unchecked star rating icons -->
+                                    <form action="/alertas" method="post" id="addFavorito" class="d-inline" v-show="!favorito && filtroCategoria != ''" >
+                                        <input type="hidden" name="_token" :value="csrf">
+                                        <input type="hidden" name="categoria" :value="filtroCategoria">
+                                        <svg style="cursor: pointer" class="svg-inline--fa fa-star fa-w-18 unchecked" v-show="!favorito && filtroCategoria != ''" @click="addFavorito" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
+                                    </form>
+                                </div>
+                            </div>
+
                             
                             <!-- <i class="fas fa-star"></i> -->
                         </div>
@@ -144,6 +156,7 @@ export default {
         return {
 
             csrf: document.head.querySelector('meta[name="csrf-token"]') ? document.head.querySelector('meta[name="csrf-token"]').content : '',
+            localidades: [],
             filtroCategoria: "",
             filtroPrecio: "",
             filtroGratis: "",
@@ -204,7 +217,7 @@ export default {
 
         },
         filter(){
-            this.eventosFiltrados = this.filterByCategory(this.filterByPrice(this.filterByPalabra(this.filterByFecha(this.eventos))));
+            this.eventosFiltrados = this.filterByCategory(this.filterByPrice(this.filterByPalabra(this.filterByFecha(this.filterByLocalidad(this.eventos)))));
         },
         filterByCategory(eventosFiltrados){
             if (this.filtroCategoria == "") {
@@ -225,10 +238,13 @@ export default {
             return eventosFiltrados.filter(e => e.precio < this.filtroPrecio.maxValue && e.precio > this.filtroPrecio.minValue);
         },
         filterByLocalidad(eventosFiltrados){
+
+            console.log(this.filtroLocalidad)
+
             if (this.filtroLocalidad == "") {
                 return eventosFiltrados;
             }
-            return eventosFiltrados.filter(e => e.localidad == this.filtroLocalidad);
+            return eventosFiltrados.filter(e => e.localidad.toLowerCase() == this.filtroLocalidad.toLowerCase());
         },
 
         filterByPalabra(eventosFiltrados){
@@ -363,6 +379,19 @@ export default {
     watch: {
         eventos: function(newData, oldData){
             this.eventosFiltrados = this.eventos
+
+            for (let index = 0; index < this.eventos.length; index++) {
+
+                this.eventos[index].localidad = this.eventos[index].localidad.charAt(0).toUpperCase() + this.eventos[index].localidad.slice(1)
+
+                if (this.localidades.filter(localidad => localidad == this.eventos[index].localidad).length == 0) {
+
+                    this.localidades.push(this.eventos[index].localidad);
+
+                }
+                
+            }
+
         },
         filtroCategoria: function(newData, oldData){
             this.esFavorito();
@@ -372,6 +401,11 @@ export default {
             this.filter();
         },
         filtroPalabra: function(newData, oldData) {
+
+            this.filter();
+
+        },
+        filtroLocalidad: function(newData,oldData) {
 
             this.filter();
 

@@ -5421,6 +5421,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Agenda",
@@ -5431,6 +5443,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       csrf: document.head.querySelector('meta[name="csrf-token"]') ? document.head.querySelector('meta[name="csrf-token"]').content : '',
+      localidades: [],
       filtroCategoria: "",
       filtroPrecio: "",
       filtroGratis: "",
@@ -5516,7 +5529,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $(window).scrollTop(0, 0);
     },
     filter: function filter() {
-      this.eventosFiltrados = this.filterByCategory(this.filterByPrice(this.filterByPalabra(this.filterByFecha(this.eventos))));
+      this.eventosFiltrados = this.filterByCategory(this.filterByPrice(this.filterByPalabra(this.filterByFecha(this.filterByLocalidad(this.eventos)))));
     },
     filterByCategory: function filterByCategory(eventosFiltrados) {
       var _this2 = this;
@@ -5549,12 +5562,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     filterByLocalidad: function filterByLocalidad(eventosFiltrados) {
       var _this4 = this;
 
+      console.log(this.filtroLocalidad);
+
       if (this.filtroLocalidad == "") {
         return eventosFiltrados;
       }
 
       return eventosFiltrados.filter(function (e) {
-        return e.localidad == _this4.filtroLocalidad;
+        return e.localidad.toLowerCase() == _this4.filtroLocalidad.toLowerCase();
       });
     },
     filterByPalabra: function filterByPalabra(eventosFiltrados) {
@@ -5590,51 +5605,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     }
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['eventos', 'categorias', 'alertas'])), {}, {
-    eventosCargados: function eventosCargados() {
-      return this.eventos;
-    }
-    /* , eventosFiltrados() {
-          
-        if (this.filtro != "") {
-              this.filtrado = [];
-              if (this.filtroCategoria == "Todos") {
-                
-                this.eventos.forEach(evento => {
-                    
-                    if ((evento.titulo.toLowerCase().includes(this.filtro.toLowerCase())) || (evento.descripcion.toLowerCase().includes(this.filtro.toLowerCase()))) {
-                          this.filtrado.push(evento);
-                      }
-                  });
-              } else {
-                  this.eventos.forEach(evento => {
-                    
-                    if (this.filtroCategoria == evento.categoria) {
-                        
-                        if ((evento.titulo.toLowerCase().includes(this.filtro.toLowerCase())) || (evento.descripcion.toLowerCase().includes(this.filtro.toLowerCase()))) {
-                              this.filtrado.push(evento);
-                          }
-                      }
-                  });
-              }
-            
-                return this.filtrado
-          }
-          if (this.filtroCategoria == "Todos") {
-            
-            return this.eventos;
-          }
-          this.filtrado = [];
-          this.eventos.forEach(evento => {
-            
-            if (this.filtroCategoria == evento.categoria) {
-                  this.filtrado.push(evento);
-              }
-          });
-          return this.filtrado;
-            } */
-
-  }),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['eventos', 'categorias', 'alertas'])),
   beforeMount: function () {
     var _beforeMount = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -5671,7 +5642,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   watch: {
     eventos: function eventos(newData, oldData) {
+      var _this7 = this;
+
       this.eventosFiltrados = this.eventos;
+
+      var _loop = function _loop(index) {
+        _this7.eventos[index].localidad = _this7.eventos[index].localidad.charAt(0).toUpperCase() + _this7.eventos[index].localidad.slice(1);
+
+        if (_this7.localidades.filter(function (localidad) {
+          return localidad == _this7.eventos[index].localidad;
+        }).length == 0) {
+          _this7.localidades.push(_this7.eventos[index].localidad);
+        }
+      };
+
+      for (var index = 0; index < this.eventos.length; index++) {
+        _loop(index);
+      }
     },
     filtroCategoria: function filtroCategoria(newData, oldData) {
       this.esFavorito();
@@ -5681,6 +5668,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.filter();
     },
     filtroPalabra: function filtroPalabra(newData, oldData) {
+      this.filter();
+    },
+    filtroLocalidad: function filtroLocalidad(newData, oldData) {
       this.filter();
     },
     filtroFechaInicio: function filtroFechaInicio(newData, oldData) {
@@ -42003,146 +41993,171 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-4" }, [
-              _c("label", { staticClass: "fw-bold", attrs: { for: "" } }, [
-                _vm._v(
-                  "\n                            Categoria:\n                        "
-                ),
-              ]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.filtroCategoria,
-                      expression: "filtroCategoria",
-                    },
-                  ],
-                  staticClass: "p-0 w-auto mx-auto",
-                  attrs: { name: "", id: "" },
-                  on: {
-                    change: function ($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function (o) {
-                          return o.selected
-                        })
-                        .map(function (o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.filtroCategoria = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    },
-                  },
-                },
-                [
-                  _c("option", { attrs: { value: "" } }, [_vm._v("Todos")]),
-                  _vm._v(" "),
-                  _vm._l(_vm.categorias, function (categoria) {
-                    return _c(
-                      "option",
-                      {
-                        key: categoria.nombre,
-                        domProps: { value: categoria.nombre },
-                      },
-                      [_vm._v(_vm._s(categoria.nombre))]
-                    )
-                  }),
-                ],
-                2
-              ),
-              _vm._v(" "),
-              _c(
-                "form",
-                {
-                  staticClass: "d-inline",
-                  attrs: {
-                    action: "/alertas/" + _vm.filtroCategoria,
-                    method: "post",
-                    id: "removeFavorito",
-                  },
-                },
-                [
-                  _c("input", {
-                    attrs: { type: "hidden", name: "_token" },
-                    domProps: { value: _vm.csrf },
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "hidden", name: "_method", value: "DELETE" },
-                  }),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-6 g-0" }, [
+                  _c("label", { staticClass: "fw-bold", attrs: { for: "" } }, [
+                    _vm._v("Localidad:"),
+                  ]),
                   _vm._v(" "),
                   _c(
-                    "svg",
+                    "select",
                     {
                       directives: [
                         {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.favorito && _vm.filtroCategoria != "",
-                          expression: "favorito && filtroCategoria != ''",
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.filtroLocalidad,
+                          expression: "filtroLocalidad",
                         },
                       ],
-                      staticClass: "svg-inline--fa fa-star fa-w-18 checked",
-                      staticStyle: { cursor: "pointer" },
-                      attrs: {
-                        "aria-hidden": "true",
-                        focusable: "false",
-                        "data-prefix": "fa",
-                        "data-icon": "star",
-                        role: "img",
-                        xmlns: "http://www.w3.org/2000/svg",
-                        viewBox: "0 0 576 512",
-                        "data-fa-i2svg": "",
+                      attrs: { name: "p-0 w-100 mx-auto", id: "" },
+                      on: {
+                        change: function ($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function (o) {
+                              return o.selected
+                            })
+                            .map(function (o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.filtroLocalidad = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        },
                       },
-                      on: { click: _vm.removeFavorito },
                     },
                     [
-                      _c("path", {
-                        attrs: {
-                          fill: "currentColor",
-                          d: "M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z",
-                        },
+                      _c("option", { attrs: { value: "" } }, [_vm._v("Todas")]),
+                      _vm._v(" "),
+                      _vm._l(_vm.localidades, function (localidad) {
+                        return _c(
+                          "option",
+                          { key: localidad, domProps: { value: localidad } },
+                          [_vm._v(_vm._s(localidad))]
+                        )
                       }),
-                    ]
+                    ],
+                    2
                   ),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "form",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: !_vm.favorito && _vm.filtroCategoria != "",
-                      expression: "!favorito && filtroCategoria != ''",
-                    },
-                  ],
-                  staticClass: "d-inline",
-                  attrs: {
-                    action: "/alertas",
-                    method: "post",
-                    id: "addFavorito",
-                  },
-                },
-                [
-                  _c("input", {
-                    attrs: { type: "hidden", name: "_token" },
-                    domProps: { value: _vm.csrf },
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "hidden", name: "categoria" },
-                    domProps: { value: _vm.filtroCategoria },
-                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-6 g-0" }, [
+                  _c("label", { staticClass: "fw-bold", attrs: { for: "" } }, [
+                    _vm._v(
+                      "\n                                    Categoria:\n                                "
+                    ),
+                  ]),
                   _vm._v(" "),
                   _c(
-                    "svg",
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.filtroCategoria,
+                          expression: "filtroCategoria",
+                        },
+                      ],
+                      staticClass: "p-0 w-50 mx-auto",
+                      attrs: { name: "", id: "" },
+                      on: {
+                        change: function ($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function (o) {
+                              return o.selected
+                            })
+                            .map(function (o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.filtroCategoria = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        },
+                      },
+                    },
+                    [
+                      _c("option", { attrs: { value: "" } }, [_vm._v("Todos")]),
+                      _vm._v(" "),
+                      _vm._l(_vm.categorias, function (categoria) {
+                        return _c(
+                          "option",
+                          {
+                            key: categoria.nombre,
+                            domProps: { value: categoria.nombre },
+                          },
+                          [_vm._v(_vm._s(categoria.nombre))]
+                        )
+                      }),
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      staticClass: "d-inline",
+                      attrs: {
+                        action: "/alertas/" + _vm.filtroCategoria,
+                        method: "post",
+                        id: "removeFavorito",
+                      },
+                    },
+                    [
+                      _c("input", {
+                        attrs: { type: "hidden", name: "_token" },
+                        domProps: { value: _vm.csrf },
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: {
+                          type: "hidden",
+                          name: "_method",
+                          value: "DELETE",
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "svg",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.favorito && _vm.filtroCategoria != "",
+                              expression: "favorito && filtroCategoria != ''",
+                            },
+                          ],
+                          staticClass: "svg-inline--fa fa-star fa-w-18 checked",
+                          staticStyle: { cursor: "pointer" },
+                          attrs: {
+                            "aria-hidden": "true",
+                            focusable: "false",
+                            "data-prefix": "fa",
+                            "data-icon": "star",
+                            role: "img",
+                            xmlns: "http://www.w3.org/2000/svg",
+                            viewBox: "0 0 576 512",
+                            "data-fa-i2svg": "",
+                          },
+                          on: { click: _vm.removeFavorito },
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              fill: "currentColor",
+                              d: "M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z",
+                            },
+                          }),
+                        ]
+                      ),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "form",
                     {
                       directives: [
                         {
@@ -42152,31 +42167,63 @@ var render = function () {
                           expression: "!favorito && filtroCategoria != ''",
                         },
                       ],
-                      staticClass: "svg-inline--fa fa-star fa-w-18 unchecked",
-                      staticStyle: { cursor: "pointer" },
+                      staticClass: "d-inline",
                       attrs: {
-                        "aria-hidden": "true",
-                        focusable: "false",
-                        "data-prefix": "fa",
-                        "data-icon": "star",
-                        role: "img",
-                        xmlns: "http://www.w3.org/2000/svg",
-                        viewBox: "0 0 576 512",
-                        "data-fa-i2svg": "",
+                        action: "/alertas",
+                        method: "post",
+                        id: "addFavorito",
                       },
-                      on: { click: _vm.addFavorito },
                     },
                     [
-                      _c("path", {
-                        attrs: {
-                          fill: "currentColor",
-                          d: "M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z",
-                        },
+                      _c("input", {
+                        attrs: { type: "hidden", name: "_token" },
+                        domProps: { value: _vm.csrf },
                       }),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: { type: "hidden", name: "categoria" },
+                        domProps: { value: _vm.filtroCategoria },
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "svg",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !_vm.favorito && _vm.filtroCategoria != "",
+                              expression: "!favorito && filtroCategoria != ''",
+                            },
+                          ],
+                          staticClass:
+                            "svg-inline--fa fa-star fa-w-18 unchecked",
+                          staticStyle: { cursor: "pointer" },
+                          attrs: {
+                            "aria-hidden": "true",
+                            focusable: "false",
+                            "data-prefix": "fa",
+                            "data-icon": "star",
+                            role: "img",
+                            xmlns: "http://www.w3.org/2000/svg",
+                            viewBox: "0 0 576 512",
+                            "data-fa-i2svg": "",
+                          },
+                          on: { click: _vm.addFavorito },
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              fill: "currentColor",
+                              d: "M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z",
+                            },
+                          }),
+                        ]
+                      ),
                     ]
                   ),
-                ]
-              ),
+                ]),
+              ]),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-4" }, [
