@@ -5433,6 +5433,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Agenda",
@@ -41992,12 +41998,14 @@ var render = function () {
           _c("h3", [_vm._v("Filtros:")]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-4" }, [
+            _c("div", { staticClass: "col-12 col-lg-5 my-3" }, [
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-6 g-0" }, [
-                  _c("label", { staticClass: "fw-bold", attrs: { for: "" } }, [
-                    _vm._v("Localidad:"),
-                  ]),
+                  _c(
+                    "label",
+                    { staticClass: "fw-bold d-block", attrs: { for: "" } },
+                    [_vm._v("Localidad:")]
+                  ),
                   _vm._v(" "),
                   _c(
                     "select",
@@ -42043,11 +42051,15 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-6 g-0" }, [
-                  _c("label", { staticClass: "fw-bold", attrs: { for: "" } }, [
-                    _vm._v(
-                      "\n                                    Categoria:\n                                "
-                    ),
-                  ]),
+                  _c(
+                    "label",
+                    { staticClass: "fw-bold d-block", attrs: { for: "" } },
+                    [
+                      _vm._v(
+                        "\n                                    Categoria:\n                                "
+                      ),
+                    ]
+                  ),
                   _vm._v(" "),
                   _c(
                     "select",
@@ -42226,13 +42238,17 @@ var render = function () {
               ]),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-4" }, [
+            _c("div", { staticClass: "col-12 col-lg-3 my-3" }, [
               _c("div", { staticClass: "me-2 d-inline" }, [
-                _c("label", { staticClass: "fw-bold", attrs: { for: "" } }, [
-                  _vm._v(
-                    "\n                                Precio:\n                            "
-                  ),
-                ]),
+                _c(
+                  "label",
+                  { staticClass: "fw-bold d-block", attrs: { for: "" } },
+                  [
+                    _vm._v(
+                      "\n                                Precio:\n                            "
+                    ),
+                  ]
+                ),
                 _vm._v(" "),
                 _c(
                   "select",
@@ -42279,60 +42295,74 @@ var render = function () {
               ]),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-4" }, [
-              _c("label", { staticClass: "fw-bold", attrs: { for: "" } }, [
-                _vm._v(
-                  "\n                            Fecha inicio:\n                        "
-                ),
+            _c("div", { staticClass: "col-12 col-lg-4 my-3 my-xxl-3" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-6" }, [
+                  _c(
+                    "label",
+                    { staticClass: "fw-bold d-block", attrs: { for: "" } },
+                    [
+                      _vm._v(
+                        "\n                                    Fecha inicio:\n                                "
+                      ),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.filtroFechaInicio,
+                        expression: "filtroFechaInicio",
+                      },
+                    ],
+                    attrs: { type: "date", name: "", id: "" },
+                    domProps: { value: _vm.filtroFechaInicio },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.filtroFechaInicio = $event.target.value
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-6" }, [
+                  _c(
+                    "label",
+                    { staticClass: "fw-bold d-block", attrs: { for: "" } },
+                    [
+                      _vm._v(
+                        "\n                                    Fecha fin:\n                                "
+                      ),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.filtroFechaFin,
+                        expression: "filtroFechaFin",
+                      },
+                    ],
+                    attrs: { type: "date", name: "", id: "" },
+                    domProps: { value: _vm.filtroFechaFin },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.filtroFechaFin = $event.target.value
+                      },
+                    },
+                  }),
+                ]),
               ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filtroFechaInicio,
-                    expression: "filtroFechaInicio",
-                  },
-                ],
-                attrs: { type: "date", name: "", id: "" },
-                domProps: { value: _vm.filtroFechaInicio },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.filtroFechaInicio = $event.target.value
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _c("label", { staticClass: "fw-bold", attrs: { for: "" } }, [
-                _vm._v(
-                  "\n                            Fecha fin:\n                        "
-                ),
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filtroFechaFin,
-                    expression: "filtroFechaFin",
-                  },
-                ],
-                attrs: { type: "date", name: "", id: "" },
-                domProps: { value: _vm.filtroFechaFin },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.filtroFechaFin = $event.target.value
-                  },
-                },
-              }),
             ]),
           ]),
         ]),

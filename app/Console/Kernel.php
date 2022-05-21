@@ -19,9 +19,11 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->call(new AvisarNuevosEventos)->everyMinute();
+        $schedule->command('avisar:nuevosEventos')->everySixHours();
+        // $schedule->command(new AvisarNuevosEventos)->everyMinute();
 
         // FetchData From Open Data Euskadi
+        $schedule->command("cargar:eventosApi")->twiceDaily(6, 18);
         // $schedule->call(new FetchData)->everyMinute();
 
         //Avisar de los eventos

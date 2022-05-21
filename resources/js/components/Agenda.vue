@@ -27,17 +27,17 @@
                     <h3>Filtros:</h3>
 
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-12 col-lg-5 my-3">
                             <div class="row">
                                 <div class="col-6 g-0">
-                                    <label for="" class="fw-bold">Localidad:</label>
+                                    <label for="" class="fw-bold d-block">Localidad:</label>
                                     <select name="p-0 w-100 mx-auto" id="" v-model="filtroLocalidad">
                                         <option value="">Todas</option>
                                         <option v-for="localidad in localidades" :key="localidad" :value="localidad">{{localidad}}</option>
                                     </select>
                                 </div>
                                 <div class="col-6 g-0">
-                                    <label for="" class="fw-bold">
+                                    <label for="" class="fw-bold d-block">
                                         Categoria:
                                     </label>
                                     <select class="p-0 w-50 mx-auto" name="" id="" v-model="filtroCategoria">
@@ -62,9 +62,9 @@
                             
                             <!-- <i class="fas fa-star"></i> -->
                         </div>
-                        <div class="col-4">
+                        <div class="col-12 col-lg-3 my-3">
                             <div class="me-2 d-inline">
-                                <label for="" class="fw-bold">
+                                <label for="" class="fw-bold d-block">
                                     Precio:
                                 </label>
                                 <select class="p-0 w-auto mx-auto" name="" id="selectPrecio" v-model="filtroPrecio">
@@ -73,15 +73,21 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-4">
-                            <label for="" class="fw-bold">
-                                Fecha inicio:
-                            </label>
-                            <input type="date" name="" id="" v-model="filtroFechaInicio">
-                            <label for="" class="fw-bold">
-                                Fecha fin:
-                            </label>
-                            <input type="date" name="" id="" v-model="filtroFechaFin">
+                        <div class="col-12 col-lg-4 my-3 my-xxl-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="" class="fw-bold d-block">
+                                        Fecha inicio:
+                                    </label>
+                                    <input type="date" name="" id="" v-model="filtroFechaInicio">
+                                </div>
+                                <div class="col-6">
+                                    <label for="" class="fw-bold d-block">
+                                        Fecha fin:
+                                    </label>
+                                    <input type="date" name="" id="" v-model="filtroFechaFin">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
