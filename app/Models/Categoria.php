@@ -17,6 +17,7 @@ class Categoria extends Model
     ];
     protected $primaryKey = "nombre";
     protected $keyType = "string";
+    protected $hidden = ['pivot','created_at','updated_at'];
 
     /**
      * Obtengo los eventos relacionados a esta categoria
@@ -24,6 +25,12 @@ class Categoria extends Model
     public function eventos()
     {
         return $this->hasMany(Evento::class, "categoria", "nombre");
+    }
+
+    public function usuariosAlertados() {
+
+        return $this->belongsToMany(User::class, 'alertas', 'categoria', 'idUsuario');
+
     }
 
 }

@@ -12,6 +12,14 @@
     color: #3385ff;
 }
 
+.checked {
+    color : yellow;
+    font-size : 20px;
+}
+.unchecked {
+    font-size : 20px;
+}
+
 .bg-magenta {
     background-color: #FF08D7; 
 }

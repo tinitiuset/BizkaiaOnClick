@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\AlertasController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // Pagina index
 Route::get('/', function () {
@@ -22,7 +26,7 @@ Route::get('/', function () {
 })->name("index");
 
 // Solo si logueado
-Route::middleware(["auth", "esactivo"])->group(function () {
+Route::middleware(["auth", "esactivo","verified"])->group(function () {
     // Registrar evento nuevo
     Route::get('/enviaevento', function () {
         return view('enviaEvento');
@@ -32,6 +36,41 @@ Route::middleware(["auth", "esactivo"])->group(function () {
         return view('usuario');
     });
     Route::patch('user/editarUsuario/{id}', [UserController::class, "editarUsuario"]);
+
+    Route::prefix("/alertas")->group(function() {
+
+        Route::get("/",[AlertasController::class,"index"]);
+        Route::delete("/{nombre}",[AlertasController::class,"destroy"]);
+        Route::post("/",[AlertasController::class,"store"]);
+
+
+    });
+
+});
+
+Route::middleware(["auth", "esactivo"])->group(function () {
+
+    Route::get('/email/verify', function (Request $request) {
+
+        // $request->user()->sendEmailVerificationNotification();
+
+        return view('auth.verify-register');
+        
+    })->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+
+        $request->fulfill();
+     
+        return redirect('/agenda');
+
+    })->middleware(['auth', 'signed'])->name('verification.verify');
+
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+     
+        return back()->with('message', 'Verification link sent!');
+    })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 });
 

@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Services\AvisarNuevosEventos;
 use App\Services\FetchData;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -18,9 +19,16 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
+        $schedule->command('avisar:nuevosEventos')->everySixHours();
+        // $schedule->command(new AvisarNuevosEventos)->everyMinute();
+
         // FetchData From Open Data Euskadi
+        $schedule->command("cargar:eventosApi")->twiceDaily(6, 18);
         // $schedule->call(new FetchData)->everyMinute();
-        $schedule->job(new FetchData)->everyTenMinutes();
+
+        //Avisar de los eventos
+        
+        // $schedule->job(new FetchData)->everyTenMinutes();
     }
 
     /**

@@ -3,6 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
+!/vendor/laravel/framework/src/Illuminate/Validation/Rules/*
 .env
 .env.backup
 .phpunit.result.cache
@@ -13,3 +14,6 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+public/mix-manifest.json
+public/js/app.js
+public/css/app.css

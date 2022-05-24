@@ -40,6 +40,7 @@ let actions = {
         axios.get('/api/categorias')
             .then(res => {
                 console.log("Called GET ALL")
+                console.log(res.data)
                 commit('FETCH_CATEGORIAS', res.data)
             }).catch(err => {
             console.log(err)

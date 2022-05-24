@@ -1,17 +1,43 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Console\Commands;
 
+use Illuminate\Console\Command;
 use App\Http\Controllers\EventoController;
 use App\Models\Categoria;
 use App\Models\Evento;
 use App\Models\Foto;
+use Illuminate\Support\Facades\Log;
 
-class FetchData
+class FetchData extends Command
 {
 
-    public function __invoke()
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'cargar:eventosApi';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Carga los eventos recogidos de la API en la base de datos';
+
+        /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    public function handle()
     {
         /*
          * Command to run CRON JOB Manually, otherwise will be run every 6 hours as in Console/Kernel.php
@@ -64,6 +90,8 @@ class FetchData
                     else
                         $data['municipalityEs'] = utf8_decode($data['municipalityEs']);
 
+                    $data['sourceUrlEs'] = isset($data['sourceUrlEs']) ? $data['sourceUrlEs'] : null;
+
                     Evento::create([
                         'titulo' => utf8_decode($data['nameEs']),
                         'descripcion'=> $data['descriptionEs'],
@@ -73,10 +101,12 @@ class FetchData
                         'precio' => doubleval($data['priceEs']),
                         'direccion' => $data['direccion'] ?? '',
                         'estado' => "aprobado",
+                        'fechaAprobado' => date("Y-m-d H:i:s"),
                         'aforo' => null,
                         'recinto' => $data['establishmentEs'],
                         'localidad' => $data['municipalityEs'],
-                        'categoria' => utf8_decode($data['typeEs'])
+                        'categoria' => utf8_decode($data['typeEs']),
+                        'URL' => $data['sourceUrlEs']
                     ]);
                     foreach ($data['images'] as $imagen) {
                         $idEvento=Evento::where("titulo",utf8_decode($data['nameEs']))->get("id");
@@ -89,6 +119,8 @@ class FetchData
                 }
             }
         }
+
+        $this->info("finalizado");
     }
 
     function getServiceData($url): array

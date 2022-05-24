@@ -70,6 +70,7 @@ const mutations = {
         return state.mensajes = mensajes
     },
     FETCH_EVENTO(state, evento) {
+        console.log(evento)
         return state.evento = evento
     },
     FETCH_EVENTOS(state, eventos) {
